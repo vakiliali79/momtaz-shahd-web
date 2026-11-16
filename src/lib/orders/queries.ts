@@ -46,13 +46,19 @@ export function canCustomerCancel(order: Pick<OrderView, "status" | "paymentMeth
 }
 
 /** An order, only if it belongs to `userId` (null otherwise). */
-export async function getOrderForUser(
-  orderNumber: string,
-  userId: string,
-): Promise<OrderView | null> {
+export async function getOrderForUser(orderNumber: string, userId: string): Promise<OrderView | null> {
+  return getOrderView(orderNumber, userId);
+}
+
+/** Any order, for admin pages (callers must check the ADMIN role first). */
+export async function getOrderForAdmin(orderNumber: string): Promise<OrderView | null> {
+  return getOrderView(orderNumber, null);
+}
+
+async function getOrderView(orderNumber: string, userId: string | null): Promise<OrderView | null> {
   if (!ORDER_NUMBER_REGEX.test(orderNumber)) return null;
   const order = await db.order.findFirst({
-    where: { orderNumber, userId },
+    where: { orderNumber, ...(userId ? { userId } : {}) },
     include: { items: true, statusHistory: { orderBy: { createdAt: "asc" } } },
   });
   if (!order) return null;

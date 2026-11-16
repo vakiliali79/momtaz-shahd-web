@@ -1069,6 +1069,88 @@
         "saving": "جارٍ الحفظ…",
         "saved": "تم حفظ الفئة."
       }
+    },
+    "orders": {
+      "title": "الطلبات",
+      "description": "تتبّع طلبات العملاء وتحديثها وشحنها.",
+      "search": "رقم الطلب أو الهاتف أو الاسم…",
+      "empty": "لا توجد طلبات تطابق هذه الفلاتر.",
+      "receiptWaiting": "إيصال",
+      "columns": {
+        "number": "الطلب",
+        "date": "التاريخ",
+        "customer": "العميل",
+        "type": "النوع",
+        "payment": "الدفع",
+        "total": "الإجمالي",
+        "status": "الحالة"
+      },
+      "types": {
+        "RETAIL": "تجزئة",
+        "WHOLESALE": "جملة"
+      },
+      "filters": {
+        "status": "الحالة",
+        "period": "التاريخ",
+        "type": "النوع",
+        "payment": "الدفع"
+      },
+      "periods": {
+        "today": "اليوم",
+        "7d": "آخر ٧ أيام",
+        "30d": "آخر ٣٠ يومًا"
+      },
+      "detail": {
+        "title": "الطلب {number}",
+        "invoice": "طباعة الفاتورة",
+        "history": "سجل الحالة",
+        "adminNote": "ملاحظة الموظف: {text}",
+        "systemNote": "النظام: {text}",
+        "payments": "محاولات الدفع",
+        "paymentStatus": {
+          "PENDING": "قيد الانتظار",
+          "PAID": "مدفوع",
+          "FAILED": "فشل"
+        },
+        "customer": "العميل",
+        "viewCustomer": "عرض العميل",
+        "statusTitle": "تغيير الحالة",
+        "finalStatus": "هذا الطلب مغلق ولا يمكن تغيير حالته.",
+        "statusChanged": "تم تغيير الحالة إلى «{status}».",
+        "newStatus": "الحالة الجديدة",
+        "chooseStatus": "اختر حالة",
+        "cancelWarning": "الإلغاء يعيد المنتجات إلى المخزون ويحرّر استخدام القسيمة.",
+        "internalNote": "ملاحظة داخلية (اختياري)",
+        "notifyCustomer": "إرسال رسالة نصية للعميل",
+        "saving": "جارٍ الحفظ…",
+        "applyStatus": "تطبيق",
+        "trackingTitle": "رمز التتبع",
+        "trackingSaved": "تم حفظ رمز التتبع.",
+        "saveTracking": "حفظ رمز التتبع",
+        "bankTitle": "تحويل بنكي",
+        "bankWithReceipt": "رفع العميل إيصالًا. تحقّق من حسابك البنكي ثم أكّده أو ارفضه.",
+        "bankNoReceipt": "لم يُرفع إيصال بعد. يمكنك التأكيد عند وصول المبلغ.",
+        "viewReceipt": "عرض الإيصال",
+        "confirmTransfer": "تأكيد الدفع",
+        "confirmTransferTitle": "تأكيد هذا التحويل؟",
+        "confirmTransferText": "سيتم تسجيل الطلب {number} كمدفوع وإبلاغ العميل.",
+        "transferConfirmed": "تم تأكيد الدفع.",
+        "rejectReceipt": "رفض الإيصال",
+        "rejectReceiptTitle": "رفض هذا الإيصال؟",
+        "rejectReceiptText": "سيُحذف الإيصال ويمكن للعميل رفع إيصال جديد.",
+        "receiptRejected": "تم رفض الإيصال."
+      }
     }
+  },
+  "sms": {
+    "status": {
+      "PENDING": "ممتاز شهد: استلمنا الطلب {orderNumber}.",
+      "PAID": "ممتاز شهد: تم تأكيد دفع الطلب {orderNumber}. شكرًا لك!",
+      "PROCESSING": "ممتاز شهد: نقوم بتجهيز الطلب {orderNumber}.",
+      "SHIPPED": "ممتاز شهد: تم شحن الطلب {orderNumber}.",
+      "DELIVERED": "ممتاز شهد: تم تسليم الطلب {orderNumber}. بالهناء!",
+      "CANCELLED": "ممتاز شهد: تم إلغاء الطلب {orderNumber}."
+    },
+    "tracking": "ممتاز شهد: رمز تتبع الطلب {orderNumber}: {code}"
   }
 }

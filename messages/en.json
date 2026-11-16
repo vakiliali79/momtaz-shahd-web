@@ -1069,6 +1069,88 @@
         "saving": "Saving…",
         "saved": "Category saved."
       }
+    },
+    "orders": {
+      "title": "Orders",
+      "description": "Track, update and ship customer orders.",
+      "search": "Order number, phone or name…",
+      "empty": "No orders match these filters.",
+      "receiptWaiting": "Receipt",
+      "columns": {
+        "number": "Order",
+        "date": "Date",
+        "customer": "Customer",
+        "type": "Type",
+        "payment": "Payment",
+        "total": "Total",
+        "status": "Status"
+      },
+      "types": {
+        "RETAIL": "Retail",
+        "WHOLESALE": "Wholesale"
+      },
+      "filters": {
+        "status": "Status",
+        "period": "Date",
+        "type": "Type",
+        "payment": "Payment"
+      },
+      "periods": {
+        "today": "Today",
+        "7d": "Last 7 days",
+        "30d": "Last 30 days"
+      },
+      "detail": {
+        "title": "Order {number}",
+        "invoice": "Print invoice",
+        "history": "Status history",
+        "adminNote": "Staff note: {text}",
+        "systemNote": "System: {text}",
+        "payments": "Payment attempts",
+        "paymentStatus": {
+          "PENDING": "Pending",
+          "PAID": "Paid",
+          "FAILED": "Failed"
+        },
+        "customer": "Customer",
+        "viewCustomer": "View customer",
+        "statusTitle": "Change status",
+        "finalStatus": "This order is closed; its status can no longer change.",
+        "statusChanged": "Status changed to {status}.",
+        "newStatus": "New status",
+        "chooseStatus": "Choose a status",
+        "cancelWarning": "Cancelling returns the items to stock and frees the coupon use.",
+        "internalNote": "Internal note (optional)",
+        "notifyCustomer": "Text the customer",
+        "saving": "Saving…",
+        "applyStatus": "Apply",
+        "trackingTitle": "Tracking code",
+        "trackingSaved": "Tracking code saved.",
+        "saveTracking": "Save tracking code",
+        "bankTitle": "Bank transfer",
+        "bankWithReceipt": "The customer uploaded a receipt. Check your bank account, then confirm or reject it.",
+        "bankNoReceipt": "No receipt uploaded yet. You can still confirm once the money arrives.",
+        "viewReceipt": "View receipt",
+        "confirmTransfer": "Confirm payment",
+        "confirmTransferTitle": "Confirm this transfer?",
+        "confirmTransferText": "Order {number} will be marked as paid and the customer will be notified.",
+        "transferConfirmed": "Payment confirmed.",
+        "rejectReceipt": "Reject receipt",
+        "rejectReceiptTitle": "Reject this receipt?",
+        "rejectReceiptText": "The receipt will be removed and the customer can upload a new one.",
+        "receiptRejected": "Receipt rejected."
+      }
     }
+  },
+  "sms": {
+    "status": {
+      "PENDING": "Momtaz Shahd: we received order {orderNumber}.",
+      "PAID": "Momtaz Shahd: payment for order {orderNumber} is confirmed. Thank you!",
+      "PROCESSING": "Momtaz Shahd: we're preparing order {orderNumber}.",
+      "SHIPPED": "Momtaz Shahd: order {orderNumber} has been shipped.",
+      "DELIVERED": "Momtaz Shahd: order {orderNumber} was delivered. Enjoy!",
+      "CANCELLED": "Momtaz Shahd: order {orderNumber} was cancelled."
+    },
+    "tracking": "Momtaz Shahd: order {orderNumber} tracking code: {code}"
   }
 }

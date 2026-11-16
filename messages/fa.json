@@ -1069,6 +1069,88 @@
         "saving": "در حال ذخیره…",
         "saved": "دسته‌بندی ذخیره شد."
       }
+    },
+    "orders": {
+      "title": "سفارش‌ها",
+      "description": "پیگیری، به‌روزرسانی و ارسال سفارش‌های مشتریان.",
+      "search": "شماره سفارش، موبایل یا نام…",
+      "empty": "سفارشی با این فیلترها پیدا نشد.",
+      "receiptWaiting": "رسید",
+      "columns": {
+        "number": "سفارش",
+        "date": "تاریخ",
+        "customer": "مشتری",
+        "type": "نوع",
+        "payment": "پرداخت",
+        "total": "مبلغ کل",
+        "status": "وضعیت"
+      },
+      "types": {
+        "RETAIL": "خرده‌فروشی",
+        "WHOLESALE": "عمده"
+      },
+      "filters": {
+        "status": "وضعیت",
+        "period": "تاریخ",
+        "type": "نوع",
+        "payment": "پرداخت"
+      },
+      "periods": {
+        "today": "امروز",
+        "7d": "۷ روز اخیر",
+        "30d": "۳۰ روز اخیر"
+      },
+      "detail": {
+        "title": "سفارش {number}",
+        "invoice": "چاپ فاکتور",
+        "history": "تاریخچه وضعیت",
+        "adminNote": "یادداشت کارمند: {text}",
+        "systemNote": "سیستم: {text}",
+        "payments": "تلاش‌های پرداخت",
+        "paymentStatus": {
+          "PENDING": "در انتظار",
+          "PAID": "پرداخت‌شده",
+          "FAILED": "ناموفق"
+        },
+        "customer": "مشتری",
+        "viewCustomer": "مشاهده مشتری",
+        "statusTitle": "تغییر وضعیت",
+        "finalStatus": "این سفارش بسته شده و وضعیت آن دیگر تغییر نمی‌کند.",
+        "statusChanged": "وضعیت به «{status}» تغییر کرد.",
+        "newStatus": "وضعیت جدید",
+        "chooseStatus": "یک وضعیت انتخاب کنید",
+        "cancelWarning": "با لغو، کالاها به موجودی برمی‌گردند و استفاده از کد تخفیف آزاد می‌شود.",
+        "internalNote": "یادداشت داخلی (اختیاری)",
+        "notifyCustomer": "ارسال پیامک به مشتری",
+        "saving": "در حال ذخیره…",
+        "applyStatus": "اعمال",
+        "trackingTitle": "کد رهگیری",
+        "trackingSaved": "کد رهگیری ذخیره شد.",
+        "saveTracking": "ذخیره کد رهگیری",
+        "bankTitle": "کارت‌به‌کارت / واریز بانکی",
+        "bankWithReceipt": "مشتری رسید را بارگذاری کرده است. حساب بانکی را بررسی و سپس تأیید یا رد کنید.",
+        "bankNoReceipt": "هنوز رسیدی بارگذاری نشده است. پس از واریز وجه می‌توانید تأیید کنید.",
+        "viewReceipt": "مشاهده رسید",
+        "confirmTransfer": "تأیید پرداخت",
+        "confirmTransferTitle": "این واریز تأیید شود؟",
+        "confirmTransferText": "سفارش {number} پرداخت‌شده ثبت می‌شود و به مشتری اطلاع داده می‌شود.",
+        "transferConfirmed": "پرداخت تأیید شد.",
+        "rejectReceipt": "رد رسید",
+        "rejectReceiptTitle": "این رسید رد شود؟",
+        "rejectReceiptText": "رسید حذف می‌شود و مشتری می‌تواند رسید جدیدی بارگذاری کند.",
+        "receiptRejected": "رسید رد شد."
+      }
     }
+  },
+  "sms": {
+    "status": {
+      "PENDING": "ممتاز شهد: سفارش {orderNumber} ثبت شد.",
+      "PAID": "ممتاز شهد: پرداخت سفارش {orderNumber} تأیید شد. سپاس از خرید شما!",
+      "PROCESSING": "ممتاز شهد: سفارش {orderNumber} در حال آماده‌سازی است.",
+      "SHIPPED": "ممتاز شهد: سفارش {orderNumber} ارسال شد.",
+      "DELIVERED": "ممتاز شهد: سفارش {orderNumber} تحویل داده شد. نوش جان!",
+      "CANCELLED": "ممتاز شهد: سفارش {orderNumber} لغو شد."
+    },
+    "tracking": "ممتاز شهد: کد رهگیری سفارش {orderNumber}: {code}"
   }
 }
