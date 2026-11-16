@@ -1,0 +1,892 @@
+{
+  "metadata": {
+    "title": "Momtaz Shahd — Traditional Iranian Koloocheh & Kolompeh",
+    "titleTemplate": "%s | Momtaz Shahd",
+    "description": "Momtaz Shahd bakes traditional Iranian cookies: walnut koloocheh, date kolompeh, coconut koloocheh, gift boxes and wholesale packs.",
+    "siteName": "Momtaz Shahd"
+  },
+  "brand": {
+    "name": "Momtaz Shahd",
+    "tagline": "Traditional Iranian cookies",
+    "homeLabel": "Momtaz Shahd — home"
+  },
+  "common": {
+    "skipToContent": "Skip to content",
+    "close": "Close",
+    "toman": "Toman"
+  },
+  "nav": {
+    "label": "Main navigation",
+    "home": "Home",
+    "products": "Products",
+    "wholesale": "Wholesale",
+    "dealers": "Dealers",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "header": {
+    "openMenu": "Open menu",
+    "menuTitle": "Menu",
+    "menuDescription": "Browse the store, search and manage your account.",
+    "settings": "Language and appearance"
+  },
+  "search": {
+    "label": "Search products",
+    "placeholder": "Search koloocheh, kolompeh…",
+    "submit": "Search"
+  },
+  "cart": {
+    "label": "Shopping cart",
+    "labelWithCount": "{count, plural, =0 {Shopping cart, empty} one {Shopping cart, # item} other {Shopping cart, # items}}",
+    "add": "Add to cart",
+    "added": "{name} added to your cart",
+    "limit": "{count, plural, one {Only {formatted} item is available.} other {Only {formatted} items are available.}}",
+    "title": "Shopping cart",
+    "description": "The products in your shopping cart.",
+    "empty": {
+      "title": "Your cart is empty",
+      "text": "You haven't added anything yet. Pick from our freshly baked koloocheh and kolompeh.",
+      "cta": "Browse products"
+    },
+    "view": "View cart",
+    "addedShort": "Added",
+    "addedPartial": "Added {formatted} × {name} — that is all we have in stock.",
+    "remove": "Remove {name}",
+    "removed": "{name} removed from your cart",
+    "undo": "Undo",
+    "clear": "Clear cart",
+    "cleared": "Your cart was cleared",
+    "quantityOf": "Quantity of {name}",
+    "each": "{price} each",
+    "wholesaleApplied": "Wholesale price",
+    "wholesaleHint": "Add {more} more to pay the wholesale price of {price} each.",
+    "maxReached": "Maximum available quantity",
+    "columns": {
+      "product": "Product",
+      "price": "Unit price",
+      "quantity": "Quantity",
+      "total": "Total",
+      "actions": "Remove"
+    },
+    "subtotal": "Subtotal",
+    "subtotalItems": "Subtotal ({formatted} items)",
+    "wholesaleSavings": "Wholesale savings",
+    "discount": "Discount ({code})",
+    "shipping": "Shipping (estimate)",
+    "shippingFree": "Free",
+    "shippingUnknown": "Calculated at checkout",
+    "freeShippingHint": "Add {amount} more to get free shipping.",
+    "freeShippingReached": "Your order ships free.",
+    "total": "Total",
+    "checkout": "Checkout",
+    "viewCart": "View full cart",
+    "continueShopping": "Continue shopping",
+    "drawerNote": "Discount codes and shipping are applied on the cart page and at checkout.",
+    "checkoutNote": "The final shipping cost is confirmed at checkout.",
+    "summary": "Order summary",
+    "synced": "Some prices or stock levels changed, so your cart has been updated.",
+    "unavailableRemoved": "{name} is no longer available and was removed from your cart.",
+    "loading": "Loading your cart…",
+    "coupon": {
+      "label": "Discount code",
+      "placeholder": "Enter code",
+      "apply": "Apply",
+      "applying": "Checking…",
+      "remove": "Remove discount code {code}",
+      "applied": "Discount code {code} applied.",
+      "active": "Code {code} applied",
+      "belowMin": "Add {amount} more to use code {code}.",
+      "errors": {
+        "required": "Please enter a discount code.",
+        "invalid": "Discount codes contain only English letters, digits, hyphens and underscores.",
+        "notFound": "This discount code is not valid.",
+        "expired": "This discount code has expired.",
+        "usedUp": "This discount code has reached its usage limit.",
+        "minOrder": "This code needs an order of at least {amount}.",
+        "server": "Something went wrong. Please try again."
+      }
+    }
+  },
+  "account": {
+    "label": "Account",
+    "guest": "Welcome",
+    "signIn": "Sign in",
+    "register": "Create account",
+    "orders": "My orders",
+    "greeting": "Hello, {name}",
+    "signOut": "Sign out",
+    "myAccount": "My account",
+    "wishlist": "Wishlist"
+  },
+  "language": {
+    "label": "Change language",
+    "current": "Language: {language}"
+  },
+  "theme": {
+    "label": "Change theme",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  },
+  "footer": {
+    "about": "For years Momtaz Shahd has baked koloocheh and kolompeh with authentic recipes and fresh ingredients.",
+    "quickLinks": "Quick links",
+    "contactTitle": "Contact us",
+    "address": "Address",
+    "addressValue": "Factory address will be published soon",
+    "phone": "Phone",
+    "email": "Email",
+    "trustTitle": "Trust badges",
+    "enamad": "Enamad e-trust badge",
+    "enamadPlaceholder": "Enamad",
+    "socialTitle": "Follow us",
+    "instagram": "Momtaz Shahd on Instagram",
+    "telegram": "Momtaz Shahd on Telegram",
+    "whatsapp": "Momtaz Shahd on WhatsApp",
+    "rights": "© {year} Momtaz Shahd. All rights reserved."
+  },
+  "newsletter": {
+    "title": "Newsletter",
+    "description": "New products and special offers, straight to your inbox.",
+    "emailLabel": "Email address",
+    "emailPlaceholder": "you@example.com",
+    "submit": "Subscribe",
+    "submitting": "Subscribing…",
+    "success": "Thank you! You are subscribed.",
+    "errors": {
+      "required": "Please enter your email address.",
+      "invalid": "Please enter a valid email address.",
+      "tooLong": "This email address is too long.",
+      "server": "Something went wrong. Please try again."
+    }
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "Freshly baked in Iran",
+      "title": "The authentic taste of koloocheh and kolompeh",
+      "subtitle": "Walnut-topped koloocheh and date-filled kolompeh, baked with traditional recipes and delivered fresh to your door.",
+      "shopNow": "Shop now",
+      "wholesale": "Wholesale",
+      "imageAlt": "A selection of Momtaz Shahd koloocheh and kolompeh"
+    },
+    "categories": {
+      "title": "Shop by category",
+      "subtitle": "From everyday treats to gift boxes and cartons for your shop.",
+      "count": "{count, plural, =0 {No products} one {{formatted} product} other {{formatted} products}}"
+    },
+    "featured": {
+      "title": "Featured products",
+      "subtitle": "Our customers' favourites, baked fresh every day.",
+      "viewAll": "View all"
+    },
+    "why": {
+      "title": "Why Momtaz Shahd",
+      "subtitle": "What goes into every box we send out.",
+      "ingredients": {
+        "title": "Quality ingredients",
+        "text": "Fresh walnuts, select dates and real spices — no shortcuts."
+      },
+      "fresh": {
+        "title": "Baked daily",
+        "text": "Small batches baked every day, so what you receive is always fresh."
+      },
+      "shipping": {
+        "title": "Nationwide shipping",
+        "text": "Carefully packed and shipped to every province in Iran."
+      },
+      "dealers": {
+        "title": "Trusted dealers",
+        "text": "Find our products at verified dealers and shops near you."
+      }
+    },
+    "testimonials": {
+      "title": "What our customers say",
+      "subtitle": "Reviews from customers who bought our products."
+    },
+    "dealers": {
+      "title": "Find a dealer near you",
+      "subtitle": "Momtaz Shahd products are available through agencies, distributors and shops across Iran.",
+      "verified": "Verified dealer",
+      "cta": "View all dealers",
+      "mapLabel": "{count, plural, one {Map of Iran showing {formatted} dealer} other {Map of Iran showing {formatted} dealers}}"
+    },
+    "instagram": {
+      "title": "Follow us on Instagram",
+      "subtitle": "Behind the scenes at the bakery, new products and special offers.",
+      "cta": "on Instagram"
+    },
+    "newsletter": {
+      "title": "Be the first to know",
+      "subtitle": "New products and special offers, straight to your inbox."
+    }
+  },
+  "notFound": {
+    "title": "Page not found",
+    "description": "The page you are looking for does not exist or is not ready yet.",
+    "backHome": "Back to home"
+  },
+  "units": {
+    "g": "{value} g",
+    "kg": "{value} kg",
+    "days": "{count, plural, one {{formatted} day} other {{formatted} days}}"
+  },
+  "breadcrumbs": {
+    "label": "Breadcrumb",
+    "home": "Home"
+  },
+  "carousel": {
+    "previous": "Previous products",
+    "next": "Next products"
+  },
+  "product": {
+    "noReviews": "No reviews yet",
+    "ratingLabel": "Rated {rating} out of 5",
+    "reviewCount": "{count, plural, one {{formatted} review} other {{formatted} reviews}}",
+    "originalPrice": "Original price",
+    "salePrice": "Sale price",
+    "wishlistAdd": "Add {name} to wishlist",
+    "wishlistRemove": "Remove {name} from wishlist",
+    "outOfStock": "Out of stock",
+    "outOfStockLong": "This product is currently out of stock. Please check back soon.",
+    "discountBadge": "{percent}% off",
+    "quantity": "Quantity",
+    "decrease": "Decrease quantity",
+    "increase": "Increase quantity",
+    "lowStock": "{count, plural, one {Only {formatted} left} other {Only {formatted} left}}",
+    "inStock": "In stock",
+    "wholesaleHint": "Buying {min} or more? Wholesale price: {price} each.",
+    "wholesaleReached": "Wholesale price applied to this quantity.",
+    "wholesaleNote": "Add {more} more to get the wholesale price.",
+    "wholesaleCta": "Larger order? Request a wholesale quote",
+    "weight": "Weight",
+    "shelfLife": "Shelf life",
+    "category": "Category",
+    "tabs": {
+      "description": "Description",
+      "ingredients": "Ingredients",
+      "reviews": "Reviews ({count})"
+    },
+    "shelfLifeNote": "{count, plural, one {Keeps for {formatted} day} other {Keeps for {formatted} days}} from the production date when stored in a cool, dry place.",
+    "ingredientsEmpty": "The ingredient list for this product will be added soon.",
+    "allergenNote": "May contain traces of nuts, sesame, wheat and egg.",
+    "reviewsEmpty": "There are no reviews for this product yet.",
+    "related": "You may also like",
+    "gallery": {
+      "zoomIn": "Zoom in on image",
+      "zoomOut": "Zoom out",
+      "imageAlt": "{name} — image {index} of {total}",
+      "thumbnails": "Product images",
+      "showImage": "Show image {index}"
+    },
+    "lineTotal": "Total: {total}",
+    "wishlistError": "We couldn't update your wishlist. Please try again."
+  },
+  "catalog": {
+    "title": "Products",
+    "description": "Koloocheh, kolompeh, gift boxes and wholesale packs — baked fresh and shipped nationwide.",
+    "category": "Category",
+    "priceRange": "Price range",
+    "priceMin": "Minimum price",
+    "priceMax": "Maximum price",
+    "inStockOnly": "In stock only",
+    "clearFilters": "Clear filters",
+    "filters": "Filters",
+    "filtersDescription": "Narrow the product list by category, price and availability.",
+    "showResults": "{count, plural, =0 {No products} one {Show {formatted} product} other {Show {formatted} products}}",
+    "sortLabel": "Sort by",
+    "sort": {
+      "newest": "Newest",
+      "priceAsc": "Price: low to high",
+      "priceDesc": "Price: high to low",
+      "rating": "Top rated"
+    },
+    "searchLabel": "Search in products",
+    "searchPlaceholder": "Search products…",
+    "results": "Products list",
+    "resultCount": "{count, plural, =0 {No products} one {{formatted} product} other {{formatted} products}}",
+    "resultCountFor": "{count, plural, =0 {No results} one {{formatted} result} other {{formatted} results}} for “{query}”",
+    "emptyTitle": "No products found",
+    "emptyDescription": "Try removing a filter or searching for something else.",
+    "pagination": {
+      "label": "Pagination",
+      "previous": "Previous page",
+      "next": "Next page",
+      "page": "Page {page}"
+    }
+  },
+  "about": {
+    "title": "About us",
+    "lead": "Momtaz Shahd bakes traditional Iranian koloocheh and kolompeh with authentic recipes and fresh ingredients.",
+    "story": {
+      "title": "Our story",
+      "p1": "Koloocheh and kolompeh are part of the memory of Iranian homes: the smell of cinnamon and cardamom, a warm cookie beside a glass of tea. Momtaz Shahd was founded to keep that taste alive, exactly as it should be.",
+      "p2": "We still work the traditional way — good flour, fresh walnuts, select dates and real spices — while baking in a clean, modern facility and packing each product so that it reaches you fresh.",
+      "imageAlt": "Inside the Momtaz Shahd bakery"
+    },
+    "principles": {
+      "title": "What we stand for",
+      "ingredients": {
+        "title": "Honest ingredients",
+        "text": "We choose every ingredient ourselves and list what goes into each product."
+      },
+      "craft": {
+        "title": "Traditional craft",
+        "text": "Authentic recipes, baked in small batches every day."
+      },
+      "trust": {
+        "title": "Lasting trust",
+        "text": "From families to shops and dealers, we aim to earn every customer's trust again with each order."
+      }
+    },
+    "cta": {
+      "title": "Taste it for yourself",
+      "text": "Browse our products, or get in touch for wholesale and dealership enquiries.",
+      "products": "View products",
+      "contact": "Contact us"
+    }
+  },
+  "contact": {
+    "title": "Contact us",
+    "lead": "Questions, feedback or wholesale enquiries — we would love to hear from you.",
+    "infoTitle": "Contact details",
+    "hours": "Working hours",
+    "hoursValue": "Saturday to Wednesday 8:00–17:00, Thursday 8:00–13:00",
+    "formTitle": "Send us a message",
+    "fields": {
+      "name": "Full name",
+      "phone": "Mobile number",
+      "email": "Email",
+      "subject": "Subject (optional)",
+      "message": "Message"
+    },
+    "contactHint": "Enter a mobile number or an email address so we can reply.",
+    "submit": "Send message",
+    "submitting": "Sending…",
+    "successTitle": "Message sent",
+    "successText": "Thank you. We have received your message and will get back to you soon.",
+    "sendAnother": "Send another message",
+    "errors": {
+      "nameRequired": "Please enter your name.",
+      "contactRequired": "Please enter a mobile number or an email address.",
+      "invalidPhone": "Please enter a valid Iranian mobile number, e.g. 09121234567.",
+      "invalidEmail": "Please enter a valid email address.",
+      "messageTooShort": "Please write at least 10 characters.",
+      "tooLong": "This text is too long.",
+      "server": "Something went wrong. Please try again."
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Sign in",
+      "description": "Sign in with your mobile number and password."
+    },
+    "register": {
+      "title": "Create an account",
+      "description": "Create an account to place orders and track them."
+    },
+    "phone": "Mobile number",
+    "password": "Password",
+    "name": "Full name",
+    "confirmPassword": "Repeat password",
+    "passwordHint": "At least 8 characters, with at least one letter and one digit.",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
+    "signIn": "Sign in",
+    "signingIn": "Signing in…",
+    "createAccount": "Create account",
+    "creatingAccount": "Creating account…",
+    "noAccount": "New here?",
+    "haveAccount": "Already have an account?",
+    "signedOut": "You have signed out.",
+    "errors": {
+      "invalidPhone": "Please enter a valid Iranian mobile number, e.g. 09121234567.",
+      "passwordRequired": "Please enter your password.",
+      "passwordTooShort": "The password must be at least 8 characters.",
+      "passwordWeak": "The password needs at least one letter and one digit.",
+      "passwordMismatch": "The passwords do not match.",
+      "nameRequired": "Please enter your name.",
+      "tooLong": "This text is too long.",
+      "invalidCredentials": "The mobile number or password is incorrect.",
+      "phoneTaken": "An account with this mobile number already exists. Please sign in.",
+      "server": "Something went wrong. Please try again."
+    }
+  },
+  "map": {
+    "label": "Map for choosing the delivery location",
+    "hint": "Optional: tap the map to drop a pin on the exact delivery spot. Drag the pin to adjust it.",
+    "osm": "OpenStreetMap contributors",
+    "useMyLocation": "Use my location",
+    "locating": "Finding you…",
+    "pinAtCenter": "Pin at map centre",
+    "removePin": "Remove pin",
+    "locationError": "We couldn't get your location. Please place the pin on the map.",
+    "pinned": "Pin placed at {lat}, {lng}.",
+    "noPin": "No pin placed."
+  },
+  "address": {
+    "formTitle": "New address",
+    "saved": "Address saved.",
+    "addNew": "Add a new address",
+    "place": "{province}, {city}",
+    "receiverLine": "Receiver: {name}",
+    "postalCodeLine": "Postal code:",
+    "pinSaved": "Map pin",
+    "addPin": "Add a pin on the map (optional)",
+    "save": "Save address",
+    "saving": "Saving…",
+    "cancel": "Cancel",
+    "fields": {
+      "title": "Address label",
+      "titlePlaceholder": "e.g. Home, Office",
+      "province": "Province",
+      "provincePlaceholder": "Choose a province",
+      "city": "City",
+      "cityPlaceholder": "Choose a city",
+      "cityFirst": "Choose a province first",
+      "fullAddress": "Full address",
+      "fullAddressPlaceholder": "Street, alley, building number, unit",
+      "postalCode": "Postal code (10 digits)",
+      "receiverName": "Receiver's name",
+      "receiverPhone": "Receiver's mobile"
+    },
+    "errors": {
+      "titleRequired": "Please give this address a label.",
+      "provinceRequired": "Please choose a province.",
+      "cityRequired": "Please choose a city.",
+      "addressTooShort": "Please enter the full address (at least 10 characters).",
+      "invalidPostalCode": "The postal code must be 10 digits.",
+      "nameRequired": "Please enter the receiver's name.",
+      "invalidPhone": "Please enter a valid Iranian mobile number, e.g. 09121234567.",
+      "invalidLocation": "The map pin is invalid. Please place it again.",
+      "tooLong": "This text is too long.",
+      "limitReached": "You have reached the maximum number of saved addresses.",
+      "unauthorized": "Please sign in again.",
+      "server": "Something went wrong. Please try again."
+    },
+    "editTitle": "Edit address"
+  },
+  "checkout": {
+    "title": "Checkout",
+    "emptyText": "Add some products to your cart before checking out.",
+    "back": "Back",
+    "continueToShipping": "Continue to shipping",
+    "continueToPayment": "Continue to payment",
+    "placing": "Placing your order…",
+    "placeAndPay": "Place order and pay {total}",
+    "placeOrder": "Place order — {total}",
+    "terms": "By placing your order you agree to our terms of sale. Prices are confirmed against current stock when you place the order.",
+    "steps": {
+      "label": "Checkout steps",
+      "address": "Address",
+      "shipping": "Shipping",
+      "payment": "Payment"
+    },
+    "address": {
+      "title": "Where should we deliver?",
+      "choose": "Choose a delivery address"
+    },
+    "shipping": {
+      "title": "How should we send it?",
+      "choose": "Choose a shipping method",
+      "to": "Delivering to: {title}",
+      "days": "Delivery in {min}–{max} working days",
+      "pickupAt": "Pick up at: {address}",
+      "methods": {
+        "post": {
+          "name": "Express Post (Pishtaz)",
+          "description": "Iran Post's express service, to every city."
+        },
+        "tipax": {
+          "name": "Tipax",
+          "description": "Faster courier service between major cities."
+        },
+        "courier": {
+          "name": "Same-day courier",
+          "description": "Delivered by our courier, in our city only."
+        },
+        "pickup": {
+          "name": "Pick up from the factory",
+          "description": "Collect your order in person, free of charge."
+        }
+      },
+      "unavailable": {
+        "inactive": "Not available at the moment.",
+        "sameCityOnly": "Only available in the factory's city.",
+        "noRate": "Not available for this destination."
+      },
+      "sameDay": "Delivered today or the next working day"
+    },
+    "payment": {
+      "title": "How would you like to pay?",
+      "choose": "Choose a payment method",
+      "wholesaleOnly": "Bank transfer is only available for wholesale orders.",
+      "methods": {
+        "ONLINE": {
+          "name": "Online payment",
+          "description": "Pay securely by bank card through the payment gateway."
+        },
+        "COD": {
+          "name": "Cash on delivery",
+          "description": "Pay when you receive your order."
+        },
+        "BANK_TRANSFER": {
+          "name": "Bank transfer",
+          "description": "Transfer the amount to our account; we ship once it arrives."
+        }
+      }
+    },
+    "note": {
+      "label": "Order note (optional)",
+      "placeholder": "Anything we should know about your order or delivery?",
+      "count": "{count}/{max}"
+    },
+    "summary": {
+      "shipping": "Shipping",
+      "shippingPending": "Chosen in the next step",
+      "couponHint": "Have a discount code?",
+      "editCart": "Edit cart",
+      "totalLabel": "Order total",
+      "showDetails": "Details",
+      "description": "Items and costs of your order."
+    },
+    "errors": {
+      "unauthorized": "Please sign in again to place your order.",
+      "invalid": "Some order details are invalid. Please check them and try again.",
+      "emptyCart": "Your cart is empty.",
+      "addressRequired": "Please choose a delivery address.",
+      "shippingRequired": "Please choose a shipping method.",
+      "paymentRequired": "Please choose a payment method.",
+      "noteTooLong": "The order note is too long.",
+      "productUnavailable": "Some products in your cart are no longer available. Your cart has been updated; please review it.",
+      "outOfStock": "Only {formatted} of {name} left in stock. Your cart has been updated; please review it.",
+      "couponInvalid": "Your discount code can no longer be used and was removed. Please review the new total.",
+      "shippingUnavailable": "This shipping method is not available for your address. Please choose another.",
+      "paymentUnavailable": "This payment method is not available for this order. Please choose another.",
+      "totalChanged": "Prices or costs changed since you started checking out. Your cart has been updated; please review the new total.",
+      "server": "We couldn't place your order. Nothing was charged. Please try again."
+    }
+  },
+  "order": {
+    "number": "Order number",
+    "date": "Order date",
+    "statusLabel": "Status",
+    "amount": "Amount",
+    "status": {
+      "PENDING": "Awaiting confirmation",
+      "PAID": "Paid",
+      "PROCESSING": "Being prepared",
+      "SHIPPED": "Shipped",
+      "DELIVERED": "Delivered",
+      "CANCELLED": "Cancelled"
+    },
+    "items": "Items",
+    "quantityTimes": "{quantity} × {price}",
+    "discount": "Discount",
+    "shipping": "Shipping",
+    "delivery": "Delivery",
+    "payment": "Payment",
+    "paymentRef": "Payment reference:",
+    "payNow": "Pay now",
+    "contactUs": "Contact us",
+    "success": {
+      "title": "Your order has been placed",
+      "thanks": "Thank you for your order!",
+      "awaitingTitle": "Your order is awaiting payment",
+      "awaitingText": "We have reserved your products. Complete the payment to confirm the order.",
+      "next": {
+        "ONLINE": "Your payment was received and we are preparing your order.",
+        "COD": "We are already preparing it. Please pay when your order arrives.",
+        "BANK_TRANSFER": "Please transfer the amount using the details below, then upload the receipt. We ship once we have confirmed the payment.",
+        "transferConfirmed": "Your bank transfer has been confirmed and we are preparing your order."
+      }
+    },
+    "bank": {
+      "title": "Bank transfer details",
+      "amount": "Amount to transfer",
+      "bankName": "Bank",
+      "accountHolder": "Account holder",
+      "sheba": "IBAN (Sheba)",
+      "card": "Card number",
+      "reference": "Payment reference",
+      "instructions": "Please mention your order number in the transfer description, then upload the receipt below."
+    },
+    "failed": {
+      "title": "Payment was not completed",
+      "cancelledText": "The payment did not go through and nothing was charged. The order has been cancelled and its products returned to stock.",
+      "pendingText": "Your payment was not completed. Your order is still reserved, so you can try paying again.",
+      "retry": "Try paying again",
+      "reorder": "Order these products again",
+      "reordering": "Adding to your cart…",
+      "reorderPartial": "Some products are no longer available in that quantity; please check your cart."
+    }
+  },
+  "payment": {
+    "gatewayDescription": "Momtaz Shahd order {orderNumber}",
+    "gateways": {
+      "mock": "the test gateway",
+      "zarinpal": "Zarinpal",
+      "idpay": "IDPay"
+    },
+    "start": {
+      "title": "Complete your payment",
+      "text": "Your order is reserved. Pay online to confirm it.",
+      "button": "Pay {amount}",
+      "requestError": "We couldn't connect to the payment gateway. Your order is saved; please try again in a moment.",
+      "via": "Secure payment through {gateway}.",
+      "unavailable": "Online payment is not available right now. Please contact us to complete your order."
+    },
+    "verifying": {
+      "title": "We're confirming your payment",
+      "text": "We couldn't confirm your payment with the bank yet. If money was taken from your account, it will be confirmed shortly; please check again in a minute.",
+      "button": "Check payment status"
+    },
+    "mock": {
+      "title": "Test payment gateway",
+      "text": "This is a simulated bank page for development. No real money is involved.",
+      "pay": "Pay {amount}",
+      "cancel": "Cancel payment",
+      "invalid": "This payment link is invalid or has already been used.",
+      "timeout": "Simulate: the bank doesn't answer"
+    }
+  },
+  "receipt": {
+    "title": "Upload your transfer receipt",
+    "text": "After transferring the amount, upload a photo or PDF of the receipt so we can confirm your payment.",
+    "file": "Receipt (photo or PDF)",
+    "fileHint": "JPG, PNG, WebP or PDF, up to 5 MB.",
+    "reference": "Transfer tracking number (optional)",
+    "referenceLine": "Tracking number:",
+    "submit": "Upload receipt",
+    "uploading": "Uploading…",
+    "uploaded": "Receipt uploaded. We will confirm your payment soon.",
+    "received": "Receipt received on {date}. We will confirm your payment soon.",
+    "view": "View uploaded receipt",
+    "replace": "Upload a different receipt",
+    "errors": {
+      "fileRequired": "Please choose a file.",
+      "fileTooLarge": "The file is larger than 5 MB.",
+      "fileType": "Please upload a JPG, PNG, WebP or PDF file.",
+      "tooLong": "The tracking number is too long.",
+      "notAllowed": "A receipt can't be uploaded for this order.",
+      "unauthorized": "Please sign in again.",
+      "server": "Something went wrong. Please try again."
+    }
+  },
+  "reviews": {
+    "rating": "Your rating",
+    "stars": "{count, plural, one {{formatted} star} other {{formatted} stars}}",
+    "comment": "Your review (optional)",
+    "commentPlaceholder": "What did you think of it?",
+    "moderationNote": "Reviews appear on the site after a quick check by our team.",
+    "submit": "Submit review",
+    "update": "Update review",
+    "submitting": "Sending…",
+    "submitted": "Thank you! Your review will appear after approval.",
+    "signInPrompt": "Bought this product?",
+    "signIn": "Sign in to review it",
+    "onlyBuyers": "Only customers who have received this product can review it.",
+    "editTitle": "Your review",
+    "writeTitle": "Write a review",
+    "writeText": "Tell other customers what you think.",
+    "statusPublished": "Your review is published. Editing it sends it for approval again.",
+    "statusPending": "Your review is awaiting approval.",
+    "published": "Published",
+    "pending": "Awaiting approval",
+    "errors": {
+      "ratingRequired": "Please choose a rating from 1 to 5 stars.",
+      "tooLong": "The review is too long.",
+      "notAllowed": "Only customers who have received this product can review it.",
+      "unauthorized": "Please sign in again.",
+      "server": "Something went wrong. Please try again."
+    }
+  },
+  "accountPages": {
+    "nav": {
+      "label": "Account",
+      "greeting": "Hello, {name}",
+      "dashboard": "Dashboard",
+      "orders": "My orders",
+      "addresses": "Addresses",
+      "wishlist": "Wishlist",
+      "reviews": "My reviews",
+      "profile": "Profile",
+      "wholesale": "Wholesale",
+      "short": {
+        "dashboard": "Home",
+        "orders": "Orders",
+        "addresses": "Addresses",
+        "wishlist": "Wishlist",
+        "reviews": "Reviews",
+        "profile": "Profile",
+        "wholesale": "Wholesale"
+      }
+    },
+    "dashboard": {
+      "title": "My account",
+      "welcome": "Welcome, {name}",
+      "description": "Your orders, addresses and saved products in one place.",
+      "orderCount": "Orders",
+      "viewOrders": "View all orders",
+      "lastOrder": "Last order",
+      "details": "Details",
+      "noOrders": "You haven't ordered anything yet.",
+      "startShopping": "Start shopping",
+      "defaultAddress": "Default address",
+      "noAddress": "No saved address yet.",
+      "manageAddresses": "Manage addresses",
+      "wishlistCount": "Wishlist",
+      "viewWishlist": "View wishlist",
+      "quickLinks": "Quick links",
+      "links": {
+        "orders": "My orders",
+        "addresses": "Addresses",
+        "wishlist": "Wishlist",
+        "reviews": "My reviews",
+        "profile": "Profile and password",
+        "shop": "Continue shopping"
+      }
+    },
+    "orders": {
+      "title": "My orders",
+      "description": "Track your orders and download invoices.",
+      "emptyTitle": "No orders yet",
+      "emptyText": "When you place an order, it will appear here.",
+      "items": "Items",
+      "details": "Details",
+      "detailsFor": "Details of order {number}"
+    },
+    "orderDetail": {
+      "title": "Order {number}",
+      "heading": "Order",
+      "back": "Back to my orders",
+      "receipt": "Upload transfer receipt",
+      "invoice": "Invoice",
+      "trackingCode": "Shipment tracking code",
+      "timeline": "Order history",
+      "cancel": "Cancel order",
+      "cancelTitle": "Cancel this order?",
+      "cancelText": "Order {number} will be cancelled and its products released. This cannot be undone.",
+      "keepOrder": "Keep order",
+      "confirmCancel": "Yes, cancel it",
+      "cancelling": "Cancelling…",
+      "cancelled": "Your order has been cancelled.",
+      "cancelErrors": {
+        "notAllowed": "This order can no longer be cancelled. Please contact us.",
+        "unauthorized": "Please sign in again.",
+        "server": "Something went wrong. Please try again."
+      }
+    },
+    "timeline": {
+      "order_placed": "Order placed",
+      "order_placed_cod": "Order placed, to be paid on delivery",
+      "payment_received": "Payment received",
+      "payment_failed": "Online payment failed",
+      "payment_needs_review": "Payment under review by our team",
+      "receipt_uploaded": "Transfer receipt uploaded",
+      "receipt_rejected": "Receipt not accepted; please upload it again",
+      "bank_transfer_confirmed": "Bank transfer confirmed",
+      "cancelled_by_customer": "Cancelled by you"
+    },
+    "invoice": {
+      "title": "Invoice {number}",
+      "back": "Back to order",
+      "print": "Print / Save as PDF",
+      "number": "Invoice no.",
+      "billTo": "Bill to",
+      "row": "#",
+      "thanks": "Thank you for shopping with Momtaz Shahd."
+    },
+    "addresses": {
+      "title": "Addresses",
+      "description": "Saved delivery addresses for faster checkout.",
+      "emptyTitle": "No saved addresses",
+      "emptyText": "Add an address to check out faster.",
+      "default": "Default",
+      "defaultSet": "Default address updated.",
+      "deleted": "Address deleted.",
+      "edit": "Edit",
+      "editFor": "Edit address {title}",
+      "makeDefault": "Set as default",
+      "makeDefaultFor": "Set {title} as default address",
+      "delete": "Delete",
+      "deleteFor": "Delete address {title}",
+      "deleteTitle": "Delete this address?",
+      "deleteText": "“{title}” will be removed from your address book. Past orders keep their own copy of the address."
+    },
+    "profile": {
+      "title": "Profile",
+      "description": "Your personal details, language and password.",
+      "detailsTitle": "Personal details",
+      "passwordTitle": "Change password",
+      "name": "Full name",
+      "phone": "Mobile number",
+      "phoneHint": "Your mobile number is your username and can't be changed here.",
+      "email": "Email (optional)",
+      "language": "Preferred language",
+      "save": "Save changes",
+      "saving": "Saving…",
+      "saved": "Your profile has been updated.",
+      "currentPassword": "Current password",
+      "newPassword": "New password",
+      "confirmPassword": "Repeat new password",
+      "passwordHint": "At least 8 characters, with at least one letter and one digit.",
+      "changePassword": "Change password",
+      "passwordChanged": "Your password has been changed.",
+      "errors": {
+        "nameRequired": "Please enter your name.",
+        "invalidEmail": "Please enter a valid email address.",
+        "emailTaken": "This email address is already used by another account.",
+        "invalidLocale": "Please choose a language.",
+        "tooLong": "This text is too long.",
+        "passwordTooShort": "The password must be at least 8 characters.",
+        "passwordWeak": "The password needs at least one letter and one digit.",
+        "passwordMismatch": "The passwords do not match.",
+        "wrongPassword": "Your current password is incorrect.",
+        "unauthorized": "Please sign in again.",
+        "server": "Something went wrong. Please try again."
+      }
+    },
+    "wishlist": {
+      "title": "Wishlist",
+      "description": "Products you've saved for later.",
+      "emptyTitle": "Your wishlist is empty",
+      "emptyText": "Tap the heart on any product to save it here."
+    },
+    "reviews": {
+      "title": "My reviews",
+      "description": "Reviews you've written and products you can review.",
+      "toReview": "Products you can review",
+      "emptyTitle": "No reviews yet",
+      "emptyText": "Once you receive an order, you can review its products.",
+      "deleted": "Review deleted.",
+      "edit": "Edit",
+      "delete": "Delete",
+      "deleteFor": "Delete your review of {name}"
+    },
+    "wholesale": {
+      "title": "Wholesale",
+      "description": "Your wholesale prices, quick ordering and requests.",
+      "priceList": "Wholesale price list",
+      "retail": "Retail price",
+      "wholesalePrice": "Wholesale price",
+      "minimum": "Minimum quantity",
+      "availability": "Availability",
+      "bulkTitle": "Quick bulk order",
+      "bulkText": "Enter quantities and add everything to your cart at once. Wholesale prices apply from each product's minimum quantity.",
+      "unitPrice": "Unit price",
+      "minQty": "Wholesale from {formatted} pcs",
+      "addAll": "Add all to cart",
+      "added": "{formatted} items added to your cart.",
+      "emptyError": "Enter a quantity for at least one product.",
+      "requests": "My wholesale requests",
+      "noRequests": "You haven't sent a wholesale request yet.",
+      "newRequest": "Send a request",
+      "requestStatus": {
+        "NEW": "Received",
+        "CONTACTED": "Contacted",
+        "CONVERTED": "Approved",
+        "REJECTED": "Declined"
+      }
+    }
+  }
+}

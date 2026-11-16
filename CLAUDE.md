@@ -1,0 +1,11 @@
+# Project: Momtaz Shahd Online Store
+- Brand: "Momtaz Shahd" (ممتاز شهد) — producer of traditional Iranian cookies: koloocheh (round filled cookies, walnut-topped) and kolompeh (rectangular date-filled cookies with sesame). Logo: red badge with green leaf.
+- Core products: walnut koloocheh, plain koloocheh, date kolompeh, coconut koloocheh, gift boxes, bulk/wholesale packs.
+- Languages: Persian (fa, RTL, default), English (en, LTR), Arabic (ar, RTL). Fully switchable at runtime, locale in the URL (/fa, /en, /ar). Persian uses Vazirmatn, Arabic uses IBM Plex Sans Arabic or Noto Naskh Arabic, English uses Inter. Jalali calendar for fa, Hijri-optional for ar, Gregorian for en. Currency: Toman for fa, with configurable display for en/ar (Toman + approximate USD/AED from an admin-set rate).
+- Stack (always latest stable versions, check npm before installing): Next.js (App Router, React Server Components, Server Actions), TypeScript strict, Tailwind CSS v4, shadcn/ui, next-intl for i18n, Prisma ORM with PostgreSQL (SQLite in local dev), Auth.js (NextAuth) v5, Zustand for cart, Zod + React Hook Form, TanStack Table for admin tables, Recharts for charts, Framer Motion for animations, sonner for toasts, lucide-react icons.
+- Design: modern, clean, premium-but-friendly food brand. Lots of white space, large product photography, soft shadows, rounded-2xl cards, subtle motion. Palette: brand red #C8102E, cream #F5E6D3, warm gold #B8763E, leaf green #3E8E41, dark text #2B2118. Light and dark mode.
+- Responsive: mobile-first; must look and work perfectly on 320px phones, tablets, laptops, and 4K desktops. Use container queries and fluid typography where helpful.
+- Code rules: no `any`, every form validated with Zod on client and server, every user-facing string goes through next-intl message files (never hardcode text), logical CSS properties only (ms/me/ps/pe, start/end) so RTL and LTR both work, accessible (aria labels, keyboard nav, focus rings).
+- After every change run `pnpm tsc --noEmit`, `pnpm lint`, and `pnpm build` and fix all errors before finishing.
+- Then push it on GitHub.
+- When a stage is complete, append a summary to PROGRESS.md.

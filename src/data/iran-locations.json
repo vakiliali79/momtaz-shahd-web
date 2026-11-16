@@ -1,0 +1,2126 @@
+{
+ "provinces": [
+  {
+   "id": "alborz",
+   "name": {
+    "fa": "البرز",
+    "en": "Alborz",
+    "ar": "ألبرز"
+   },
+   "center": [
+    35.84,
+    50.94
+   ],
+   "cities": [
+    {
+     "id": "karaj",
+     "name": {
+      "fa": "کرج",
+      "en": "Karaj",
+      "ar": "كرج"
+     }
+    },
+    {
+     "id": "fardis",
+     "name": {
+      "fa": "فردیس",
+      "en": "Fardis",
+      "ar": "فرديس"
+     }
+    },
+    {
+     "id": "nazarabad",
+     "name": {
+      "fa": "نظرآباد",
+      "en": "Nazarabad",
+      "ar": "نظرآباد"
+     }
+    },
+    {
+     "id": "hashtgerd",
+     "name": {
+      "fa": "هشتگرد",
+      "en": "Hashtgerd",
+      "ar": "هشتجرد"
+     }
+    },
+    {
+     "id": "mohammadshahr",
+     "name": {
+      "fa": "محمدشهر",
+      "en": "Mohammadshahr",
+      "ar": "محمدشهر"
+     }
+    },
+    {
+     "id": "eshtehard",
+     "name": {
+      "fa": "اشتهارد",
+      "en": "Eshtehard",
+      "ar": "اشتهارد"
+     }
+    }
+   ]
+  },
+  {
+   "id": "ardabil",
+   "name": {
+    "fa": "اردبیل",
+    "en": "Ardabil",
+    "ar": "أردبيل"
+   },
+   "center": [
+    38.25,
+    48.29
+   ],
+   "cities": [
+    {
+     "id": "ardabil",
+     "name": {
+      "fa": "اردبیل",
+      "en": "Ardabil",
+      "ar": "أردبيل"
+     }
+    },
+    {
+     "id": "parsabad",
+     "name": {
+      "fa": "پارس‌آباد",
+      "en": "Parsabad",
+      "ar": "بارس آباد"
+     }
+    },
+    {
+     "id": "meshginshahr",
+     "name": {
+      "fa": "مشگین‌شهر",
+      "en": "Meshginshahr",
+      "ar": "مشجين شهر"
+     }
+    },
+    {
+     "id": "khalkhal",
+     "name": {
+      "fa": "خلخال",
+      "en": "Khalkhal",
+      "ar": "خلخال"
+     }
+    },
+    {
+     "id": "germi",
+     "name": {
+      "fa": "گرمی",
+      "en": "Germi",
+      "ar": "جرمي"
+     }
+    },
+    {
+     "id": "namin",
+     "name": {
+      "fa": "نمین",
+      "en": "Namin",
+      "ar": "نمين"
+     }
+    }
+   ]
+  },
+  {
+   "id": "bushehr",
+   "name": {
+    "fa": "بوشهر",
+    "en": "Bushehr",
+    "ar": "بوشهر"
+   },
+   "center": [
+    28.92,
+    50.84
+   ],
+   "cities": [
+    {
+     "id": "bushehr",
+     "name": {
+      "fa": "بوشهر",
+      "en": "Bushehr",
+      "ar": "بوشهر"
+     }
+    },
+    {
+     "id": "borazjan",
+     "name": {
+      "fa": "برازجان",
+      "en": "Borazjan",
+      "ar": "برازجان"
+     }
+    },
+    {
+     "id": "bandar-ganaveh",
+     "name": {
+      "fa": "بندر گناوه",
+      "en": "Bandar Ganaveh",
+      "ar": "بندر جناوه"
+     }
+    },
+    {
+     "id": "kangan",
+     "name": {
+      "fa": "کنگان",
+      "en": "Kangan",
+      "ar": "كنجان"
+     }
+    },
+    {
+     "id": "jam",
+     "name": {
+      "fa": "جم",
+      "en": "Jam",
+      "ar": "جم"
+     }
+    },
+    {
+     "id": "bandar-deyr",
+     "name": {
+      "fa": "بندر دیر",
+      "en": "Bandar Deyr",
+      "ar": "بندر دير"
+     }
+    }
+   ]
+  },
+  {
+   "id": "chaharmahal-bakhtiari",
+   "name": {
+    "fa": "چهارمحال و بختیاری",
+    "en": "Chaharmahal and Bakhtiari",
+    "ar": "جهارمحال وبختياري"
+   },
+   "center": [
+    32.33,
+    50.86
+   ],
+   "cities": [
+    {
+     "id": "shahrekord",
+     "name": {
+      "fa": "شهرکرد",
+      "en": "Shahrekord",
+      "ar": "شهركرد"
+     }
+    },
+    {
+     "id": "borujen",
+     "name": {
+      "fa": "بروجن",
+      "en": "Borujen",
+      "ar": "بروجن"
+     }
+    },
+    {
+     "id": "farsan",
+     "name": {
+      "fa": "فارسان",
+      "en": "Farsan",
+      "ar": "فارسان"
+     }
+    },
+    {
+     "id": "lordegan",
+     "name": {
+      "fa": "لردگان",
+      "en": "Lordegan",
+      "ar": "لردجان"
+     }
+    },
+    {
+     "id": "hafshejan",
+     "name": {
+      "fa": "هفشجان",
+      "en": "Hafshejan",
+      "ar": "هفشجان"
+     }
+    }
+   ]
+  },
+  {
+   "id": "east-azerbaijan",
+   "name": {
+    "fa": "آذربایجان شرقی",
+    "en": "East Azerbaijan",
+    "ar": "أذربيجان الشرقية"
+   },
+   "center": [
+    38.08,
+    46.29
+   ],
+   "cities": [
+    {
+     "id": "tabriz",
+     "name": {
+      "fa": "تبریز",
+      "en": "Tabriz",
+      "ar": "تبريز"
+     }
+    },
+    {
+     "id": "maragheh",
+     "name": {
+      "fa": "مراغه",
+      "en": "Maragheh",
+      "ar": "مراغه"
+     }
+    },
+    {
+     "id": "marand",
+     "name": {
+      "fa": "مرند",
+      "en": "Marand",
+      "ar": "مرند"
+     }
+    },
+    {
+     "id": "mianeh",
+     "name": {
+      "fa": "میانه",
+      "en": "Mianeh",
+      "ar": "ميانه"
+     }
+    },
+    {
+     "id": "ahar",
+     "name": {
+      "fa": "اهر",
+      "en": "Ahar",
+      "ar": "اهر"
+     }
+    },
+    {
+     "id": "bonab",
+     "name": {
+      "fa": "بناب",
+      "en": "Bonab",
+      "ar": "بناب"
+     }
+    },
+    {
+     "id": "sarab",
+     "name": {
+      "fa": "سراب",
+      "en": "Sarab",
+      "ar": "سراب"
+     }
+    },
+    {
+     "id": "azarshahr",
+     "name": {
+      "fa": "آذرشهر",
+      "en": "Azarshahr",
+      "ar": "آذرشهر"
+     }
+    }
+   ]
+  },
+  {
+   "id": "west-azerbaijan",
+   "name": {
+    "fa": "آذربایجان غربی",
+    "en": "West Azerbaijan",
+    "ar": "أذربيجان الغربية"
+   },
+   "center": [
+    37.55,
+    45.07
+   ],
+   "cities": [
+    {
+     "id": "urmia",
+     "name": {
+      "fa": "ارومیه",
+      "en": "Urmia",
+      "ar": "أرومية"
+     }
+    },
+    {
+     "id": "khoy",
+     "name": {
+      "fa": "خوی",
+      "en": "Khoy",
+      "ar": "خوي"
+     }
+    },
+    {
+     "id": "mahabad",
+     "name": {
+      "fa": "مهاباد",
+      "en": "Mahabad",
+      "ar": "مهاباد"
+     }
+    },
+    {
+     "id": "bukan",
+     "name": {
+      "fa": "بوکان",
+      "en": "Bukan",
+      "ar": "بوكان"
+     }
+    },
+    {
+     "id": "miandoab",
+     "name": {
+      "fa": "میاندوآب",
+      "en": "Miandoab",
+      "ar": "مياندوآب"
+     }
+    },
+    {
+     "id": "salmas",
+     "name": {
+      "fa": "سلماس",
+      "en": "Salmas",
+      "ar": "سلماس"
+     }
+    },
+    {
+     "id": "naqadeh",
+     "name": {
+      "fa": "نقده",
+      "en": "Naqadeh",
+      "ar": "نقده"
+     }
+    },
+    {
+     "id": "piranshahr",
+     "name": {
+      "fa": "پیرانشهر",
+      "en": "Piranshahr",
+      "ar": "بيرانشهر"
+     }
+    }
+   ]
+  },
+  {
+   "id": "fars",
+   "name": {
+    "fa": "فارس",
+    "en": "Fars",
+    "ar": "فارس"
+   },
+   "center": [
+    29.61,
+    52.53
+   ],
+   "cities": [
+    {
+     "id": "shiraz",
+     "name": {
+      "fa": "شیراز",
+      "en": "Shiraz",
+      "ar": "شيراز"
+     }
+    },
+    {
+     "id": "marvdasht",
+     "name": {
+      "fa": "مرودشت",
+      "en": "Marvdasht",
+      "ar": "مرودشت"
+     }
+    },
+    {
+     "id": "jahrom",
+     "name": {
+      "fa": "جهرم",
+      "en": "Jahrom",
+      "ar": "جهرم"
+     }
+    },
+    {
+     "id": "fasa",
+     "name": {
+      "fa": "فسا",
+      "en": "Fasa",
+      "ar": "فسا"
+     }
+    },
+    {
+     "id": "kazerun",
+     "name": {
+      "fa": "کازرون",
+      "en": "Kazerun",
+      "ar": "كازرون"
+     }
+    },
+    {
+     "id": "lar",
+     "name": {
+      "fa": "لار",
+      "en": "Lar",
+      "ar": "لار"
+     }
+    },
+    {
+     "id": "darab",
+     "name": {
+      "fa": "داراب",
+      "en": "Darab",
+      "ar": "داراب"
+     }
+    },
+    {
+     "id": "abadeh",
+     "name": {
+      "fa": "آباده",
+      "en": "Abadeh",
+      "ar": "آباده"
+     }
+    }
+   ]
+  },
+  {
+   "id": "gilan",
+   "name": {
+    "fa": "گیلان",
+    "en": "Gilan",
+    "ar": "جيلان"
+   },
+   "center": [
+    37.28,
+    49.58
+   ],
+   "cities": [
+    {
+     "id": "rasht",
+     "name": {
+      "fa": "رشت",
+      "en": "Rasht",
+      "ar": "رشت"
+     }
+    },
+    {
+     "id": "bandar-anzali",
+     "name": {
+      "fa": "بندر انزلی",
+      "en": "Bandar Anzali",
+      "ar": "بندر انزلي"
+     }
+    },
+    {
+     "id": "lahijan",
+     "name": {
+      "fa": "لاهیجان",
+      "en": "Lahijan",
+      "ar": "لاهيجان"
+     }
+    },
+    {
+     "id": "langarud",
+     "name": {
+      "fa": "لنگرود",
+      "en": "Langarud",
+      "ar": "لنجرود"
+     }
+    },
+    {
+     "id": "talesh",
+     "name": {
+      "fa": "تالش",
+      "en": "Talesh",
+      "ar": "تالش"
+     }
+    },
+    {
+     "id": "astara",
+     "name": {
+      "fa": "آستارا",
+      "en": "Astara",
+      "ar": "آستارا"
+     }
+    },
+    {
+     "id": "rudsar",
+     "name": {
+      "fa": "رودسر",
+      "en": "Rudsar",
+      "ar": "رودسر"
+     }
+    },
+    {
+     "id": "fuman",
+     "name": {
+      "fa": "فومن",
+      "en": "Fuman",
+      "ar": "فومن"
+     }
+    }
+   ]
+  },
+  {
+   "id": "golestan",
+   "name": {
+    "fa": "گلستان",
+    "en": "Golestan",
+    "ar": "جلستان"
+   },
+   "center": [
+    36.84,
+    54.44
+   ],
+   "cities": [
+    {
+     "id": "gorgan",
+     "name": {
+      "fa": "گرگان",
+      "en": "Gorgan",
+      "ar": "جرجان"
+     }
+    },
+    {
+     "id": "gonbad-kavus",
+     "name": {
+      "fa": "گنبد کاووس",
+      "en": "Gonbad-e Kavus",
+      "ar": "جنبد كاووس"
+     }
+    },
+    {
+     "id": "aliabad-katul",
+     "name": {
+      "fa": "علی‌آباد کتول",
+      "en": "Aliabad-e Katul",
+      "ar": "علي آباد كتول"
+     }
+    },
+    {
+     "id": "bandar-torkaman",
+     "name": {
+      "fa": "بندر ترکمن",
+      "en": "Bandar Torkaman",
+      "ar": "بندر تركمن"
+     }
+    },
+    {
+     "id": "azadshahr",
+     "name": {
+      "fa": "آزادشهر",
+      "en": "Azadshahr",
+      "ar": "آزادشهر"
+     }
+    },
+    {
+     "id": "kordkuy",
+     "name": {
+      "fa": "کردکوی",
+      "en": "Kordkuy",
+      "ar": "كردكوي"
+     }
+    }
+   ]
+  },
+  {
+   "id": "hamadan",
+   "name": {
+    "fa": "همدان",
+    "en": "Hamadan",
+    "ar": "همدان"
+   },
+   "center": [
+    34.8,
+    48.51
+   ],
+   "cities": [
+    {
+     "id": "hamadan",
+     "name": {
+      "fa": "همدان",
+      "en": "Hamadan",
+      "ar": "همدان"
+     }
+    },
+    {
+     "id": "malayer",
+     "name": {
+      "fa": "ملایر",
+      "en": "Malayer",
+      "ar": "ملاير"
+     }
+    },
+    {
+     "id": "nahavand",
+     "name": {
+      "fa": "نهاوند",
+      "en": "Nahavand",
+      "ar": "نهاوند"
+     }
+    },
+    {
+     "id": "tuyserkan",
+     "name": {
+      "fa": "تویسرکان",
+      "en": "Tuyserkan",
+      "ar": "تويسركان"
+     }
+    },
+    {
+     "id": "asadabad",
+     "name": {
+      "fa": "اسدآباد",
+      "en": "Asadabad",
+      "ar": "اسدآباد"
+     }
+    },
+    {
+     "id": "kabudarahang",
+     "name": {
+      "fa": "کبودرآهنگ",
+      "en": "Kabudarahang",
+      "ar": "كبودرآهنج"
+     }
+    }
+   ]
+  },
+  {
+   "id": "hormozgan",
+   "name": {
+    "fa": "هرمزگان",
+    "en": "Hormozgan",
+    "ar": "هرمزجان"
+   },
+   "center": [
+    27.18,
+    56.27
+   ],
+   "cities": [
+    {
+     "id": "bandar-abbas",
+     "name": {
+      "fa": "بندرعباس",
+      "en": "Bandar Abbas",
+      "ar": "بندر عباس"
+     }
+    },
+    {
+     "id": "minab",
+     "name": {
+      "fa": "میناب",
+      "en": "Minab",
+      "ar": "ميناب"
+     }
+    },
+    {
+     "id": "bandar-lengeh",
+     "name": {
+      "fa": "بندر لنگه",
+      "en": "Bandar Lengeh",
+      "ar": "بندر لنجه"
+     }
+    },
+    {
+     "id": "qeshm",
+     "name": {
+      "fa": "قشم",
+      "en": "Qeshm",
+      "ar": "قشم"
+     }
+    },
+    {
+     "id": "kish",
+     "name": {
+      "fa": "کیش",
+      "en": "Kish",
+      "ar": "كيش"
+     }
+    },
+    {
+     "id": "rudan",
+     "name": {
+      "fa": "رودان",
+      "en": "Rudan",
+      "ar": "رودان"
+     }
+    }
+   ]
+  },
+  {
+   "id": "ilam",
+   "name": {
+    "fa": "ایلام",
+    "en": "Ilam",
+    "ar": "إيلام"
+   },
+   "center": [
+    33.64,
+    46.42
+   ],
+   "cities": [
+    {
+     "id": "ilam",
+     "name": {
+      "fa": "ایلام",
+      "en": "Ilam",
+      "ar": "إيلام"
+     }
+    },
+    {
+     "id": "dehloran",
+     "name": {
+      "fa": "دهلران",
+      "en": "Dehloran",
+      "ar": "دهلران"
+     }
+    },
+    {
+     "id": "eyvan",
+     "name": {
+      "fa": "ایوان",
+      "en": "Eyvan",
+      "ar": "ايوان"
+     }
+    },
+    {
+     "id": "abdanan",
+     "name": {
+      "fa": "آبدانان",
+      "en": "Abdanan",
+      "ar": "آبدانان"
+     }
+    },
+    {
+     "id": "darreh-shahr",
+     "name": {
+      "fa": "دره‌شهر",
+      "en": "Darreh Shahr",
+      "ar": "دره شهر"
+     }
+    },
+    {
+     "id": "mehran",
+     "name": {
+      "fa": "مهران",
+      "en": "Mehran",
+      "ar": "مهران"
+     }
+    }
+   ]
+  },
+  {
+   "id": "isfahan",
+   "name": {
+    "fa": "اصفهان",
+    "en": "Isfahan",
+    "ar": "أصفهان"
+   },
+   "center": [
+    32.65,
+    51.67
+   ],
+   "cities": [
+    {
+     "id": "isfahan",
+     "name": {
+      "fa": "اصفهان",
+      "en": "Isfahan",
+      "ar": "أصفهان"
+     }
+    },
+    {
+     "id": "kashan",
+     "name": {
+      "fa": "کاشان",
+      "en": "Kashan",
+      "ar": "كاشان"
+     }
+    },
+    {
+     "id": "khomeyni-shahr",
+     "name": {
+      "fa": "خمینی‌شهر",
+      "en": "Khomeyni Shahr",
+      "ar": "خميني شهر"
+     }
+    },
+    {
+     "id": "najafabad",
+     "name": {
+      "fa": "نجف‌آباد",
+      "en": "Najafabad",
+      "ar": "نجف آباد"
+     }
+    },
+    {
+     "id": "shahin-shahr",
+     "name": {
+      "fa": "شاهین‌شهر",
+      "en": "Shahin Shahr",
+      "ar": "شاهين شهر"
+     }
+    },
+    {
+     "id": "golpayegan",
+     "name": {
+      "fa": "گلپایگان",
+      "en": "Golpayegan",
+      "ar": "جلبايجان"
+     }
+    },
+    {
+     "id": "mobarakeh",
+     "name": {
+      "fa": "مبارکه",
+      "en": "Mobarakeh",
+      "ar": "مباركه"
+     }
+    },
+    {
+     "id": "shahreza",
+     "name": {
+      "fa": "شهرضا",
+      "en": "Shahreza",
+      "ar": "شهرضا"
+     }
+    }
+   ]
+  },
+  {
+   "id": "kerman",
+   "name": {
+    "fa": "کرمان",
+    "en": "Kerman",
+    "ar": "كرمان"
+   },
+   "center": [
+    30.28,
+    57.08
+   ],
+   "cities": [
+    {
+     "id": "kerman",
+     "name": {
+      "fa": "کرمان",
+      "en": "Kerman",
+      "ar": "كرمان"
+     }
+    },
+    {
+     "id": "sirjan",
+     "name": {
+      "fa": "سیرجان",
+      "en": "Sirjan",
+      "ar": "سيرجان"
+     }
+    },
+    {
+     "id": "rafsanjan",
+     "name": {
+      "fa": "رفسنجان",
+      "en": "Rafsanjan",
+      "ar": "رفسنجان"
+     }
+    },
+    {
+     "id": "jiroft",
+     "name": {
+      "fa": "جیرفت",
+      "en": "Jiroft",
+      "ar": "جيرفت"
+     }
+    },
+    {
+     "id": "bam",
+     "name": {
+      "fa": "بم",
+      "en": "Bam",
+      "ar": "بم"
+     }
+    },
+    {
+     "id": "zarand",
+     "name": {
+      "fa": "زرند",
+      "en": "Zarand",
+      "ar": "زرند"
+     }
+    },
+    {
+     "id": "shahr-e-babak",
+     "name": {
+      "fa": "شهربابک",
+      "en": "Shahr-e Babak",
+      "ar": "شهربابك"
+     }
+    },
+    {
+     "id": "kahnuj",
+     "name": {
+      "fa": "کهنوج",
+      "en": "Kahnuj",
+      "ar": "كهنوج"
+     }
+    }
+   ]
+  },
+  {
+   "id": "kermanshah",
+   "name": {
+    "fa": "کرمانشاه",
+    "en": "Kermanshah",
+    "ar": "كرمانشاه"
+   },
+   "center": [
+    34.31,
+    47.07
+   ],
+   "cities": [
+    {
+     "id": "kermanshah",
+     "name": {
+      "fa": "کرمانشاه",
+      "en": "Kermanshah",
+      "ar": "كرمانشاه"
+     }
+    },
+    {
+     "id": "eslamabad-gharb",
+     "name": {
+      "fa": "اسلام‌آباد غرب",
+      "en": "Eslamabad-e Gharb",
+      "ar": "اسلام آباد غرب"
+     }
+    },
+    {
+     "id": "kangavar",
+     "name": {
+      "fa": "کنگاور",
+      "en": "Kangavar",
+      "ar": "كنجاور"
+     }
+    },
+    {
+     "id": "sonqor",
+     "name": {
+      "fa": "سنقر",
+      "en": "Sonqor",
+      "ar": "سنقر"
+     }
+    },
+    {
+     "id": "harsin",
+     "name": {
+      "fa": "هرسین",
+      "en": "Harsin",
+      "ar": "هرسين"
+     }
+    },
+    {
+     "id": "javanrud",
+     "name": {
+      "fa": "جوانرود",
+      "en": "Javanrud",
+      "ar": "جوانرود"
+     }
+    },
+    {
+     "id": "sarpol-e-zahab",
+     "name": {
+      "fa": "سرپل ذهاب",
+      "en": "Sarpol-e Zahab",
+      "ar": "سربل ذهاب"
+     }
+    }
+   ]
+  },
+  {
+   "id": "north-khorasan",
+   "name": {
+    "fa": "خراسان شمالی",
+    "en": "North Khorasan",
+    "ar": "خراسان الشمالية"
+   },
+   "center": [
+    37.47,
+    57.33
+   ],
+   "cities": [
+    {
+     "id": "bojnurd",
+     "name": {
+      "fa": "بجنورد",
+      "en": "Bojnurd",
+      "ar": "بجنورد"
+     }
+    },
+    {
+     "id": "shirvan",
+     "name": {
+      "fa": "شیروان",
+      "en": "Shirvan",
+      "ar": "شيروان"
+     }
+    },
+    {
+     "id": "esfarayen",
+     "name": {
+      "fa": "اسفراین",
+      "en": "Esfarayen",
+      "ar": "اسفراين"
+     }
+    },
+    {
+     "id": "ashkhaneh",
+     "name": {
+      "fa": "آشخانه",
+      "en": "Ashkhaneh",
+      "ar": "آشخانه"
+     }
+    },
+    {
+     "id": "jajarm",
+     "name": {
+      "fa": "جاجرم",
+      "en": "Jajarm",
+      "ar": "جاجرم"
+     }
+    }
+   ]
+  },
+  {
+   "id": "razavi-khorasan",
+   "name": {
+    "fa": "خراسان رضوی",
+    "en": "Razavi Khorasan",
+    "ar": "خراسان الرضوية"
+   },
+   "center": [
+    36.3,
+    59.6
+   ],
+   "cities": [
+    {
+     "id": "mashhad",
+     "name": {
+      "fa": "مشهد",
+      "en": "Mashhad",
+      "ar": "مشهد"
+     }
+    },
+    {
+     "id": "neyshabur",
+     "name": {
+      "fa": "نیشابور",
+      "en": "Neyshabur",
+      "ar": "نيشابور"
+     }
+    },
+    {
+     "id": "sabzevar",
+     "name": {
+      "fa": "سبزوار",
+      "en": "Sabzevar",
+      "ar": "سبزوار"
+     }
+    },
+    {
+     "id": "torbat-heydarieh",
+     "name": {
+      "fa": "تربت حیدریه",
+      "en": "Torbat-e Heydarieh",
+      "ar": "تربت حيدريه"
+     }
+    },
+    {
+     "id": "quchan",
+     "name": {
+      "fa": "قوچان",
+      "en": "Quchan",
+      "ar": "قوجان"
+     }
+    },
+    {
+     "id": "kashmar",
+     "name": {
+      "fa": "کاشمر",
+      "en": "Kashmar",
+      "ar": "كاشمر"
+     }
+    },
+    {
+     "id": "torbat-jam",
+     "name": {
+      "fa": "تربت جام",
+      "en": "Torbat-e Jam",
+      "ar": "تربت جام"
+     }
+    },
+    {
+     "id": "chenaran",
+     "name": {
+      "fa": "چناران",
+      "en": "Chenaran",
+      "ar": "جناران"
+     }
+    }
+   ]
+  },
+  {
+   "id": "south-khorasan",
+   "name": {
+    "fa": "خراسان جنوبی",
+    "en": "South Khorasan",
+    "ar": "خراسان الجنوبية"
+   },
+   "center": [
+    32.87,
+    59.22
+   ],
+   "cities": [
+    {
+     "id": "birjand",
+     "name": {
+      "fa": "بیرجند",
+      "en": "Birjand",
+      "ar": "بيرجند"
+     }
+    },
+    {
+     "id": "qaen",
+     "name": {
+      "fa": "قائن",
+      "en": "Qaen",
+      "ar": "قائن"
+     }
+    },
+    {
+     "id": "ferdows",
+     "name": {
+      "fa": "فردوس",
+      "en": "Ferdows",
+      "ar": "فردوس"
+     }
+    },
+    {
+     "id": "tabas",
+     "name": {
+      "fa": "طبس",
+      "en": "Tabas",
+      "ar": "طبس"
+     }
+    },
+    {
+     "id": "nehbandan",
+     "name": {
+      "fa": "نهبندان",
+      "en": "Nehbandan",
+      "ar": "نهبندان"
+     }
+    }
+   ]
+  },
+  {
+   "id": "khuzestan",
+   "name": {
+    "fa": "خوزستان",
+    "en": "Khuzestan",
+    "ar": "خوزستان"
+   },
+   "center": [
+    31.32,
+    48.67
+   ],
+   "cities": [
+    {
+     "id": "ahvaz",
+     "name": {
+      "fa": "اهواز",
+      "en": "Ahvaz",
+      "ar": "الأهواز"
+     }
+    },
+    {
+     "id": "abadan",
+     "name": {
+      "fa": "آبادان",
+      "en": "Abadan",
+      "ar": "عبادان"
+     }
+    },
+    {
+     "id": "dezful",
+     "name": {
+      "fa": "دزفول",
+      "en": "Dezful",
+      "ar": "دزفول"
+     }
+    },
+    {
+     "id": "khorramshahr",
+     "name": {
+      "fa": "خرمشهر",
+      "en": "Khorramshahr",
+      "ar": "المحمرة"
+     }
+    },
+    {
+     "id": "andimeshk",
+     "name": {
+      "fa": "اندیمشک",
+      "en": "Andimeshk",
+      "ar": "انديمشك"
+     }
+    },
+    {
+     "id": "shushtar",
+     "name": {
+      "fa": "شوشتر",
+      "en": "Shushtar",
+      "ar": "شوشتر"
+     }
+    },
+    {
+     "id": "behbahan",
+     "name": {
+      "fa": "بهبهان",
+      "en": "Behbahan",
+      "ar": "بهبهان"
+     }
+    },
+    {
+     "id": "mahshahr",
+     "name": {
+      "fa": "ماهشهر",
+      "en": "Mahshahr",
+      "ar": "ماهشهر"
+     }
+    },
+    {
+     "id": "izeh",
+     "name": {
+      "fa": "ایذه",
+      "en": "Izeh",
+      "ar": "ايذه"
+     }
+    }
+   ]
+  },
+  {
+   "id": "kohgiluyeh-boyer-ahmad",
+   "name": {
+    "fa": "کهگیلویه و بویراحمد",
+    "en": "Kohgiluyeh and Boyer-Ahmad",
+    "ar": "كهكيلويه وبوير أحمد"
+   },
+   "center": [
+    30.67,
+    51.59
+   ],
+   "cities": [
+    {
+     "id": "yasuj",
+     "name": {
+      "fa": "یاسوج",
+      "en": "Yasuj",
+      "ar": "ياسوج"
+     }
+    },
+    {
+     "id": "dogonbadan",
+     "name": {
+      "fa": "دوگنبدان",
+      "en": "Dogonbadan",
+      "ar": "دوجنبدان"
+     }
+    },
+    {
+     "id": "dehdasht",
+     "name": {
+      "fa": "دهدشت",
+      "en": "Dehdasht",
+      "ar": "دهدشت"
+     }
+    },
+    {
+     "id": "likak",
+     "name": {
+      "fa": "لیکک",
+      "en": "Likak",
+      "ar": "ليكك"
+     }
+    },
+    {
+     "id": "sisakht",
+     "name": {
+      "fa": "سی‌سخت",
+      "en": "Sisakht",
+      "ar": "سي سخت"
+     }
+    }
+   ]
+  },
+  {
+   "id": "kurdistan",
+   "name": {
+    "fa": "کردستان",
+    "en": "Kurdistan",
+    "ar": "كردستان"
+   },
+   "center": [
+    35.31,
+    46.99
+   ],
+   "cities": [
+    {
+     "id": "sanandaj",
+     "name": {
+      "fa": "سنندج",
+      "en": "Sanandaj",
+      "ar": "سنندج"
+     }
+    },
+    {
+     "id": "saqqez",
+     "name": {
+      "fa": "سقز",
+      "en": "Saqqez",
+      "ar": "سقز"
+     }
+    },
+    {
+     "id": "marivan",
+     "name": {
+      "fa": "مریوان",
+      "en": "Marivan",
+      "ar": "مريوان"
+     }
+    },
+    {
+     "id": "baneh",
+     "name": {
+      "fa": "بانه",
+      "en": "Baneh",
+      "ar": "بانه"
+     }
+    },
+    {
+     "id": "qorveh",
+     "name": {
+      "fa": "قروه",
+      "en": "Qorveh",
+      "ar": "قروه"
+     }
+    },
+    {
+     "id": "bijar",
+     "name": {
+      "fa": "بیجار",
+      "en": "Bijar",
+      "ar": "بيجار"
+     }
+    },
+    {
+     "id": "kamyaran",
+     "name": {
+      "fa": "کامیاران",
+      "en": "Kamyaran",
+      "ar": "كامياران"
+     }
+    }
+   ]
+  },
+  {
+   "id": "lorestan",
+   "name": {
+    "fa": "لرستان",
+    "en": "Lorestan",
+    "ar": "لرستان"
+   },
+   "center": [
+    33.49,
+    48.36
+   ],
+   "cities": [
+    {
+     "id": "khorramabad",
+     "name": {
+      "fa": "خرم‌آباد",
+      "en": "Khorramabad",
+      "ar": "خرم آباد"
+     }
+    },
+    {
+     "id": "borujerd",
+     "name": {
+      "fa": "بروجرد",
+      "en": "Borujerd",
+      "ar": "بروجرد"
+     }
+    },
+    {
+     "id": "dorud",
+     "name": {
+      "fa": "دورود",
+      "en": "Dorud",
+      "ar": "دورود"
+     }
+    },
+    {
+     "id": "aligudarz",
+     "name": {
+      "fa": "الیگودرز",
+      "en": "Aligudarz",
+      "ar": "اليجودرز"
+     }
+    },
+    {
+     "id": "kuhdasht",
+     "name": {
+      "fa": "کوهدشت",
+      "en": "Kuhdasht",
+      "ar": "كوهدشت"
+     }
+    },
+    {
+     "id": "azna",
+     "name": {
+      "fa": "ازنا",
+      "en": "Azna",
+      "ar": "ازنا"
+     }
+    },
+    {
+     "id": "nurabad",
+     "name": {
+      "fa": "نورآباد",
+      "en": "Nurabad",
+      "ar": "نورآباد"
+     }
+    }
+   ]
+  },
+  {
+   "id": "markazi",
+   "name": {
+    "fa": "مرکزی",
+    "en": "Markazi",
+    "ar": "المركزية"
+   },
+   "center": [
+    34.09,
+    49.69
+   ],
+   "cities": [
+    {
+     "id": "arak",
+     "name": {
+      "fa": "اراک",
+      "en": "Arak",
+      "ar": "اراك"
+     }
+    },
+    {
+     "id": "saveh",
+     "name": {
+      "fa": "ساوه",
+      "en": "Saveh",
+      "ar": "ساوه"
+     }
+    },
+    {
+     "id": "khomeyn",
+     "name": {
+      "fa": "خمین",
+      "en": "Khomeyn",
+      "ar": "خمين"
+     }
+    },
+    {
+     "id": "mahallat",
+     "name": {
+      "fa": "محلات",
+      "en": "Mahallat",
+      "ar": "محلات"
+     }
+    },
+    {
+     "id": "delijan",
+     "name": {
+      "fa": "دلیجان",
+      "en": "Delijan",
+      "ar": "دليجان"
+     }
+    },
+    {
+     "id": "tafresh",
+     "name": {
+      "fa": "تفرش",
+      "en": "Tafresh",
+      "ar": "تفرش"
+     }
+    },
+    {
+     "id": "shazand",
+     "name": {
+      "fa": "شازند",
+      "en": "Shazand",
+      "ar": "شازند"
+     }
+    }
+   ]
+  },
+  {
+   "id": "mazandaran",
+   "name": {
+    "fa": "مازندران",
+    "en": "Mazandaran",
+    "ar": "مازندران"
+   },
+   "center": [
+    36.56,
+    53.06
+   ],
+   "cities": [
+    {
+     "id": "sari",
+     "name": {
+      "fa": "ساری",
+      "en": "Sari",
+      "ar": "ساري"
+     }
+    },
+    {
+     "id": "babol",
+     "name": {
+      "fa": "بابل",
+      "en": "Babol",
+      "ar": "بابل"
+     }
+    },
+    {
+     "id": "amol",
+     "name": {
+      "fa": "آمل",
+      "en": "Amol",
+      "ar": "آمل"
+     }
+    },
+    {
+     "id": "qaem-shahr",
+     "name": {
+      "fa": "قائم‌شهر",
+      "en": "Qaem Shahr",
+      "ar": "قائم شهر"
+     }
+    },
+    {
+     "id": "behshahr",
+     "name": {
+      "fa": "بهشهر",
+      "en": "Behshahr",
+      "ar": "بهشهر"
+     }
+    },
+    {
+     "id": "chalus",
+     "name": {
+      "fa": "چالوس",
+      "en": "Chalus",
+      "ar": "جالوس"
+     }
+    },
+    {
+     "id": "nowshahr",
+     "name": {
+      "fa": "نوشهر",
+      "en": "Nowshahr",
+      "ar": "نوشهر"
+     }
+    },
+    {
+     "id": "ramsar",
+     "name": {
+      "fa": "رامسر",
+      "en": "Ramsar",
+      "ar": "رامسر"
+     }
+    },
+    {
+     "id": "babolsar",
+     "name": {
+      "fa": "بابلسر",
+      "en": "Babolsar",
+      "ar": "بابلسر"
+     }
+    },
+    {
+     "id": "tonekabon",
+     "name": {
+      "fa": "تنکابن",
+      "en": "Tonekabon",
+      "ar": "تنكابن"
+     }
+    }
+   ]
+  },
+  {
+   "id": "qazvin",
+   "name": {
+    "fa": "قزوین",
+    "en": "Qazvin",
+    "ar": "قزوين"
+   },
+   "center": [
+    36.27,
+    50.0
+   ],
+   "cities": [
+    {
+     "id": "qazvin",
+     "name": {
+      "fa": "قزوین",
+      "en": "Qazvin",
+      "ar": "قزوين"
+     }
+    },
+    {
+     "id": "takestan",
+     "name": {
+      "fa": "تاکستان",
+      "en": "Takestan",
+      "ar": "تاكستان"
+     }
+    },
+    {
+     "id": "abyek",
+     "name": {
+      "fa": "آبیک",
+      "en": "Abyek",
+      "ar": "آبيك"
+     }
+    },
+    {
+     "id": "buin-zahra",
+     "name": {
+      "fa": "بوئین‌زهرا",
+      "en": "Buin Zahra",
+      "ar": "بوئين زهرا"
+     }
+    },
+    {
+     "id": "alvand",
+     "name": {
+      "fa": "الوند",
+      "en": "Alvand",
+      "ar": "الوند"
+     }
+    },
+    {
+     "id": "mohammadieh",
+     "name": {
+      "fa": "محمدیه",
+      "en": "Mohammadieh",
+      "ar": "محمديه"
+     }
+    }
+   ]
+  },
+  {
+   "id": "qom",
+   "name": {
+    "fa": "قم",
+    "en": "Qom",
+    "ar": "قم"
+   },
+   "center": [
+    34.64,
+    50.88
+   ],
+   "cities": [
+    {
+     "id": "qom",
+     "name": {
+      "fa": "قم",
+      "en": "Qom",
+      "ar": "قم"
+     }
+    },
+    {
+     "id": "jafarieh",
+     "name": {
+      "fa": "جعفریه",
+      "en": "Jafarieh",
+      "ar": "جعفريه"
+     }
+    },
+    {
+     "id": "kahak",
+     "name": {
+      "fa": "کهک",
+      "en": "Kahak",
+      "ar": "كهك"
+     }
+    },
+    {
+     "id": "salafchegan",
+     "name": {
+      "fa": "سلفچگان",
+      "en": "Salafchegan",
+      "ar": "سلفججان"
+     }
+    }
+   ]
+  },
+  {
+   "id": "semnan",
+   "name": {
+    "fa": "سمنان",
+    "en": "Semnan",
+    "ar": "سمنان"
+   },
+   "center": [
+    35.58,
+    53.39
+   ],
+   "cities": [
+    {
+     "id": "semnan",
+     "name": {
+      "fa": "سمنان",
+      "en": "Semnan",
+      "ar": "سمنان"
+     }
+    },
+    {
+     "id": "shahrud",
+     "name": {
+      "fa": "شاهرود",
+      "en": "Shahrud",
+      "ar": "شاهرود"
+     }
+    },
+    {
+     "id": "damghan",
+     "name": {
+      "fa": "دامغان",
+      "en": "Damghan",
+      "ar": "دامغان"
+     }
+    },
+    {
+     "id": "garmsar",
+     "name": {
+      "fa": "گرمسار",
+      "en": "Garmsar",
+      "ar": "جرمسار"
+     }
+    },
+    {
+     "id": "mehdishahr",
+     "name": {
+      "fa": "مهدی‌شهر",
+      "en": "Mehdishahr",
+      "ar": "مهدي شهر"
+     }
+    }
+   ]
+  },
+  {
+   "id": "sistan-baluchestan",
+   "name": {
+    "fa": "سیستان و بلوچستان",
+    "en": "Sistan and Baluchestan",
+    "ar": "سيستان وبلوشستان"
+   },
+   "center": [
+    29.5,
+    60.86
+   ],
+   "cities": [
+    {
+     "id": "zahedan",
+     "name": {
+      "fa": "زاهدان",
+      "en": "Zahedan",
+      "ar": "زاهدان"
+     }
+    },
+    {
+     "id": "chabahar",
+     "name": {
+      "fa": "چابهار",
+      "en": "Chabahar",
+      "ar": "جابهار"
+     }
+    },
+    {
+     "id": "iranshahr",
+     "name": {
+      "fa": "ایرانشهر",
+      "en": "Iranshahr",
+      "ar": "ايرانشهر"
+     }
+    },
+    {
+     "id": "zabol",
+     "name": {
+      "fa": "زابل",
+      "en": "Zabol",
+      "ar": "زابل"
+     }
+    },
+    {
+     "id": "saravan",
+     "name": {
+      "fa": "سراوان",
+      "en": "Saravan",
+      "ar": "سراوان"
+     }
+    },
+    {
+     "id": "khash",
+     "name": {
+      "fa": "خاش",
+      "en": "Khash",
+      "ar": "خاش"
+     }
+    },
+    {
+     "id": "konarak",
+     "name": {
+      "fa": "کنارک",
+      "en": "Konarak",
+      "ar": "كنارك"
+     }
+    }
+   ]
+  },
+  {
+   "id": "tehran",
+   "name": {
+    "fa": "تهران",
+    "en": "Tehran",
+    "ar": "طهران"
+   },
+   "center": [
+    35.69,
+    51.39
+   ],
+   "cities": [
+    {
+     "id": "tehran",
+     "name": {
+      "fa": "تهران",
+      "en": "Tehran",
+      "ar": "طهران"
+     }
+    },
+    {
+     "id": "eslamshahr",
+     "name": {
+      "fa": "اسلامشهر",
+      "en": "Eslamshahr",
+      "ar": "اسلامشهر"
+     }
+    },
+    {
+     "id": "shahriar",
+     "name": {
+      "fa": "شهریار",
+      "en": "Shahriar",
+      "ar": "شهريار"
+     }
+    },
+    {
+     "id": "qods",
+     "name": {
+      "fa": "شهر قدس",
+      "en": "Qods",
+      "ar": "شهر قدس"
+     }
+    },
+    {
+     "id": "malard",
+     "name": {
+      "fa": "ملارد",
+      "en": "Malard",
+      "ar": "ملارد"
+     }
+    },
+    {
+     "id": "varamin",
+     "name": {
+      "fa": "ورامین",
+      "en": "Varamin",
+      "ar": "ورامين"
+     }
+    },
+    {
+     "id": "pakdasht",
+     "name": {
+      "fa": "پاکدشت",
+      "en": "Pakdasht",
+      "ar": "باكدشت"
+     }
+    },
+    {
+     "id": "rey",
+     "name": {
+      "fa": "شهر ری",
+      "en": "Rey",
+      "ar": "شهر ري"
+     }
+    },
+    {
+     "id": "damavand",
+     "name": {
+      "fa": "دماوند",
+      "en": "Damavand",
+      "ar": "دماوند"
+     }
+    },
+    {
+     "id": "robat-karim",
+     "name": {
+      "fa": "رباط‌کریم",
+      "en": "Robat Karim",
+      "ar": "رباط كريم"
+     }
+    },
+    {
+     "id": "pardis",
+     "name": {
+      "fa": "پردیس",
+      "en": "Pardis",
+      "ar": "برديس"
+     }
+    }
+   ]
+  },
+  {
+   "id": "yazd",
+   "name": {
+    "fa": "یزد",
+    "en": "Yazd",
+    "ar": "يزد"
+   },
+   "center": [
+    31.9,
+    54.37
+   ],
+   "cities": [
+    {
+     "id": "yazd",
+     "name": {
+      "fa": "یزد",
+      "en": "Yazd",
+      "ar": "يزد"
+     }
+    },
+    {
+     "id": "meybod",
+     "name": {
+      "fa": "میبد",
+      "en": "Meybod",
+      "ar": "ميبد"
+     }
+    },
+    {
+     "id": "ardakan",
+     "name": {
+      "fa": "اردکان",
+      "en": "Ardakan",
+      "ar": "اردكان"
+     }
+    },
+    {
+     "id": "bafq",
+     "name": {
+      "fa": "بافق",
+      "en": "Bafq",
+      "ar": "بافق"
+     }
+    },
+    {
+     "id": "mehriz",
+     "name": {
+      "fa": "مهریز",
+      "en": "Mehriz",
+      "ar": "مهريز"
+     }
+    },
+    {
+     "id": "taft",
+     "name": {
+      "fa": "تفت",
+      "en": "Taft",
+      "ar": "تفت"
+     }
+    },
+    {
+     "id": "abarkuh",
+     "name": {
+      "fa": "ابرکوه",
+      "en": "Abarkuh",
+      "ar": "ابركوه"
+     }
+    }
+   ]
+  },
+  {
+   "id": "zanjan",
+   "name": {
+    "fa": "زنجان",
+    "en": "Zanjan",
+    "ar": "زنجان"
+   },
+   "center": [
+    36.68,
+    48.5
+   ],
+   "cities": [
+    {
+     "id": "zanjan",
+     "name": {
+      "fa": "زنجان",
+      "en": "Zanjan",
+      "ar": "زنجان"
+     }
+    },
+    {
+     "id": "abhar",
+     "name": {
+      "fa": "ابهر",
+      "en": "Abhar",
+      "ar": "ابهر"
+     }
+    },
+    {
+     "id": "khorramdarreh",
+     "name": {
+      "fa": "خرمدره",
+      "en": "Khorramdarreh",
+      "ar": "خرمدره"
+     }
+    },
+    {
+     "id": "khodabandeh",
+     "name": {
+      "fa": "خدابنده",
+      "en": "Khodabandeh",
+      "ar": "خدابنده"
+     }
+    },
+    {
+     "id": "mahneshan",
+     "name": {
+      "fa": "ماهنشان",
+      "en": "Mahneshan",
+      "ar": "ماهنشان"
+     }
+    },
+    {
+     "id": "soltanieh",
+     "name": {
+      "fa": "سلطانیه",
+      "en": "Soltaniyeh",
+      "ar": "سلطانيه"
+     }
+    }
+   ]
+  }
+ ]
+}

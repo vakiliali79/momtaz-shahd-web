@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" role="img" aria-label="Momtaz Shahd">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F9EEDF"/>
+      <stop offset="1" stop-color="#EDD6BA"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="800" fill="url(#bg)"/>
+  <circle cx="400" cy="400" r="170" fill="#E3BE92" stroke="#B8763E" stroke-width="10"/>
+  <circle cx="400" cy="400" r="128" fill="none" stroke="#B8763E" stroke-width="5" stroke-dasharray="4 16" stroke-linecap="round"/>
+  <ellipse cx="400" cy="400" rx="46" ry="60" fill="#B8763E"/>
+  <path d="M400 345v110M378 372c14 10 30 10 44 0M374 404c16 12 36 12 52 0M378 436c14 8 30 8 44 0" fill="none" stroke="#E3BE92" stroke-width="5" stroke-linecap="round"/>
+</svg>
