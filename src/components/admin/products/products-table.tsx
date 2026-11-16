@@ -65,7 +65,7 @@ function StockCell({ row }: { row: AdminProductRow }) {
           event.currentTarget.blur();
         }
       }}
-      className={cn("h-8 w-20 rounded-lg text-center tabular-nums", row.stock <= 0 && "border-destructive/60 text-destructive")}
+      className={cn("h-11 w-20 rounded-xl text-center tabular-nums", row.stock <= 0 && "border-destructive/60 text-destructive")}
     />
   );
 }

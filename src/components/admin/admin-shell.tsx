@@ -158,8 +158,8 @@ export function AdminShell({ adminName, children }: { adminName: string; childre
             </SheetContent>
           </Sheet>
           <p className="truncate text-sm text-muted-foreground">{t("signedInAs", { name: adminName })}</p>
-          <div className="ms-auto flex items-center gap-1">
-            <Button asChild variant="ghost" size="sm" className="rounded-full">
+          <div className="ms-auto flex items-center gap-2">
+            <Button asChild variant="ghost" className="h-9 min-w-9 rounded-full">
               <Link href="/" target="_blank">
                 <ExternalLinkIcon className="rtl:-scale-x-100" aria-hidden="true" />
                 <span className="max-sm:sr-only">{t("viewStore")}</span>

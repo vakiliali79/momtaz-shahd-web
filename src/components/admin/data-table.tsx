@@ -128,7 +128,7 @@ export function DataTable<TData extends RowData>({
                         <button
                           type="button"
                           onClick={header.column.getToggleSortingHandler()}
-                          className="touch-target inline-flex items-center gap-1 rounded hover:text-foreground"
+                          className="inline-flex min-h-11 items-center gap-1 rounded hover:text-foreground"
                         >
                           <table.FlexRender header={header} />
                           {sorted === "asc" ? (
@@ -228,7 +228,7 @@ export function ListPager({
         onClick={() => onPage(page - 1)}
         disabled={page <= 1}
         aria-label={t("previous")}
-        className="grid size-9 place-items-center rounded-lg border border-border hover:bg-muted disabled:opacity-40"
+        className="grid size-11 place-items-center rounded-xl border border-border hover:bg-muted disabled:opacity-40"
       >
         <ChevronRightIcon className="size-4 ltr:rotate-180" aria-hidden="true" />
       </button>
@@ -240,7 +240,7 @@ export function ListPager({
         onClick={() => onPage(page + 1)}
         disabled={page >= pageCount}
         aria-label={t("next")}
-        className="grid size-9 place-items-center rounded-lg border border-border hover:bg-muted disabled:opacity-40"
+        className="grid size-11 place-items-center rounded-xl border border-border hover:bg-muted disabled:opacity-40"
       >
         <ChevronLeftIcon className="size-4 ltr:rotate-180" aria-hidden="true" />
       </button>

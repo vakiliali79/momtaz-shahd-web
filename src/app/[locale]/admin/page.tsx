@@ -70,7 +70,7 @@ async function Dashboard() {
                 <li key={product.productId} className="space-y-1">
                   <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-0.5 text-sm">
                     <Link href={`/admin/products/${product.productId}`} className="touch-target font-medium hover:text-primary">{product.name}</Link>
-                    <span className="shrink-0 text-muted-foreground">
+                    <span className="text-muted-foreground">
                       {t("sold", { count: product.quantity, formatted: formatNumber(product.quantity, locale) })} · {formatPrice(product.revenue, locale, toman)}
                     </span>
                   </div>

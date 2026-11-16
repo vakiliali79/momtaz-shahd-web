@@ -18,12 +18,12 @@ export function Header() {
       <Suspense fallback={null}>
         <SessionLoader />
       </Suspense>
-      <Container className="flex h-16 items-center gap-1 sm:gap-2">
+      <Container className="flex h-16 items-center gap-2">
         <MobileNav className="-ms-2 xl:hidden" />
         <Logo className="me-auto xl:me-4" />
         <MainNav className="hidden xl:block" />
         <SearchForm className="ms-auto hidden w-full max-w-64 md:block xl:max-w-56 2xl:max-w-72" />
-        <div className="flex items-center gap-0.5 sm:gap-1 md:ms-2">
+        <div className="flex items-center gap-2 md:ms-2">
           <LanguageSwitcher className="max-[359px]:hidden" />
           <ThemeToggle className="max-[359px]:hidden" />
           <AccountMenu className="max-sm:hidden" />

@@ -284,7 +284,7 @@
 }
 
 /* Map zoom buttons: 44px tap targets, brand colours. */
-.leaflet-container .leaflet-bar a {
+.leaflet-container .leaflet-bar.leaflet-control a {
   width: 44px;
   height: 44px;
   line-height: 44px;

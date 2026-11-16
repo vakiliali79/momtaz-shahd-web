@@ -20,7 +20,7 @@ function pageWindow(page: number, pageCount: number): (number | "gap")[] {
 }
 
 const itemClass =
-  "grid h-10 min-w-10 place-items-center rounded-full px-3 text-sm font-medium transition-colors";
+  "grid h-11 min-w-11 place-items-center rounded-full px-3 text-sm font-medium transition-colors";
 
 export function Pagination({
   basePath,

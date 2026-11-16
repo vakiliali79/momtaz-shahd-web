@@ -66,12 +66,12 @@ export function Filters({
       aria-busy={isPending}
     >
       {showCategories ? (
-        <fieldset className="space-y-3">
-          <legend className="mb-3 text-sm font-semibold">{t("catalog.category")}</legend>
+        <fieldset className="space-y-1">
+          <legend className="mb-2 text-sm font-semibold">{t("catalog.category")}</legend>
           {categories.map((category) => {
             const inputId = `${id}-${category.slug}`;
             return (
-              <div key={category.slug} className="flex items-center gap-3">
+              <div key={category.slug} className="flex min-h-11 items-center gap-3">
                 <Checkbox
                   id={inputId}
                   checked={params.category.includes(category.slug)}
@@ -79,7 +79,7 @@ export function Filters({
                     toggleCategory(category.slug, checked === true)
                   }
                 />
-                <label htmlFor={inputId} className="flex flex-1 cursor-pointer justify-between gap-2 text-sm">
+                <label htmlFor={inputId} className="flex flex-1 cursor-pointer items-center justify-between gap-2 self-stretch text-sm">
                   <span>{category.name}</span>
                   <span className="text-muted-foreground">
                     {formatNumber(category.count, locale)}
@@ -115,7 +115,7 @@ export function Filters({
         </div>
       </fieldset>
 
-      <div className="flex items-center gap-3">
+      <div className="flex min-h-11 items-center gap-3">
         <Checkbox
           id={`${id}-stock`}
           checked={params.stock === "1"}
@@ -123,7 +123,7 @@ export function Filters({
             update({ stock: checked === true ? "1" : undefined })
           }
         />
-        <label htmlFor={`${id}-stock`} className="cursor-pointer text-sm">
+        <label htmlFor={`${id}-stock`} className="flex flex-1 cursor-pointer items-center self-stretch text-sm">
           {t("catalog.inStockOnly")}
         </label>
       </div>

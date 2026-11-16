@@ -87,7 +87,7 @@ export function Footer({ year, contact, locale }: { year: string; contact: Conta
               <li key={key}>
                 <Link
                   href={href}
-                  className="inline-flex min-h-11 items-center rounded text-muted-foreground transition-colors hover:text-primary"
+                  className="touch-target inline-flex min-h-11 items-center rounded text-muted-foreground transition-colors hover:text-primary"
                 >
                   {t(`nav.${key}`)}
                 </Link>
@@ -96,7 +96,7 @@ export function Footer({ year, contact, locale }: { year: string; contact: Conta
             <li>
               <Link
                 href="/track"
-                className="inline-flex min-h-11 items-center rounded text-muted-foreground transition-colors hover:text-primary"
+                className="touch-target inline-flex min-h-11 items-center rounded text-muted-foreground transition-colors hover:text-primary"
               >
                 {t("footer.track")}
               </Link>

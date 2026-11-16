@@ -22,7 +22,7 @@ export function LocalizedTabs({
   const t = useTranslations("admin.form");
   return (
     <Tabs defaultValue={routing.defaultLocale} className="gap-4">
-      <TabsList aria-label={t("languages")}>
+      <TabsList aria-label={t("languages")} className="h-11">
         {routing.locales.map((locale) => (
           <TabsTrigger key={locale} value={locale} className="gap-1.5 px-3" lang={locale}>
             {localeMeta[locale].nativeName}
