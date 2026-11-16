@@ -18,7 +18,8 @@ async function AccountNavLoader() {
 
 export default function AccountLayout({ children }: LayoutProps<"/[locale]/account">) {
   return (
-    <Container className="grid items-start gap-8 py-8 lg:grid-cols-[15rem_minmax(0,1fr)] lg:gap-10 lg:py-12">
+    // When printing (invoice), the sidebar is hidden: drop the grid so the page uses the full width.
+    <Container className="grid items-start gap-8 py-8 lg:grid-cols-[15rem_minmax(0,1fr)] lg:gap-10 lg:py-12 print:block print:max-w-none print:p-0">
       <Suspense fallback={<AccountNavSkeleton />}>
         <AccountNavLoader />
       </Suspense>

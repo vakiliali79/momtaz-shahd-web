@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { HeartIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 import { setWishlisted, syncWishlist } from "@/actions/wishlist";
@@ -39,6 +40,7 @@ export function useWishlistToggle() {
  * and shows the combined list. Rendered once in the app providers.
  */
 export function WishlistSync() {
+  const router = useRouter();
   const userId = useSessionStore((state) => state.user?.id ?? null);
   const status = useSessionStore((state) => state.status);
   const lastSynced = useRef<string | null>(null);
@@ -49,10 +51,14 @@ export function WishlistSync() {
     void (async () => {
       // Make sure the browser copy is loaded before merging it.
       await useWishlistStore.persist.rehydrate();
-      const merged = await syncWishlist(useWishlistStore.getState().ids).catch(() => null);
-      if (merged) useWishlistStore.getState().setIds(merged, true);
+      const local = useWishlistStore.getState().ids;
+      const merged = await syncWishlist(local).catch(() => null);
+      if (!merged) return;
+      useWishlistStore.getState().setIds(merged, true);
+      // Guest hearts were just saved to the account: refresh pages that count them.
+      if (local.length > 0) router.refresh();
     })();
-  }, [status, userId]);
+  }, [status, userId, router]);
 
   useEffect(() => {
     if (status === "guest") lastSynced.current = null;

@@ -195,3 +195,35 @@
 - Online orders whose customer never returns from the gateway stay PENDING with stock reserved; a scheduled job should cancel them after a timeout (`cancelPendingOrder` in `src/lib/orders/cancel.ts` does the work).
 - No admin UI yet for confirming bank transfers or reviewing flagged payments.
 - Receipts are on the local disk; use object storage on hosts without a persistent disk.
+
+## Stage 7 — Customer account area (2026-11-16)
+
+**Layout**: `/account` with a sidebar on large screens and a bottom tab bar on phones and tablets; the wholesale tab only appears for `WHOLESALE` users. Every page reads the session behind `<Suspense>` and is excluded from search engines.
+
+**Pages**
+- Dashboard: order count, last order, default address, wishlist count, quick links.
+- My orders (`/account/orders`): number, Jalali/Gregorian date, item count, total, status badge (table on tablets and up, cards on phones).
+- Order detail: items, totals, delivery address, payment, shipment tracking code, status timeline (from `OrderStatusHistory`), "Pay now" or "Upload receipt" when relevant, Reorder, and Cancel.
+  - Cancel is only offered while PENDING, and not after a bank-transfer receipt was uploaded. It restores stock and the coupon use, and leaves any pending online payment attempt to be verified (paid → flagged for refund).
+- Invoice (`/account/orders/[number]/invoice`): a print-friendly page ("Print / Save as PDF") instead of `@react-pdf/renderer`, because the browser shapes Persian/Arabic text correctly and PDF libraries don't reliably. The site header, footer and account navigation are hidden in print.
+- Addresses: add, edit, delete (the oldest remaining address becomes default) and set default, with the map pin.
+- Profile: name, email (unique), preferred language (switches the site to it), change password. The name in the header updates via an Auth.js session update.
+- Wishlist: the heart on product cards now saves to the account when signed in. A guest's hearts are merged in at sign-in, and the list is cleared from the browser at sign-out.
+- My reviews: list with approval status, delete, and "products you can review".
+  - The review form on a product page appears only for customers with a DELIVERED order containing that product. Every new or edited review waits for moderation.
+- Wholesale (`WHOLESALE` role only): wholesale price list, quick bulk order form (quantities per product → cart), and the user's wholesale requests (matched by phone number, because the request form is public).
+
+**Verified**: `pnpm tsc --noEmit`, `pnpm lint`, `pnpm test`, `pnpm build` pass. Browser-tested against the production build:
+- dashboard; order list and detail; cancel (stock restored); no cancel after a receipt upload;
+- tracking code and timeline; invoice print layout (full width, chrome hidden; PDF export works in Persian); reorder;
+- address add / edit / set default / delete default;
+- profile validation, header name update, wrong/right current password, language switch to Arabic;
+- wishlist guest-to-account merge, save and remove;
+- review form gating (guest, not delivered, delivered), rating validation, moderation status;
+- wholesale role gating, bulk form errors and cart contents at wholesale prices;
+- Persian mobile layout with bottom tabs.
+
+**Open items**
+- Admin moderation of reviews, order status changes (shipped/delivered, tracking codes) and wholesale role approval need the admin panel.
+- The public wholesale request form (`/wholesale`) is not built yet, so the request list will stay empty until it is.
+- Changing a password does not sign out other devices (JWT sessions stay valid until they expire).

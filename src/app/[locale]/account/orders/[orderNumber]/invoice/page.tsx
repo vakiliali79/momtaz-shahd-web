@@ -84,7 +84,7 @@ async function Invoice({ params }: { params: PageProps<"/[locale]/account/orders
                   — {address.fullAddress}
                 </p>
                 <p>{t("address.postalCodeLine")} <span dir="ltr">{address.postalCode}</span></p>
-                <p dir="ltr" className="text-start">{address.receiverPhone}</p>
+                <p><span dir="ltr">{address.receiverPhone}</span></p>
               </address>
             ) : null}
           </div>
