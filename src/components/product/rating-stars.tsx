@@ -37,7 +37,7 @@ export function RatingStars({
           ))}
         </span>
         <span
-          className="absolute inset-y-0 start-0 flex gap-0.5 overflow-hidden text-brand-gold"
+          className="absolute inset-y-0 start-0 flex gap-0.5 overflow-hidden text-gold-ink"
           style={{ width: `${(value / 5) * 100}%` }}
           aria-hidden="true"
         >

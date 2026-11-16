@@ -107,7 +107,7 @@ export default async function HomePage() {
       <section className="relative overflow-hidden bg-linear-to-b from-secondary/80 to-background dark:from-secondary/40">
         <Container className="grid items-center gap-10 section-y-sm lg:grid-cols-2 lg:gap-16 lg:py-24">
           <HeroText>
-            <p className="inline-flex items-center gap-2 rounded-full bg-background px-3 py-1.5 text-xs font-medium text-brand-leaf shadow-soft dark:text-success">
+            <p className="inline-flex items-center gap-2 rounded-full bg-background px-3 py-1.5 text-xs font-medium text-leaf-ink shadow-soft">
               <LeafIcon className="size-3.5" aria-hidden="true" />
               {t("home.hero.eyebrow")}
             </p>
@@ -190,7 +190,7 @@ export default async function HomePage() {
               subtitle={t("home.featured.subtitle")}
               action={{ href: "/products", label: t("home.featured.viewAll") }}
             />
-            <FeaturedCarousel label={t("home.featured.title")}>
+            <FeaturedCarousel label={t("home.featured.carousel")}>
               {featured.map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))}
@@ -207,7 +207,7 @@ export default async function HomePage() {
             <li key={key}>
               <Reveal delay={index * 0.06} className="h-full">
                 <div className="h-full rounded-2xl border border-border bg-card p-6 shadow-soft">
-                  <span className="grid size-12 place-items-center rounded-2xl bg-secondary text-brand-gold">
+                  <span className="grid size-12 place-items-center rounded-2xl bg-secondary text-gold-ink">
                     <Icon className="size-6" strokeWidth={1.75} aria-hidden="true" />
                   </span>
                   <h3 className="mt-4 font-semibold">{t(`home.why.${key}.title`)}</h3>
@@ -235,7 +235,7 @@ export default async function HomePage() {
                 <li key={review.id}>
                   <Reveal delay={(index % 3) * 0.06} className="h-full">
                     <figure className="flex h-full flex-col rounded-2xl bg-card p-6 shadow-soft">
-                      <QuoteIcon className="size-6 text-brand-gold/70 rtl:-scale-x-100" aria-hidden="true" />
+                      <QuoteIcon className="size-6 text-gold-ink/70 rtl:-scale-x-100" aria-hidden="true" />
                       {/* Reviews are stored in the language the customer wrote them in. */}
                       <blockquote dir="auto" className="mt-3 flex-1 text-sm leading-7">
                         {review.comment}
@@ -245,7 +245,7 @@ export default async function HomePage() {
                           <p dir="auto" className="text-sm font-semibold">{review.author}</p>
                           <Link
                             href={`/products/${review.productSlug}`}
-                            className="text-xs text-muted-foreground underline-offset-4 hover:text-primary hover:underline"
+                            className="touch-target text-xs text-muted-foreground underline-offset-4 hover:text-primary hover:underline"
                           >
                             {review.productName}
                           </Link>
@@ -278,7 +278,7 @@ export default async function HomePage() {
                   <span className="truncate">{dealer.name}</span>
                   {dealer.isVerified ? (
                     <BadgeCheckIcon
-                      className="size-4 shrink-0 text-brand-leaf"
+                      className="size-4 shrink-0 text-leaf-ink"
                       role="img"
                       aria-label={t("home.dealers.verified")}
                     />

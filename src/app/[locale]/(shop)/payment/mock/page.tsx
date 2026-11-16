@@ -49,7 +49,7 @@ async function MockBank({
 
   return (
     <div className="mx-auto max-w-md space-y-6 rounded-3xl border-2 border-dashed border-brand-gold/60 bg-card p-6 text-center shadow-soft sm:p-8">
-      <FlaskConicalIcon className="mx-auto size-12 text-brand-gold" strokeWidth={1.5} aria-hidden="true" />
+      <FlaskConicalIcon className="mx-auto size-12 text-gold-ink" strokeWidth={1.5} aria-hidden="true" />
       <div className="space-y-2">
         <h1 className="text-fluid-lg font-bold">{t("payment.mock.title")}</h1>
         <p className="text-sm text-muted-foreground">{t("payment.mock.text")}</p>

@@ -263,7 +263,7 @@ export function AddressForm({
             }}
           />
         ) : (
-          <Button type="button" variant="outline" size="lg" className="h-10 rounded-full" onClick={() => setShowMap(true)}>
+          <Button type="button" variant="outline" size="lg" className="h-11 rounded-full" onClick={() => setShowMap(true)}>
             <MapPinIcon aria-hidden="true" />
             {t("addPin")}
           </Button>

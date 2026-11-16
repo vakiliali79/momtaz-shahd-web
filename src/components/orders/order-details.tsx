@@ -78,7 +78,7 @@ export function OrderDetails({ order }: { order: OrderView }) {
             <dd>{price(order.subtotal)}</dd>
           </div>
           {order.discount > 0 ? (
-            <div className="flex justify-between gap-3 text-brand-leaf dark:text-success">
+            <div className="flex justify-between gap-3 text-leaf-ink">
               <dt>{order.couponCode ? t("cart.discount", { code: order.couponCode }) : t("order.discount")}</dt>
               <dd>−{price(order.discount)}</dd>
             </div>

@@ -77,7 +77,7 @@ export function ImageUploader({
             </div>
             {index === 0 ? (
               <span className="absolute start-2 top-2 flex items-center gap-1 rounded-full bg-background/90 px-2 py-0.5 text-[0.6875rem] font-semibold">
-                <StarIcon className="size-3 fill-brand-gold text-brand-gold" aria-hidden="true" />
+                <StarIcon className="size-3 fill-brand-gold text-gold-ink" aria-hidden="true" />
                 {t("cover")}
               </span>
             ) : null}

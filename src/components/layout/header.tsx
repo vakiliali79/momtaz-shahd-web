@@ -1,5 +1,4 @@
 import { Suspense } from "react";
-import { useTranslations } from "next-intl";
 
 import { SessionLoader } from "@/components/auth/session-loader";
 import { CartDrawer } from "@/components/cart/cart-drawer";
@@ -13,16 +12,8 @@ import { SearchForm } from "@/components/layout/search-form";
 import { ThemeToggle } from "@/components/layout/theme-toggle";
 
 export function Header() {
-  const t = useTranslations("common");
-
   return (
     <header className="sticky top-0 z-40 border-b print:hidden border-border/70 bg-background/85 backdrop-blur-md supports-backdrop-filter:bg-background/70">
-      <a
-        href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:start-4 focus:top-3 focus:z-50 focus:rounded-lg focus:bg-primary focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-primary-foreground"
-      >
-        {t("skipToContent")}
-      </a>
       {/* The session is per-request, so it streams in without blocking the page. */}
       <Suspense fallback={null}>
         <SessionLoader />

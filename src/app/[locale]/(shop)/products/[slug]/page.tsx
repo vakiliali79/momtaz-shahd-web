@@ -111,7 +111,7 @@ export default async function ProductPage({
             <div className="flex flex-wrap items-center gap-2">
               <Link
                 href={`/category/${product.categorySlug}`}
-                className="rounded text-sm font-medium text-brand-gold hover:underline"
+                className="touch-target rounded text-sm font-medium text-gold-ink hover:underline"
               >
                 {product.categoryName}
               </Link>
@@ -161,7 +161,7 @@ export default async function ProductPage({
       </div>
 
       <Tabs defaultValue="description" className="mt-12 gap-6 sm:mt-16">
-        <TabsList variant="line" className="h-auto! w-full justify-start gap-2 overflow-x-auto border-b border-border">
+        <TabsList variant="line" className="h-auto! w-full justify-start gap-2 relative overflow-x-auto border-b border-border">
           <TabsTrigger value="description" className="flex-none px-4 py-3 text-base">
             {t("product.tabs.description")}
           </TabsTrigger>

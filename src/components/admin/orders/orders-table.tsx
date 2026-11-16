@@ -32,7 +32,7 @@ export function OrdersTable(props: {
         helper.accessor("orderNumber", {
           header: t("columns.number"),
           cell: (info) => (
-            <Link href={`/admin/orders/${info.getValue()}`} className="font-medium whitespace-nowrap hover:text-primary" dir="ltr">
+            <Link href={`/admin/orders/${info.getValue()}`} className="touch-target font-medium whitespace-nowrap hover:text-primary" dir="ltr">
               {info.getValue()}
             </Link>
           ),

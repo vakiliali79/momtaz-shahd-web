@@ -3,7 +3,8 @@
  * `pnpm build && pnpm start`). Checks every page in fa/en/ar at several
  * widths, in light and dark mode:
  *   - horizontal overflow (and which element causes it)
- *   - tap targets smaller than 44×44 px (inline text links excluded)
+ *   - tap targets: a 44×44px area around each control must reach it
+ *     (inline text links excluded)
  *   - axe-core WCAG 2.1 AA rules (names, labels, colour contrast, ARIA…)
  *   - Latin digits in Persian/Arabic text (outside dir="ltr" content)
  *   - document lang/dir
@@ -72,11 +73,20 @@ function layoutChecks(locale) {
       if (overflow.length >= 5) break;
     }
   }
-  // Tap targets.
+  // Tap targets: a 44×44 square centred on the control must route taps to it
+  // (so invisible hit areas and whole-card links count, crowded neighbours fail).
   const small = [];
+  const hitsTarget = (element, x, y) => {
+    if (x < 0 || y < 0 || x >= window.innerWidth || y >= window.innerHeight) return true;
+    const hit = document.elementFromPoint(x, y);
+    if (!hit) return true;
+    if (hit === element || element.contains(hit)) return true;
+    const label = hit.closest("label");
+    return Boolean(label && (label.control === element || label.contains(element)));
+  };
   for (const element of document.querySelectorAll("a[href], button, input:not([type=hidden]), select, textarea, summary, [role=button], [role=tab], [role=checkbox], [role=switch], [role=combobox], [role=radio]")) {
     if (!visible(element) || element.closest(".leaflet-control-attribution")) continue;
-    const rect = element.getBoundingClientRect();
+    let rect = element.getBoundingClientRect();
     if (rect.width >= 44 && rect.height >= 44) continue;
     // Inline links inside running text are exempt (WCAG 2.5.8 "inline").
     if (element.tagName === "A") {
@@ -84,21 +94,29 @@ function layoutChecks(locale) {
       const blockText = (block?.textContent ?? "").trim();
       if (block && blockText.length > (element.textContent ?? "").trim().length + 3) continue;
     }
-    // A larger clickable ancestor (e.g. a <label> around a checkbox) counts.
-    const wrapper = element.closest("label");
-    if (wrapper) {
-      const box = wrapper.getBoundingClientRect();
-      if (box.width >= 44 && box.height >= 44) continue;
-    }
-    small.push(`${describe(element)} ${Math.round(rect.width)}×${Math.round(rect.height)}`);
+    element.scrollIntoView({ block: "center", inline: "nearest" });
+    rect = element.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+    const points = [[cx, cy], [cx - 21, cy - 21], [cx + 21, cy - 21], [cx - 21, cy + 21], [cx + 21, cy + 21]];
+    const missed = points.filter(([x, y]) => !hitsTarget(element, x, y)).length;
+    if (missed > 0) small.push(`${describe(element)} ${Math.round(rect.width)}×${Math.round(rect.height)}`);
   }
+  window.scrollTo(0, 0);
   // Latin digits in Persian/Arabic text.
   const latin = [];
   if (locale !== "en") {
     const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
     while (walker.nextNode() && latin.length < 8) {
       const node = walker.currentNode;
-      const text = node.textContent ?? "";
+      // Codes (MS-20261116-0004, walnut-koloocheh-450g) and Latin-script user
+      // content (an address typed in English) legitimately keep Latin digits.
+      const raw = node.textContent ?? "";
+      if (!/[0-9]/.test(raw)) continue;
+      const letters = raw.match(/[A-Za-z\u0600-\u06FF]/g) ?? [];
+      const latinLetters = raw.match(/[A-Za-z]/g) ?? [];
+      if (letters.length > 0 && latinLetters.length / letters.length > 0.5) continue;
+      const text = raw.replace(/[A-Za-z0-9][\w./-]*[A-Za-z][\w./-]*|[A-Za-z][\w./-]*\d[\w./-]*/g, "");
       if (!/[0-9]/.test(text)) continue;
       const parent = node.parentElement;
       if (!parent || !visible(parent)) continue;

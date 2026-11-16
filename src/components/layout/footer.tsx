@@ -58,10 +58,10 @@ export function Footer({ year, contact, locale }: { year: string; contact: Conta
               href={`https://www.instagram.com/${contact.instagram}`}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label={t("footer.instagram")}
-              className="inline-flex h-10 items-center gap-2 rounded-full border border-border bg-background px-4 text-sm font-medium transition-colors hover:border-brand-gold hover:text-primary"
+              className="inline-flex h-11 items-center gap-2 rounded-full border border-border bg-background px-4 text-sm font-medium transition-colors hover:border-brand-gold hover:text-primary"
             >
               <InstagramIcon />
+              <span className="sr-only">{t("footer.instagram")}: </span>
               <span dir="ltr">@{contact.instagram}</span>
             </a>
             ) : null}
@@ -71,7 +71,7 @@ export function Footer({ year, contact, locale }: { year: string; contact: Conta
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex h-10 items-center gap-2 rounded-full border border-border bg-background px-4 text-sm font-medium transition-colors hover:border-brand-gold hover:text-primary"
+                className="inline-flex h-11 items-center gap-2 rounded-full border border-border bg-background px-4 text-sm font-medium transition-colors hover:border-brand-gold hover:text-primary"
               >
                 <ExternalLinkIcon className="size-4 rtl:-scale-x-100" aria-hidden="true" />
                 {t(`footer.social.${key}`)}
@@ -87,7 +87,7 @@ export function Footer({ year, contact, locale }: { year: string; contact: Conta
               <li key={key}>
                 <Link
                   href={href}
-                  className="inline-block rounded py-1.5 text-muted-foreground transition-colors hover:text-primary"
+                  className="inline-flex min-h-11 items-center rounded text-muted-foreground transition-colors hover:text-primary"
                 >
                   {t(`nav.${key}`)}
                 </Link>
@@ -96,7 +96,7 @@ export function Footer({ year, contact, locale }: { year: string; contact: Conta
             <li>
               <Link
                 href="/track"
-                className="inline-block rounded py-1.5 text-muted-foreground transition-colors hover:text-primary"
+                className="inline-flex min-h-11 items-center rounded text-muted-foreground transition-colors hover:text-primary"
               >
                 {t("footer.track")}
               </Link>
@@ -108,30 +108,30 @@ export function Footer({ year, contact, locale }: { year: string; contact: Conta
           <FooterHeading>{t("footer.contactTitle")}</FooterHeading>
           <ul className="space-y-3 text-sm text-muted-foreground">
             <li className="flex gap-3">
-              <MapPinIcon className="mt-1 size-4 shrink-0 text-brand-gold" aria-hidden="true" />
+              <MapPinIcon className="mt-1 size-4 shrink-0 text-gold-ink" aria-hidden="true" />
               <span>
                 <span className="sr-only">{t("footer.address")}: </span>
                 {address}
               </span>
             </li>
             <li className="flex items-center gap-3">
-              <PhoneIcon className="size-4 shrink-0 text-brand-gold" aria-hidden="true" />
+              <PhoneIcon className="size-4 shrink-0 text-gold-ink" aria-hidden="true" />
               <span className="sr-only">{t("footer.phone")}: </span>
               <a
                 href={`tel:${contact.phone.replace(/[^\d+]/g, "")}`}
                 dir="ltr"
-                className="rounded transition-colors hover:text-primary"
+                className="touch-target rounded transition-colors hover:text-primary"
               >
                 {contact.phone}
               </a>
             </li>
             <li className="flex items-center gap-3">
-              <MailIcon className="size-4 shrink-0 text-brand-gold" aria-hidden="true" />
+              <MailIcon className="size-4 shrink-0 text-gold-ink" aria-hidden="true" />
               <span className="sr-only">{t("footer.email")}: </span>
               <a
                 href={`mailto:${contact.email}`}
                 dir="ltr"
-                className="rounded break-all transition-colors hover:text-primary"
+                className="touch-target rounded break-all transition-colors hover:text-primary"
               >
                 {contact.email}
               </a>
@@ -155,7 +155,7 @@ export function Footer({ year, contact, locale }: { year: string; contact: Conta
               aria-label={t("footer.enamad")}
               className="grid size-24 place-items-center gap-1 rounded-2xl border border-dashed border-input bg-background p-2 text-center text-xs text-muted-foreground"
             >
-              <ShieldCheckIcon className="size-7 text-brand-leaf" aria-hidden="true" />
+              <ShieldCheckIcon className="size-7 text-leaf-ink" aria-hidden="true" />
               <span>{t("footer.enamadPlaceholder")}</span>
             </div>
           </div>

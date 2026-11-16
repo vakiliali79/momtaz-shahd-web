@@ -106,7 +106,7 @@ export function AddressBook({
               <div className="mb-2 flex items-center justify-between gap-2">
                 <h2 className="font-semibold">{address.title}</h2>
                 {address.isDefault ? (
-                  <span className="rounded-full bg-brand-leaf/15 px-2.5 py-0.5 text-xs font-semibold text-brand-leaf dark:text-success">
+                  <span className="rounded-full bg-brand-leaf/15 px-2.5 py-0.5 text-xs font-semibold text-leaf-ink">
                     {t("accountPages.addresses.default")}
                   </span>
                 ) : null}

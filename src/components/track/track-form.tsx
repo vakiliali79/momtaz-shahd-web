@@ -36,7 +36,7 @@ function TrackedOrderCard({ order }: { order: TrackedOrder }) {
 
       {order.trackingCode ? (
         <div className="flex items-start gap-3 rounded-2xl bg-secondary/70 p-4">
-          <TruckIcon className="mt-0.5 size-5 shrink-0 text-brand-gold" aria-hidden="true" />
+          <TruckIcon className="mt-0.5 size-5 shrink-0 text-gold-ink" aria-hidden="true" />
           <div>
             <p className="text-sm text-muted-foreground">{t("track.trackingCode")}</p>
             <p className="font-mono text-lg font-semibold" dir="ltr">{order.trackingCode}</p>
@@ -76,7 +76,7 @@ function TrackedOrderCard({ order }: { order: TrackedOrder }) {
       </div>
       <p className="text-sm text-muted-foreground">
         {t("track.accountHint")}{" "}
-        <Link href={`/account/orders/${order.orderNumber}`} className="font-medium text-primary hover:underline">{t("track.accountLink")}</Link>
+        <Link href={`/account/orders/${order.orderNumber}`} className="touch-target font-medium text-primary hover:underline">{t("track.accountLink")}</Link>
       </p>
     </section>
   );

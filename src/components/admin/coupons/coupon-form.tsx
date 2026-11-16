@@ -69,7 +69,7 @@ export function CouponForm({ couponId, initial }: { couponId: string | null; ini
           <div>
             <TextField<CouponInput> name="expiresAt" label={t("expiresAt")} hint={t("expiresHint")} dir="ltr" placeholder="2026-12-31" register={register} error={errors.expiresAt} />
             {expiryValid ? (
-              <p className="mt-1 text-xs text-brand-leaf dark:text-success" aria-live="polite">
+              <p className="mt-1 text-xs text-leaf-ink" aria-live="polite">
                 {t("expiresPreview", { date: formatDate(expiryInstant(expiresAt).toISOString(), locale, { dateStyle: "full" }) })}
               </p>
             ) : null}

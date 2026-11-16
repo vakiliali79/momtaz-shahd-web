@@ -80,7 +80,7 @@ export default async function DealerPage({ params }: PageProps<"/[locale]/dealer
       <Container className="grid gap-8 section-y-sm lg:grid-cols-[1fr_1.2fr] lg:gap-12">
         <div className="space-y-6">
           {dealer.isVerified ? (
-            <p className="inline-flex items-center gap-2 rounded-full bg-brand-leaf/15 px-3 py-1 text-sm font-medium text-brand-leaf dark:text-success">
+            <p className="inline-flex items-center gap-2 rounded-full bg-brand-leaf/15 px-3 py-1 text-sm font-medium text-leaf-ink">
               <BadgeCheckIcon className="size-4" aria-hidden="true" />
               {t("verifiedDealer")}
             </p>

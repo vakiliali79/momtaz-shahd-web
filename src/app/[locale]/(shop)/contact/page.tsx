@@ -56,13 +56,13 @@ export default async function ContactPage() {
           <ul className="space-y-3">
             {details.map(({ Icon, label, value, href }) => (
               <li key={label} className="flex gap-4 rounded-2xl border border-border bg-card p-4 shadow-soft">
-                <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-secondary text-brand-gold">
+                <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-secondary text-gold-ink">
                   <Icon className="size-5" aria-hidden="true" />
                 </span>
                 <div className="min-w-0">
                   <p className="text-xs text-muted-foreground">{label}</p>
                   {href ? (
-                    <a href={href} dir="ltr" className="inline-block rounded font-medium break-all hover:text-primary">
+                    <a href={href} dir="ltr" className="touch-target inline-block rounded font-medium break-all hover:text-primary">
                       {value}
                     </a>
                   ) : (

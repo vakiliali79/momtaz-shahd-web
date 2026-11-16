@@ -38,7 +38,7 @@ export default async function DealerApplyPage() {
           <ul className="space-y-4">
             {perks.map(({ key, Icon }) => (
               <li key={key} className="flex gap-4">
-                <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-secondary text-brand-gold">
+                <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-secondary text-gold-ink">
                   <Icon className="size-5" aria-hidden="true" />
                 </span>
                 <div>

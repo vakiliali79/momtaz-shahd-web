@@ -108,7 +108,7 @@ export function DataTable<TData extends RowData>({
 
   return (
     <div className={cn("space-y-3 transition-opacity", pending && "opacity-60")} aria-busy={pending}>
-      <div className="overflow-x-auto rounded-2xl border border-border bg-card">
+      <div className="relative overflow-x-auto rounded-2xl border border-border bg-card">
         <table className="w-full min-w-[40rem] text-sm">
           <caption className="sr-only">{caption}</caption>
           <thead className="bg-muted/60 text-xs text-muted-foreground">
@@ -128,7 +128,7 @@ export function DataTable<TData extends RowData>({
                         <button
                           type="button"
                           onClick={header.column.getToggleSortingHandler()}
-                          className="inline-flex items-center gap-1 rounded hover:text-foreground"
+                          className="touch-target inline-flex items-center gap-1 rounded hover:text-foreground"
                         >
                           <table.FlexRender header={header} />
                           {sorted === "asc" ? (

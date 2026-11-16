@@ -45,7 +45,7 @@ export function PurchasePanel({ product }: { product: CartProduct }) {
           <div className="text-sm">
             <p
               className={cn(
-                stock <= 10 ? "font-medium text-primary" : "text-brand-leaf dark:text-success",
+                stock <= 10 ? "font-medium text-primary" : "text-leaf-ink",
               )}
             >
               {stock <= 10
@@ -81,7 +81,7 @@ export function PurchasePanel({ product }: { product: CartProduct }) {
             qualifies ? "border-brand-leaf/40 bg-brand-leaf/10" : "border-border bg-muted/60",
           )}
         >
-          <TagIcon className="mt-1 size-4 shrink-0 text-brand-gold" aria-hidden="true" />
+          <TagIcon className="mt-1 size-4 shrink-0 text-gold-ink" aria-hidden="true" />
           <div>
             <p className="font-medium">
               {t("product.wholesaleHint", {
@@ -91,7 +91,7 @@ export function PurchasePanel({ product }: { product: CartProduct }) {
             </p>
             <p
               aria-live="polite"
-              className={qualifies ? "font-medium text-brand-leaf dark:text-success" : "text-muted-foreground"}
+              className={qualifies ? "font-medium text-leaf-ink" : "text-muted-foreground"}
             >
               {qualifies
                 ? t("product.wholesaleReached")
@@ -101,7 +101,7 @@ export function PurchasePanel({ product }: { product: CartProduct }) {
             </p>
             <Link
               href="/wholesale"
-              className="font-medium text-primary underline-offset-4 hover:underline"
+              className="touch-target font-medium text-primary underline-offset-4 hover:underline"
             >
               {t("product.wholesaleCta")}
             </Link>

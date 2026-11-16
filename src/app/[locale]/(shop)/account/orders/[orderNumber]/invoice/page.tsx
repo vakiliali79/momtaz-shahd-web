@@ -37,7 +37,7 @@ async function Invoice({ params }: { params: PageProps<"/[locale]/account/orders
       <div className="flex flex-wrap items-center justify-between gap-3 print:hidden">
         <Link
           href={`/account/orders/${order.orderNumber}`}
-          className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-primary"
+          className="touch-target inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-primary"
         >
           <ArrowRightIcon className="size-4 ltr:rotate-180" aria-hidden="true" />
           {t("accountPages.invoice.back")}

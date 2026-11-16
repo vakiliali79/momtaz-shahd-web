@@ -68,7 +68,7 @@ export function ContactForm() {
   if (sent) {
     return (
       <div role="status" className="grid place-items-center gap-3 py-10 text-center">
-        <CircleCheckIcon className="size-12 text-brand-leaf" aria-hidden="true" />
+        <CircleCheckIcon className="size-12 text-leaf-ink" aria-hidden="true" />
         <h3 className="text-fluid-lg font-semibold">{t("successTitle")}</h3>
         <p className="max-w-sm text-sm text-muted-foreground">{t("successText")}</p>
         <Button variant="outline" size="lg" className="mt-2 rounded-full px-5" onClick={() => setSent(false)}>

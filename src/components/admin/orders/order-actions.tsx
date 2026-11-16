@@ -66,7 +66,7 @@ export function OrderStatusForm({ orderNumber, next }: { orderNumber: string; ne
         <div className="space-y-1.5">
           <Label htmlFor="order-status">{t("newStatus")}</Label>
           <Select value={status} onValueChange={(value) => setStatus(next.find((s) => s === value) ?? "")}>
-            <SelectTrigger id="order-status" className="h-10! w-full rounded-xl">
+            <SelectTrigger id="order-status" className="h-11! w-full rounded-xl">
               <SelectValue placeholder={t("chooseStatus")} />
             </SelectTrigger>
             <SelectContent>
@@ -117,7 +117,7 @@ export function TrackingCodeForm({ orderNumber, current }: { orderNumber: string
         }}
       >
         <Label htmlFor="tracking-code" className="sr-only">{t("trackingTitle")}</Label>
-        <Input id="tracking-code" dir="ltr" value={code} maxLength={64} onChange={(event) => setCode(event.target.value)} placeholder="IR1234567890" className="h-10 rounded-xl text-start" />
+        <Input id="tracking-code" dir="ltr" value={code} maxLength={64} onChange={(event) => setCode(event.target.value)} placeholder="IR1234567890" className="h-11 rounded-xl text-start" />
         <label className="flex items-center gap-2 text-sm">
           <Checkbox checked={notify} onCheckedChange={(checked) => setNotify(checked === true)} />
           {t("notifyCustomer")}

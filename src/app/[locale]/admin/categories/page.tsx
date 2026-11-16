@@ -34,7 +34,7 @@ async function Categories() {
           </Button>
         }
       />
-      <div className="overflow-x-auto rounded-2xl border border-border bg-card">
+      <div className="relative overflow-x-auto rounded-2xl border border-border bg-card">
         <table className="w-full min-w-[32rem] text-sm">
           <caption className="sr-only">{t("title")}</caption>
           <thead className="bg-muted/60 text-xs text-muted-foreground">
@@ -57,7 +57,7 @@ async function Categories() {
                       <span className="relative size-10 shrink-0 overflow-hidden rounded-lg bg-secondary">
                         <ProductImage src={category.image} alt="" sizes="40px" />
                       </span>
-                      <Link href={`/admin/categories/${category.id}`} className="font-medium hover:text-primary">{category.name}</Link>
+                      <Link href={`/admin/categories/${category.id}`} className="touch-target font-medium hover:text-primary">{category.name}</Link>
                     </div>
                   </td>
                   <td className="p-3 text-muted-foreground" dir="ltr"><span className="block text-start">{category.slug}</span></td>

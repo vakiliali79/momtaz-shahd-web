@@ -59,7 +59,7 @@ function useLineInfo() {
 function WholesaleBadge() {
   const t = useTranslations("cart");
   return (
-    <span className="rounded-full bg-brand-leaf/15 px-2 py-0.5 text-xs font-medium text-brand-leaf dark:text-success">
+    <span className="rounded-full bg-brand-leaf/15 px-2 py-0.5 text-xs font-medium text-leaf-ink">
       {t("wholesaleApplied")}
     </span>
   );
@@ -121,7 +121,7 @@ function CartItems({ items }: { items: readonly CartItem[] }) {
                   <div className="flex items-center gap-4">
                     <ItemThumb item={item} className="size-20" />
                     <div className="min-w-0 space-y-1">
-                      <Link href={`/products/${item.slug}`} className="rounded font-medium hover:text-primary">
+                      <Link href={`/products/${item.slug}`} className="touch-target rounded font-medium hover:text-primary">
                         {info.name}
                       </Link>
                       {info.hint ? <p className="text-xs text-muted-foreground">{info.hint}</p> : null}
@@ -171,7 +171,7 @@ function CartItems({ items }: { items: readonly CartItem[] }) {
                   <div className="flex items-start justify-between gap-1">
                     <Link
                       href={`/products/${item.slug}`}
-                      className="line-clamp-2 rounded text-sm font-medium hover:text-primary"
+                      className="touch-target line-clamp-2 rounded text-sm font-medium hover:text-primary"
                     >
                       {info.name}
                     </Link>
@@ -251,7 +251,7 @@ function OrderSummary({ totals, hasItems }: { totals: CartTotals; hasItems: bool
           <SummaryRow
             label={t("cart.wholesaleSavings")}
             value={`−${price(totals.wholesaleSavings)}`}
-            className="text-brand-leaf dark:text-success"
+            className="text-leaf-ink"
           />
         ) : null}
         {coupon ? (
@@ -259,7 +259,7 @@ function OrderSummary({ totals, hasItems }: { totals: CartTotals; hasItems: bool
             <SummaryRow
               label={t("cart.discount", { code: coupon.code })}
               value={totals.couponApplies ? `−${price(totals.discount)}` : price(0)}
-              className={totals.couponApplies ? "text-brand-leaf dark:text-success" : undefined}
+              className={totals.couponApplies ? "text-leaf-ink" : undefined}
             />
             {!totals.couponApplies && totals.couponShortfall > 0 ? (
               <p className="text-xs text-primary">
@@ -283,7 +283,7 @@ function OrderSummary({ totals, hasItems }: { totals: CartTotals; hasItems: bool
       {threshold !== null && totals.freeShippingShortfall !== null ? (
         <div className="space-y-2 rounded-xl bg-muted/70 p-3">
           <p className="flex items-center gap-2 text-xs">
-            <TruckIcon className="size-4 shrink-0 text-brand-gold" aria-hidden="true" />
+            <TruckIcon className="size-4 shrink-0 text-gold-ink" aria-hidden="true" />
             {t("cart.freeShippingHint", { amount: price(totals.freeShippingShortfall) })}
           </p>
           <div className="h-1.5 overflow-hidden rounded-full bg-border" aria-hidden="true">
@@ -294,7 +294,7 @@ function OrderSummary({ totals, hasItems }: { totals: CartTotals; hasItems: bool
           </div>
         </div>
       ) : totals.shipping === 0 ? (
-        <p className="flex items-center gap-2 text-xs text-brand-leaf dark:text-success">
+        <p className="flex items-center gap-2 text-xs text-leaf-ink">
           <TruckIcon className="size-4 shrink-0" aria-hidden="true" />
           {t("cart.freeShippingReached")}
         </p>
@@ -350,7 +350,7 @@ export function CartView({ shipping }: { shipping: ShippingConfig }) {
     return (
       <Container className="section-y">
         <div className="mx-auto grid max-w-md place-items-center gap-3 rounded-3xl border border-dashed border-input px-6 py-14 text-center">
-          <span className="grid size-20 place-items-center rounded-full bg-secondary text-brand-gold">
+          <span className="grid size-20 place-items-center rounded-full bg-secondary text-gold-ink">
             <ShoppingBagIcon className="size-9" strokeWidth={1.5} aria-hidden="true" />
           </span>
           <h2 className="text-fluid-lg font-bold">{t("empty.title")}</h2>

@@ -62,7 +62,7 @@ async function Customer({ params }: { params: PageProps<"/[locale]/admin/custome
             {customer.orders.length === 0 ? (
               <p className="text-sm text-muted-foreground">{t("detail.noOrders")}</p>
             ) : (
-              <div className="overflow-x-auto">
+              <div className="relative overflow-x-auto">
                 <table className="w-full min-w-[30rem] text-sm">
                   <caption className="sr-only">{t("detail.orderList")}</caption>
                   <thead className="text-xs text-muted-foreground">
@@ -77,7 +77,7 @@ async function Customer({ params }: { params: PageProps<"/[locale]/admin/custome
                     {customer.orders.map((order) => (
                       <tr key={order.orderNumber}>
                         <td className="py-2.5">
-                          <Link href={`/admin/orders/${order.orderNumber}`} className="font-medium hover:text-primary" dir="ltr">{order.orderNumber}</Link>
+                          <Link href={`/admin/orders/${order.orderNumber}`} className="touch-target font-medium hover:text-primary" dir="ltr">{order.orderNumber}</Link>
                         </td>
                         <td className="py-2.5 whitespace-nowrap">{formatDate(order.createdAt, locale, { dateStyle: "medium" })}</td>
                         <td className="py-2.5 whitespace-nowrap">{formatPrice(order.total, locale, toman)}</td>
@@ -93,7 +93,7 @@ async function Customer({ params }: { params: PageProps<"/[locale]/admin/custome
         <div className="space-y-6">
           <AdminCard title={t("detail.contact")}>
             <dl className="space-y-2 text-sm">
-              <div className="flex justify-between gap-2"><dt className="text-muted-foreground">{t("columns.phone")}</dt><dd dir="ltr"><a href={`tel:${customer.phone}`} className="hover:text-primary">{customer.phone}</a></dd></div>
+              <div className="flex justify-between gap-2"><dt className="text-muted-foreground">{t("columns.phone")}</dt><dd dir="ltr"><a href={`tel:${customer.phone}`} className="touch-target hover:text-primary">{customer.phone}</a></dd></div>
               {customer.email ? <div className="flex justify-between gap-2"><dt className="text-muted-foreground">{t("detail.email")}</dt><dd dir="ltr" className="truncate">{customer.email}</dd></div> : null}
               <div className="flex justify-between gap-2"><dt className="text-muted-foreground">{t("detail.language")}</dt><dd>{customer.preferredLocale.toUpperCase()}</dd></div>
             </dl>

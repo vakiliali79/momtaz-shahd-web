@@ -19,7 +19,7 @@ function Stars({ rating, label }: { rating: number; label: string }) {
   return (
     <span className="inline-flex gap-0.5" role="img" aria-label={label}>
       {[1, 2, 3, 4, 5].map((star) => (
-        <StarIcon key={star} aria-hidden="true" className={cn("size-4", star <= rating ? "fill-brand-gold text-brand-gold" : "text-muted-foreground/40")} />
+        <StarIcon key={star} aria-hidden="true" className={cn("size-4", star <= rating ? "fill-brand-gold text-gold-ink" : "text-muted-foreground/40")} />
       ))}
     </span>
   );
@@ -41,9 +41,9 @@ function ReviewCard({ review }: { review: AdminReviewRow }) {
             {review.isApproved ? <Pill tone="green">{t("states.approved")}</Pill> : <Pill tone="gold">{t("states.pending")}</Pill>}
           </div>
           <p className="text-sm">
-            <Link href={`/products/${review.productSlug}`} className="font-medium hover:text-primary">{review.productName}</Link>
+            <Link href={`/products/${review.productSlug}`} className="touch-target font-medium hover:text-primary">{review.productName}</Link>
             <span className="text-muted-foreground"> · </span>
-            <Link href={`/admin/customers/${review.customerId}`} className="text-muted-foreground hover:text-primary">{review.customerName}</Link>
+            <Link href={`/admin/customers/${review.customerId}`} className="touch-target text-muted-foreground hover:text-primary">{review.customerName}</Link>
           </p>
         </div>
         <time dateTime={review.createdAt} className="text-xs text-muted-foreground">{formatDate(review.createdAt, locale, { dateStyle: "medium" })}</time>

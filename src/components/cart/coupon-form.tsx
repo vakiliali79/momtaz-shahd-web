@@ -42,7 +42,7 @@ export function CouponForm({ subtotal }: { subtotal: number }) {
   if (coupon) {
     return (
       <div className="flex items-center justify-between gap-2 rounded-xl border border-dashed border-brand-leaf/50 bg-brand-leaf/10 px-3 py-2">
-        <span className="flex items-center gap-2 text-sm font-medium text-brand-leaf dark:text-success">
+        <span className="flex items-center gap-2 text-sm font-medium text-leaf-ink">
           <TicketPercentIcon className="size-4" aria-hidden="true" />
           {t("cart.coupon.active", { code: coupon.code })}
         </span>
@@ -91,7 +91,7 @@ export function CouponForm({ subtotal }: { subtotal: number }) {
           placeholder={t("cart.coupon.placeholder")}
           aria-invalid={errorKey ? true : undefined}
           aria-describedby={errorKey ? errorId : undefined}
-          className="h-10 min-w-0 flex-1 rounded-full px-4 text-start uppercase placeholder:normal-case"
+          className="h-11 min-w-0 flex-1 rounded-full px-4 text-start uppercase placeholder:normal-case"
           {...register("code")}
         />
         <Button
@@ -99,7 +99,7 @@ export function CouponForm({ subtotal }: { subtotal: number }) {
           variant="outline"
           size="lg"
           disabled={isSubmitting}
-          className="h-10 rounded-full px-4"
+          className="h-11 rounded-full px-4"
         >
           {isSubmitting ? t("cart.coupon.applying") : t("cart.coupon.apply")}
         </Button>

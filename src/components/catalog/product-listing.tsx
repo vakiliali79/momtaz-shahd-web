@@ -86,7 +86,7 @@ export function ProductListing({
 
         {result.total === 0 ? (
           <div className="grid place-items-center rounded-2xl border border-dashed border-input px-4 py-16 text-center">
-            <PackageSearchIcon className="size-12 text-brand-gold" strokeWidth={1.25} aria-hidden="true" />
+            <PackageSearchIcon className="size-12 text-gold-ink" strokeWidth={1.25} aria-hidden="true" />
             <h2 className="mt-4 text-fluid-lg font-semibold">{t("emptyTitle")}</h2>
             <p className="mt-1 max-w-sm text-sm text-muted-foreground">{t("emptyDescription")}</p>
             <Button asChild variant="outline" size="lg" className="mt-5 rounded-full px-5">
@@ -95,6 +95,7 @@ export function ProductListing({
           </div>
         ) : (
           <>
+            <h2 className="sr-only">{t("resultsTitle")}</h2>
             <ProductGrid products={result.items} className={productGridWithSidebarClass} />
             <Pagination
               basePath={basePath}

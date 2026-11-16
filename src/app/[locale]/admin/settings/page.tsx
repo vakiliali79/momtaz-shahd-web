@@ -31,7 +31,7 @@ async function Settings() {
     <div className="mx-auto max-w-4xl">
       <AdminHeading title={t("title")} description={t("description")} />
       <Tabs defaultValue="shipping" className="gap-6">
-        <div className="overflow-x-auto">
+        <div className="relative overflow-x-auto">
           <TabsList aria-label={t("title")}>
             {sections.map((section) => (
               <TabsTrigger key={section} value={section} className="px-3">{t(`tabs.${section}`)}</TabsTrigger>

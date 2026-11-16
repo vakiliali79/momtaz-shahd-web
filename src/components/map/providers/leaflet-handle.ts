@@ -7,7 +7,7 @@ type LeafletLib = typeof Leaflet;
 function markerIcon(L: LeafletLib, marker: MapMarker): Leaflet.DivIcon {
   if (marker.kind === "cluster") {
     const count = marker.count ?? 0;
-    const size = count >= 50 ? 52 : count >= 10 ? 44 : 38;
+    const size = count >= 50 ? 52 : count >= 10 ? 48 : 44;
     return L.divIcon({
       className: "",
       iconSize: [size, size],
@@ -27,12 +27,15 @@ function markerIcon(L: LeafletLib, marker: MapMarker): Leaflet.DivIcon {
   const fill = marker.highlighted ? "#b8763e" : "#c8102e";
   const width = Math.round(32 * scale);
   const height = Math.round(40 * scale);
+  // The pin sits at the bottom of a box at least 44×44px, so it is easy to tap.
+  const boxWidth = Math.max(44, width);
+  const boxHeight = Math.max(48, height);
   return L.divIcon({
     className: "",
-    iconSize: [width, height],
-    iconAnchor: [width / 2, height],
+    iconSize: [boxWidth, boxHeight],
+    iconAnchor: [boxWidth / 2, boxHeight],
     popupAnchor: [0, -height + 4],
-    html: `<svg width="${width}" height="${height}" viewBox="0 0 32 40" aria-hidden="true"><path d="M16 39s13-13.4 13-23A13 13 0 0 0 3 16c0 9.6 13 23 13 23z" fill="${fill}" stroke="#fff" stroke-width="2"/><circle cx="16" cy="16" r="5" fill="#fff"/></svg>`,
+    html: `<span style="display:flex;align-items:flex-end;justify-content:center;width:${boxWidth}px;height:${boxHeight}px"><svg width="${width}" height="${height}" viewBox="0 0 32 40" aria-hidden="true"><path d="M16 39s13-13.4 13-23A13 13 0 0 0 3 16c0 9.6 13 23 13 23z" fill="${fill}" stroke="#fff" stroke-width="2"/><circle cx="16" cy="16" r="5" fill="#fff"/></svg></span>`,
   });
 }
 

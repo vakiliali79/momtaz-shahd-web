@@ -23,7 +23,7 @@ function Kpi({ Icon, label, value, href, hint }: { Icon: LucideIcon; label: stri
     <>
       <div className="flex items-center justify-between gap-2 text-sm text-muted-foreground">
         <span>{label}</span>
-        <Icon className="size-4 text-brand-gold" aria-hidden="true" />
+        <Icon className="size-4 text-gold-ink" aria-hidden="true" />
       </div>
       <p className="mt-2 text-xl font-bold break-words tabular-nums sm:text-2xl">{value}</p>
       {hint ? <p className="mt-1 text-xs text-muted-foreground">{hint}</p> : null}
@@ -69,7 +69,7 @@ async function Dashboard() {
               {data.topProducts.map((product) => (
                 <li key={product.productId} className="space-y-1">
                   <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-0.5 text-sm">
-                    <Link href={`/admin/products/${product.productId}`} className="font-medium hover:text-primary">{product.name}</Link>
+                    <Link href={`/admin/products/${product.productId}`} className="touch-target font-medium hover:text-primary">{product.name}</Link>
                     <span className="shrink-0 text-muted-foreground">
                       {t("sold", { count: product.quantity, formatted: formatNumber(product.quantity, locale) })} · {formatPrice(product.revenue, locale, toman)}
                     </span>
@@ -83,7 +83,7 @@ async function Dashboard() {
           )}
         </AdminCard>
 
-        <AdminCard title={t("latestOrders")} actions={<Link href="/admin/orders" className="text-sm font-medium text-primary hover:underline">{t("allOrders")}</Link>}>
+        <AdminCard title={t("latestOrders")} actions={<Link href="/admin/orders" className="touch-target text-sm font-medium text-primary hover:underline">{t("allOrders")}</Link>}>
           {data.latestOrders.length === 0 ? (
             <p className="text-sm text-muted-foreground">{t("noOrders")}</p>
           ) : (
@@ -91,7 +91,7 @@ async function Dashboard() {
               {data.latestOrders.map((order) => (
                 <li key={order.orderNumber} className="flex flex-wrap items-center justify-between gap-2 py-2.5">
                   <div className="min-w-0">
-                    <Link href={`/admin/orders/${order.orderNumber}`} className="font-medium hover:text-primary" dir="ltr">{order.orderNumber}</Link>
+                    <Link href={`/admin/orders/${order.orderNumber}`} className="touch-target font-medium hover:text-primary" dir="ltr">{order.orderNumber}</Link>
                     <p className="truncate text-xs text-muted-foreground">
                       {order.customer} · {formatDate(order.createdAt, locale, { dateStyle: "medium", timeStyle: "short" })}
                     </p>

@@ -32,7 +32,7 @@ export function CustomersTable(props: {
           header: t("columns.name"),
           cell: (info) => (
             <div>
-              <Link href={`/admin/customers/${info.row.original.id}`} className="font-medium hover:text-primary">
+              <Link href={`/admin/customers/${info.row.original.id}`} className="touch-target font-medium hover:text-primary">
                 {info.getValue() || t("noName")}
               </Link>
               {info.row.original.email ? <p className="text-xs text-muted-foreground" dir="ltr">{info.row.original.email}</p> : null}

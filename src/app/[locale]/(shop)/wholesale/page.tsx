@@ -62,15 +62,17 @@ export default async function WholesalePage() {
           </div>
         </div>
         <Reveal>
-          <dl className="grid gap-3 rounded-3xl border border-border bg-secondary/60 p-5 sm:p-7">
+          <div className="grid gap-3 rounded-3xl border border-border bg-secondary/60 p-5 sm:p-7">
             <h3 className="font-semibold">{t("terms.title")}</h3>
+            <dl className="grid gap-3">
             {terms.map((key) => (
               <div key={key} className="rounded-2xl bg-card p-4 shadow-soft">
                 <dt className="text-sm text-muted-foreground">{t(`terms.${key}.label`)}</dt>
                 <dd className="mt-1 font-semibold">{t(`terms.${key}.value`)}</dd>
               </div>
             ))}
-          </dl>
+            </dl>
+          </div>
         </Reveal>
       </Container>
 
@@ -82,7 +84,7 @@ export default async function WholesalePage() {
               <li key={key}>
                 <Reveal delay={index * 0.05} className="h-full">
                   <div className="flex h-full gap-4 rounded-2xl border border-border bg-card p-5 shadow-soft">
-                    <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-secondary text-brand-gold">
+                    <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-secondary text-gold-ink">
                       <Icon className="size-5" aria-hidden="true" />
                     </span>
                     <div>
@@ -103,7 +105,7 @@ export default async function WholesalePage() {
         {tiers.length === 0 ? (
           <p className="mt-6 text-muted-foreground">{t("tiers.empty")}</p>
         ) : (
-          <div className="mt-6 overflow-x-auto rounded-2xl border border-border bg-card shadow-soft">
+          <div className="mt-6 relative overflow-x-auto rounded-2xl border border-border bg-card shadow-soft">
             <table className="w-full min-w-[36rem] text-sm">
               <caption className="sr-only">{t("tiers.title")}</caption>
               <thead className="bg-muted/60 text-xs text-muted-foreground">
@@ -122,14 +124,14 @@ export default async function WholesalePage() {
                   return (
                     <tr key={product.id}>
                       <th scope="row" className="p-3 text-start font-medium">
-                        <Link href={`/products/${product.slug}`} className="hover:text-primary">{product.name}</Link>
+                        <Link href={`/products/${product.slug}`} className="touch-target hover:text-primary">{product.name}</Link>
                         <span className="block text-xs font-normal text-muted-foreground">{product.categoryName}</span>
                       </th>
                       <td className="p-3 whitespace-nowrap">{formatPrice(product.effectivePrice, locale, toman)}</td>
                       <td className="p-3 font-semibold whitespace-nowrap text-primary">{formatPrice(wholesale, locale, toman)}</td>
                       <td className="p-3 whitespace-nowrap">{t("tiers.units", { count: product.minWholesaleQty ?? 0, formatted: formatNumber(product.minWholesaleQty ?? 0, locale) })}</td>
                       <td className="p-3 text-end whitespace-nowrap">
-                        <span className="rounded-full bg-brand-leaf/15 px-2.5 py-0.5 text-xs font-semibold text-brand-leaf dark:text-success">
+                        <span className="rounded-full bg-brand-leaf/15 px-2.5 py-0.5 text-xs font-semibold text-leaf-ink">
                           {t("tiers.percent", { value: formatNumber(saving, locale) })}
                         </span>
                       </td>

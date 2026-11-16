@@ -82,7 +82,7 @@ function SummaryBody({ items, totals, coupon, shippingChosen }: SummaryProps) {
 
       <dl className="space-y-2.5 border-t border-border pt-4 text-sm">
         {rows.map((row) => (
-          <div key={row.label} className={row.positive ? "flex justify-between gap-3 text-brand-leaf dark:text-success" : "flex justify-between gap-3"}>
+          <div key={row.label} className={row.positive ? "flex justify-between gap-3 text-leaf-ink" : "flex justify-between gap-3"}>
             <dt>{row.label}</dt>
             <dd className="text-end font-medium">{row.value}</dd>
           </div>
@@ -96,7 +96,7 @@ function SummaryBody({ items, totals, coupon, shippingChosen }: SummaryProps) {
       {!coupon ? (
         <p className="text-xs text-muted-foreground">
           {t("checkout.summary.couponHint")}{" "}
-          <Link href="/cart" className="font-medium text-primary hover:underline">
+          <Link href="/cart" className="touch-target font-medium text-primary hover:underline">
             {t("checkout.summary.editCart")}
           </Link>
         </p>
@@ -126,7 +126,7 @@ export function CheckoutSummary(props: SummaryProps) {
             <h2 id="checkout-summary-title" className="text-lg font-bold">
               {t("cart.summary")}
             </h2>
-            <Link href="/cart" className="text-sm font-medium text-primary hover:underline">
+            <Link href="/cart" className="touch-target text-sm font-medium text-primary hover:underline">
               {t("checkout.summary.editCart")}
             </Link>
           </div>

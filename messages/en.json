@@ -184,7 +184,8 @@
     "featured": {
       "title": "Featured products",
       "subtitle": "Our customers' favourites, baked fresh every day.",
-      "viewAll": "View all"
+      "viewAll": "View all",
+      "carousel": "Featured products — scroll sideways"
     },
     "why": {
       "title": "Why Momtaz Shahd",
@@ -321,7 +322,8 @@
       "previous": "Previous page",
       "next": "Next page",
       "page": "Page {page}"
-    }
+    },
+    "resultsTitle": "Products"
   },
   "about": {
     "title": "About us",
@@ -730,7 +732,8 @@
         "reviews": "Reviews",
         "profile": "Profile",
         "wholesale": "Wholesale"
-      }
+      },
+      "tabsLabel": "Account sections"
     },
     "dashboard": {
       "title": "My account",

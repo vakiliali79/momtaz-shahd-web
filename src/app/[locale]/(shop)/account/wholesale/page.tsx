@@ -20,9 +20,9 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const requestStyles = {
-  NEW: "bg-brand-gold/15 text-brand-gold",
+  NEW: "bg-brand-gold/15 text-gold-ink",
   CONTACTED: "bg-sky-500/15 text-sky-700 dark:text-sky-300",
-  CONVERTED: "bg-brand-leaf/15 text-brand-leaf dark:text-success",
+  CONVERTED: "bg-brand-leaf/15 text-leaf-ink",
   REJECTED: "bg-muted text-muted-foreground",
 } as const;
 
@@ -48,7 +48,7 @@ async function Wholesale() {
 
       <section aria-labelledby="price-list">
         <h2 id="price-list" className="mb-3 text-lg font-semibold">{t("accountPages.wholesale.priceList")}</h2>
-        <div className="overflow-x-auto rounded-2xl border border-border">
+        <div className="relative overflow-x-auto rounded-2xl border border-border">
           <table className="w-full min-w-[36rem] text-sm">
             <caption className="sr-only">{t("accountPages.wholesale.priceList")}</caption>
             <thead className="bg-muted/60 text-xs text-muted-foreground">
@@ -64,7 +64,7 @@ async function Wholesale() {
               {products.map((product) => (
                 <tr key={product.id}>
                   <td className="p-3">
-                    <Link href={`/products/${product.slug}`} className="font-medium hover:text-primary">{product.name}</Link>
+                    <Link href={`/products/${product.slug}`} className="touch-target font-medium hover:text-primary">{product.name}</Link>
                   </td>
                   <td className="p-3 whitespace-nowrap text-muted-foreground">{price(product.effectivePrice)}</td>
                   <td className="p-3 font-semibold whitespace-nowrap text-primary">{price(product.wholesalePrice ?? 0)}</td>
@@ -90,7 +90,7 @@ async function Wholesale() {
         {requests.length === 0 ? (
           <p className="text-sm text-muted-foreground">
             {t("accountPages.wholesale.noRequests")}{" "}
-            <Link href="/wholesale" className="font-medium text-primary hover:underline">
+            <Link href="/wholesale" className="touch-target font-medium text-primary hover:underline">
               {t("accountPages.wholesale.newRequest")}
             </Link>
           </p>

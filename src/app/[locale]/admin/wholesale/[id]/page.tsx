@@ -55,7 +55,7 @@ async function Request({ params }: { params: PageProps<"/[locale]/admin/wholesal
                     <dt className="text-muted-foreground">{field.label}</dt>
                     <dd className="font-medium" dir={field.ltr ? "ltr" : undefined}>
                       <span className="block text-start">
-                        {field.href ? <a href={field.href} className="hover:text-primary">{field.value}</a> : field.value}
+                        {field.href ? <a href={field.href} className="touch-target hover:text-primary">{field.value}</a> : field.value}
                       </span>
                     </dd>
                   </div>
@@ -63,7 +63,7 @@ async function Request({ params }: { params: PageProps<"/[locale]/admin/wholesal
               )}
             </dl>
             {request.account ? (
-              <Link href={`/admin/customers/${request.account.id}`} className="mt-4 inline-block text-sm font-medium text-primary hover:underline">
+              <Link href={`/admin/customers/${request.account.id}`} className="touch-target mt-4 inline-block text-sm font-medium text-primary hover:underline">
                 {t("detail.hasAccount")}
               </Link>
             ) : (

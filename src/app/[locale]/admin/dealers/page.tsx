@@ -33,7 +33,7 @@ async function Dealers() {
           </Button>
         }
       />
-      <div className="overflow-x-auto rounded-2xl border border-border bg-card">
+      <div className="relative overflow-x-auto rounded-2xl border border-border bg-card">
         <table className="w-full min-w-[44rem] text-sm">
           <caption className="sr-only">{t("title")}</caption>
           <thead className="bg-muted/60 text-xs text-muted-foreground">
@@ -58,14 +58,14 @@ async function Dealers() {
                       <span className="relative size-10 shrink-0 overflow-hidden rounded-lg bg-secondary">
                         <ProductImage src={dealer.image} alt="" sizes="40px" />
                       </span>
-                      <Link href={`/admin/dealers/${dealer.id}`} className="font-medium hover:text-primary">{dealer.name}</Link>
+                      <Link href={`/admin/dealers/${dealer.id}`} className="touch-target font-medium hover:text-primary">{dealer.name}</Link>
                     </div>
                   </td>
                   <td className="p-3"><Pill tone={dealer.type === "AGENCY" ? "gold" : dealer.type === "DISTRIBUTOR" ? "blue" : "muted"}>{t(`types.${dealer.type}`)}</Pill></td>
                   <td className="p-3">
                     <span className="inline-flex items-center gap-1">
                       {t("place", dealer.place)}
-                      {dealer.hasLocation ? <MapPinIcon className="size-3.5 text-brand-leaf" aria-label={t("hasPin")} /> : null}
+                      {dealer.hasLocation ? <MapPinIcon className="size-3.5 text-leaf-ink" aria-label={t("hasPin")} /> : null}
                     </span>
                   </td>
                   <td className="p-3 whitespace-nowrap" dir="ltr"><span className="block text-start">{dealer.phone ?? "—"}</span></td>

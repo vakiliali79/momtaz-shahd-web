@@ -60,9 +60,9 @@ async function PayContent({
   return (
     <div className="mx-auto max-w-md space-y-6 text-center">
       {verifying ? (
-        <LoaderCircleIcon className="mx-auto size-14 text-brand-gold" strokeWidth={1.5} aria-hidden="true" />
+        <LoaderCircleIcon className="mx-auto size-14 text-gold-ink" strokeWidth={1.5} aria-hidden="true" />
       ) : (
-        <CreditCardIcon className="mx-auto size-14 text-brand-gold" strokeWidth={1.5} aria-hidden="true" />
+        <CreditCardIcon className="mx-auto size-14 text-gold-ink" strokeWidth={1.5} aria-hidden="true" />
       )}
       <div className="space-y-2">
         <h1 className="text-fluid-2xl font-bold">

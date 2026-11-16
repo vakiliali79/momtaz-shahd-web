@@ -34,7 +34,7 @@ async function Reviews() {
               <li key={product.id}>
                 <Link
                   href={`/products/${product.slug}`}
-                  className="inline-flex rounded-full border border-border bg-background px-3 py-1.5 text-sm font-medium hover:border-brand-gold hover:text-primary"
+                  className="touch-target inline-flex rounded-full border border-border bg-background px-3 py-1.5 text-sm font-medium hover:border-brand-gold hover:text-primary"
                 >
                   {product.name}
                 </Link>

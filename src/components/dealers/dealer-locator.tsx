@@ -98,11 +98,11 @@ export function DealerLocator({ dealers, title, lead }: { dealers: DealerSummary
             <div className="space-y-2 text-foreground">
               <p className="flex items-center gap-1.5 text-sm font-semibold">
                 {dealer.name}
-                {dealer.isVerified ? <BadgeCheckIcon className="size-4 text-brand-leaf" aria-label={t("verified")} /> : null}
+                {dealer.isVerified ? <BadgeCheckIcon className="size-4 text-leaf-ink" aria-label={t("verified")} /> : null}
               </p>
               <p className="text-xs text-muted-foreground">{t(`types.${dealer.type}`)} · {dealer.city}</p>
               <DealerDetails dealer={dealer} compact />
-              <Link href={`/dealers/${dealer.id}`} className="inline-block text-xs font-semibold text-primary hover:underline">{t("moreInfo")}</Link>
+              <Link href={`/dealers/${dealer.id}`} className="touch-target inline-block text-xs font-semibold text-primary hover:underline">{t("moreInfo")}</Link>
             </div>
           )}
         />
@@ -115,7 +115,7 @@ export function DealerLocator({ dealers, title, lead }: { dealers: DealerSummary
             <p className="text-sm text-muted-foreground">{lead}</p>
           </div>
           <h2 id="dealer-list-title" className="sr-only">{t("listTitle")}</h2>
-          <form role="search" className="relative" onSubmit={(event) => event.preventDefault()}>
+          <form role="search" aria-label={t("search")} className="relative" onSubmit={(event) => event.preventDefault()}>
             <label htmlFor="dealer-search" className="sr-only">{t("search")}</label>
             <SearchIcon className="pointer-events-none absolute start-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" aria-hidden="true" />
             <Input
@@ -135,7 +135,7 @@ export function DealerLocator({ dealers, title, lead }: { dealers: DealerSummary
                 aria-pressed={type === value}
                 onClick={() => setType(value)}
                 className={cn(
-                  "h-9 rounded-full border px-3.5 text-sm font-medium transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none",
+                  "touch-target h-9 rounded-full border px-3.5 text-sm font-medium transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none",
                   type === value ? "border-primary bg-primary text-primary-foreground" : "border-border bg-background hover:border-brand-gold",
                 )}
               >
@@ -185,8 +185,8 @@ export function DealerLocator({ dealers, title, lead }: { dealers: DealerSummary
                     <div className="flex flex-col gap-2 @[19rem]:flex-row @[19rem]:items-start @[19rem]:justify-between @[19rem]:gap-3">
                       <div className="min-w-0">
                         <h3 className="flex items-center gap-1.5 font-semibold">
-                          <Link href={`/dealers/${dealer.id}`} className="hover:text-primary">{dealer.name}</Link>
-                          {dealer.isVerified ? <BadgeCheckIcon className="size-4 shrink-0 text-brand-leaf" aria-label={t("verified")} /> : null}
+                          <Link href={`/dealers/${dealer.id}`} className="touch-target hover:text-primary">{dealer.name}</Link>
+                          {dealer.isVerified ? <BadgeCheckIcon className="size-4 shrink-0 text-leaf-ink" aria-label={t("verified")} /> : null}
                         </h3>
                         <p className="text-xs text-muted-foreground">
                           {t(`types.${dealer.type}`)} · {dealer.city}
@@ -217,7 +217,7 @@ export function DealerLocator({ dealers, title, lead }: { dealers: DealerSummary
         </ul>
         <div className="border-t border-border p-4 text-center text-sm">
           {t("applyPrompt")}{" "}
-          <Link href="/dealers/apply" className="font-semibold text-primary hover:underline">{t("applyLink")}</Link>
+          <Link href="/dealers/apply" className="touch-target font-semibold text-primary hover:underline">{t("applyLink")}</Link>
         </div>
       </section>
     </div>

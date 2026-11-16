@@ -159,7 +159,7 @@ export function LoginForm({ callbackUrl }: { callbackUrl: string }) {
       </Button>
       <p className="text-center text-sm text-muted-foreground">
         {t("noAccount")}{" "}
-        <Link href={{ pathname: "/register", query: { callbackUrl } }} className="font-medium text-primary hover:underline">
+        <Link href={{ pathname: "/register", query: { callbackUrl } }} className="touch-target font-medium text-primary hover:underline">
           {t("createAccount")}
         </Link>
       </p>
@@ -205,7 +205,7 @@ export function RegisterForm({ callbackUrl }: { callbackUrl: string }) {
       </Button>
       <p className="text-center text-sm text-muted-foreground">
         {t("haveAccount")}{" "}
-        <Link href={{ pathname: "/login", query: { callbackUrl } }} className="font-medium text-primary hover:underline">
+        <Link href={{ pathname: "/login", query: { callbackUrl } }} className="touch-target font-medium text-primary hover:underline">
           {t("signIn")}
         </Link>
       </p>

@@ -16,7 +16,7 @@ import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
 import { Link } from "@/i18n/navigation";
 import type { AdminProductRow } from "@/lib/admin/products";
-import { formatNumber, formatPrice } from "@/lib/format";
+import { formatDate, formatNumber, formatPrice } from "@/lib/format";
 import { cn } from "@/lib/utils";
 import { toLatinDigits } from "@/lib/validation/phone";
 
@@ -150,7 +150,7 @@ export function ProductsTable(props: {
                   <ProductImage src={row.image} alt="" sizes="44px" />
                 </span>
                 <div className="min-w-0">
-                  <Link href={`/admin/products/${row.id}`} className="font-medium hover:text-primary">
+                  <Link href={`/admin/products/${row.id}`} className="touch-target font-medium hover:text-primary">
                     {row.name}
                   </Link>
                   <p className="text-xs text-muted-foreground" dir="ltr">{row.slug}</p>
@@ -193,7 +193,7 @@ export function ProductsTable(props: {
           header: t("columns.created"),
           cell: (info) => (
             <time dateTime={info.getValue()} className="whitespace-nowrap text-muted-foreground">
-              {new Intl.DateTimeFormat(locale === "fa" ? "fa-IR-u-ca-persian" : locale, { dateStyle: "medium" }).format(new Date(info.getValue()))}
+              {formatDate(info.getValue(), locale, { dateStyle: "medium" })}
             </time>
           ),
         }),

@@ -36,7 +36,7 @@ async function OrderDetail({ params }: { params: PageProps<"/[locale]/account/or
   return (
     <div className="space-y-8">
       <div className="space-y-4">
-        <Link href="/account/orders" className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-primary">
+        <Link href="/account/orders" className="touch-target inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-primary">
           <ArrowRightIcon className="size-4 ltr:rotate-180" aria-hidden="true" />
           {t("accountPages.orderDetail.back")}
         </Link>
@@ -79,7 +79,7 @@ async function OrderDetail({ params }: { params: PageProps<"/[locale]/account/or
 
       {order.trackingCode ? (
         <section aria-labelledby="tracking" className="flex items-center gap-3 rounded-2xl border border-brand-leaf/40 bg-brand-leaf/10 p-4">
-          <TruckIcon className="size-6 shrink-0 text-brand-leaf" aria-hidden="true" />
+          <TruckIcon className="size-6 shrink-0 text-leaf-ink" aria-hidden="true" />
           <div>
             <h2 id="tracking" className="text-sm text-muted-foreground">{t("accountPages.orderDetail.trackingCode")}</h2>
             <p className="font-semibold tracking-wide" dir="ltr">{order.trackingCode}</p>

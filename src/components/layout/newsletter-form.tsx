@@ -59,14 +59,14 @@ export function NewsletterForm() {
           placeholder={t("emailPlaceholder")}
           aria-invalid={errors.email ? true : undefined}
           aria-describedby={errors.email ? errorId : undefined}
-          className="h-10 min-w-0 flex-1 basis-44 rounded-full bg-background px-4 text-start placeholder:text-start"
+          className="h-11 min-w-0 flex-1 basis-44 rounded-full bg-background px-4 text-start placeholder:text-start"
           {...register("email")}
         />
         <Button
           type="submit"
           size="lg"
           disabled={isSubmitting}
-          className="h-10 rounded-full px-5"
+          className="h-11 rounded-full px-5"
         >
           {isSubmitting ? t("submitting") : t("submit")}
         </Button>

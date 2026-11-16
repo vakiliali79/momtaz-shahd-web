@@ -83,7 +83,7 @@ function ProvinceRates({ index, control, register, errors }: {
   return (
     <div className="space-y-3">
       <div>
-        <h4 className="text-sm font-medium">{t("provinceRates")}</h4>
+        <h3 className="text-sm font-medium">{t("provinceRates")}</h3>
         <p className="text-xs text-muted-foreground">{t("provinceRatesHint")}</p>
       </div>
       {fields.map((field, rateIndex) => {

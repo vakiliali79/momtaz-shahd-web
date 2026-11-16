@@ -7,11 +7,11 @@ import { cn } from "@/lib/utils";
 export type OrderStatus = "PENDING" | "PAID" | "PROCESSING" | "SHIPPED" | "DELIVERED" | "CANCELLED";
 
 const statusStyles: Record<OrderStatus, string> = {
-  PENDING: "bg-brand-gold/15 text-brand-gold",
-  PAID: "bg-brand-leaf/15 text-brand-leaf dark:text-success",
+  PENDING: "bg-brand-gold/15 text-gold-ink",
+  PAID: "bg-brand-leaf/15 text-leaf-ink",
   PROCESSING: "bg-sky-500/15 text-sky-700 dark:text-sky-300",
   SHIPPED: "bg-indigo-500/15 text-indigo-700 dark:text-indigo-300",
-  DELIVERED: "bg-brand-leaf/20 text-brand-leaf dark:text-success",
+  DELIVERED: "bg-brand-leaf/20 text-leaf-ink",
   CANCELLED: "bg-muted text-muted-foreground",
 };
 
@@ -63,7 +63,7 @@ export function AccountEmpty({
 }) {
   return (
     <div className="grid place-items-center gap-3 rounded-2xl border border-dashed border-input px-6 py-14 text-center">
-      <span className="grid size-16 place-items-center rounded-full bg-secondary text-brand-gold">{icon}</span>
+      <span className="grid size-16 place-items-center rounded-full bg-secondary text-gold-ink">{icon}</span>
       <h2 className="text-fluid-lg font-semibold">{title}</h2>
       <p className="max-w-sm text-sm text-muted-foreground">{text}</p>
       {action}

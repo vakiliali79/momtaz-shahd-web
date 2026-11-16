@@ -16,6 +16,9 @@
   --color-brand-leaf: var(--brand-leaf);
   --color-brand-ink: var(--brand-ink);
   --color-success: var(--success);
+  /* Text-safe versions of the brand gold and leaf green (≥4.5:1 on light and dark surfaces). */
+  --color-gold-ink: var(--gold-ink);
+  --color-leaf-ink: var(--leaf-ink);
   --shadow-soft: var(--shadow-soft);
   --breakpoint-3xl: 120rem;
   --animate-shimmer: shimmer 1.6s ease-in-out infinite;
@@ -98,6 +101,8 @@
   --accent-foreground: var(--brand-ink);
   --destructive: #b3261e;
   --success: var(--brand-leaf);
+  --gold-ink: #8a5524;
+  --leaf-ink: #2e6f31;
   --border: #ecdfd0;
   --input: #e2d2bf;
   --ring: var(--brand-gold);
@@ -126,8 +131,10 @@
   --card-foreground: #f5e6d3;
   --popover: #211912;
   --popover-foreground: #f5e6d3;
-  --primary: #d81e3c;
-  --primary-foreground: #ffffff;
+  /* A lighter red keeps red text readable on the dark surfaces (≥4.9:1); buttons
+     on it use dark ink, since white on this red would be too faint. */
+  --primary: #f26b7c;
+  --primary-foreground: #17110c;
   --secondary: #33271c;
   --secondary-foreground: #f5e6d3;
   --muted: #2a2018;
@@ -136,6 +143,8 @@
   --accent-foreground: #f5e6d3;
   --destructive: #f2776d;
   --success: #6cbf6f;
+  --gold-ink: #e0aa74;
+  --leaf-ink: #6cbf6f;
   --border: rgb(245 230 211 / 0.12);
   --input: rgb(245 230 211 / 0.18);
   --ring: #d39a63;
@@ -146,8 +155,8 @@
   --chart-5: #8f7458;
   --sidebar: #211912;
   --sidebar-foreground: #f5e6d3;
-  --sidebar-primary: #d81e3c;
-  --sidebar-primary-foreground: #ffffff;
+  --sidebar-primary: #f26b7c;
+  --sidebar-primary-foreground: #17110c;
   --sidebar-accent: #33271c;
   --sidebar-accent-foreground: #f5e6d3;
   --sidebar-border: rgb(245 230 211 / 0.12);
@@ -172,6 +181,26 @@
 }
 @utility page-y {
   padding-block: clamp(1.5rem, 1.2rem + 1.5vw, 2.75rem);
+}
+
+/*
+ * Tap-target size: an invisible hit area of at least 44×44px centred on a
+ * smaller control (icon buttons, switches, inline links), so it is easy to
+ * tap without changing how it looks. Leave ~8px between neighbours.
+ */
+@utility touch-target {
+  &:not(.absolute, .fixed, .sticky) {
+    position: relative;
+  }
+  &::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: max(100%, 44px);
+    height: max(100%, 44px);
+    transform: translate(-50%, -50%);
+  }
 }
 
 @keyframes shimmer {
@@ -252,4 +281,12 @@
 }
 .leaflet-container .dealer-popup .leaflet-popup-content-wrapper {
   border-radius: 1rem;
+}
+
+/* Map zoom buttons: 44px tap targets, brand colours. */
+.leaflet-container .leaflet-bar a {
+  width: 44px;
+  height: 44px;
+  line-height: 44px;
+  font-size: 22px;
 }

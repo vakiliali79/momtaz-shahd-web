@@ -45,7 +45,7 @@ export function WholesaleForm({ id, status, adminNote }: { id: string; status: W
         <div className="space-y-1.5">
           <Label htmlFor="wholesale-status">{t("columns.status")}</Label>
           <Select value={value} onValueChange={(next) => setValue(wholesaleStatuses.find((s) => s === next) ?? value)}>
-            <SelectTrigger id="wholesale-status" className="h-10! w-full rounded-xl">
+            <SelectTrigger id="wholesale-status" className="h-11! w-full rounded-xl">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>

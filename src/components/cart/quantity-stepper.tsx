@@ -30,7 +30,7 @@ export function QuantityStepper({
   const clamp = (quantity: number) => Math.min(upper, Math.max(1, Math.round(quantity) || 1));
 
   const buttonClass = cn(
-    "grid place-items-center rounded-full text-foreground transition hover:bg-muted active:scale-90 disabled:pointer-events-none disabled:opacity-35",
+    "touch-target grid place-items-center rounded-full text-foreground transition hover:bg-muted active:scale-90 disabled:pointer-events-none disabled:opacity-35",
     size === "sm" ? "size-8" : "size-11",
   );
 
@@ -63,7 +63,7 @@ export function QuantityStepper({
         }}
         onFocus={(event) => event.currentTarget.select()}
         className={cn(
-          "bg-transparent text-center font-semibold tabular-nums outline-none",
+          "self-stretch bg-transparent text-center font-semibold tabular-nums outline-none focus-visible:rounded-md focus-visible:ring-2 focus-visible:ring-ring",
           size === "sm" ? "w-8 text-sm" : "w-12 text-base",
         )}
       />

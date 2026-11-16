@@ -60,8 +60,8 @@ export function AdminPageSkeleton() {
 export function Pill({ tone = "muted", children }: { tone?: "muted" | "green" | "gold" | "red" | "blue"; children: ReactNode }) {
   const tones = {
     muted: "bg-muted text-muted-foreground",
-    green: "bg-brand-leaf/15 text-brand-leaf dark:text-success",
-    gold: "bg-brand-gold/15 text-brand-gold",
+    green: "bg-brand-leaf/15 text-leaf-ink",
+    gold: "bg-brand-gold/15 text-gold-ink",
     red: "bg-destructive/10 text-destructive",
     blue: "bg-sky-500/15 text-sky-700 dark:text-sky-300",
   } as const;

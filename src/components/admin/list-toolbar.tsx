@@ -51,7 +51,7 @@ export function ListToolbar({
   return (
     <div className="mb-4 flex flex-wrap items-center gap-2">
       {searchPlaceholder ? (
-        <form role="search" onSubmit={onSearch} className="relative w-full sm:w-72">
+        <form role="search" aria-label={searchPlaceholder} onSubmit={onSearch} className="relative w-full sm:w-72">
           <label htmlFor={id} className="sr-only">{t("search")}</label>
           <SearchIcon className="pointer-events-none absolute start-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" aria-hidden="true" />
           <Input
@@ -61,7 +61,7 @@ export function ListToolbar({
             key={searchParams.get("q") ?? ""}
             defaultValue={searchParams.get("q") ?? ""}
             placeholder={searchPlaceholder}
-            className="h-9 rounded-lg ps-9"
+            className="h-11 rounded-xl ps-9"
           />
         </form>
       ) : null}
@@ -80,7 +80,7 @@ export function ListToolbar({
             } else update({ [filter.key]: value === ALL ? null : value });
           }}
         >
-          <SelectTrigger className="h-9! min-w-36 rounded-lg" aria-label={filter.label}>
+          <SelectTrigger className="h-11! min-w-36 rounded-xl" aria-label={filter.label}>
             <SelectValue />
           </SelectTrigger>
           <SelectContent>

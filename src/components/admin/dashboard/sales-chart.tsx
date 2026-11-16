@@ -64,7 +64,7 @@ export function SalesChart({ data }: { data: Point[] }) {
         </ResponsiveContainer>
       </div>
       <details className="text-sm">
-        <summary className="cursor-pointer text-muted-foreground hover:text-foreground">{t("showTable")}</summary>
+        <summary className="inline-flex min-h-11 cursor-pointer items-center text-muted-foreground hover:text-foreground">{t("showTable")}</summary>
         <div className="mt-2 max-h-64 overflow-y-auto">
           <table className="w-full text-sm">
             <caption className="sr-only">{t("chartLabel")}</caption>

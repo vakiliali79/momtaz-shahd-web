@@ -79,7 +79,7 @@ function StepIndicator({
                 className={cn(
                   "grid size-8 shrink-0 place-items-center rounded-full text-sm font-semibold",
                   current && "bg-primary text-primary-foreground",
-                  done && "bg-brand-leaf text-white",
+                  done && "bg-leaf-ink text-background",
                   !current && !done && "bg-muted text-muted-foreground",
                 )}
               >
@@ -217,7 +217,7 @@ export function CheckoutFlow({
     return (
       <Container className="section-y">
         <div className="mx-auto grid max-w-md place-items-center gap-3 rounded-3xl border border-dashed border-input px-6 py-14 text-center">
-          <ShoppingBagIcon className="size-10 text-brand-gold" strokeWidth={1.5} aria-hidden="true" />
+          <ShoppingBagIcon className="size-10 text-gold-ink" strokeWidth={1.5} aria-hidden="true" />
           <h2 className="text-fluid-lg font-bold">{t("cart.empty.title")}</h2>
           <p className="text-sm text-muted-foreground">{t("checkout.emptyText")}</p>
           <Button asChild size="lg" className="mt-2 h-11 rounded-full px-6">
@@ -443,7 +443,7 @@ export function CheckoutFlow({
                     disabled={disabledReason !== null}
                     onSelect={() => setPayment(id)}
                     describedBy={descriptionId}
-                    aside={<Icon className="size-5 text-brand-gold" aria-hidden="true" />}
+                    aside={<Icon className="size-5 text-gold-ink" aria-hidden="true" />}
                   >
                     <span className="block font-semibold">{t(`checkout.payment.methods.${id}.name`)}</span>
                     <span id={descriptionId} className="mt-0.5 block text-xs text-muted-foreground">

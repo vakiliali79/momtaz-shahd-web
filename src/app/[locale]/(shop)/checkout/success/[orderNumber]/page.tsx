@@ -53,7 +53,7 @@ async function Confirmation({
     <div className="space-y-8">
       <div className="space-y-3 text-center">
         <Icon
-          className={awaitingOnline ? "mx-auto size-16 text-brand-gold" : "mx-auto size-16 text-brand-leaf"}
+          className={awaitingOnline ? "mx-auto size-16 text-gold-ink" : "mx-auto size-16 text-leaf-ink"}
           strokeWidth={1.5}
           aria-hidden="true"
         />
@@ -80,7 +80,7 @@ async function Confirmation({
       {bank ? (
         <section aria-labelledby="bank-details" className="rounded-2xl border border-brand-gold/40 bg-secondary/50 p-5">
           <h2 id="bank-details" className="mb-3 flex items-center gap-2 font-semibold">
-            <LandmarkIcon className="size-5 text-brand-gold" aria-hidden="true" />
+            <LandmarkIcon className="size-5 text-gold-ink" aria-hidden="true" />
             {t("order.bank.title")}
           </h2>
           <dl className="grid gap-3 text-sm sm:grid-cols-2">
@@ -118,7 +118,7 @@ async function Confirmation({
           <h2 id="receipt-title" className="mb-1 font-semibold">{t("receipt.title")}</h2>
           {order.receiptUploadedAt ? (
             <div className="space-y-3">
-              <p role="status" className="text-sm text-brand-leaf dark:text-success">
+              <p role="status" className="text-sm text-leaf-ink">
                 {t("receipt.received", {
                   date: formatDate(order.receiptUploadedAt, locale, { dateStyle: "medium", timeStyle: "short" }),
                 })}
@@ -132,7 +132,7 @@ async function Confirmation({
                 href={`/api/orders/${order.orderNumber}/receipt`}
                 target="_blank"
                 rel="noopener"
-                className="inline-block text-sm font-medium text-primary hover:underline"
+                className="touch-target inline-block text-sm font-medium text-primary hover:underline"
               >
                 {t("receipt.view")}
               </a>

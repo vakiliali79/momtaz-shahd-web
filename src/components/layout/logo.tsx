@@ -49,7 +49,7 @@ export function Logo({ className }: { className?: string }) {
       href="/"
       aria-label={t("homeLabel")}
       className={cn(
-        "inline-flex items-center gap-2 rounded-lg font-bold text-foreground",
+        "inline-flex min-h-11 items-center gap-2 rounded-lg font-bold text-foreground",
         className,
       )}
     >

@@ -101,9 +101,9 @@ async function AdminOrder({ params }: { params: PageProps<"/[locale]/admin/order
         <div className="space-y-6">
           <AdminCard title={t("customer")}>
             <p className="font-medium">{extras.customer.name ?? "—"}</p>
-            <p className="text-sm text-muted-foreground" dir="ltr"><a href={`tel:${extras.customer.phone}`} className="hover:text-primary">{extras.customer.phone}</a></p>
+            <p className="text-sm text-muted-foreground" dir="ltr"><a href={`tel:${extras.customer.phone}`} className="touch-target hover:text-primary">{extras.customer.phone}</a></p>
             {extras.customer.email ? <p className="text-sm text-muted-foreground" dir="ltr">{extras.customer.email}</p> : null}
-            <Link href={`/admin/customers/${extras.customer.id}`} className="mt-2 inline-block text-sm font-medium text-primary hover:underline">{t("viewCustomer")}</Link>
+            <Link href={`/admin/customers/${extras.customer.id}`} className="touch-target mt-2 inline-block text-sm font-medium text-primary hover:underline">{t("viewCustomer")}</Link>
           </AdminCard>
           {order.paymentMethod === "BANK_TRANSFER" && order.status === "PENDING" ? (
             <BankTransferPanel orderNumber={order.orderNumber} hasReceipt={order.receiptUploadedAt !== null} />

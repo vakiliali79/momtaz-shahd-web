@@ -34,7 +34,7 @@ async function Coupons() {
           </Button>
         }
       />
-      <div className="overflow-x-auto rounded-2xl border border-border bg-card">
+      <div className="relative overflow-x-auto rounded-2xl border border-border bg-card">
         <table className="w-full min-w-[44rem] text-sm">
           <caption className="sr-only">{t("title")}</caption>
           <thead className="bg-muted/60 text-xs text-muted-foreground">
@@ -57,7 +57,7 @@ async function Coupons() {
                 return (
                   <tr key={coupon.id}>
                     <td className="p-3">
-                      <Link href={`/admin/coupons/${coupon.id}`} className="font-mono font-semibold hover:text-primary" dir="ltr">{coupon.code}</Link>
+                      <Link href={`/admin/coupons/${coupon.id}`} className="touch-target font-mono font-semibold hover:text-primary" dir="ltr">{coupon.code}</Link>
                       {expired ? <span className="ms-2"><Pill tone="red">{t("expired")}</Pill></span> : null}
                       {usedUp ? <span className="ms-2"><Pill tone="muted">{t("usedUp")}</Pill></span> : null}
                     </td>

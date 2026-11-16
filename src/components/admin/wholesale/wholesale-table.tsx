@@ -38,7 +38,7 @@ export function WholesaleTable(props: {
           header: t("columns.company"),
           cell: (info) => (
             <div>
-              <Link href={`/admin/wholesale/${info.row.original.id}`} className="font-medium hover:text-primary">
+              <Link href={`/admin/wholesale/${info.row.original.id}`} className="touch-target font-medium hover:text-primary">
                 {info.getValue()}
               </Link>
               {info.row.original.type === "AGENCY" ? (

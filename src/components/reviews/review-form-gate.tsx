@@ -28,7 +28,7 @@ export async function ReviewFormGate({
         {t("signInPrompt")}{" "}
         <Link
           href={{ pathname: "/login", query: { callbackUrl: `/${locale}/products/${productSlug}` } }}
-          className="font-medium text-primary hover:underline"
+          className="touch-target font-medium text-primary hover:underline"
         >
           {t("signIn")}
         </Link>

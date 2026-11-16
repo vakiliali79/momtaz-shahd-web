@@ -69,7 +69,7 @@ export default async function AboutPage() {
               <li key={key}>
                 <Reveal delay={index * 0.06} className="h-full">
                   <div className="h-full rounded-2xl border border-border bg-card p-6 shadow-soft">
-                    <span className="grid size-12 place-items-center rounded-2xl bg-secondary text-brand-gold">
+                    <span className="grid size-12 place-items-center rounded-2xl bg-secondary text-gold-ink">
                       <Icon className="size-6" strokeWidth={1.75} aria-hidden="true" />
                     </span>
                     <h3 className="mt-4 font-semibold">{t(`principles.${key}.title`)}</h3>

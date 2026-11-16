@@ -45,7 +45,7 @@ async function Dashboard() {
         <section aria-labelledby="dash-orders" className="rounded-2xl border border-border bg-card p-5 shadow-soft">
           <h2 id="dash-orders" className="text-sm text-muted-foreground">{t("accountPages.dashboard.orderCount")}</h2>
           <p className="mt-1 text-fluid-2xl font-bold tabular-nums">{formatNumber(data.orderCount, locale)}</p>
-          <Link href="/account/orders" className="mt-3 inline-block text-sm font-medium text-primary hover:underline">
+          <Link href="/account/orders" className="touch-target mt-3 inline-block text-sm font-medium text-primary hover:underline">
             {t("accountPages.dashboard.viewOrders")}
           </Link>
         </section>
@@ -70,7 +70,7 @@ async function Dashboard() {
           ) : (
             <p className="mt-2 text-sm text-muted-foreground">
               {t("accountPages.dashboard.noOrders")}{" "}
-              <Link href="/products" className="font-medium text-primary hover:underline">{t("accountPages.dashboard.startShopping")}</Link>
+              <Link href="/products" className="touch-target font-medium text-primary hover:underline">{t("accountPages.dashboard.startShopping")}</Link>
             </p>
           )}
         </section>
@@ -87,7 +87,7 @@ async function Dashboard() {
           ) : (
             <p className="mt-2 text-sm text-muted-foreground">{t("accountPages.dashboard.noAddress")}</p>
           )}
-          <Link href="/account/addresses" className="mt-3 inline-block text-sm font-medium text-primary hover:underline">
+          <Link href="/account/addresses" className="touch-target mt-3 inline-block text-sm font-medium text-primary hover:underline">
             {t("accountPages.dashboard.manageAddresses")}
           </Link>
         </section>
@@ -95,7 +95,7 @@ async function Dashboard() {
         <section aria-labelledby="dash-wishlist" className="rounded-2xl border border-border bg-card p-5 shadow-soft">
           <h2 id="dash-wishlist" className="text-sm text-muted-foreground">{t("accountPages.dashboard.wishlistCount")}</h2>
           <p className="mt-1 text-fluid-2xl font-bold tabular-nums">{formatNumber(data.wishlistCount, locale)}</p>
-          <Link href="/account/wishlist" className="mt-3 inline-block text-sm font-medium text-primary hover:underline">
+          <Link href="/account/wishlist" className="touch-target mt-3 inline-block text-sm font-medium text-primary hover:underline">
             {t("accountPages.dashboard.viewWishlist")}
           </Link>
         </section>
@@ -110,7 +110,7 @@ async function Dashboard() {
                 href={href}
                 className="flex min-h-14 items-center gap-3 rounded-2xl border border-border bg-card px-4 text-sm font-medium transition-colors hover:border-brand-gold/60 hover:bg-muted/50"
               >
-                <Icon className="size-5 text-brand-gold" aria-hidden="true" />
+                <Icon className="size-5 text-gold-ink" aria-hidden="true" />
                 {t(`accountPages.dashboard.links.${key}`)}
               </Link>
             </li>

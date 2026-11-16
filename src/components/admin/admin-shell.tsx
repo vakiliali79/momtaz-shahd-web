@@ -23,6 +23,7 @@ import { useLocale, useTranslations } from "next-intl";
 
 import { useLogout } from "@/components/auth/use-logout";
 import { LanguageSwitcher } from "@/components/layout/language-switcher";
+import { SkipLink } from "@/components/layout/skip-link";
 import { LogoMark } from "@/components/layout/logo";
 import { ThemeToggle } from "@/components/layout/theme-toggle";
 import { Button } from "@/components/ui/button";
@@ -72,7 +73,7 @@ function NavList({ collapsed, onNavigate }: { collapsed: boolean; onNavigate?: (
               aria-current={active ? "page" : undefined}
               title={collapsed ? t(key) : undefined}
               className={cn(
-                "flex min-h-10 items-center gap-3 rounded-xl px-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground",
+                "flex min-h-11 items-center gap-3 rounded-xl px-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground",
                 active && "bg-primary/10 text-primary hover:bg-primary/15 hover:text-primary",
                 collapsed && "justify-center px-0",
               )}
@@ -102,6 +103,7 @@ export function AdminShell({ adminName, children }: { adminName: string; childre
 
   return (
     <div className="flex min-h-dvh">
+      <SkipLink />
       <aside
         className={cn(
           "sticky top-0 hidden h-dvh shrink-0 flex-col border-e border-border bg-card transition-[width] duration-200 lg:flex",

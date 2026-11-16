@@ -107,7 +107,7 @@ export function TextField<T extends FieldValues>({
       {multiline ? (
         <Textarea rows={rows} className="rounded-xl px-3 py-2" {...common} {...register(name)} />
       ) : (
-        <Input className="h-10 rounded-xl px-3 text-start" {...common} {...register(name)} />
+        <Input className="h-11 rounded-xl px-3 text-start" {...common} {...register(name)} />
       )}
     </Wrapper>
   );
@@ -132,7 +132,7 @@ export function NumberField<T extends FieldValues>({
         dir="ltr"
         aria-invalid={error ? true : undefined}
         aria-describedby={describedBy(id, error, hint)}
-        className="h-10 rounded-xl px-3 text-start tabular-nums"
+        className="h-11 rounded-xl px-3 text-start tabular-nums"
         {...register(name, {
           setValueAs: (value: unknown) => {
             const text = toLatinDigits(String(value ?? "")).replace(/[,٬\s]/g, "");
@@ -171,7 +171,7 @@ export function SelectField<T extends FieldValues>({
               id={id}
               aria-invalid={error ? true : undefined}
               aria-describedby={describedBy(id, error, hint)}
-              className="h-10! w-full rounded-xl px-3"
+              className="h-11! w-full rounded-xl px-3"
             >
               <SelectValue placeholder={placeholder} />
             </SelectTrigger>
