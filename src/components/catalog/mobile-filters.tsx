@@ -48,7 +48,7 @@ export function MobileFilters({
           <SlidersHorizontalIcon aria-hidden="true" />
           {t("catalog.filters")}
           {activeCount > 0 ? (
-            <span className="grid size-5 place-items-center rounded-full bg-primary text-[0.6875rem] font-semibold text-primary-foreground">
+            <span className="grid size-5 place-items-center rounded-full bg-brand-red text-[0.6875rem] font-semibold text-white">
               {formatNumber(activeCount, locale)}
             </span>
           ) : null}

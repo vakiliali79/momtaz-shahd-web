@@ -345,13 +345,13 @@ export default async function HomePage() {
 
       {/* Newsletter */}
       <Container as="section" className="section-y" aria-labelledby="home-newsletter">
-        <div className="rounded-3xl bg-primary px-6 py-10 text-primary-foreground sm:px-12 sm:py-14">
+        <div className="rounded-3xl bg-brand-red px-6 py-10 text-white sm:px-12 sm:py-14">
           <div className="mx-auto max-w-xl space-y-5 text-center">
             <h2 id="home-newsletter" className="text-fluid-2xl font-bold text-balance">
               {t("home.newsletter.title")}
             </h2>
             <p className="text-fluid-sm text-pretty opacity-90">{t("home.newsletter.subtitle")}</p>
-            <div className="mx-auto max-w-md text-start [&_[role=alert]]:text-primary-foreground [&_button]:bg-foreground [&_button]:text-background [&_button]:hover:bg-foreground/85 [&_input]:text-foreground">
+            <div className="mx-auto max-w-md text-start [&_[role=alert]]:text-white [&_button]:bg-foreground [&_button]:text-background [&_button]:hover:bg-foreground/85 [&_input]:text-foreground">
               <NewsletterForm />
             </div>
           </div>

@@ -79,7 +79,7 @@ export function CartDrawer() {
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.4, opacity: 0 }}
                 transition={{ type: "spring", stiffness: 520, damping: 16 }}
-                className="absolute -end-1 -top-1 grid h-5 min-w-5 place-items-center rounded-full bg-primary px-1 text-[0.6875rem] leading-none font-semibold text-primary-foreground ring-2 ring-background"
+                className="absolute -end-1 -top-1 grid h-5 min-w-5 place-items-center rounded-full bg-brand-red px-1 text-[0.6875rem] leading-none font-semibold text-white ring-2 ring-background"
               >
                 {formatNumber(Math.min(count, 99), locale)}
                 {count > 99 ? "+" : ""}

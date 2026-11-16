@@ -54,7 +54,7 @@ export function ProductCard({
               {t("product.outOfStock")}
             </span>
           ) : product.discountPrice !== null ? (
-            <span className="rounded-full bg-primary px-2.5 py-1 text-xs font-semibold text-primary-foreground">
+            <span className="rounded-full bg-brand-red px-2.5 py-1 text-xs font-semibold text-white">
               {t("product.discountBadge", {
                 percent: formatNumber(
                   discountPercent(product.price, product.discountPrice),

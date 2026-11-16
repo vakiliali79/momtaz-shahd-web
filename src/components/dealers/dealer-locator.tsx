@@ -136,7 +136,7 @@ export function DealerLocator({ dealers, title, lead }: { dealers: DealerSummary
                 onClick={() => setType(value)}
                 className={cn(
                   "touch-target h-9 rounded-full border px-3.5 text-sm font-medium transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none",
-                  type === value ? "border-primary bg-primary text-primary-foreground" : "border-border bg-background hover:border-brand-gold",
+                  type === value ? "border-primary bg-brand-red text-white" : "border-border bg-background hover:border-brand-gold",
                 )}
               >
                 {value ? t(`types.${value}`) : t("allTypes")}

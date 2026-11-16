@@ -122,7 +122,7 @@ for (const [locale, width] of [["fa", 1280], ["en", 1280], ["ar", 375], ["fa", 3
   // Dealer list: search, type filters, near me and "show on map" are all reachable; Enter selects a dealer.
   await page.goto(`${BASE}/en/dealers`, { waitUntil: "load" });
   await page.waitForTimeout(800);
-  await page.getByLabel("Search by city or name…").focus();
+  await page.locator("#dealer-search").focus();
   const seen = [];
   for (let index = 0; index < 10; index += 1) {
     await page.keyboard.press("Tab");

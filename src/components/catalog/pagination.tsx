@@ -63,7 +63,7 @@ export function Pagination({
             className={cn(
               itemClass,
               entry === page
-                ? "bg-primary text-primary-foreground"
+                ? "bg-brand-red text-white"
                 : "hover:bg-muted",
             )}
           >

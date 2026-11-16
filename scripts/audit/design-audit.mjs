@@ -186,7 +186,15 @@ async function run(pages, auth) {
   for (const theme of ["light", "dark"]) {
     const context = await browser.newContext({ colorScheme: theme, reducedMotion: "reduce" });
     await context.addInitScript((value) => localStorage.setItem("theme", value), theme);
-    if (auth) await login(context, auth.phone, auth.password);
+    if (auth) {
+      try {
+        await login(context, auth.phone, auth.password);
+      } catch (error) {
+        report.push({ path: "(login)", locale: "fa", width: 0, theme, error: `login failed for ${auth.phone}: ${String(error).slice(0, 120)}` });
+        await context.close();
+        continue;
+      }
+    }
     const jobs = [];
     for (const path of pages) {
       for (const locale of LOCALES) {

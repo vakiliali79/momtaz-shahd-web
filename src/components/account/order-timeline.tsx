@@ -23,7 +23,7 @@ export function OrderTimeline({ history }: { history: OrderView["history"] }) {
               aria-hidden="true"
               className={cn(
                 "relative mt-1 size-6 shrink-0 rounded-full border-4 border-background",
-                last ? "bg-primary" : "bg-brand-leaf",
+                last ? "bg-brand-red" : "bg-brand-leaf",
               )}
             />
             <div className="min-w-0">

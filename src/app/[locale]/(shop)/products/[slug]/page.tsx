@@ -120,7 +120,7 @@ export default async function ProductPage({
                   {t("product.outOfStock")}
                 </span>
               ) : product.discountPrice !== null ? (
-                <span className="rounded-full bg-primary px-2.5 py-0.5 text-xs font-semibold text-primary-foreground">
+                <span className="rounded-full bg-brand-red px-2.5 py-0.5 text-xs font-semibold text-white">
                   {t("product.discountBadge", {
                     percent: formatNumber(
                       discountPercent(product.price, product.discountPrice),

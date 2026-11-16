@@ -78,7 +78,7 @@ function StepIndicator({
               <span
                 className={cn(
                   "grid size-8 shrink-0 place-items-center rounded-full text-sm font-semibold",
-                  current && "bg-primary text-primary-foreground",
+                  current && "bg-brand-red text-white",
                   done && "bg-leaf-ink text-background",
                   !current && !done && "bg-muted text-muted-foreground",
                 )}
