@@ -1,5 +1,7 @@
+import { Suspense } from "react";
 import { useTranslations } from "next-intl";
 
+import { SessionLoader } from "@/components/auth/session-loader";
 import { CartDrawer } from "@/components/cart/cart-drawer";
 import { AccountMenu } from "@/components/layout/account-menu";
 import { Container } from "@/components/layout/container";
@@ -21,6 +23,10 @@ export function Header() {
       >
         {t("skipToContent")}
       </a>
+      {/* The session is per-request, so it streams in without blocking the page. */}
+      <Suspense fallback={null}>
+        <SessionLoader />
+      </Suspense>
       <Container className="flex h-16 items-center gap-1 sm:gap-2">
         <MobileNav className="-ms-2 xl:hidden" />
         <Logo className="me-auto xl:me-4" />

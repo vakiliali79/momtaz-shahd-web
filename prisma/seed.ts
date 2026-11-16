@@ -714,40 +714,54 @@ const coupons = [
 // ───────────────────────────── Settings ─────────────────────────────
 
 const settings: Record<string, object> = {
-  // Toman. `perExtraKg` applies above `baseWeightGrams`.
+  // Toman. Each extra started kg above `baseWeightGrams` costs `perExtraKg`.
+  // `inProvince` applies when the destination is in the origin province.
+  // Method names are translated in the message files, keyed by `id`.
+  // SAMPLE RATES and a placeholder origin: set the real ones before launch.
   shipping: {
+    schemaVersion: 2,
+    origin: { province: "tehran", city: "tehran" },
+    pickupAddress: {
+      fa: "تهران، نشانی کارخانه به‌زودی اعلام می‌شود",
+      en: "Tehran — factory address will be published soon",
+      ar: "طهران — سيُنشر عنوان المصنع قريبًا",
+    },
     methods: [
       {
         id: "post",
-        name: { fa: "پست پیشتاز", en: "Express Post", ar: "البريد السريع" },
-        baseCost: 65000,
-        baseWeightGrams: 1000,
-        perExtraKg: 18000,
-        estimatedDays: { min: 2, max: 5 },
         isActive: true,
+        baseWeightGrams: 1000,
+        inProvince: { baseCost: 55000, perExtraKg: 15000 },
+        outOfProvince: { baseCost: 75000, perExtraKg: 20000 },
+        sameCityOnly: false,
+        estimatedDays: { min: 2, max: 5 },
       },
       {
         id: "tipax",
-        name: { fa: "تیپاکس", en: "Tipax Courier", ar: "شركة تيباكس" },
-        baseCost: 95000,
-        baseWeightGrams: 1000,
-        perExtraKg: 25000,
-        estimatedDays: { min: 1, max: 3 },
         isActive: true,
+        baseWeightGrams: 1000,
+        inProvince: { baseCost: 85000, perExtraKg: 20000 },
+        outOfProvince: { baseCost: 110000, perExtraKg: 28000 },
+        sameCityOnly: false,
+        estimatedDays: { min: 1, max: 3 },
       },
       {
-        id: "tehran-courier",
-        name: {
-          fa: "پیک تهران (همان روز)",
-          en: "Tehran courier (same day)",
-          ar: "مندوب طهران (في اليوم نفسه)",
-        },
-        baseCost: 80000,
-        baseWeightGrams: 5000,
-        perExtraKg: 10000,
-        estimatedDays: { min: 0, max: 1 },
-        onlyCities: ["تهران"],
+        id: "courier",
         isActive: true,
+        baseWeightGrams: 5000,
+        inProvince: { baseCost: 80000, perExtraKg: 10000 },
+        outOfProvince: null,
+        sameCityOnly: true,
+        estimatedDays: { min: 0, max: 1 },
+      },
+      {
+        id: "pickup",
+        isActive: true,
+        baseWeightGrams: 0,
+        inProvince: { baseCost: 0, perExtraKg: 0 },
+        outOfProvince: { baseCost: 0, perExtraKg: 0 },
+        sameCityOnly: false,
+        estimatedDays: { min: 1, max: 1 },
       },
     ],
   },
@@ -773,6 +787,13 @@ const settings: Record<string, object> = {
       ar: "سيُنشر عنوان المصنع قريبًا",
     },
     workingHours: OFFICE_HOURS,
+  },
+  // PLACEHOLDER account details for bank transfers (wholesale orders).
+  bankTransfer: {
+    bankName: { fa: "نام بانک", en: "Bank name", ar: "اسم البنك" },
+    accountHolder: { fa: "شرکت ممتاز شهد", en: "Momtaz Shahd Co.", ar: "شركة ممتاز شهد" },
+    sheba: "IR000000000000000000000000",
+    cardNumber: "0000-0000-0000-0000",
   },
   announcementBanner: {
     enabled: true,
@@ -906,12 +927,18 @@ async function main() {
   }
 
   for (const [key, value] of Object.entries(settings)) {
-    await prisma.setting.upsert({
-      where: { key },
-      // Keep values an admin has already changed.
-      update: {},
-      create: { key, value },
-    });
+    const existing = await prisma.setting.findUnique({ where: { key } });
+    // Keep values an admin has already changed, unless the stored value uses
+    // an older format than this seed (`schemaVersion`), which the app can no
+    // longer read.
+    const seedVersion = "schemaVersion" in value ? value.schemaVersion : undefined;
+    const storedVersion =
+      existing && typeof existing.value === "object" && existing.value !== null &&
+      "schemaVersion" in existing.value
+        ? existing.value.schemaVersion
+        : undefined;
+    if (existing && seedVersion === storedVersion) continue;
+    await prisma.setting.upsert({ where: { key }, update: { value }, create: { key, value } });
   }
 
   const [

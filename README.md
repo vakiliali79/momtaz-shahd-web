@@ -6,7 +6,7 @@ Online store for **Momtaz Shahd (ممتاز شهد)** — traditional Iranian ko
 
 ```bash
 pnpm install
-cp .env.example .env   # SQLite by default
+cp .env.example .env   # SQLite by default; set AUTH_SECRET (openssl rand -base64 32)
 pnpm db:migrate        # create/update the local database
 pnpm db:seed           # sample catalogue, dealers, settings, admin user
 pnpm dev          # http://localhost:3000 → redirects to /fa

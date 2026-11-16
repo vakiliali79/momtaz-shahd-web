@@ -1,5 +1,13 @@
 import type { CatalogProduct } from "@/lib/data/catalog";
 import type { LocalizedText } from "@/lib/localized";
+import {
+  applyFreeShipping,
+  calculateShipping,
+  estimateShipping,
+  type Destination,
+  type ShippingConfig,
+  type ShippingMethodId,
+} from "@/lib/shipping";
 import { PLACEHOLDER_IMAGE } from "@/lib/site";
 
 /**
@@ -32,20 +40,6 @@ export type AppliedCoupon = {
   type: "PERCENT" | "FIXED";
   value: number;
   minOrder: number;
-};
-
-export type ShippingRate = {
-  id: string;
-  baseCost: number;
-  baseWeightGrams: number;
-  perExtraKg: number;
-};
-
-export type ShippingConfig = {
-  /** Active methods that deliver nationwide. */
-  methods: ShippingRate[];
-  /** Orders at or above this amount ship free; null when disabled. */
-  freeShippingThreshold: number | null;
 };
 
 /** Sale price when it is lower than the list price, otherwise the list price. */
@@ -96,23 +90,14 @@ export function couponDiscount(coupon: AppliedCoupon, subtotal: number): number 
 }
 
 /**
- * Cheapest nationwide method for the parcel weight, or 0 above the
- * free-shipping threshold. Null when no method is configured.
+ * Shipping input for totals: with `method` null the cart shows an estimate
+ * (cheapest delivery option); with a method, its exact cost.
  */
-export function estimateShipping(
-  weightGrams: number,
-  amount: number,
-  config: ShippingConfig,
-): number | null {
-  if (config.freeShippingThreshold !== null && amount >= config.freeShippingThreshold) {
-    return 0;
-  }
-  const costs = config.methods.map((method) => {
-    const extraKg = Math.ceil(Math.max(0, weightGrams - method.baseWeightGrams) / 1000);
-    return method.baseCost + extraKg * method.perExtraKg;
-  });
-  return costs.length > 0 ? Math.min(...costs) : null;
-}
+export type ShippingSelection = {
+  config: ShippingConfig;
+  method: ShippingMethodId | null;
+  destination: Destination | null;
+};
 
 export type CartTotals = {
   itemCount: number;
@@ -126,7 +111,7 @@ export type CartTotals = {
   couponApplies: boolean;
   /** How much more to buy before the coupon applies (0 when it does). */
   couponShortfall: number;
-  /** Null when shipping cannot be estimated. */
+  /** Null when shipping cannot be calculated (or the method is unavailable). */
   shipping: number | null;
   /** How much more to buy for free shipping; null when not applicable. */
   freeShippingShortfall: number | null;
@@ -136,7 +121,7 @@ export type CartTotals = {
 export function computeCartTotals(
   items: readonly CartItem[],
   coupon: AppliedCoupon | null,
-  shipping: ShippingConfig | null = null,
+  shipping: ShippingSelection | null = null,
 ): CartTotals {
   let itemCount = 0;
   let weightGrams = 0;
@@ -152,9 +137,17 @@ export function computeCartTotals(
 
   const discount = coupon ? couponDiscount(coupon, subtotal) : 0;
   const afterDiscount = subtotal - discount;
-  const shippingCost =
-    shipping && items.length > 0 ? estimateShipping(weightGrams, afterDiscount, shipping) : null;
-  const threshold = shipping?.freeShippingThreshold ?? null;
+  let shippingCost: number | null = null;
+  if (shipping && items.length > 0) {
+    const { config, method, destination } = shipping;
+    const base =
+      method === null
+        ? estimateShipping(config, weightGrams, destination)
+        : calculateShipping(config, method, weightGrams, destination);
+    shippingCost = applyFreeShipping(config, base, afterDiscount);
+  }
+  const threshold =
+    shipping && shipping.method !== "pickup" ? shipping.config.freeShippingThreshold : null;
 
   return {
     itemCount,

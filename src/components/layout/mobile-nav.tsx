@@ -1,10 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { MenuIcon } from "lucide-react";
+import { LogOutIcon, MenuIcon } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 
-import { accountLinks } from "@/components/layout/account-menu";
+import { useLogout } from "@/components/auth/use-logout";
+import { guestLinks, memberLinks, useAuthHref } from "@/components/layout/account-menu";
 import { LanguageSwitcher } from "@/components/layout/language-switcher";
 import { LogoMark } from "@/components/layout/logo";
 import { isActivePath } from "@/components/layout/main-nav";
@@ -24,6 +25,7 @@ import { mainNav } from "@/config/site";
 import { getDirection } from "@/i18n/locales";
 import { Link, usePathname } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
+import { useSessionStore } from "@/stores/session";
 
 export function MobileNav({ className }: { className?: string }) {
   const t = useTranslations();
@@ -31,6 +33,10 @@ export function MobileNav({ className }: { className?: string }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const close = () => setOpen(false);
+  const status = useSessionStore((state) => state.status);
+  const { logout, pending } = useLogout();
+  const authHref = useAuthHref();
+  const accountLinks = status === "user" ? memberLinks : guestLinks;
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
@@ -97,7 +103,7 @@ export function MobileNav({ className }: { className?: string }) {
             {accountLinks.map(({ key, href, Icon }) => (
               <li key={key}>
                 <Link
-                  href={href}
+                  href={status === "user" ? href : authHref(href)}
                   onClick={close}
                   className="flex min-h-11 items-center gap-3 rounded-xl px-3 text-sm font-medium transition-colors hover:bg-muted"
                 >
@@ -106,6 +112,22 @@ export function MobileNav({ className }: { className?: string }) {
                 </Link>
               </li>
             ))}
+            {status === "user" ? (
+              <li>
+                <button
+                  type="button"
+                  disabled={pending}
+                  onClick={() => {
+                    close();
+                    logout();
+                  }}
+                  className="flex min-h-11 w-full items-center gap-3 rounded-xl px-3 text-sm font-medium transition-colors hover:bg-muted"
+                >
+                  <LogOutIcon className="size-4 text-muted-foreground" aria-hidden="true" />
+                  {t("account.signOut")}
+                </button>
+              </li>
+            ) : null}
           </ul>
         </div>
 

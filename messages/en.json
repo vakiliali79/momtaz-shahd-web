@@ -112,7 +112,9 @@
     "guest": "Welcome",
     "signIn": "Sign in",
     "register": "Create account",
-    "orders": "My orders"
+    "orders": "My orders",
+    "greeting": "Hello, {name}",
+    "signOut": "Sign out"
   },
   "language": {
     "label": "Change language",
@@ -369,6 +371,252 @@
       "messageTooShort": "Please write at least 10 characters.",
       "tooLong": "This text is too long.",
       "server": "Something went wrong. Please try again."
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Sign in",
+      "description": "Sign in with your mobile number and password."
+    },
+    "register": {
+      "title": "Create an account",
+      "description": "Create an account to place orders and track them."
+    },
+    "phone": "Mobile number",
+    "password": "Password",
+    "name": "Full name",
+    "confirmPassword": "Repeat password",
+    "passwordHint": "At least 8 characters, with at least one letter and one digit.",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
+    "signIn": "Sign in",
+    "signingIn": "Signing in…",
+    "createAccount": "Create account",
+    "creatingAccount": "Creating account…",
+    "noAccount": "New here?",
+    "haveAccount": "Already have an account?",
+    "signedOut": "You have signed out.",
+    "errors": {
+      "invalidPhone": "Please enter a valid Iranian mobile number, e.g. 09121234567.",
+      "passwordRequired": "Please enter your password.",
+      "passwordTooShort": "The password must be at least 8 characters.",
+      "passwordWeak": "The password needs at least one letter and one digit.",
+      "passwordMismatch": "The passwords do not match.",
+      "nameRequired": "Please enter your name.",
+      "tooLong": "This text is too long.",
+      "invalidCredentials": "The mobile number or password is incorrect.",
+      "phoneTaken": "An account with this mobile number already exists. Please sign in.",
+      "server": "Something went wrong. Please try again."
+    }
+  },
+  "map": {
+    "label": "Map for choosing the delivery location",
+    "hint": "Optional: tap the map to drop a pin on the exact delivery spot. Drag the pin to adjust it.",
+    "osm": "OpenStreetMap contributors",
+    "useMyLocation": "Use my location",
+    "locating": "Finding you…",
+    "pinAtCenter": "Pin at map centre",
+    "removePin": "Remove pin",
+    "locationError": "We couldn't get your location. Please place the pin on the map.",
+    "pinned": "Pin placed at {lat}, {lng}.",
+    "noPin": "No pin placed."
+  },
+  "address": {
+    "formTitle": "New address",
+    "saved": "Address saved.",
+    "addNew": "Add a new address",
+    "place": "{province}, {city}",
+    "receiverLine": "Receiver: {name}",
+    "postalCodeLine": "Postal code:",
+    "pinSaved": "Map pin",
+    "addPin": "Add a pin on the map (optional)",
+    "save": "Save address",
+    "saving": "Saving…",
+    "cancel": "Cancel",
+    "fields": {
+      "title": "Address label",
+      "titlePlaceholder": "e.g. Home, Office",
+      "province": "Province",
+      "provincePlaceholder": "Choose a province",
+      "city": "City",
+      "cityPlaceholder": "Choose a city",
+      "cityFirst": "Choose a province first",
+      "fullAddress": "Full address",
+      "fullAddressPlaceholder": "Street, alley, building number, unit",
+      "postalCode": "Postal code (10 digits)",
+      "receiverName": "Receiver's name",
+      "receiverPhone": "Receiver's mobile"
+    },
+    "errors": {
+      "titleRequired": "Please give this address a label.",
+      "provinceRequired": "Please choose a province.",
+      "cityRequired": "Please choose a city.",
+      "addressTooShort": "Please enter the full address (at least 10 characters).",
+      "invalidPostalCode": "The postal code must be 10 digits.",
+      "nameRequired": "Please enter the receiver's name.",
+      "invalidPhone": "Please enter a valid Iranian mobile number, e.g. 09121234567.",
+      "invalidLocation": "The map pin is invalid. Please place it again.",
+      "tooLong": "This text is too long.",
+      "limitReached": "You have reached the maximum number of saved addresses.",
+      "unauthorized": "Please sign in again.",
+      "server": "Something went wrong. Please try again."
+    }
+  },
+  "checkout": {
+    "title": "Checkout",
+    "emptyText": "Add some products to your cart before checking out.",
+    "back": "Back",
+    "continueToShipping": "Continue to shipping",
+    "continueToPayment": "Continue to payment",
+    "placing": "Placing your order…",
+    "placeAndPay": "Place order and pay {total}",
+    "placeOrder": "Place order — {total}",
+    "terms": "By placing your order you agree to our terms of sale. Prices are confirmed against current stock when you place the order.",
+    "steps": {
+      "label": "Checkout steps",
+      "address": "Address",
+      "shipping": "Shipping",
+      "payment": "Payment"
+    },
+    "address": {
+      "title": "Where should we deliver?",
+      "choose": "Choose a delivery address"
+    },
+    "shipping": {
+      "title": "How should we send it?",
+      "choose": "Choose a shipping method",
+      "to": "Delivering to: {title}",
+      "days": "Delivery in {min}–{max} working days",
+      "pickupAt": "Pick up at: {address}",
+      "methods": {
+        "post": {
+          "name": "Express Post (Pishtaz)",
+          "description": "Iran Post's express service, to every city."
+        },
+        "tipax": {
+          "name": "Tipax",
+          "description": "Faster courier service between major cities."
+        },
+        "courier": {
+          "name": "Same-day courier",
+          "description": "Delivered by our courier, in our city only."
+        },
+        "pickup": {
+          "name": "Pick up from the factory",
+          "description": "Collect your order in person, free of charge."
+        }
+      },
+      "unavailable": {
+        "inactive": "Not available at the moment.",
+        "sameCityOnly": "Only available in the factory's city.",
+        "noRate": "Not available for this destination."
+      },
+      "sameDay": "Delivered today or the next working day"
+    },
+    "payment": {
+      "title": "How would you like to pay?",
+      "choose": "Choose a payment method",
+      "wholesaleOnly": "Bank transfer is only available for wholesale orders.",
+      "methods": {
+        "ONLINE": {
+          "name": "Online payment",
+          "description": "Pay securely by bank card through the payment gateway."
+        },
+        "COD": {
+          "name": "Cash on delivery",
+          "description": "Pay when you receive your order."
+        },
+        "BANK_TRANSFER": {
+          "name": "Bank transfer",
+          "description": "Transfer the amount to our account; we ship once it arrives."
+        }
+      }
+    },
+    "note": {
+      "label": "Order note (optional)",
+      "placeholder": "Anything we should know about your order or delivery?",
+      "count": "{count}/{max}"
+    },
+    "summary": {
+      "shipping": "Shipping",
+      "shippingPending": "Chosen in the next step",
+      "couponHint": "Have a discount code?",
+      "editCart": "Edit cart",
+      "totalLabel": "Order total",
+      "showDetails": "Details",
+      "description": "Items and costs of your order."
+    },
+    "errors": {
+      "unauthorized": "Please sign in again to place your order.",
+      "invalid": "Some order details are invalid. Please check them and try again.",
+      "emptyCart": "Your cart is empty.",
+      "addressRequired": "Please choose a delivery address.",
+      "shippingRequired": "Please choose a shipping method.",
+      "paymentRequired": "Please choose a payment method.",
+      "noteTooLong": "The order note is too long.",
+      "productUnavailable": "Some products in your cart are no longer available. Your cart has been updated; please review it.",
+      "outOfStock": "Only {formatted} of {name} left in stock. Your cart has been updated; please review it.",
+      "couponInvalid": "Your discount code can no longer be used and was removed. Please review the new total.",
+      "shippingUnavailable": "This shipping method is not available for your address. Please choose another.",
+      "paymentUnavailable": "This payment method is not available for this order. Please choose another.",
+      "totalChanged": "Prices or costs changed since you started checking out. Your cart has been updated; please review the new total.",
+      "server": "We couldn't place your order. Nothing was charged. Please try again."
+    }
+  },
+  "order": {
+    "number": "Order number",
+    "date": "Order date",
+    "statusLabel": "Status",
+    "amount": "Amount",
+    "status": {
+      "PENDING": "Awaiting confirmation",
+      "PAID": "Paid",
+      "PROCESSING": "Being prepared",
+      "SHIPPED": "Shipped",
+      "DELIVERED": "Delivered",
+      "CANCELLED": "Cancelled"
+    },
+    "items": "Items",
+    "quantityTimes": "{quantity} × {price}",
+    "discount": "Discount",
+    "shipping": "Shipping",
+    "delivery": "Delivery",
+    "payment": "Payment",
+    "paymentRef": "Payment reference:",
+    "payNow": "Pay now",
+    "contactUs": "Contact us",
+    "success": {
+      "title": "Your order has been placed",
+      "thanks": "Thank you for your order!",
+      "awaitingTitle": "Your order is awaiting payment",
+      "awaitingText": "We have reserved your products. Complete the payment to confirm the order.",
+      "next": {
+        "ONLINE": "Your payment was received and we are preparing your order.",
+        "COD": "Please have the amount ready when your order arrives.",
+        "BANK_TRANSFER": "Please transfer the amount using the details below. We ship as soon as the payment arrives."
+      }
+    },
+    "bank": {
+      "title": "Bank transfer details",
+      "amount": "Amount to transfer",
+      "bankName": "Bank",
+      "accountHolder": "Account holder",
+      "sheba": "IBAN (Sheba)",
+      "card": "Card number",
+      "reference": "Payment reference",
+      "instructions": "Please mention your order number in the transfer description and send us the receipt through the contact page."
+    },
+    "failed": {
+      "title": "Payment was not completed",
+      "text": "Your payment did not go through and no money was taken.",
+      "reserved": "Your order has been kept, so you can try paying again.",
+      "retry": "Try paying again"
+    },
+    "mockGateway": {
+      "title": "Test payment gateway",
+      "text": "This is a simulated gateway for development. No real payment is made.",
+      "pay": "Simulate successful payment",
+      "fail": "Simulate failed payment"
     }
   }
 }

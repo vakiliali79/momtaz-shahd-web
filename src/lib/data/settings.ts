@@ -3,18 +3,29 @@ import "server-only";
 import { cacheLife, cacheTag } from "next/cache";
 import { z } from "zod";
 
-import type { ShippingConfig } from "@/lib/cart";
 import { db } from "@/lib/db";
+import type { LocalizedText } from "@/lib/localized";
+import { shippingMethodIds, type ShippingConfig } from "@/lib/shipping";
+
+const rateSchema = z.object({
+  baseCost: z.number().int().min(0),
+  perExtraKg: z.number().int().min(0),
+});
+
+const localizedSchema = z.object({ fa: z.string(), en: z.string(), ar: z.string() });
 
 const shippingSchema = z.object({
+  origin: z.object({ province: z.string(), city: z.string() }),
+  pickupAddress: localizedSchema.nullable().default(null),
   methods: z.array(
     z.object({
-      id: z.string(),
-      baseCost: z.number().int().min(0),
-      baseWeightGrams: z.number().int().min(0),
-      perExtraKg: z.number().int().min(0),
+      id: z.enum(shippingMethodIds),
       isActive: z.boolean().default(true),
-      onlyCities: z.array(z.string()).optional(),
+      baseWeightGrams: z.number().int().min(0).default(1000),
+      inProvince: rateSchema,
+      outOfProvince: rateSchema.nullable().default(null),
+      sameCityOnly: z.boolean().default(false),
+      estimatedDays: z.object({ min: z.number().int().min(0), max: z.number().int().min(0) }),
     }),
   ),
 });
@@ -24,37 +35,56 @@ const freeShippingSchema = z.object({
   threshold: z.number().int().min(0),
 });
 
+async function readSettings(keys: string[]): Promise<Map<string, unknown>> {
+  const rows = await db.setting.findMany({ where: { key: { in: keys } } });
+  return new Map(rows.map((row) => [row.key, row.value]));
+}
+
 /**
- * Shipping rates for cart estimates, from the admin-editable `shipping` and
- * `freeShipping` settings. City-only methods (e.g. a Tehran courier) are left
- * out because the destination is not known yet. Invalid settings are treated
- * as "not configured" rather than crashing the cart.
+ * Shipping rates and rules from the admin-editable `shipping` and
+ * `freeShipping` settings. Invalid settings are logged and treated as "no
+ * methods configured" instead of crashing the shop.
  */
 export async function getShippingConfig(): Promise<ShippingConfig> {
   "use cache";
   cacheLife("hours");
   cacheTag("settings");
 
-  const rows = await db.setting.findMany({
-    where: { key: { in: ["shipping", "freeShipping"] } },
-  });
-  const value = (key: string) => rows.find((row) => row.key === key)?.value;
-
-  const shipping = shippingSchema.safeParse(value("shipping"));
-  const freeShipping = freeShippingSchema.safeParse(value("freeShipping"));
+  const values = await readSettings(["shipping", "freeShipping"]);
+  const shipping = shippingSchema.safeParse(values.get("shipping"));
+  const freeShipping = freeShippingSchema.safeParse(values.get("freeShipping"));
+  if (!shipping.success) console.error("[settings] Invalid shipping setting:", shipping.error.issues);
 
   return {
-    methods: shipping.success
-      ? shipping.data.methods
-          .filter((method) => method.isActive && !method.onlyCities?.length)
-          .map(({ id, baseCost, baseWeightGrams, perExtraKg }) => ({
-            id,
-            baseCost,
-            baseWeightGrams,
-            perExtraKg,
-          }))
-      : [],
+    origin: shipping.success ? shipping.data.origin : { province: "", city: "" },
+    pickupAddress: shipping.success ? shipping.data.pickupAddress : null,
+    methods: shipping.success ? shipping.data.methods : [],
     freeShippingThreshold:
       freeShipping.success && freeShipping.data.enabled ? freeShipping.data.threshold : null,
   };
+}
+
+export type BankTransferInfo = {
+  bankName: LocalizedText;
+  accountHolder: LocalizedText;
+  sheba: string;
+  cardNumber: string;
+};
+
+const bankTransferSchema = z.object({
+  bankName: localizedSchema,
+  accountHolder: localizedSchema,
+  sheba: z.string(),
+  cardNumber: z.string(),
+});
+
+/** Account details shown to customers who pay by bank transfer. */
+export async function getBankTransferInfo(): Promise<BankTransferInfo | null> {
+  "use cache";
+  cacheLife("hours");
+  cacheTag("settings");
+
+  const values = await readSettings(["bankTransfer"]);
+  const parsed = bankTransferSchema.safeParse(values.get("bankTransfer"));
+  return parsed.success ? parsed.data : null;
 }

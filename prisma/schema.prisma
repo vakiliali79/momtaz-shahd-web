@@ -235,6 +235,8 @@ model Order {
   paymentMethod   PaymentMethod
   /// Gateway reference / bank receipt number.
   paymentRef      String?
+  /// Discount code used, if any (its usage was counted at placement).
+  couponCode      String?
   note            String?
   createdAt       DateTime      @default(now())
   updatedAt       DateTime      @updatedAt

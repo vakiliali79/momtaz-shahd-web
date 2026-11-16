@@ -18,9 +18,9 @@ import {
   qualifiesForWholesale,
   type CartItem,
   type CartTotals,
-  type ShippingConfig,
 } from "@/lib/cart";
 import { formatNumber, formatPrice } from "@/lib/format";
+import type { ShippingConfig } from "@/lib/shipping";
 import { cn } from "@/lib/utils";
 import { useCartHydrated, useCartStore } from "@/stores/cart";
 
@@ -361,7 +361,7 @@ export function CartView({ shipping }: { shipping: ShippingConfig }) {
     );
   }
 
-  const totals = computeCartTotals(items, coupon, shipping);
+  const totals = computeCartTotals(items, coupon, { config: shipping, method: null, destination: null });
 
   function clearAll() {
     const snapshot = useCartStore.getState();

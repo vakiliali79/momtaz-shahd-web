@@ -113,3 +113,37 @@
 - The shipping estimate ignores city-only methods (Tehran courier) because the destination is unknown until checkout.
 - Coupon checks have no rate limiting, and coupon usage is not counted until orders exist.
 - Approximate USD/AED prices for en/ar (from CLAUDE.md) are not shown yet.
+
+## Stage 5 — Accounts and checkout (2026-11-16)
+
+**Accounts** (needed because checkout requires login)
+- Auth.js v5 (`next-auth@5.0.0-beta.32`, the only v5 release line) with phone + password and JWT sessions: `src/auth.ts`, data-access helpers in `src/lib/session.ts`.
+- `/login` and `/register` pages (Zod on client and server, safe `callbackUrl`), sign-out from the account menu and mobile menu. The header learns the session through a small `<Suspense>` hole, so pages stay prerendered.
+- `src/proxy.ts` redirects signed-out visitors from `/checkout` and `/account` to `/login?callbackUrl=…`; pages re-check the session themselves.
+- New env vars: `AUTH_SECRET` (required), `PAYMENT_GATEWAY`, `ALLOW_MOCK_PAYMENTS`.
+
+**Checkout** (`/checkout`, three steps)
+1. Address: pick a saved address or add one. Provinces and cities come from `src/data/iran-locations.json` (31 provinces, 211 main cities, fa/en/ar labels); 10-digit postal code (Persian digits accepted); receiver name and mobile; optional map pin (Leaflet + OpenStreetMap, `src/components/map/` — reusable for the dealer locator).
+2. Shipping: Express Post, Tipax, same-day courier (only in the factory's city) and factory pickup. Costs come from `calculateShipping` in `src/lib/shipping.ts`, using the rates in the `shipping` setting (in-province / out-of-province, per extra kg) and the free-shipping threshold.
+3. Payment: online gateway, cash on delivery, bank transfer (wholesale orders only); order note.
+- Order summary is sticky on desktop and a bottom bar with an expandable sheet on phones.
+
+**placeOrder** (`src/actions/checkout.ts`), in one database transaction: re-reads prices, decrements stock only if still available, validates the coupon and counts its use, checks the shipping method for the address, recomputes totals with the same functions as the browser, refuses the order if the total differs from what the customer saw, generates `MS-YYYYMMDD-NNNN` (Tehran date, retried on collision), and saves the order, items, address snapshot and status history. The cart is cleared only after it succeeds.
+
+**After placing**
+- `/checkout/success/[orderNumber]`: thank-you message, order details, bank details for transfers, "pay now" for unpaid online orders.
+- `/checkout/failed/[orderNumber]`: payment failed, with retry.
+- `/checkout/pay/[orderNumber]`: simulated gateway (development only).
+- Orders are only visible to their owner.
+
+**Data changes**: `Order.couponCode` (migrations for SQLite and PostgreSQL); `shipping` setting format v2 (the seed upgrades the old format); new `bankTransfer` setting with placeholder account details.
+
+**Verified**: `pnpm tsc --noEmit`, `pnpm lint`, `pnpm build` pass. Browser-tested end to end against the production build: login redirect, registration, address validation and saving, map pin, shipping costs and courier restriction, online payment failure → retry → paid, wholesale order with coupon + free shipping + bank transfer, price change and stock drop during checkout (order refused, coupon not consumed, cart refreshed), another user cannot see the order, sign-out, Persian 320px layout.
+
+**Open items**
+- No real payment gateway yet; `PAYMENT_GATEWAY=mock` is refused in production unless `ALLOW_MOCK_PAYMENTS=true`. Integrating a provider (e.g. Zarinpal) needs a merchant account.
+- Unpaid online orders keep their stock reserved indefinitely; they need an expiry job that cancels them and restores stock.
+- Shipping rates, the origin (Tehran) and pickup address, and bank account details are placeholders in the seed.
+- No OTP sign-in, password reset, rate limiting on login/coupon/order attempts, or "My orders" page yet (`/account/orders` 404s).
+- The city list holds main cities only; customers in smaller towns must pick the nearest listed city until the JSON is extended.
+- OpenStreetMap's public tile server suits low traffic only; a commercial tile provider (or Neshan) may be needed at scale.
