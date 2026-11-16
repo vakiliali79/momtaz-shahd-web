@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 
+import { CartDrawer } from "@/components/cart/cart-drawer";
 import { AccountMenu } from "@/components/layout/account-menu";
-import { CartButton } from "@/components/layout/cart-button";
 import { Container } from "@/components/layout/container";
 import { LanguageSwitcher } from "@/components/layout/language-switcher";
 import { Logo } from "@/components/layout/logo";
@@ -30,7 +30,7 @@ export function Header() {
           <LanguageSwitcher className="max-[359px]:hidden" />
           <ThemeToggle className="max-[359px]:hidden" />
           <AccountMenu className="max-sm:hidden" />
-          <CartButton />
+          <CartDrawer />
         </div>
       </Container>
     </header>

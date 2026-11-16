@@ -15,6 +15,7 @@ import { Breadcrumbs } from "@/components/shared/page-header";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
+import { toCartProduct } from "@/lib/cart";
 import { getCatalog, getProductReviews } from "@/lib/data/catalog";
 import { formatDate, formatNumber } from "@/lib/format";
 import { pageMetadata } from "@/lib/seo";
@@ -153,14 +154,7 @@ export default async function ProductPage({
             ))}
           </dl>
 
-          <PurchasePanel
-            productId={product.id}
-            productName={product.name}
-            unitPrice={product.effectivePrice}
-            stock={product.stock}
-            wholesalePrice={product.wholesalePrice}
-            minWholesaleQty={product.minWholesaleQty}
-          />
+          <PurchasePanel product={toCartProduct(product)} />
         </div>
       </div>
 

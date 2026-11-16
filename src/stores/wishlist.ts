@@ -1,6 +1,8 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
+export const WISHLIST_STORAGE_KEY = "momtaz-shahd-wishlist";
+
 type WishlistState = {
   /** Product ids. Kept in the browser until accounts exist to sync with. */
   ids: string[];
@@ -19,7 +21,7 @@ export const useWishlistStore = create<WishlistState>()(
         })),
     }),
     {
-      name: "momtaz-shahd-wishlist",
+      name: WISHLIST_STORAGE_KEY,
       version: 1,
       storage: createJSONStorage(() => localStorage),
       skipHydration: true,

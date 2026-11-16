@@ -6,6 +6,7 @@ import { ProductImage } from "@/components/product/product-image";
 import { RatingStars } from "@/components/product/rating-stars";
 import { WishlistButton } from "@/components/product/wishlist-button";
 import { Link } from "@/i18n/navigation";
+import { toCartProduct } from "@/lib/cart";
 import type { CatalogProduct } from "@/lib/data/catalog";
 import { formatNumber } from "@/lib/format";
 import { discountPercent, formatWeight } from "@/lib/units";
@@ -87,10 +88,7 @@ export function ProductCard({
           <Price price={product.price} discountPrice={product.discountPrice} />
           <AddToCartButton
             variant="icon"
-            productId={product.id}
-            productName={product.name}
-            unitPrice={product.effectivePrice}
-            stock={product.stock}
+            product={toCartProduct(product)}
             className="relative z-10"
           />
         </div>

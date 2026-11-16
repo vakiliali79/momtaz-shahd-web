@@ -84,3 +84,32 @@
 - The mini map outline of Iran is a rough illustration; the Instagram section shows placeholder tiles.
 - Review submission, `/wholesale`, `/dealers`, `/cart` and account pages are not built yet.
 - `pnpm build` needs a migrated and seeded database, because pages are prerendered from it.
+
+## Stage 4 — Cart (2026-11-16)
+
+**Store** (`src/stores/cart.ts`, Zustand, persisted to localStorage as `momtaz-shahd-cart` v2)
+- Items carry productId, slug, name in all three languages, image, unit price, wholesale price and minimum, weight, quantity and max stock; plus the applied coupon.
+- Actions: `addItem` (capped at stock, returns how many were added), `updateQuantity`, `removeItem` / `restoreItem` (undo), `clearCart`, `applyCoupon` / `removeCoupon`, `syncItems`.
+- Hydration guard: the store loads after mount; `useCartHydrated()` lets components show a skeleton instead of an empty cart. Changes in another tab are picked up.
+- Pricing rules live in `src/lib/cart.ts` (pure functions, reusable by checkout): wholesale price applies automatically once quantity ≥ `minWholesaleQty`; coupon discount; shipping estimate; totals.
+
+**UI**
+- Add-to-cart on cards and the product page: icon swaps to a check mark, the header bag bounces, and a localized toast offers "View cart".
+- Cart drawer opens from the inline-end edge (right in English, left in Persian/Arabic): items, quantity stepper, remove with undo, subtotal, Checkout and View cart.
+- `/cart` page: table on tablets and up, cards on phones; coupon field; summary with subtotal, wholesale savings, discount, shipping estimate with free-shipping progress, total; continue shopping, clear cart (with undo), checkout. Empty state links to products. Not indexed by search engines.
+- Product page shows the live line total and switches to the wholesale price at the minimum quantity.
+
+**Server**
+- `getCartProducts` re-reads price and stock whenever the cart page loads or the drawer opens: stale prices are corrected, quantities capped to stock, and removed or sold-out products dropped (with a toast).
+- `checkCoupon` validates codes (active, not expired, usage limit, minimum order) with Zod.
+- `getShippingConfig` reads the `shipping` and `freeShipping` settings (tag `settings`).
+- Seed adds sample coupons: `WELCOME10` (10%, min 300,000), `NOWRUZ1405` (50,000 off, min 500,000), `EXPIRED2025` (expired, for testing).
+
+**Verified**: `pnpm tsc --noEmit`, `pnpm lint`, `pnpm build` pass. Browser-tested add/remove/undo, stock caps, wholesale switch, every coupon error, totals, cross-tab sync, stale-price correction, RTL/LTR drawer side and 320px layout with no console errors.
+
+**Open items**
+- `/checkout` does not exist yet; the Checkout buttons lead to the 404 page.
+- Cart prices in the browser are only a display: checkout must recompute everything on the server with `src/lib/cart.ts`.
+- The shipping estimate ignores city-only methods (Tehran courier) because the destination is unknown until checkout.
+- Coupon checks have no rate limiting, and coupon usage is not counted until orders exist.
+- Approximate USD/AED prices for en/ar (from CLAUDE.md) are not shown yet.

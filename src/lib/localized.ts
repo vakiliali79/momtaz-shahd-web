@@ -37,3 +37,12 @@ export function localize(value: unknown, locale: AppLocale): string {
   }
   return "";
 }
+
+/** A localized JSON value with every locale filled in (using fallbacks). */
+export function toLocalizedText(value: unknown): LocalizedText {
+  return {
+    fa: localize(value, "fa"),
+    en: localize(value, "en"),
+    ar: localize(value, "ar"),
+  };
+}

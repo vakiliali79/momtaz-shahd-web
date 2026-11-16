@@ -7,14 +7,24 @@ import { ThemeProvider } from "next-themes";
 import { DirectionProvider } from "@/components/ui/direction";
 import { Toaster } from "@/components/ui/sonner";
 import type { Direction } from "@/i18n/locales";
-import { useCartStore } from "@/stores/cart";
-import { useWishlistStore } from "@/stores/wishlist";
+import { CART_STORAGE_KEY, useCartStore } from "@/stores/cart";
+import { WISHLIST_STORAGE_KEY, useWishlistStore } from "@/stores/wishlist";
 
-/** Loads the persisted cart and wishlist from localStorage after mount. */
+/**
+ * Loads the persisted cart and wishlist from localStorage after mount, and
+ * keeps them in sync when they change in another tab.
+ */
 function StoreHydration() {
   useEffect(() => {
     void useCartStore.persist.rehydrate();
     void useWishlistStore.persist.rehydrate();
+
+    function onStorage(event: StorageEvent) {
+      if (event.key === CART_STORAGE_KEY) void useCartStore.persist.rehydrate();
+      if (event.key === WISHLIST_STORAGE_KEY) void useWishlistStore.persist.rehydrate();
+    }
+    window.addEventListener("storage", onStorage);
+    return () => window.removeEventListener("storage", onStorage);
   }, []);
   return null;
 }

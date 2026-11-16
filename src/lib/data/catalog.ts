@@ -4,7 +4,8 @@ import { cacheLife, cacheTag } from "next/cache";
 
 import type { AppLocale } from "@/i18n/routing";
 import { db } from "@/lib/db";
-import { localize } from "@/lib/localized";
+import { effectivePrice } from "@/lib/cart";
+import { localize, toLocalizedText, type LocalizedText } from "@/lib/localized";
 import { normalizeSearchText } from "@/lib/search-text";
 
 import { resolveImage, resolveImages } from "./images";
@@ -22,6 +23,8 @@ export type CatalogProduct = {
   id: string;
   slug: string;
   name: string;
+  /** Name in every language, for the cart (which outlives a locale switch). */
+  names: LocalizedText;
   description: string;
   ingredients: string;
   /** Lower-cased text in all languages, used for search. */
@@ -95,14 +98,14 @@ export async function getCatalog(locale: AppLocale): Promise<Catalog> {
     const category = categoryById.get(product.categoryId);
     if (!category) return [];
     const stats = ratingByProduct.get(product.id);
-    const onSale =
-      product.discountPrice !== null && product.discountPrice < product.price;
+    const price = effectivePrice(product.price, product.discountPrice);
 
     return [
       {
         id: product.id,
         slug: product.slug,
         name: localize(product.name, locale),
+        names: toLocalizedText(product.name),
         description: localize(product.description, locale),
         ingredients: localize(product.ingredients, locale),
         searchText: normalizeSearchText(
@@ -111,8 +114,8 @@ export async function getCatalog(locale: AppLocale): Promise<Catalog> {
         categorySlug: category.slug,
         categoryName: localize(category.name, locale),
         price: product.price,
-        discountPrice: onSale ? product.discountPrice : null,
-        effectivePrice: onSale ? (product.discountPrice ?? product.price) : product.price,
+        discountPrice: price < product.price ? price : null,
+        effectivePrice: price,
         wholesalePrice: product.wholesalePrice,
         minWholesaleQty: product.minWholesaleQty,
         weightGrams: product.weightGrams,

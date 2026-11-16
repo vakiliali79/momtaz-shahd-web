@@ -11,7 +11,7 @@ import "dotenv/config";
 
 import bcrypt from "bcryptjs";
 
-import { DealerType, Role } from "../src/generated/prisma/client";
+import { CouponType, DealerType, Role } from "../src/generated/prisma/client";
 import { createPrismaClient } from "../src/lib/db/client";
 import type { LocalizedText } from "../src/lib/localized";
 
@@ -702,6 +702,15 @@ const dealers: {
   },
 ];
 
+// ───────────────────────────── Coupons ─────────────────────────────
+// Sample discount codes for development. EXPIRED2025 is deliberately expired.
+
+const coupons = [
+  { code: "WELCOME10", type: CouponType.PERCENT, value: 10, minOrder: 300000, maxUses: null, expiresAt: null },
+  { code: "NOWRUZ1405", type: CouponType.FIXED, value: 50000, minOrder: 500000, maxUses: 500, expiresAt: new Date("2027-04-01T00:00:00+03:30") },
+  { code: "EXPIRED2025", type: CouponType.PERCENT, value: 15, minOrder: 0, maxUses: null, expiresAt: new Date("2025-12-31T23:59:59+03:30") },
+];
+
 // ───────────────────────────── Settings ─────────────────────────────
 
 const settings: Record<string, object> = {
@@ -887,6 +896,15 @@ async function main() {
     });
   }
 
+  for (const coupon of coupons) {
+    await prisma.coupon.upsert({
+      where: { code: coupon.code },
+      // Keep usage counts and any edits made in the admin panel.
+      update: {},
+      create: coupon,
+    });
+  }
+
   for (const [key, value] of Object.entries(settings)) {
     await prisma.setting.upsert({
       where: { key },
@@ -902,6 +920,7 @@ async function main() {
     productCount,
     reviewCount,
     dealerCount,
+    couponCount,
     settingCount,
   ] = await Promise.all([
     prisma.user.count(),
@@ -909,12 +928,13 @@ async function main() {
     prisma.product.count(),
     prisma.review.count(),
     prisma.dealer.count(),
+    prisma.coupon.count(),
     prisma.setting.count(),
   ]);
 
   console.log(
     `Seed complete: ${userCount} user(s), ${categoryCount} categories, ` +
-      `${productCount} products, ${reviewCount} reviews, ${dealerCount} dealers, ${settingCount} settings.`,
+      `${productCount} products, ${reviewCount} reviews, ${dealerCount} dealers, ${couponCount} coupons, ${settingCount} settings.`,
   );
   console.log(
     `Admin login: ${ADMIN.phone} / ${ADMIN.password} — change this password before going live.`,
