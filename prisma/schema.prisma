@@ -1,0 +1,349 @@
+// Momtaz Shahd data model.
+//
+// This file is the single source of truth and targets SQLite (local dev).
+// For PostgreSQL, `prisma.config.ts` derives `prisma/postgresql/schema.prisma`
+// from it automatically whenever DATABASE_URL is a postgres:// URL, so the
+// models below must stay portable across both databases:
+//   - no scalar lists (SQLite has none) → `Json` arrays instead
+//   - no `@db.*` native type attributes
+//
+// Conventions
+//   - Money is stored in Toman as whole numbers. Unit prices are `Int`;
+//     order totals are `BigInt` because a large wholesale order can exceed
+//     the 32-bit limit (~2.1 billion Toman).
+//   - Multilingual text is a `Json` object `{ "fa": "…", "en": "…", "ar": "…" }`
+//     (see src/lib/localized.ts for the type, Zod schema and reader).
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+// ───────────────────────────── Enums ─────────────────────────────
+
+enum Role {
+  CUSTOMER
+  WHOLESALE
+  ADMIN
+}
+
+enum OrderType {
+  RETAIL
+  WHOLESALE
+}
+
+enum OrderStatus {
+  PENDING
+  PAID
+  PROCESSING
+  SHIPPED
+  DELIVERED
+  CANCELLED
+}
+
+enum PaymentMethod {
+  ONLINE
+  COD
+  BANK_TRANSFER
+}
+
+enum CouponType {
+  PERCENT
+  FIXED
+}
+
+enum DealerType {
+  DISTRIBUTOR
+  RETAIL_STORE
+  AGENCY
+}
+
+enum WholesaleRequestStatus {
+  NEW
+  CONTACTED
+  CONVERTED
+  REJECTED
+}
+
+// ───────────────────────────── Users ─────────────────────────────
+
+model User {
+  id              String   @id @default(cuid())
+  name            String?
+  email           String?  @unique
+  /// Iranian mobile number, normalised to `09xxxxxxxxx` (see src/lib/validation/phone.ts).
+  phone           String   @unique
+  /// Null for accounts that only ever sign in with an OTP.
+  passwordHash    String?
+  role            Role     @default(CUSTOMER)
+  /// "fa" | "en" | "ar"
+  preferredLocale String   @default("fa")
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  addresses Address[]
+  orders    Order[]
+  reviews   Review[]
+  wishlist  Wishlist[]
+}
+
+model Address {
+  id            String  @id @default(cuid())
+  userId        String
+  /// Label chosen by the user, e.g. "Home" / "خانه".
+  title         String
+  country       String  @default("IR")
+  province      String
+  city          String
+  fullAddress   String
+  postalCode    String
+  receiverName  String
+  receiverPhone String
+  lat           Float?
+  lng           Float?
+  isDefault     Boolean @default(false)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+/// One-time passwords for phone sign-in. Rows are deleted once used or expired.
+model OtpCode {
+  id        String   @id @default(cuid())
+  phone     String
+  /// Store a hash of the code, never the plain digits.
+  code      String
+  expiresAt DateTime
+  /// Failed verification attempts, to lock the code after too many tries.
+  attempts  Int      @default(0)
+  createdAt DateTime @default(now())
+
+  @@index([phone])
+  @@index([expiresAt])
+}
+
+// ──────────────────────────── Catalogue ────────────────────────────
+
+model Category {
+  id          String  @id @default(cuid())
+  slug        String  @unique
+  /// i18n: { fa, en, ar }
+  name        Json
+  /// i18n: { fa, en, ar }
+  description Json?
+  image       String?
+  sortOrder   Int     @default(0)
+
+  products Product[]
+
+  @@index([sortOrder])
+}
+
+model Product {
+  id              String   @id @default(cuid())
+  slug            String   @unique
+  /// i18n: { fa, en, ar }
+  name            Json
+  /// i18n: { fa, en, ar }
+  description     Json
+  /// i18n: { fa, en, ar }
+  ingredients     Json?
+  categoryId      String
+  /// Retail price in Toman.
+  price           Int
+  /// Discounted retail price in Toman; null when not on sale.
+  discountPrice   Int?
+  /// Unit price in Toman for wholesale buyers; null when not sold wholesale.
+  wholesalePrice  Int?
+  /// Minimum quantity to qualify for `wholesalePrice`.
+  minWholesaleQty Int?
+  weightGrams     Int
+  stock           Int      @default(0)
+  /// JSON array of image URLs/paths, first one is the cover: ["/images/…", …]
+  images          Json     @default("[]")
+  shelfLifeDays   Int?
+  isActive        Boolean  @default(true)
+  isFeatured      Boolean  @default(false)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  category   Category    @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  orderItems OrderItem[]
+  reviews    Review[]
+  wishlist   Wishlist[]
+
+  @@index([categoryId])
+  @@index([isActive, isFeatured])
+  @@index([createdAt])
+}
+
+model Review {
+  id         String   @id @default(cuid())
+  productId  String
+  userId     String
+  /// 1–5, enforced by Zod in the application layer.
+  rating     Int
+  comment    String?
+  isApproved Boolean  @default(false)
+  createdAt  DateTime @default(now())
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  /// One review per customer per product.
+  @@unique([productId, userId])
+  @@index([productId, isApproved])
+  @@index([userId])
+}
+
+model Wishlist {
+  userId    String
+  productId String
+  createdAt DateTime @default(now())
+
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@id([userId, productId])
+  @@index([productId])
+}
+
+// ───────────────────────────── Orders ─────────────────────────────
+
+model Order {
+  id              String        @id @default(cuid())
+  /// Human-readable, e.g. MS-20261116-0001.
+  orderNumber     String        @unique
+  userId          String
+  type            OrderType     @default(RETAIL)
+  status          OrderStatus   @default(PENDING)
+  subtotal        BigInt
+  shippingCost    BigInt        @default(0)
+  discount        BigInt        @default(0)
+  total           BigInt
+  /// "IRT" = Iranian Toman.
+  currency        String        @default("IRT")
+  /// Copy of the delivery address at checkout, so later edits don't change past orders.
+  addressSnapshot Json
+  shippingMethod  String?
+  trackingCode    String?
+  paymentMethod   PaymentMethod
+  /// Gateway reference / bank receipt number.
+  paymentRef      String?
+  note            String?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  user          User                 @relation(fields: [userId], references: [id], onDelete: Restrict)
+  items         OrderItem[]
+  statusHistory OrderStatusHistory[]
+
+  @@index([userId, createdAt])
+  @@index([status, createdAt])
+  @@index([createdAt])
+}
+
+model OrderItem {
+  id          String @id @default(cuid())
+  orderId     String
+  productId   String
+  /// Snapshot of the product name at checkout (in the buyer's locale).
+  productName String
+  /// Snapshot of the unit price in Toman at checkout.
+  unitPrice   Int
+  quantity    Int
+
+  order   Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id], onDelete: Restrict)
+
+  @@index([orderId])
+  @@index([productId])
+}
+
+model OrderStatusHistory {
+  id        String      @id @default(cuid())
+  orderId   String
+  status    OrderStatus
+  note      String?
+  createdAt DateTime    @default(now())
+
+  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@index([orderId, createdAt])
+}
+
+model Coupon {
+  id        String     @id @default(cuid())
+  /// Stored upper-case.
+  code      String     @unique
+  type      CouponType
+  /// Percent (1–100) for PERCENT, Toman for FIXED.
+  value     Int
+  /// Minimum order subtotal in Toman.
+  minOrder  Int        @default(0)
+  /// Null = unlimited.
+  maxUses   Int?
+  usedCount Int        @default(0)
+  expiresAt DateTime?
+  isActive  Boolean    @default(true)
+  createdAt DateTime   @default(now())
+}
+
+// ──────────────────────── Dealers & wholesale ────────────────────────
+
+model Dealer {
+  id           String     @id @default(cuid())
+  /// i18n: { fa, en, ar }
+  name         Json
+  type         DealerType
+  country      String     @default("IR")
+  province     String
+  city         String
+  /// i18n: { fa, en, ar }
+  address      Json
+  phone        String?
+  whatsapp     String?
+  instagram    String?
+  lat          Float?
+  lng          Float?
+  /// i18n: { fa, en, ar }
+  openingHours Json?
+  image        String?
+  isActive     Boolean    @default(true)
+  isVerified   Boolean    @default(false)
+  createdAt    DateTime   @default(now())
+
+  @@index([isActive, country, province, city])
+}
+
+model WholesaleRequest {
+  id           String                 @id @default(cuid())
+  companyName  String
+  contactName  String
+  phone        String
+  email        String?
+  city         String
+  /// Free text: which products the buyer is interested in.
+  products     String
+  estimatedQty String?
+  message      String?
+  status       WholesaleRequestStatus @default(NEW)
+  createdAt    DateTime               @default(now())
+
+  @@index([status, createdAt])
+}
+
+// ───────────────────────────── Settings ─────────────────────────────
+
+/// Key/value store for admin-editable configuration: shipping rates,
+/// free-shipping threshold, exchange rates, contact info, announcement banner.
+model Setting {
+  key       String   @id
+  value     Json
+  updatedAt DateTime @updatedAt
+}

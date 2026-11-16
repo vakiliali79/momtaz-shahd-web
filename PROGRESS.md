@@ -33,3 +33,29 @@
 - Nav targets (`/products`, `/wholesale`, `/dealers`, `/about`, `/contact`, `/cart`, `/login`, …) render the localized 404 until those stages are built.
 - Prisma, Auth.js, TanStack Table, Recharts and Framer Motion are not installed yet; they will be added in the stages that use them.
 - Product photos and the real logo artwork are still needed; the current logo is a drawn stand-in.
+
+## Stage 2 — Database (2026-11-16)
+
+**Setup**
+- Prisma 7.10.1 with driver adapters: `better-sqlite3` for local dev, `pg` for production. bcryptjs for password hashes.
+- `prisma/schema.prisma` is the single source of truth (SQLite). When `DATABASE_URL` is a `postgresql://` URL, `prisma.config.ts` derives `prisma/postgresql/schema.prisma` from it (only the provider changes). Each database has its own migration history: `prisma/migrations` (SQLite) and `prisma/postgresql/migrations` (PostgreSQL).
+- `DATABASE_URL` defaults to `file:./prisma/dev.db` outside production; `.env.example` documents both forms.
+- `src/lib/db` exports the shared `db` client; the generated client lives in `src/generated/prisma` (git-ignored, rebuilt on `pnpm install` and `pnpm build`).
+- Scripts: `db:migrate`, `db:deploy`, `db:seed`, `db:reset`, `db:studio`, `db:generate`.
+
+**Models**: User, Address, OtpCode, Category, Product, Review, Wishlist, Order, OrderItem, OrderStatusHistory, Coupon, Dealer, WholesaleRequest, Setting.
+
+**Decisions**
+- Multilingual fields are JSON objects `{ fa, en, ar }` rather than a Translation table (`src/lib/localized.ts` has the type, Zod schemas and `localize()` reader).
+- `Product.images` is a JSON array, because SQLite has no array columns.
+- Money is whole Toman: `Int` for unit prices, `BigInt` for order totals.
+- Iranian mobile numbers are normalised to `09xxxxxxxxx` and validated in `src/lib/validation/phone.ts`.
+
+**Seed** (`prisma/seed.ts`, re-runnable): 4 categories, 14 products in three languages, 6 sample dealers, 5 settings (shipping, free shipping, exchange rates, contact, announcement banner) and the admin user.
+
+**Verified**: migrate + generate + seed run on both SQLite and a local PostgreSQL 16; `pnpm tsc --noEmit`, `pnpm lint`, `pnpm build` pass.
+
+**Open items**
+- Seed prices, dealers, exchange rates and contact details are sample data; product image paths point to files that do not exist yet.
+- The seeded admin password (`Admin@1234`) must be changed before going live.
+- Nothing in the UI reads from the database yet; the home page still uses its hardcoded sample products.
