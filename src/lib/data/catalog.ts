@@ -5,6 +5,7 @@ import { cacheLife, cacheTag } from "next/cache";
 import type { AppLocale } from "@/i18n/routing";
 import { db } from "@/lib/db";
 import { effectivePrice } from "@/lib/cart";
+import { getCity } from "@/lib/locations";
 import { localize, toLocalizedText, type LocalizedText } from "@/lib/localized";
 import { normalizeSearchText } from "@/lib/search-text";
 
@@ -240,7 +241,7 @@ export async function getDealers(locale: AppLocale): Promise<DealerSummary[]> {
   return dealers.map((dealer) => ({
     id: dealer.id,
     name: localize(dealer.name, locale),
-    city: dealer.city,
+    city: getCity(dealer.province, dealer.city)?.name[locale] ?? dealer.city,
     type: dealer.type,
     lat: dealer.lat,
     lng: dealer.lng,

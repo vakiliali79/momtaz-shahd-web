@@ -1176,6 +1176,63 @@
         "unblocked": "Customer unblocked."
       }
     },
+    "dealers": {
+      "title": "Dealers",
+      "description": "Agencies, distributors and shops shown on the dealer map.",
+      "new": "New dealer",
+      "edit": "Edit dealer",
+      "editNamed": "Edit: {name}",
+      "empty": "No dealers yet.",
+      "editFor": "Edit {name}",
+      "deleteFor": "Delete {name}",
+      "verifiedFor": "{name} is verified",
+      "activeFor": "{name} is shown",
+      "hasPin": "Location on map",
+      "deleteTitle": "Delete this dealer?",
+      "deleteText": "“{name}” will be removed from the site. This can't be undone.",
+      "delete": "Delete",
+      "deleted": "Dealer deleted.",
+      "place": "{city}, {province}",
+      "types": {
+        "DISTRIBUTOR": "Distributor",
+        "RETAIL_STORE": "Retail store",
+        "AGENCY": "Agency"
+      },
+      "columns": {
+        "name": "Name",
+        "type": "Type",
+        "place": "City",
+        "phone": "Phone",
+        "verified": "Verified",
+        "active": "Shown",
+        "actions": "Actions"
+      },
+      "form": {
+        "texts": "Name, address and hours",
+        "name": "Name",
+        "address": "Address",
+        "hours": "Opening hours (optional)",
+        "hoursHint": "e.g. Sat–Thu 9:00–21:00",
+        "general": "Details",
+        "type": "Type",
+        "province": "Province",
+        "city": "City",
+        "choose": "Choose…",
+        "provinceFirst": "Choose a province first",
+        "phone": "Phone (optional)",
+        "whatsapp": "WhatsApp (optional)",
+        "instagram": "Instagram handle (optional)",
+        "active": "Show on the site",
+        "activeHint": "Hidden dealers stay in the panel only.",
+        "verified": "Verified dealer",
+        "verifiedHint": "Shows a verified badge and lists them first.",
+        "location": "Location on the map",
+        "image": "Photo",
+        "save": "Save dealer",
+        "saving": "Saving…",
+        "saved": "Dealer saved."
+      }
+    },
     "orders": {
       "title": "Orders",
       "description": "Track, update and ship customer orders.",
