@@ -1070,6 +1070,112 @@
         "saved": "Category saved."
       }
     },
+    "coupons": {
+      "title": "Coupons",
+      "description": "Discount codes customers enter at checkout.",
+      "new": "New coupon",
+      "edit": "Edit coupon",
+      "editNamed": "Edit coupon {code}",
+      "empty": "No coupons yet.",
+      "editFor": "Edit {code}",
+      "deleteFor": "Delete {code}",
+      "activeFor": "{code} is active",
+      "deleteTitle": "Delete this coupon?",
+      "deleteText": "Code {code} will stop working. Past orders keep their discount.",
+      "delete": "Delete",
+      "deleted": "Coupon deleted.",
+      "expired": "Expired",
+      "usedUp": "Used up",
+      "never": "Never",
+      "percentValue": "{value}%",
+      "usesOf": "{used} of {max}",
+      "usesUnlimited": "{used} (no limit)",
+      "types": {
+        "PERCENT": "Percentage",
+        "FIXED": "Fixed amount"
+      },
+      "columns": {
+        "code": "Code",
+        "discount": "Discount",
+        "minOrder": "Minimum order",
+        "uses": "Uses",
+        "expires": "Expires",
+        "active": "Active",
+        "actions": "Actions"
+      },
+      "form": {
+        "code": "Code",
+        "codeHint": "English letters, digits, - and _. Saved in capitals.",
+        "type": "Discount type",
+        "percent": "Percent off (1–100)",
+        "amount": "Amount off (Toman)",
+        "minOrder": "Minimum order (Toman)",
+        "minOrderHint": "0 for no minimum.",
+        "maxUses": "Usage limit",
+        "maxUsesHint": "Leave empty for unlimited.",
+        "expiresAt": "Last valid day",
+        "expiresHint": "Gregorian date as YYYY-MM-DD; leave empty for no expiry.",
+        "expiresPreview": "Valid until the end of {date}",
+        "active": "Active",
+        "activeHint": "Inactive codes are refused at checkout.",
+        "save": "Save coupon",
+        "saving": "Saving…",
+        "saved": "Coupon saved."
+      }
+    },
+    "customers": {
+      "title": "Customers",
+      "description": "Everyone with an account, their orders and access.",
+      "search": "Name, phone or email…",
+      "empty": "No customers match these filters.",
+      "noName": "(no name)",
+      "columns": {
+        "name": "Name",
+        "phone": "Mobile",
+        "role": "Role",
+        "orders": "Orders",
+        "state": "Status",
+        "joined": "Joined"
+      },
+      "roles": {
+        "CUSTOMER": "Customer",
+        "WHOLESALE": "Wholesale",
+        "ADMIN": "Admin"
+      },
+      "states": {
+        "active": "Active",
+        "blocked": "Blocked"
+      },
+      "detail": {
+        "title": "Customer",
+        "joined": "Customer since {date}",
+        "orders": "Orders",
+        "spent": "Total spent",
+        "reviews": "Reviews",
+        "orderList": "Orders",
+        "noOrders": "No orders yet.",
+        "contact": "Contact",
+        "email": "Email",
+        "language": "Language",
+        "addresses": "Addresses",
+        "noAddresses": "No saved addresses.",
+        "addressLine": "{province}, {city} — {address}",
+        "manage": "Access",
+        "roleHint": "Wholesale customers see bulk prices and the bulk order form.",
+        "roleChanged": "Role changed to {role}.",
+        "notEditable": "Admin accounts can't be changed here.",
+        "block": "Block customer",
+        "unblock": "Unblock",
+        "blockHint": "Blocking signs the customer out and stops them signing in.",
+        "blockedText": "This customer is blocked and cannot sign in.",
+        "blockTitle": "Block this customer?",
+        "blockText": "They will be signed out and won't be able to sign in until unblocked. Their orders are kept.",
+        "unblockTitle": "Unblock this customer?",
+        "unblockText": "They will be able to sign in again.",
+        "blocked": "Customer blocked.",
+        "unblocked": "Customer unblocked."
+      }
+    },
     "orders": {
       "title": "Orders",
       "description": "Track, update and ship customer orders.",
@@ -1139,6 +1245,67 @@
         "rejectReceiptTitle": "Reject this receipt?",
         "rejectReceiptText": "The receipt will be removed and the customer can upload a new one.",
         "receiptRejected": "Receipt rejected."
+      }
+    },
+    "reviews": {
+      "title": "Reviews",
+      "description": "New reviews appear on the shop only after you approve them.",
+      "search": "Comment or customer…",
+      "empty": "Nothing here — no reviews match these filters.",
+      "noComment": "(rating only, no comment)",
+      "rating": "{value} out of 5 stars",
+      "stars": "{count, plural, one {# star} other {# stars}}",
+      "filters": {
+        "state": "Status",
+        "rating": "Rating"
+      },
+      "states": {
+        "pending": "Waiting for approval",
+        "approved": "Approved"
+      },
+      "approve": "Approve",
+      "approved": "Review published.",
+      "reject": "Reject",
+      "remove": "Remove",
+      "rejected": "Review removed.",
+      "rejectTitle": "Remove this review?",
+      "rejectText": "The review will be deleted. The customer can write a new one."
+    },
+    "wholesale": {
+      "title": "Wholesale requests",
+      "description": "Enquiries from shops and distributors.",
+      "search": "Company, contact, phone or city…",
+      "empty": "No requests match these filters.",
+      "columns": {
+        "company": "Company",
+        "contact": "Contact",
+        "city": "City",
+        "status": "Status",
+        "date": "Received"
+      },
+      "statuses": {
+        "NEW": "New",
+        "CONTACTED": "Contacted",
+        "CONVERTED": "Converted",
+        "REJECTED": "Rejected"
+      },
+      "detail": {
+        "title": "Wholesale request",
+        "received": "Received {date}",
+        "contactInfo": "Contact details",
+        "phone": "Phone",
+        "email": "Email",
+        "quantity": "Estimated quantity",
+        "products": "Products of interest",
+        "message": "Message",
+        "hasAccount": "This phone has an account — open the customer to grant wholesale prices.",
+        "noAccount": "No account uses this phone number yet.",
+        "workflow": "Follow-up",
+        "note": "Team notes",
+        "noteHint": "Only visible to staff.",
+        "save": "Save",
+        "saving": "Saving…",
+        "saved": "Request updated."
       }
     }
   },

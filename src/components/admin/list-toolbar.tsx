@@ -18,6 +18,12 @@ export type ToolbarFilter = {
   key: string;
   label: string;
   options: { value: string; label: string }[];
+  /**
+   * For filters that default to a value when absent from the URL (e.g. the
+   * review queue shows pending ones): the value shown then, and the URL value
+   * that means "all".
+   */
+  fallback?: { value: string; allValue: string };
 };
 
 const ALL = "__all";
@@ -62,8 +68,17 @@ export function ListToolbar({
       {filters.map((filter) => (
         <Select
           key={filter.key}
-          value={searchParams.get(filter.key) ?? ALL}
-          onValueChange={(value) => update({ [filter.key]: value === ALL ? null : value })}
+          value={
+            filter.fallback && searchParams.get(filter.key) === filter.fallback.allValue
+              ? ALL
+              : (searchParams.get(filter.key) ?? filter.fallback?.value ?? ALL)
+          }
+          onValueChange={(value) => {
+            if (filter.fallback) {
+              const next = value === ALL ? filter.fallback.allValue : value === filter.fallback.value ? null : value;
+              update({ [filter.key]: next });
+            } else update({ [filter.key]: value === ALL ? null : value });
+          }}
         >
           <SelectTrigger className="h-9! min-w-36 rounded-lg" aria-label={filter.label}>
             <SelectValue />

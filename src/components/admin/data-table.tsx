@@ -82,8 +82,6 @@ export function DataTable<TData extends RowData>({
   emptyText: string;
   caption: string;
 }) {
-  const t = useTranslations("admin.table");
-  const locale = useLocale();
   const { update, pending } = useListNavigation();
   const sorting: SortingState = [{ id: sort, desc }];
   const pagination: PaginationState = { pageIndex: page - 1, pageSize };
@@ -107,8 +105,6 @@ export function DataTable<TData extends RowData>({
       else update({ page: next.pageIndex > 0 ? String(next.pageIndex + 1) : null }, false);
     },
   });
-
-  const pageCount = Math.max(1, Math.ceil(rowCount / pageSize));
 
   return (
     <div className={cn("space-y-3 transition-opacity", pending && "opacity-60")} aria-busy={pending}>
@@ -174,53 +170,95 @@ export function DataTable<TData extends RowData>({
         </table>
       </div>
 
-      <div className="flex flex-wrap items-center justify-between gap-3 text-sm">
-        <p className="text-muted-foreground" role="status">
-          {t("summary", {
-            from: formatNumber(rowCount === 0 ? 0 : (page - 1) * pageSize + 1, locale),
-            to: formatNumber(Math.min(page * pageSize, rowCount), locale),
-            total: formatNumber(rowCount, locale),
-          })}
-        </p>
-        <div className="flex items-center gap-2">
-          <label className="flex items-center gap-2 text-muted-foreground">
-            <span>{t("perPage")}</span>
-            <Select value={String(pageSize)} onValueChange={(value) => table.setPageSize(Number(value))}>
-              <SelectTrigger className="h-9! w-20 rounded-lg" aria-label={t("perPage")}>
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                {PAGE_SIZES.map((size) => (
-                  <SelectItem key={size} value={String(size)}>
-                    {formatNumber(size, locale)}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </label>
-          <button
-            type="button"
-            onClick={() => table.previousPage()}
-            disabled={!table.getCanPreviousPage()}
-            aria-label={t("previous")}
-            className="grid size-9 place-items-center rounded-lg border border-border hover:bg-muted disabled:opacity-40"
-          >
-            <ChevronRightIcon className="size-4 ltr:rotate-180" aria-hidden="true" />
-          </button>
-          <span className="tabular-nums">
-            {t("page", { page: formatNumber(page, locale), total: formatNumber(pageCount, locale) })}
-          </span>
-          <button
-            type="button"
-            onClick={() => table.nextPage()}
-            disabled={!table.getCanNextPage()}
-            aria-label={t("next")}
-            className="grid size-9 place-items-center rounded-lg border border-border hover:bg-muted disabled:opacity-40"
-          >
-            <ChevronLeftIcon className="size-4 ltr:rotate-180" aria-hidden="true" />
-          </button>
-        </div>
-      </div>
+      <ListPager
+        page={page}
+        pageSize={pageSize}
+        rowCount={rowCount}
+        onPage={(next) => table.setPageIndex(next - 1)}
+        onPageSize={(size) => table.setPageSize(size)}
+      />
     </div>
+  );
+}
+
+/** "1–20 of 135", page size and previous/next buttons. */
+export function ListPager({
+  page,
+  pageSize,
+  rowCount,
+  onPage,
+  onPageSize,
+}: {
+  page: number;
+  pageSize: number;
+  rowCount: number;
+  onPage: (page: number) => void;
+  onPageSize: (size: number) => void;
+}) {
+  const t = useTranslations("admin.table");
+  const locale = useLocale();
+  const pageCount = Math.max(1, Math.ceil(rowCount / pageSize));
+  return (
+  <div className="flex flex-wrap items-center justify-between gap-3 text-sm">
+    <p className="text-muted-foreground" role="status">
+      {t("summary", {
+        from: formatNumber(rowCount === 0 ? 0 : (page - 1) * pageSize + 1, locale),
+        to: formatNumber(Math.min(page * pageSize, rowCount), locale),
+        total: formatNumber(rowCount, locale),
+      })}
+    </p>
+    <div className="flex items-center gap-2">
+      <label className="flex items-center gap-2 text-muted-foreground">
+        <span>{t("perPage")}</span>
+        <Select value={String(pageSize)} onValueChange={(value) => onPageSize(Number(value))}>
+          <SelectTrigger className="h-9! w-20 rounded-lg" aria-label={t("perPage")}>
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            {PAGE_SIZES.map((size) => (
+              <SelectItem key={size} value={String(size)}>
+                {formatNumber(size, locale)}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </label>
+      <button
+        type="button"
+        onClick={() => onPage(page - 1)}
+        disabled={page <= 1}
+        aria-label={t("previous")}
+        className="grid size-9 place-items-center rounded-lg border border-border hover:bg-muted disabled:opacity-40"
+      >
+        <ChevronRightIcon className="size-4 ltr:rotate-180" aria-hidden="true" />
+      </button>
+      <span className="tabular-nums">
+        {t("page", { page: formatNumber(page, locale), total: formatNumber(pageCount, locale) })}
+      </span>
+      <button
+        type="button"
+        onClick={() => onPage(page + 1)}
+        disabled={page >= pageCount}
+        aria-label={t("next")}
+        className="grid size-9 place-items-center rounded-lg border border-border hover:bg-muted disabled:opacity-40"
+      >
+        <ChevronLeftIcon className="size-4 ltr:rotate-180" aria-hidden="true" />
+      </button>
+    </div>
+  </div>
+  );
+}
+
+/** ListPager wired to the list URL (?page=&size=), for lists that are not tables. */
+export function UrlPager({ page, pageSize, rowCount }: { page: number; pageSize: number; rowCount: number }) {
+  const { update } = useListNavigation();
+  return (
+    <ListPager
+      page={page}
+      pageSize={pageSize}
+      rowCount={rowCount}
+      onPage={(next) => update({ page: next > 1 ? String(next) : null }, false)}
+      onPageSize={(size) => update({ size: String(size) })}
+    />
   );
 }
