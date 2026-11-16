@@ -20,7 +20,7 @@ export async function generateMetadata(): Promise<Metadata> {
 async function Request({ params }: { params: PageProps<"/[locale]/admin/wholesale/[id]">["params"] }) {
   const [locale, { id }] = await Promise.all([currentLocale(), params]);
   await requireAdmin(locale, `/admin/wholesale/${id}`);
-  const request = await getWholesaleRequest(id);
+  const request = await getWholesaleRequest(id, locale);
   if (!request) notFound();
   const t = await getTranslations("admin.wholesale");
 
@@ -30,6 +30,7 @@ async function Request({ params }: { params: PageProps<"/[locale]/admin/wholesal
     { label: t("detail.email"), value: request.email, ltr: true, href: request.email ? `mailto:${request.email}` : undefined },
     { label: t("columns.city"), value: request.city },
     { label: t("detail.quantity"), value: request.estimatedQty },
+    { label: t("detail.language"), value: request.locale.toUpperCase() },
   ];
 
   return (
@@ -37,7 +38,12 @@ async function Request({ params }: { params: PageProps<"/[locale]/admin/wholesal
       <AdminHeading
         title={request.companyName}
         description={t("detail.received", { date: formatDate(request.createdAt, locale, { dateStyle: "long", timeStyle: "short" }) })}
-        actions={<Pill tone={wholesaleTone[request.status]}>{t(`statuses.${request.status}`)}</Pill>}
+        actions={
+          <>
+            <Pill tone={request.type === "AGENCY" ? "blue" : "muted"}>{t(`types.${request.type}`)}</Pill>
+            <Pill tone={wholesaleTone[request.status]}>{t(`statuses.${request.status}`)}</Pill>
+          </>
+        }
       />
       <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_22rem]">
         <div className="space-y-6">

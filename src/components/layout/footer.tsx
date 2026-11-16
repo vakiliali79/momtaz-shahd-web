@@ -93,6 +93,14 @@ export function Footer({ year, contact, locale }: { year: string; contact: Conta
                 </Link>
               </li>
             ))}
+            <li>
+              <Link
+                href="/track"
+                className="inline-block rounded py-1.5 text-muted-foreground transition-colors hover:text-primary"
+              >
+                {t("footer.track")}
+              </Link>
+            </li>
           </ul>
         </nav>
 

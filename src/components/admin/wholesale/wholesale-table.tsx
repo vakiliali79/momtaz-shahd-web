@@ -37,9 +37,14 @@ export function WholesaleTable(props: {
         helper.accessor("companyName", {
           header: t("columns.company"),
           cell: (info) => (
-            <Link href={`/admin/wholesale/${info.row.original.id}`} className="font-medium hover:text-primary">
-              {info.getValue()}
-            </Link>
+            <div>
+              <Link href={`/admin/wholesale/${info.row.original.id}`} className="font-medium hover:text-primary">
+                {info.getValue()}
+              </Link>
+              {info.row.original.type === "AGENCY" ? (
+                <span className="ms-2"><Pill tone="blue">{t("types.AGENCY")}</Pill></span>
+              ) : null}
+            </div>
           ),
         }),
         helper.accessor("contactName", {

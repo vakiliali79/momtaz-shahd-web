@@ -1,4 +1,5 @@
-"""Writes the `admin` namespace of messages/{fa,en,ar}.json from the module files here."""
+"""Writes the `admin` namespace of messages/{fa,en,ar}.json from admin_*.py, and the
+*_OTHER dicts of admin_*.py and site_*.py into the other namespaces."""
 import glob, importlib.util, json, os
 
 HERE = os.path.dirname(__file__)
@@ -12,7 +13,7 @@ def merge(a, b):
             a[k] = v
 
 combined = {"en": {}, "fa": {}, "ar": {}}
-for path in sorted(glob.glob(os.path.join(HERE, "admin_*.py"))):
+for path in sorted(glob.glob(os.path.join(HERE, "admin_*.py")) + glob.glob(os.path.join(HERE, "site_*.py"))):
     spec = importlib.util.spec_from_file_location(os.path.basename(path)[:-3], path)
     module = importlib.util.module_from_spec(spec); spec.loader.exec_module(module)
     for lang, attr in (("en", "EN"), ("fa", "FA"), ("ar", "AR")):

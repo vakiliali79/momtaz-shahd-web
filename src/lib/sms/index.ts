@@ -6,7 +6,7 @@ import { db } from "@/lib/db";
  * Text messages to customers. Chosen by SMS_PROVIDER:
  *
  *   console (default) — prints to the server log (development).
- *   kavenegar         — stub; see KavenegarSmsProvider.
+ *   kavenegar         — Kavenegar's send API (KAVENEGAR_API_KEY, KAVENEGAR_SENDER).
  *
  * Every attempt is recorded in the SmsLog table. Sending never throws: an
  * order update must not fail because a text message could not be sent.
@@ -24,16 +24,27 @@ class ConsoleSmsProvider implements SmsProvider {
 }
 
 /**
- * Kavenegar — NOT IMPLEMENTED (stub). To implement:
- *   GET https://api.kavenegar.com/v1/{KAVENEGAR_API_KEY}/sms/send.json
- *       ?receptor={phone}&sender={KAVENEGAR_SENDER}&message={text}
- * (or verify/lookup.json with an approved template). The response's
- * `return.status` is 200 on success.
+ * Kavenegar (https://kavenegar.com) simple send API. Needs KAVENEGAR_API_KEY
+ * and KAVENEGAR_SENDER (your dedicated line number).
  */
 class KavenegarSmsProvider implements SmsProvider {
   readonly id = "kavenegar";
-  async send(): Promise<void> {
-    throw new Error("Kavenegar SMS is not implemented yet (see src/lib/sms/index.ts).");
+  async send(phone: string, message: string): Promise<void> {
+    const key = process.env.KAVENEGAR_API_KEY;
+    const sender = process.env.KAVENEGAR_SENDER;
+    if (!key || !sender) throw new Error("KAVENEGAR_API_KEY and KAVENEGAR_SENDER must be set.");
+    const response = await fetch(`https://api.kavenegar.com/v1/${encodeURIComponent(key)}/sms/send.json`, {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({ receptor: phone, sender, message }),
+      signal: AbortSignal.timeout(10_000),
+    });
+    const body: unknown = await response.json().catch(() => null);
+    const status =
+      body && typeof body === "object" && "return" in body && body.return && typeof body.return === "object" && "status" in body.return
+        ? body.return.status
+        : response.status;
+    if (status !== 200) throw new Error(`Kavenegar refused the message (status ${String(status)}).`);
   }
 }
 

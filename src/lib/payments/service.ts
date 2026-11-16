@@ -1,11 +1,14 @@
 import "server-only";
 
+import { after } from "next/server";
+
 import { revalidateTag } from "next/cache";
 import { getTranslations } from "next-intl/server";
 
 import { Prisma } from "@/generated/prisma/client";
 import { routing, type AppLocale } from "@/i18n/routing";
 import { db } from "@/lib/db";
+import { notifyOrderCustomer } from "@/lib/notifications";
 import { cancelPendingOrder } from "@/lib/orders/cancel";
 import { allGateways, getGatewayById, getPaymentGateway } from "@/lib/payments";
 import type { PaymentVerifyResult } from "@/lib/payments/types";
@@ -111,6 +114,7 @@ async function settlePayment(
 
   if (result.status === "paid") {
     const paid = result;
+    let markedPaid = false;
     await db.$transaction(async (tx) => {
       const settled = await tx.payment.updateMany({
         where: { id: payment.id, status: "PENDING" },
@@ -128,6 +132,7 @@ async function settlePayment(
         data: { status: "PAID", paymentRef: paid.refId },
       });
       if (order.count === 1) {
+        markedPaid = true;
         await tx.orderStatusHistory.create({
           data: { orderId: payment.order.id, status: "PAID", note: "payment_received" },
         });
@@ -147,6 +152,10 @@ async function settlePayment(
         });
       }
     });
+    if (markedPaid) {
+      const orderId = payment.order.id;
+      after(() => notifyOrderCustomer(orderId, { type: "status", status: "PAID" }));
+    }
     return to.success;
   }
 

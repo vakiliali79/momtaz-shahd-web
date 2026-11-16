@@ -68,6 +68,12 @@ enum DealerType {
   AGENCY
 }
 
+/// A buyer asking for wholesale prices, or a shop applying to become a dealer.
+enum WholesaleRequestType {
+  WHOLESALE
+  AGENCY
+}
+
 enum WholesaleRequestStatus {
   NEW
   CONTACTED
@@ -365,15 +371,20 @@ model Dealer {
 
 model WholesaleRequest {
   id           String                 @id @default(cuid())
+  type         WholesaleRequestType   @default(WHOLESALE)
   companyName  String
   contactName  String
   phone        String
   email        String?
+  /// Province id (src/data/iran-locations.json); dealer applications only.
+  province     String?
   city         String
   /// Free text: which products the buyer is interested in.
   products     String
   estimatedQty String?
   message      String?
+  /// Language the visitor used, for replies: "fa" | "en" | "ar".
+  locale       String                 @default("fa")
   status       WholesaleRequestStatus @default(NEW)
   /// Internal notes from the sales team (not shown to the customer).
   adminNote    String?
@@ -381,6 +392,7 @@ model WholesaleRequest {
   updatedAt    DateTime               @default(now()) @updatedAt
 
   @@index([status, createdAt])
+  @@index([phone, createdAt])
 }
 
 /// Messages sent through the public contact form.

@@ -7,7 +7,7 @@ import { firstIssue, type AdminResult } from "@/lib/admin/validation";
 import { db } from "@/lib/db";
 import { confirmBankTransfer, rejectTransferReceipt } from "@/lib/orders/bank-transfer";
 import { cancelOrder } from "@/lib/orders/cancel";
-import { notifyOrderCustomer } from "@/lib/orders/notify";
+import { notifyOrderCustomer } from "@/lib/notifications";
 import { ORDER_NUMBER_PATTERN } from "@/lib/orders/order-number-pattern";
 import { allowedNextStatuses, orderStatuses } from "@/lib/orders/status";
 import { getAdminUser } from "@/lib/session";

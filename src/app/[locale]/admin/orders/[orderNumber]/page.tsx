@@ -5,7 +5,7 @@ import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 
 import { OrderStatusBadge } from "@/components/account/account-ui";
-import { noteKey } from "@/components/account/order-timeline";
+import { noteKey } from "@/lib/orders/history-notes";
 import { AdminCard, AdminHeading, AdminPageSkeleton, Pill } from "@/components/admin/admin-ui";
 import { BankTransferPanel, OrderStatusForm, TrackingCodeForm } from "@/components/admin/orders/order-actions";
 import { OrderDetails } from "@/components/orders/order-details";

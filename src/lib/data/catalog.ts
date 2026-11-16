@@ -5,7 +5,7 @@ import { cacheLife, cacheTag } from "next/cache";
 import type { AppLocale } from "@/i18n/routing";
 import { db } from "@/lib/db";
 import { effectivePrice } from "@/lib/cart";
-import { getCity } from "@/lib/locations";
+import { getCity, getProvince } from "@/lib/locations";
 import { localize, toLocalizedText, type LocalizedText } from "@/lib/localized";
 import { normalizeSearchText } from "@/lib/search-text";
 
@@ -221,13 +221,47 @@ export async function getTestimonials(locale: AppLocale): Promise<Testimonial[]>
 export type DealerSummary = {
   id: string;
   name: string;
-  city: string;
   type: "DISTRIBUTOR" | "RETAIL_STORE" | "AGENCY";
+  provinceId: string;
+  province: string;
+  cityId: string;
+  city: string;
+  address: string;
+  phone: string | null;
+  whatsapp: string | null;
+  instagram: string | null;
+  openingHours: string | null;
   lat: number | null;
   lng: number | null;
+  image: string | null;
   isVerified: boolean;
 };
 
+type DealerRow = Awaited<ReturnType<typeof db.dealer.findMany>>[number];
+
+function toDealerSummary(dealer: DealerRow, locale: AppLocale): DealerSummary {
+  const hours = localize(dealer.openingHours, locale);
+  return {
+    id: dealer.id,
+    name: localize(dealer.name, locale),
+    type: dealer.type,
+    provinceId: dealer.province,
+    province: getProvince(dealer.province)?.name[locale] ?? dealer.province,
+    cityId: dealer.city,
+    city: getCity(dealer.province, dealer.city)?.name[locale] ?? dealer.city,
+    address: localize(dealer.address, locale),
+    phone: dealer.phone,
+    whatsapp: dealer.whatsapp,
+    instagram: dealer.instagram,
+    openingHours: hours || null,
+    lat: dealer.lat,
+    lng: dealer.lng,
+    image: dealer.image,
+    isVerified: dealer.isVerified,
+  };
+}
+
+/** Every active dealer, verified ones first. */
 export async function getDealers(locale: AppLocale): Promise<DealerSummary[]> {
   "use cache";
   cacheLife("hours");
@@ -237,14 +271,16 @@ export async function getDealers(locale: AppLocale): Promise<DealerSummary[]> {
     where: { isActive: true },
     orderBy: [{ isVerified: "desc" }, { createdAt: "asc" }],
   });
+  return dealers.map((dealer) => toDealerSummary(dealer, locale));
+}
 
-  return dealers.map((dealer) => ({
-    id: dealer.id,
-    name: localize(dealer.name, locale),
-    city: getCity(dealer.province, dealer.city)?.name[locale] ?? dealer.city,
-    type: dealer.type,
-    lat: dealer.lat,
-    lng: dealer.lng,
-    isVerified: dealer.isVerified,
-  }));
+/** One active dealer, or null. */
+export async function getDealer(id: string, locale: AppLocale): Promise<DealerSummary | null> {
+  "use cache";
+  cacheLife("hours");
+  cacheTag("dealers");
+
+  if (id.length > 64) return null;
+  const dealer = await db.dealer.findFirst({ where: { id, isActive: true } });
+  return dealer ? toDealerSummary(dealer, locale) : null;
 }
