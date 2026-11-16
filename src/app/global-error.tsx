@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useSyncExternalStore } from "react";
 
 import ar from "../../messages/ar.json";
 import en from "../../messages/en.json";
@@ -15,12 +15,18 @@ type Locale = keyof typeof texts;
  * styles, and reads the language from the URL.
  */
 export default function GlobalError({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) {
-  const [locale, setLocale] = useState<Locale>("fa");
+  // The language comes from the URL; the server render falls back to Persian.
+  const locale = useSyncExternalStore<Locale>(
+    () => () => undefined,
+    () => {
+      const segment = window.location.pathname.split("/")[1];
+      return segment === "en" || segment === "ar" ? segment : "fa";
+    },
+    () => "fa",
+  );
 
   useEffect(() => {
     console.error(error);
-    const segment = window.location.pathname.split("/")[1];
-    if (segment === "en" || segment === "ar" || segment === "fa") setLocale(segment);
   }, [error]);
 
   const t = texts[locale];
