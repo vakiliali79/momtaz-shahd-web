@@ -40,7 +40,7 @@ export function Footer({ year }: { year: string }) {
   const t = useTranslations();
 
   return (
-    <footer className="mt-auto border-t border-border bg-muted/50">
+    <footer className="mt-auto border-t border-border bg-muted/50 print:hidden">
       <Container className="grid gap-10 py-12 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1.2fr_1.4fr] lg:gap-8 lg:py-16">
         <div className="space-y-4">
           <Logo />

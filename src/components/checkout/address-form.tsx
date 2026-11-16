@@ -6,7 +6,7 @@ import { MapPinIcon } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { Controller, useForm, useWatch } from "react-hook-form";
 
-import { saveAddress } from "@/actions/address";
+import { saveAddress, updateAddress } from "@/actions/address";
 import { MapPicker } from "@/components/map/map-picker";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -42,17 +42,20 @@ type FieldName = (typeof fieldNames)[number];
 
 export function AddressForm({
   defaults,
+  initial,
   onSaved,
   onCancel,
 }: {
   defaults: { receiverName: string; receiverPhone: string };
+  /** An existing address to edit; omit to create a new one. */
+  initial?: AddressDto;
   onSaved: (address: AddressDto) => void;
   onCancel?: () => void;
 }) {
   const t = useTranslations("address");
   const locale = useLocale();
   const id = useId();
-  const [showMap, setShowMap] = useState(false);
+  const [showMap, setShowMap] = useState(initial?.lat != null);
   const [formError, setFormError] = useState<string | null>(null);
   const {
     register,
@@ -63,17 +66,29 @@ export function AddressForm({
     formState: { errors, isSubmitting },
   } = useForm<AddressInput, unknown, AddressOutput>({
     resolver: zodResolver(addressSchema),
-    defaultValues: {
-      title: "",
-      province: "",
-      city: "",
-      fullAddress: "",
-      postalCode: "",
-      receiverName: defaults.receiverName,
-      receiverPhone: defaults.receiverPhone,
-      lat: null,
-      lng: null,
-    },
+    defaultValues: initial
+      ? {
+          title: initial.title,
+          province: initial.province,
+          city: initial.city,
+          fullAddress: initial.fullAddress,
+          postalCode: initial.postalCode,
+          receiverName: initial.receiverName,
+          receiverPhone: initial.receiverPhone,
+          lat: initial.lat,
+          lng: initial.lng,
+        }
+      : {
+          title: "",
+          province: "",
+          city: "",
+          fullAddress: "",
+          postalCode: "",
+          receiverName: defaults.receiverName,
+          receiverPhone: defaults.receiverPhone,
+          lat: null,
+          lng: null,
+        },
   });
 
   const [provinceId, lat, lng] = useWatch({ control, name: ["province", "lat", "lng"] });
@@ -98,7 +113,9 @@ export function AddressForm({
 
   async function onSubmit(values: AddressOutput) {
     setFormError(null);
-    const result = await saveAddress(values).catch(() => null);
+    const result = await (initial ? updateAddress(initial.id, values) : saveAddress(values)).catch(
+      () => null,
+    );
     if (!result) {
       setFormError("server");
     } else if (result.ok) {
@@ -119,7 +136,7 @@ export function AddressForm({
         void handleSubmit(onSubmit)(event);
       }}
       className="grid gap-4 sm:grid-cols-2"
-      aria-label={t("formTitle")}
+      aria-label={initial ? t("editTitle") : t("formTitle")}
     >
       {formError ? (
         <p role="alert" className="rounded-xl bg-destructive/10 px-4 py-3 text-sm text-destructive sm:col-span-2">

@@ -1,61 +1,46 @@
 "use server";
 
-import { randomBytes } from "node:crypto";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 
 import { routing } from "@/i18n/routing";
 import { db } from "@/lib/db";
 import { ORDER_NUMBER_REGEX } from "@/lib/orders/queries";
-import { getPaymentGateway } from "@/lib/payments";
+import { recheckOrderPayment, startOnlinePayment } from "@/lib/payments/service";
 import { getSessionUser } from "@/lib/session";
 
-const mockPaymentSchema = z.object({
+const orderFormSchema = z.object({
   orderNumber: z.string().regex(ORDER_NUMBER_REGEX),
-  outcome: z.enum(["success", "failure"]),
   locale: z.enum(routing.locales),
 });
 
-/**
- * Result of the simulated gateway (development only). A real gateway would
- * instead call back a route handler that verifies the payment with the
- * provider before marking the order as paid.
- */
-export async function finishMockPayment(formData: FormData): Promise<void> {
-  const parsed = mockPaymentSchema.safeParse({
+async function ownOrder(formData: FormData) {
+  const parsed = orderFormSchema.safeParse({
     orderNumber: formData.get("orderNumber"),
-    outcome: formData.get("outcome"),
     locale: formData.get("locale"),
   });
   const user = await getSessionUser();
-  if (!parsed.success || !user || getPaymentGateway() !== "mock") {
-    redirect(`/${routing.defaultLocale}`);
-  }
-  const { orderNumber, outcome, locale } = parsed.data;
-  const base = `/${locale}/checkout`;
-
+  if (!parsed.success || !user) redirect(`/${routing.defaultLocale}`);
   const order = await db.order.findFirst({
-    where: { orderNumber, userId: user.id, paymentMethod: "ONLINE" },
-    select: { id: true, status: true },
+    where: { orderNumber: parsed.data.orderNumber, userId: user.id },
+    select: { id: true, orderNumber: true },
   });
-  if (!order || order.status !== "PENDING") redirect(`${base}/success/${orderNumber}`);
+  if (!order) redirect(`/${parsed.data.locale}`);
+  return { order, locale: parsed.data.locale };
+}
 
-  if (outcome === "failure") {
-    await db.orderStatusHistory.create({
-      data: { orderId: order.id, status: "PENDING", note: "payment_failed" },
-    });
-    redirect(`${base}/failed/${orderNumber}`);
-  }
+/** "Pay" button on the payment page: starts a new gateway attempt. */
+export async function startPaymentAction(formData: FormData): Promise<void> {
+  const { order, locale } = await ownOrder(formData);
+  const result = await startOnlinePayment(order.id, locale);
+  if (result.ok) redirect(result.redirectUrl);
+  if (result.error === "notPayable") redirect(`/${locale}/checkout/success/${order.orderNumber}`);
+  redirect(`/${locale}/checkout/pay/${order.orderNumber}?error=request`);
+}
 
-  // Only flips PENDING → PAID once, even if the button is pressed twice.
-  const updated = await db.order.updateMany({
-    where: { id: order.id, status: "PENDING" },
-    data: { status: "PAID", paymentRef: `MOCK-${randomBytes(4).toString("hex").toUpperCase()}` },
-  });
-  if (updated.count === 1) {
-    await db.orderStatusHistory.create({
-      data: { orderId: order.id, status: "PAID", note: "payment_received" },
-    });
-  }
-  redirect(`${base}/success/${orderNumber}`);
+/** "Check payment status" after an unconfirmed return from the gateway. */
+export async function recheckPaymentAction(formData: FormData): Promise<void> {
+  const { order, locale } = await ownOrder(formData);
+  const target = await recheckOrderPayment(order.id, locale);
+  redirect(target ?? `/${locale}/checkout/pay/${order.orderNumber}`);
 }

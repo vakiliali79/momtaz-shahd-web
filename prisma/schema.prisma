@@ -51,6 +51,12 @@ enum PaymentMethod {
   BANK_TRANSFER
 }
 
+enum PaymentStatus {
+  PENDING
+  PAID
+  FAILED
+}
+
 enum CouponType {
   PERCENT
   FIXED
@@ -216,34 +222,40 @@ model Wishlist {
 // ───────────────────────────── Orders ─────────────────────────────
 
 model Order {
-  id              String        @id @default(cuid())
+  id                String        @id @default(cuid())
   /// Human-readable, e.g. MS-20261116-0001.
-  orderNumber     String        @unique
-  userId          String
-  type            OrderType     @default(RETAIL)
-  status          OrderStatus   @default(PENDING)
-  subtotal        BigInt
-  shippingCost    BigInt        @default(0)
-  discount        BigInt        @default(0)
-  total           BigInt
+  orderNumber       String        @unique
+  userId            String
+  type              OrderType     @default(RETAIL)
+  status            OrderStatus   @default(PENDING)
+  subtotal          BigInt
+  shippingCost      BigInt        @default(0)
+  discount          BigInt        @default(0)
+  total             BigInt
   /// "IRT" = Iranian Toman.
-  currency        String        @default("IRT")
+  currency          String        @default("IRT")
   /// Copy of the delivery address at checkout, so later edits don't change past orders.
-  addressSnapshot Json
-  shippingMethod  String?
-  trackingCode    String?
-  paymentMethod   PaymentMethod
+  addressSnapshot   Json
+  shippingMethod    String?
+  trackingCode      String?
+  paymentMethod     PaymentMethod
   /// Gateway reference / bank receipt number.
-  paymentRef      String?
+  paymentRef        String?
   /// Discount code used, if any (its usage was counted at placement).
-  couponCode      String?
-  note            String?
-  createdAt       DateTime      @default(now())
-  updatedAt       DateTime      @updatedAt
+  couponCode        String?
+  /// Bank transfers: the customer's uploaded receipt (storage key, see src/lib/storage.ts).
+  receiptPath       String?
+  receiptUploadedAt DateTime?
+  /// Bank transfers: tracking number of the transfer, as entered by the customer.
+  transferReference String?
+  note              String?
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
 
   user          User                 @relation(fields: [userId], references: [id], onDelete: Restrict)
   items         OrderItem[]
   statusHistory OrderStatusHistory[]
+  payments      Payment[]
 
   @@index([userId, createdAt])
   @@index([status, createdAt])
@@ -277,6 +289,32 @@ model OrderStatusHistory {
   order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
 
   @@index([orderId, createdAt])
+}
+
+/// One online payment attempt. A retry creates a new row with a new authority.
+model Payment {
+  id          String        @id @default(cuid())
+  orderId     String
+  /// "zarinpal" | "mock" | "idpay"
+  gateway     String
+  /// Amount requested from the gateway, in Toman.
+  amount      BigInt
+  /// The gateway's token for this attempt (Zarinpal's "Authority").
+  authority   String        @unique
+  status      PaymentStatus @default(PENDING)
+  /// Bank reference of a successful payment (Zarinpal's ref_id).
+  refId       String?
+  /// Masked card number reported by the gateway.
+  cardPan     String?
+  /// Last raw gateway response, kept for support and audits.
+  gatewayData Json?
+  createdAt   DateTime      @default(now())
+  verifiedAt  DateTime?
+
+  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@index([orderId, createdAt])
+  @@index([status, createdAt])
 }
 
 model Coupon {

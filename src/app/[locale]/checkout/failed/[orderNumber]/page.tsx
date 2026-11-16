@@ -7,6 +7,7 @@ import { notFound, redirect } from "next/navigation";
 import { locale as rootLocale } from "next/root-params";
 
 import { OrderPageShell, OrderPageSkeleton } from "@/app/[locale]/checkout/order-page";
+import { ReorderButton } from "@/components/orders/reorder-button";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 import { routing, type AppLocale } from "@/i18n/routing";
@@ -35,17 +36,20 @@ async function Failure({
   const user = await requireUser(locale, `/checkout/failed/${orderNumber}`);
   const order = await getOrderForUser(orderNumber, user.id);
   if (!order) notFound();
-  // Paid in the meantime, or not an online payment: nothing to retry.
-  if (order.paymentMethod !== "ONLINE" || order.status !== "PENDING") {
+  // Paid in the meantime, or not an online payment: nothing failed here.
+  if (order.paymentMethod !== "ONLINE" || (order.status !== "PENDING" && order.status !== "CANCELLED")) {
     redirect(`/${locale}/checkout/success/${order.orderNumber}`);
   }
+  const cancelled = order.status === "CANCELLED";
 
   const t = await getTranslations();
   return (
     <div className="space-y-6 text-center">
       <CircleXIcon className="mx-auto size-16 text-destructive" strokeWidth={1.5} aria-hidden="true" />
       <h1 className="text-fluid-2xl font-bold">{t("order.failed.title")}</h1>
-      <p className="mx-auto max-w-xl text-pretty text-muted-foreground">{t("order.failed.text")}</p>
+      <p className="mx-auto max-w-xl text-pretty text-muted-foreground">
+        {cancelled ? t("order.failed.cancelledText") : t("order.failed.pendingText")}
+      </p>
       <dl className="mx-auto grid max-w-md grid-cols-2 gap-3 rounded-2xl bg-muted/60 p-4 text-sm">
         <div>
           <dt className="text-xs text-muted-foreground">{t("order.number")}</dt>
@@ -56,9 +60,12 @@ async function Failure({
           <dd className="font-semibold">{formatPrice(order.total, locale, t("common.toman"))}</dd>
         </div>
       </dl>
-      <p className="text-sm text-muted-foreground">{t("order.failed.reserved")}</p>
       <div className="flex flex-wrap justify-center gap-3">
-        {isOnlinePaymentEnabled() ? (
+        {cancelled ? (
+          <ReorderButton
+            items={order.items.map(({ productId, quantity }) => ({ productId, quantity }))}
+          />
+        ) : isOnlinePaymentEnabled() ? (
           <Button asChild size="lg" className="h-12 rounded-full px-8 text-base">
             <Link href={`/checkout/pay/${order.orderNumber}`}>{t("order.failed.retry")}</Link>
           </Button>

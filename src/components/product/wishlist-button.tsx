@@ -1,10 +1,65 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import { HeartIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { toast } from "sonner";
 
+import { setWishlisted, syncWishlist } from "@/actions/wishlist";
 import { cn } from "@/lib/utils";
+import { useSessionStore } from "@/stores/session";
 import { useWishlistStore } from "@/stores/wishlist";
+
+/**
+ * Toggles a product in the wishlist: instantly in the browser, and in the
+ * saved wishlist when signed in (reverted if the server refuses).
+ */
+export function useWishlistToggle() {
+  const t = useTranslations("product");
+  const toggle = useWishlistStore((state) => state.toggle);
+  const signedIn = useSessionStore((state) => state.status === "user");
+
+  return (productId: string) => {
+    const on = !useWishlistStore.getState().ids.includes(productId);
+    toggle(productId);
+    if (!signedIn) return;
+    setWishlisted(productId, on)
+      .then((result) => {
+        if (!result.ok) throw new Error("wishlist update refused");
+      })
+      .catch(() => {
+        toggle(productId);
+        toast.error(t("wishlistError"));
+      });
+  };
+}
+
+/**
+ * When a user signs in, merges the browser's wishlist into their saved one
+ * and shows the combined list. Rendered once in the app providers.
+ */
+export function WishlistSync() {
+  const userId = useSessionStore((state) => state.user?.id ?? null);
+  const status = useSessionStore((state) => state.status);
+  const lastSynced = useRef<string | null>(null);
+
+  useEffect(() => {
+    if (status !== "user" || !userId || lastSynced.current === userId) return;
+    lastSynced.current = userId;
+    void (async () => {
+      // Make sure the browser copy is loaded before merging it.
+      await useWishlistStore.persist.rehydrate();
+      const merged = await syncWishlist(useWishlistStore.getState().ids).catch(() => null);
+      if (merged) useWishlistStore.getState().setIds(merged, true);
+    })();
+  }, [status, userId]);
+
+  useEffect(() => {
+    if (status === "guest") lastSynced.current = null;
+  }, [status]);
+
+  return null;
+}
 
 export function WishlistButton({
   productId,
@@ -17,7 +72,7 @@ export function WishlistButton({
 }) {
   const t = useTranslations("product");
   const active = useWishlistStore((state) => state.ids.includes(productId));
-  const toggle = useWishlistStore((state) => state.toggle);
+  const toggle = useWishlistToggle();
 
   return (
     <button

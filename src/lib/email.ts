@@ -19,7 +19,7 @@ export async function sendAdminEmail({ subject, text, replyTo }: Mail): Promise<
   }
 
   try {
-    const port = Number(SMTP_PORT ?? 587);
+    const port = Number(SMTP_PORT || 587);
     const transport = nodemailer.createTransport({
       host: SMTP_HOST,
       port,
@@ -27,7 +27,7 @@ export async function sendAdminEmail({ subject, text, replyTo }: Mail): Promise<
       auth: SMTP_USER ? { user: SMTP_USER, pass: SMTP_PASSWORD ?? "" } : undefined,
     });
     await transport.sendMail({
-      from: SMTP_FROM ?? ADMIN_EMAIL,
+      from: SMTP_FROM || ADMIN_EMAIL,
       to: ADMIN_EMAIL,
       subject,
       text,

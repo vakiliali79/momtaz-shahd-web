@@ -10,7 +10,7 @@ import { loginSchema } from "@/lib/validation/auth";
  * session table). Server code should use the helpers in `src/lib/session.ts`
  * rather than calling `auth()` directly.
  */
-export const { handlers, auth, signIn, signOut } = NextAuth({
+export const { handlers, auth, signIn, signOut, unstable_update: updateSession } = NextAuth({
   trustHost: true,
   session: { strategy: "jwt", maxAge: 60 * 60 * 24 * 30 },
   pages: { signIn: "/login" },
@@ -34,6 +34,13 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     }),
   ],
   callbacks: {
+    jwt({ token, trigger, session }) {
+      // Profile edits refresh the display name kept in the session token.
+      if (trigger === "update" && typeof session?.user?.name === "string") {
+        token.name = session.user.name;
+      }
+      return token;
+    },
     session({ session, token }) {
       if (token.sub) session.user.id = token.sub;
       return session;

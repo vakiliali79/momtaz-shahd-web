@@ -10,6 +10,7 @@ import { localize, toLocalizedText } from "@/lib/localized";
 import { nextOrderNumber, orderNumberPrefix } from "@/lib/orders/order-number";
 import type { AddressSnapshot } from "@/lib/orders/types";
 import { isOnlinePaymentEnabled } from "@/lib/payments";
+import { startOnlinePayment } from "@/lib/payments/service";
 import { getShippingConfig } from "@/lib/data/settings";
 import { getCurrentUser } from "@/lib/session";
 import { shippingAvailability } from "@/lib/shipping";
@@ -179,12 +180,16 @@ export async function placeOrder(input: unknown): Promise<PlaceOrderResult> {
           lng: address.lng,
         };
 
+        // Cash on delivery needs no payment step: the order goes straight to
+        // preparation. Online and bank-transfer orders wait for their payment.
+        const isCod = data.paymentMethod === "COD";
+
         return tx.order.create({
           data: {
             orderNumber: nextOrderNumber(prefix, latest?.orderNumber ?? null),
             userId: user.id,
             type,
-            status: "PENDING",
+            status: isCod ? "PROCESSING" : "PENDING",
             subtotal: BigInt(totals.subtotal),
             shippingCost: BigInt(totals.shipping),
             discount: BigInt(totals.discount),
@@ -203,9 +208,13 @@ export async function placeOrder(input: unknown): Promise<PlaceOrderResult> {
                 quantity: item.quantity,
               })),
             },
-            statusHistory: { create: { status: "PENDING", note: "order_placed" } },
+            statusHistory: {
+              create: isCod
+                ? { status: "PROCESSING", note: "order_placed_cod" }
+                : { status: "PENDING", note: "order_placed" },
+            },
           },
-          select: { orderNumber: true },
+          select: { id: true, orderNumber: true },
         });
       });
 
@@ -213,13 +222,16 @@ export async function placeOrder(input: unknown): Promise<PlaceOrderResult> {
       updateTag("catalog");
 
       const base = `/${data.locale}/checkout`;
+      if (data.paymentMethod !== "ONLINE") {
+        return { ok: true, orderNumber: order.orderNumber, nextUrl: `${base}/success/${order.orderNumber}` };
+      }
+      // Online: go straight to the gateway. If it cannot be reached, the order
+      // is kept and the payment page offers to try again.
+      const payment = await startOnlinePayment(order.id, data.locale);
       return {
         ok: true,
         orderNumber: order.orderNumber,
-        nextUrl:
-          data.paymentMethod === "ONLINE"
-            ? `${base}/pay/${order.orderNumber}`
-            : `${base}/success/${order.orderNumber}`,
+        nextUrl: payment.ok ? payment.redirectUrl : `${base}/pay/${order.orderNumber}?error=request`,
       };
     } catch (error) {
       if (error instanceof OrderError) {

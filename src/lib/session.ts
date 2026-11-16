@@ -1,6 +1,7 @@
 import "server-only";
 
 import { redirect } from "next/navigation";
+import { connection } from "next/server";
 
 import { auth } from "@/auth";
 import type { Role } from "@/generated/prisma/client";
@@ -17,6 +18,9 @@ export type SessionUser = { id: string; name: string };
 
 /** Lightweight: reads the session token only (no database query). */
 export async function getSessionUser(): Promise<SessionUser | null> {
+  // Auth.js creates random tokens before it reads the request, which Cache
+  // Components would treat as prerendered randomness: mark the read dynamic.
+  await connection();
   const session = await auth();
   const id = session?.user?.id;
   if (!id) return null;

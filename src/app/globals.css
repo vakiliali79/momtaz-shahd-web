@@ -172,4 +172,17 @@
       scroll-behavior: auto;
     }
   }
+  /* Leave room for the fixed bottom tab bar of the account area on small screens. */
+  @media (width < 64rem) {
+    body:has([data-account-tabs]) {
+      padding-bottom: calc(3.5rem + env(safe-area-inset-bottom));
+    }
+  }
+  /* Printing (e.g. an invoice): plain white page, no site chrome. */
+  @media print {
+    body {
+      background: #fff;
+      color: #000;
+    }
+  }
 }

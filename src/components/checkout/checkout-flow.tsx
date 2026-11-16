@@ -276,7 +276,9 @@ export function CheckoutFlow({
         // The order exists now: only at this point is the cart emptied.
         setPlaced(true);
         clearCart();
-        router.push(result.nextUrl);
+        // Real gateways live on another site; internal pages use the router.
+        if (/^https?:\/\//.test(result.nextUrl)) window.location.assign(result.nextUrl);
+        else router.push(result.nextUrl);
       } else {
         handleError(result);
       }

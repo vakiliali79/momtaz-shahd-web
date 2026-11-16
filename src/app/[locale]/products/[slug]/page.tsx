@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { CalendarClockIcon, ScaleIcon, TagsIcon } from "lucide-react";
 import { hasLocale } from "next-intl";
 import { getTranslations } from "next-intl/server";
@@ -11,6 +12,7 @@ import { Price } from "@/components/product/price";
 import { ProductGrid } from "@/components/product/product-grid";
 import { PurchasePanel } from "@/components/product/purchase-panel";
 import { RatingStars } from "@/components/product/rating-stars";
+import { ReviewFormGate } from "@/components/reviews/review-form-gate";
 import { Breadcrumbs } from "@/components/shared/page-header";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Link } from "@/i18n/navigation";
@@ -213,7 +215,12 @@ export default async function ProductPage({
               ))}
             </ul>
           )}
-          <p className="mt-5 text-sm text-muted-foreground">{t("product.reviewsSignIn")}</p>
+          <div className="mt-6">
+            {/* Who may review depends on the visitor: streams in after the static page. */}
+            <Suspense fallback={null}>
+              <ReviewFormGate productId={product.id} productSlug={product.slug} locale={locale} />
+            </Suspense>
+          </div>
         </TabsContent>
       </Tabs>
 

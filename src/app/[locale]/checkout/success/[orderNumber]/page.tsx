@@ -3,16 +3,17 @@ import { Suspense } from "react";
 import { CircleCheckIcon, ClockIcon, LandmarkIcon } from "lucide-react";
 import { hasLocale } from "next-intl";
 import { getTranslations } from "next-intl/server";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { locale as rootLocale } from "next/root-params";
 
 import { OrderPageShell, OrderPageSkeleton } from "@/app/[locale]/checkout/order-page";
 import { OrderDetails } from "@/components/orders/order-details";
+import { ReceiptUpload } from "@/components/orders/receipt-upload";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 import { routing, type AppLocale } from "@/i18n/routing";
 import { getBankTransferInfo } from "@/lib/data/settings";
-import { formatPrice } from "@/lib/format";
+import { formatDate, formatPrice } from "@/lib/format";
 import { getOrderForUser } from "@/lib/orders/queries";
 import { isOnlinePaymentEnabled } from "@/lib/payments";
 import { requireUser } from "@/lib/session";
@@ -38,9 +39,14 @@ async function Confirmation({
   const order = await getOrderForUser(orderNumber, user.id);
   if (!order) notFound();
 
+  if (order.paymentMethod === "ONLINE" && order.status === "CANCELLED") {
+    redirect(`/${locale}/checkout/failed/${order.orderNumber}`);
+  }
+
   const t = await getTranslations();
   const awaitingOnline = order.paymentMethod === "ONLINE" && order.status === "PENDING";
-  const bank = order.paymentMethod === "BANK_TRANSFER" ? await getBankTransferInfo() : null;
+  const awaitingTransfer = order.paymentMethod === "BANK_TRANSFER" && order.status === "PENDING";
+  const bank = awaitingTransfer ? await getBankTransferInfo() : null;
   const Icon = awaitingOnline ? ClockIcon : CircleCheckIcon;
 
   return (
@@ -58,7 +64,11 @@ async function Confirmation({
           {awaitingOnline
             ? t("order.success.awaitingText")
             : t("order.success.thanks")}{" "}
-          {!awaitingOnline ? t(`order.success.next.${order.paymentMethod}`) : null}
+          {awaitingOnline
+            ? null
+            : order.paymentMethod === "BANK_TRANSFER" && !awaitingTransfer
+              ? t("order.success.next.transferConfirmed")
+              : t(`order.success.next.${order.paymentMethod}`)}
         </p>
         {awaitingOnline && isOnlinePaymentEnabled() ? (
           <Button asChild size="lg" className="h-12 rounded-full px-8 text-base">
@@ -100,6 +110,45 @@ async function Confirmation({
             </div>
           </dl>
           <p className="mt-4 text-sm text-muted-foreground">{t("order.bank.instructions")}</p>
+        </section>
+      ) : null}
+
+      {awaitingTransfer ? (
+        <section aria-labelledby="receipt-title" className="rounded-2xl border border-border p-5">
+          <h2 id="receipt-title" className="mb-1 font-semibold">{t("receipt.title")}</h2>
+          {order.receiptUploadedAt ? (
+            <div className="space-y-3">
+              <p role="status" className="text-sm text-brand-leaf dark:text-success">
+                {t("receipt.received", {
+                  date: formatDate(order.receiptUploadedAt, locale, { dateStyle: "medium", timeStyle: "short" }),
+                })}
+              </p>
+              {order.transferReference ? (
+                <p className="text-sm text-muted-foreground">
+                  {t("receipt.referenceLine")} <span dir="ltr">{order.transferReference}</span>
+                </p>
+              ) : null}
+              <a
+                href={`/api/orders/${order.orderNumber}/receipt`}
+                target="_blank"
+                rel="noopener"
+                className="inline-block text-sm font-medium text-primary hover:underline"
+              >
+                {t("receipt.view")}
+              </a>
+              <details className="rounded-xl bg-muted/50 p-4">
+                <summary className="cursor-pointer text-sm font-medium">{t("receipt.replace")}</summary>
+                <div className="mt-4">
+                  <ReceiptUpload orderNumber={order.orderNumber} />
+                </div>
+              </details>
+            </div>
+          ) : (
+            <>
+              <p className="mb-4 text-sm text-muted-foreground">{t("receipt.text")}</p>
+              <ReceiptUpload orderNumber={order.orderNumber} />
+            </>
+          )}
         </section>
       ) : null}
 

@@ -1,6 +1,14 @@
 "use client";
 
-import { LogInIcon, LogOutIcon, PackageIcon, UserIcon, UserPlusIcon } from "lucide-react";
+import {
+  HeartIcon,
+  LayoutDashboardIcon,
+  LogInIcon,
+  LogOutIcon,
+  PackageIcon,
+  UserIcon,
+  UserPlusIcon,
+} from "lucide-react";
 import { useTranslations } from "next-intl";
 
 import { useLogout } from "@/components/auth/use-logout";
@@ -21,7 +29,11 @@ export const guestLinks = [
   { key: "register", href: "/register", Icon: UserPlusIcon },
 ] as const;
 
-export const memberLinks = [{ key: "orders", href: "/account/orders", Icon: PackageIcon }] as const;
+export const memberLinks = [
+  { key: "myAccount", href: "/account", Icon: LayoutDashboardIcon },
+  { key: "orders", href: "/account/orders", Icon: PackageIcon },
+  { key: "wishlist", href: "/account/wishlist", Icon: HeartIcon },
+] as const;
 
 /** Sign-in links that bring the visitor back to the current page afterwards. */
 export function useAuthHref() {

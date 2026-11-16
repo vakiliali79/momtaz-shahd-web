@@ -147,3 +147,51 @@
 - No OTP sign-in, password reset, rate limiting on login/coupon/order attempts, or "My orders" page yet (`/account/orders` 404s).
 - The city list holds main cities only; customers in smaller towns must pick the nearest listed city until the JSON is extended.
 - OpenStreetMap's public tile server suits low traffic only; a commercial tile provider (or Neshan) may be needed at scale.
+
+## Stage 6 — Online payment and bank transfers (2026-11-16)
+
+**Gateway architecture** (`src/lib/payments/`)
+- `PaymentGateway` interface: `request(amount, orderId, callbackUrl, description)` and `verify(params, amount)` (plus `getAuthority` / `buildVerifyParams`). Amounts are Toman; gateways convert.
+- `verify` returns `paid`, `failed` (definitely not paid) or `error` (outcome unknown). Only `failed` cancels an order; `error` keeps it pending, because money may have been taken.
+- `ZarinpalGateway`: REST v4 `payment/request.json` + `payment/verify.json`, StartPay redirect, amounts sent in Rial, `ZARINPAL_MERCHANT_ID`, `ZARINPAL_SANDBOX`. Codes 100/101 = paid, -51/-54 = failed, everything else = needs review. Contract tests with a stubbed fetch: `pnpm test`.
+- `MockGateway`: simulated bank page (`/payment/mock`) with Pay, Cancel and "bank doesn't answer"; it returns through the real callback, so the same code path is exercised. Refused in production unless `ALLOW_MOCK_PAYMENTS=true`.
+- `IDPayGateway`: stub (reports itself unconfigured, so online payment stays hidden).
+- Chosen by `PAYMENT_GATEWAY=mock|zarinpal|idpay`; online payment is hidden when none is usable.
+
+**Flow**
+- Placing an online order goes straight to the gateway. If the gateway cannot be reached, the order is kept and `/checkout/pay/[orderNumber]` offers a retry.
+- Each attempt is a `Payment` row (gateway, amount, authority, status, refId, card, raw response).
+- `/api/payment/callback` (GET or POST) finds the attempt by its authority, verifies server-to-server, then:
+  - paid → order PAID + `paymentRef`;
+  - failed → order CANCELLED, stock and coupon use restored; the failed page offers "Order these products again";
+  - unknown → "confirming your payment" page with a re-check button (no second "pay" button, to avoid double charges).
+- Idempotent: each attempt and each order change state only once (conditional updates). Replayed and concurrent callbacks just redirect. Money arriving for an order that is no longer pending is recorded in the history for a refund.
+
+**Other payment methods**
+- Cash on delivery: the order goes straight to PROCESSING.
+- Bank transfer: the order stays PENDING. The customer uploads a receipt (JPG/PNG/WebP/PDF, 5 MB, type checked from the file's bytes) on the success page. Files are stored privately in `UPLOAD_DIR` (default `./storage`) and served only to the owner or an admin via `/api/orders/[orderNumber]/receipt`. Admin actions `confirmBankTransferAction` (→ PAID) and `rejectTransferReceiptAction` are in `src/actions/admin/orders.ts` for the admin panel.
+
+**Data changes**: `Payment` model and `PaymentStatus` enum; `Order.receiptPath`, `receiptUploadedAt`, `transferReference` (migrations for SQLite and PostgreSQL). New dependency `server-only`.
+
+**Fixes along the way**
+- Session reads now call `connection()`, because Auth.js creates random tokens before reading the request, which Cache Components rejected while prerendering.
+- Empty env vars (e.g. `UPLOAD_DIR=""`, `APP_URL=""`, `SMTP_PORT=""`) now fall back to defaults instead of being used as empty values.
+
+**Verified**: `pnpm tsc --noEmit`, `pnpm lint`, `pnpm test`, `pnpm build` pass. End-to-end in the browser against the production build:
+- cancel at the bank → order cancelled, stock and coupon restored → reorder;
+- pay → PAID with a reference;
+- replayed OK/NOK callbacks and 5 concurrent callbacks → a single transition;
+- unknown authority;
+- "bank doesn't answer" → re-check → PAID;
+- cash on delivery → PROCESSING;
+- receipt upload: missing file, disguised file, valid file; owner/admin/other/anonymous access;
+- admin confirmation → PAID, and a second confirmation is refused;
+- Zarinpal selected but unreachable → order kept, retry page;
+- no gateway → online payment hidden.
+
+**Open items**
+- Zarinpal has not been tested against the real service: Zarinpal's servers refuse connections from this (non-Iranian) cloud machine, and its docs could not be fetched either. Before launch, run one sandbox payment from an Iranian server and compare the request/verify responses and error codes with the official docs.
+- Set `APP_URL` (or `NEXT_PUBLIC_SITE_URL`) in production: callback URLs are built from it.
+- Online orders whose customer never returns from the gateway stay PENDING with stock reserved; a scheduled job should cancel them after a timeout (`cancelPendingOrder` in `src/lib/orders/cancel.ts` does the work).
+- No admin UI yet for confirming bank transfers or reviewing flagged payments.
+- Receipts are on the local disk; use object storage on hosts without a persistent disk.

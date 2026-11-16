@@ -4,6 +4,7 @@ import { useEffect, type ReactNode } from "react";
 import { MotionConfig } from "motion/react";
 import { ThemeProvider } from "next-themes";
 
+import { WishlistSync } from "@/components/product/wishlist-button";
 import { DirectionProvider } from "@/components/ui/direction";
 import { Toaster } from "@/components/ui/sonner";
 import type { Direction } from "@/i18n/locales";
@@ -50,6 +51,7 @@ export function Providers({
     >
       <DirectionProvider dir={dir}>
         <StoreHydration />
+        <WishlistSync />
         {/* Honour the visitor's "reduce motion" setting for all animations. */}
         <MotionConfig reducedMotion="user">{children}</MotionConfig>
         <Toaster dir={dir} position="bottom-center" />
