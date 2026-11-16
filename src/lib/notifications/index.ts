@@ -7,6 +7,7 @@ import { routing, type AppLocale } from "@/i18n/routing";
 import { db } from "@/lib/db";
 import { sendAdminEmail } from "@/lib/email";
 import { formatNumber } from "@/lib/format";
+import { getCity } from "@/lib/locations";
 import type { OrderStatusId } from "@/lib/orders/status";
 import { sendSms } from "@/lib/sms";
 import type faMessages from "../../../messages/fa.json";
@@ -122,7 +123,7 @@ export async function notifyNewWholesaleRequest(requestId: string): Promise<void
       contact: request.contactName,
       phone: request.phone,
       email: request.email ?? "—",
-      city: request.city,
+      city: request.province ? (getCity(request.province, request.city)?.name.fa ?? request.city) : request.city,
       products: request.products,
       quantity: request.estimatedQty ?? "—",
       message: request.message ?? "—",

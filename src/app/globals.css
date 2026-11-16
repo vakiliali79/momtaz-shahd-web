@@ -186,3 +186,13 @@
     }
   }
 }
+/* Dealer map popups: brand colours instead of Leaflet's default link blue. */
+.leaflet-container .dealer-popup a {
+  color: var(--primary);
+}
+.leaflet-container .dealer-popup a[href^="tel:"] {
+  color: inherit;
+}
+.leaflet-container .dealer-popup .leaflet-popup-content-wrapper {
+  border-radius: 1rem;
+}

@@ -254,3 +254,36 @@
 - S3 storage and Kavenegar SMS are stubs: implement before switching `STORAGE_DRIVER`/`SMS_PROVIDER`.
 - Admin accounts can only be created by the seed (or the database); there is no admin-user management screen.
 - The public wholesale request form is still to be built.
+
+## Stage 9 — Wholesale, dealers, tracking and notifications (2026-11-16)
+
+**Pages**
+- `/wholesale`: hero with the wholesale terms, benefits, a price tiers table built from the live catalogue (retail price, wholesale price, minimum quantity, saving), FAQ accordion (`<details>`, works without JavaScript) and the request form. The terms and FAQ are sample copy: confirm with the sales team, then edit in `scripts/i18n/site_wholesale.py` or Admin → Translations.
+- Request form (shared with `/dealers/apply`): business name, contact name, mobile, email, province and city (from the location list), products of interest, estimated monthly quantity, message. Zod on client and server, honeypot field, and at most 3 requests per phone number per day. Saved as `WholesaleRequest` (`type` WHOLESALE or AGENCY, plus the visitor's language).
+- `/dealers`: full-height locator. The list panel (beside the map on desktop, below it on phones) has search by city or name, filter by type, and "Near me" (browser geolocation, sorted by distance). Clicking a card zooms to its marker and opens the popup; clicking a marker opens the popup: name, address, tap-to-call phone, WhatsApp, Instagram, opening hours, and directions in Google Maps / Neshan / Balad. Markers cluster when zoomed out (`supercluster`). Verified dealers have red pins, the others gold.
+- Map provider abstraction (`src/components/map/providers`): Neshan's web SDK when `NEXT_PUBLIC_NESHAN_KEY` is set, otherwise Leaflet + OpenStreetMap (also the fallback if Neshan fails to load). The map loads client-side only.
+- `/dealers/[id]`: dealer detail with photo, contact and directions, a map, SEO metadata (canonical, hreflang, Open Graph) and `LocalBusiness`-type JSON-LD (`Store` / `WholesaleStore`, with address, geo and phone).
+- `/dealers/apply`: "Become a dealer" page; applications land in the same admin inbox as type AGENCY. The inbox now shows and filters by type, and shows city names in the admin's language.
+- `/track`: order tracking without signing in, by order number + mobile number. Shows status, timeline (customer-facing notes only), tracking code, items and total. The same "not found" answer is given for a wrong number or phone, and attempts are rate-limited per IP and per order number (in memory). Linked from the footer.
+
+**Notifications** (`src/lib/notifications`)
+- Customer SMS in their language: order placed (online/bank transfer, and a separate cash-on-delivery text), paid (online payment or confirmed bank transfer), status changes including shipped and delivered, tracking code, and a thank-you for wholesale and dealer requests.
+- Team alerts in Persian for new orders and new requests, by SMS to `ADMIN_NOTIFY_PHONES` and by email to `ADMIN_EMAIL`. They are sent after the response with `after()`, so customers never wait for them, and a failure never fails an order.
+- All templates are in the `sms` and `notifications` message namespaces, so they can be edited in Admin → Translations.
+- The Kavenegar SMS provider is now implemented (`KAVENEGAR_API_KEY`, `KAVENEGAR_SENDER`). It could not be tested from the development machine.
+
+**Database**: migration `public_forms_dealers` (SQLite and PostgreSQL): `WholesaleRequest.type`, `province`, `locale`, and an index on phone + date.
+
+**Verified**: `pnpm tsc --noEmit`, `pnpm lint`, `pnpm test` and `pnpm build` pass. Browser-tested against the production build:
+- wholesale form validation and submission (saved with province/city ids, customer and team SMS logged);
+- an English dealer application saved as AGENCY;
+- locator markers, card → popup with call and directions links, type filter, city search, "Near me" sorting with distances;
+- dealer detail title, canonical URL and JSON-LD;
+- tracking with a wrong phone (refused) and the right one (status and tracking code shown);
+- a cash-on-delivery checkout sending the customer SMS and the team SMS;
+- no horizontal scrolling at 320px on all new pages.
+
+**Open items**
+- OpenStreetMap tiles and Neshan are not reachable from the development machine, so map tiles and Neshan were not seen loading; markers, clusters, popups and fallbacks were tested.
+- The Neshan and Balad directions links open the location in those apps; check their exact routing URL formats on a phone.
+- The tracking rate limit is per server instance; use a shared store if the site runs on several instances.
