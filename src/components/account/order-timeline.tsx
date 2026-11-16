@@ -18,7 +18,7 @@ const visibleNotes = [
 ] as const;
 type VisibleNote = (typeof visibleNotes)[number];
 
-function noteKey(note: string | null): VisibleNote | null {
+export function noteKey(note: string | null): VisibleNote | null {
   const code = note?.split(":")[0];
   return visibleNotes.find((key) => key === code) ?? null;
 }

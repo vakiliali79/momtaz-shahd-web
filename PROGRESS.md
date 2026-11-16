@@ -227,3 +227,30 @@
 - Admin moderation of reviews, order status changes (shipped/delivered, tracking codes) and wholesale role approval need the admin panel.
 - The public wholesale request form (`/wholesale`) is not built yet, so the request list will stay empty until it is.
 - Changing a password does not sign out other devices (JWT sessions stay valid until they expire).
+
+## Stage 8 — Admin panel (2026-11-16)
+
+**Access**: `/admin` has its own layout (the storefront moved into a `(shop)` route group) with a collapsible sidebar (remembered per browser) and a drawer on phones. The ADMIN role is checked on the server in the layout, in every page, in every server action and in the upload route — not only in `proxy.ts`. Non-admins get a 404; guests are sent to the login page. Blocked accounts can't sign in and their open sessions stop working.
+
+**Modules**
+- Dashboard: sales today and this (Persian) month, pending orders, low-stock products, new wholesale requests; a 30-day daily sales bar chart (Recharts, brand red, hover tooltip, table view, right-to-left in fa/ar); top products for 30 days; latest orders.
+- Products: TanStack Table with search, status/category/stock filters, sortable columns and server-side pagination (state in the URL); create/edit form with a tab per language; multi-image upload (`/api/admin/uploads` → `public/uploads`, S3-compatible adapter stub for Liara/Arvan via `STORAGE_DRIVER`); inline stock edit, active toggle, duplicate.
+- Categories: CRUD with translated name/description, image and display order; deleting a category that still has products is refused.
+- Orders: filters by status, date range, retail/wholesale and payment method, plus search; detail page with customer, items, payment attempts and full history. Status changes follow the allowed transitions (PENDING → PAID/PROCESSING/CANCELLED, PAID → PROCESSING/SHIPPED/CANCELLED, PROCESSING → SHIPPED/CANCELLED, SHIPPED → DELIVERED), write `OrderStatusHistory` with an optional internal note, and can text the customer. Cancelling returns stock and the coupon use. Tracking code (with SMS), bank-transfer confirm/reject with receipt preview, printable invoice (shared with the customer invoice).
+- SMS: `SMS_PROVIDER` = console (default) or Kavenegar (stub); texts use the customer's language; every attempt is logged in `SmsLog`.
+- Customers: list with search and role/blocked filters, detail with stats, orders and addresses; promote to WHOLESALE or back; block/unblock. Admin accounts (and yourself) can't be changed from the panel.
+- Dealers: CRUD with translated name/address/hours, type, province/city from the location list (seed dealers now use location ids), map picker (click to pin, pin at centre, my location), verified and visible toggles, photo.
+- Wholesale requests: inbox with status filter and search; detail with contact info, link to the customer if the phone has an account, status workflow (new → contacted → converted/rejected) and team notes.
+- Coupons: CRUD (percent or fixed, minimum order, usage limit, last valid day in Tehran time with a calendar-aware preview), active toggle, expired/used-up badges.
+- Reviews: moderation queue (pending by default), approve or reject (rejecting deletes, so the customer can write again); the storefront updates immediately.
+- Settings: shipping per method (in-province, other provinces, per-province special prices, weight steps, delivery days, city-only courier, pickup address), free-shipping threshold, USD/AED exchange rates, contact details and social links, announcement banner per language, bank-transfer details. The footer, contact page, invoice, home page and a new announcement strip read these settings. English and Arabic visitors see approximate USD/AED under product prices and cart/checkout totals when enabled (payment is always in Toman).
+- Translations: every key of `messages/*.json` side by side in fa/en/ar, with search, section filter, "edited" and "missing a language" filters. Edits are saved in `TranslationOverride` and merged over the files in `src/i18n/request.ts` (cached, tag `translations`), so they show on the site right away; invalid ICU syntax or changed `{placeholders}` are refused; "Reset" restores the file text.
+
+**Database**: migration `admin_panel` (SQLite and PostgreSQL): `User.isBlocked`, `WholesaleRequest.adminNote/updatedAt`, `TranslationOverride`, `SmsLog`.
+
+**Verified**: `pnpm tsc --noEmit`, `pnpm lint`, `pnpm test` (new shipping rule tests) and `pnpm build` pass with no warnings. Browser-tested against the production build: every admin page in fa/en/ar returns 200 with no console errors; guests are redirected to login; a status change PAID → PROCESSING writes history and an SMS log; a tracking code is saved and texted; a translation edit appears on the storefront and resets; a broken placeholder is refused; no horizontal scrolling at 320px.
+
+**Open items**
+- S3 storage and Kavenegar SMS are stubs: implement before switching `STORAGE_DRIVER`/`SMS_PROVIDER`.
+- Admin accounts can only be created by the seed (or the database); there is no admin-user management screen.
+- The public wholesale request form is still to be built.

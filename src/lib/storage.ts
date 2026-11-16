@@ -9,7 +9,7 @@ import path from "node:path";
  * routes. On hosts with an ephemeral disk, replace with object storage
  * (e.g. S3) behind the same functions.
  */
-const ROOT = path.resolve(process.env.UPLOAD_DIR || path.join(process.cwd(), "storage"));
+const ROOT = path.resolve(process.env.UPLOAD_DIR || path.join(/* turbopackIgnore: true */ process.cwd(), "storage"));
 
 function resolveKey(key: string): string {
   const full = path.resolve(ROOT, key);

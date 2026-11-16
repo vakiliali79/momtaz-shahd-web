@@ -5,6 +5,7 @@ import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 
 import { OrderStatusBadge } from "@/components/account/account-ui";
+import { noteKey } from "@/components/account/order-timeline";
 import { AdminCard, AdminHeading, AdminPageSkeleton, Pill } from "@/components/admin/admin-ui";
 import { BankTransferPanel, OrderStatusForm, TrackingCodeForm } from "@/components/admin/orders/order-actions";
 import { OrderDetails } from "@/components/orders/order-details";
@@ -23,13 +24,18 @@ export async function generateMetadata({ params }: PageProps<"/[locale]/admin/or
 }
 
 /** Turns a history note code into something readable for staff. */
-function noteLabel(note: string | null, t: (key: "adminNote" | "systemNote", values: { text: string }) => string) {
+function noteLabel(
+  note: string | null,
+  t: (key: "adminNote" | "systemNote", values: { text: string }) => string,
+  known: (key: NonNullable<ReturnType<typeof noteKey>>) => string,
+) {
   if (!note) return null;
   if (note.startsWith("admin:")) {
     const text = note.split(":").slice(2).join(":");
     return text ? t("adminNote", { text }) : null;
   }
-  return t("systemNote", { text: note });
+  const key = noteKey(note);
+  return t("systemNote", { text: key ? known(key) : note });
 }
 
 async function AdminOrder({ params }: { params: PageProps<"/[locale]/admin/orders/[orderNumber]">["params"] }) {
@@ -37,7 +43,12 @@ async function AdminOrder({ params }: { params: PageProps<"/[locale]/admin/order
   await requireAdmin(locale, `/admin/orders/${orderNumber}`);
   const [order, extras] = await Promise.all([getOrderForAdmin(orderNumber), getAdminOrderExtras(orderNumber)]);
   if (!order || !extras) notFound();
-  const [t, tStatus] = await Promise.all([getTranslations("admin.orders.detail"), getTranslations("order.status")]);
+  const [t, tStatus, tTimeline] = await Promise.all([
+    getTranslations("admin.orders.detail"),
+    getTranslations("order.status"),
+    getTranslations("accountPages.timeline"),
+  ]);
+  const label = (note: string | null) => noteLabel(note, t, (key) => tTimeline(key));
   const toman = (await getTranslations("common"))("toman");
 
   return (
@@ -65,7 +76,7 @@ async function AdminOrder({ params }: { params: PageProps<"/[locale]/admin/order
                 <li key={entry.id} className="flex flex-wrap items-baseline justify-between gap-2 border-b border-border pb-3 last:border-0 last:pb-0">
                   <div>
                     <p className="font-medium">{tStatus(entry.status)}</p>
-                    {noteLabel(entry.note, t) ? <p className="text-muted-foreground" dir="auto">{noteLabel(entry.note, t)}</p> : null}
+                    {label(entry.note) ? <p className="text-muted-foreground" dir="auto">{label(entry.note)}</p> : null}
                   </div>
                   <time dateTime={entry.createdAt} className="text-xs text-muted-foreground">
                     {formatDate(entry.createdAt, locale, { dateStyle: "medium", timeStyle: "short" })}

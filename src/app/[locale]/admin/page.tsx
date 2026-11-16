@@ -25,7 +25,7 @@ function Kpi({ Icon, label, value, href, hint }: { Icon: LucideIcon; label: stri
         <span>{label}</span>
         <Icon className="size-4 text-brand-gold" aria-hidden="true" />
       </div>
-      <p className="mt-2 text-2xl font-bold tabular-nums">{value}</p>
+      <p className="mt-2 text-xl font-bold break-words tabular-nums sm:text-2xl">{value}</p>
       {hint ? <p className="mt-1 text-xs text-muted-foreground">{hint}</p> : null}
     </>
   );
@@ -48,7 +48,7 @@ async function Dashboard() {
   return (
     <>
       <AdminHeading title={t("title")} description={t("description")} />
-      <div className="grid grid-cols-1 gap-4 min-[420px]:grid-cols-2 xl:grid-cols-5">
+      <div className="grid grid-cols-1 gap-4 min-[420px]:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5">
         <Kpi Icon={WalletIcon} label={t("kpis.today")} value={formatPrice(kpis.today, locale, toman)} />
         <Kpi Icon={CalendarRangeIcon} label={t("kpis.month")} value={formatPrice(kpis.month, locale, toman)} hint={t("kpis.monthHint")} />
         <Kpi Icon={ClockIcon} label={t("kpis.pending")} value={formatNumber(kpis.pendingOrders, locale)} href="/admin/orders?status=PENDING" />
@@ -68,7 +68,7 @@ async function Dashboard() {
             <ol className="space-y-3">
               {data.topProducts.map((product) => (
                 <li key={product.productId} className="space-y-1">
-                  <div className="flex items-baseline justify-between gap-3 text-sm">
+                  <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-0.5 text-sm">
                     <Link href={`/admin/products/${product.productId}`} className="font-medium hover:text-primary">{product.name}</Link>
                     <span className="shrink-0 text-muted-foreground">
                       {t("sold", { count: product.quantity, formatted: formatNumber(product.quantity, locale) })} · {formatPrice(product.revenue, locale, toman)}
@@ -114,7 +114,7 @@ function DashboardSkeleton() {
   return (
     <div className="space-y-6" aria-hidden="true">
       <Skeleton className="h-9 w-48" />
-      <div className="grid grid-cols-2 gap-4 xl:grid-cols-5">
+      <div className="grid grid-cols-2 gap-4 lg:grid-cols-3 2xl:grid-cols-5">
         {Array.from({ length: 5 }, (_, index) => <Skeleton key={index} className="h-24 rounded-2xl" />)}
       </div>
       <Skeleton className="h-80 rounded-2xl" />
