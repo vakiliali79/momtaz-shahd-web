@@ -1,0 +1,135 @@
+{
+  "metadata": {
+    "title": "Momtaz Shahd — Traditional Iranian Koloocheh & Kolompeh",
+    "titleTemplate": "%s | Momtaz Shahd",
+    "description": "Momtaz Shahd bakes traditional Iranian cookies: walnut koloocheh, date kolompeh, coconut koloocheh, gift boxes and wholesale packs."
+  },
+  "brand": {
+    "name": "Momtaz Shahd",
+    "tagline": "Traditional Iranian cookies",
+    "homeLabel": "Momtaz Shahd — home"
+  },
+  "common": {
+    "skipToContent": "Skip to content",
+    "close": "Close",
+    "toman": "Toman"
+  },
+  "nav": {
+    "label": "Main navigation",
+    "home": "Home",
+    "products": "Products",
+    "wholesale": "Wholesale",
+    "dealers": "Dealers",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "header": {
+    "openMenu": "Open menu",
+    "menuTitle": "Menu",
+    "menuDescription": "Browse the store, search and manage your account.",
+    "settings": "Language and appearance"
+  },
+  "search": {
+    "label": "Search products",
+    "placeholder": "Search koloocheh, kolompeh…",
+    "submit": "Search"
+  },
+  "cart": {
+    "label": "Shopping cart",
+    "labelWithCount": "{count, plural, =0 {Shopping cart, empty} one {Shopping cart, # item} other {Shopping cart, # items}}",
+    "add": "Add to cart",
+    "added": "{name} added to your cart"
+  },
+  "account": {
+    "label": "Account",
+    "guest": "Welcome",
+    "signIn": "Sign in",
+    "register": "Create account",
+    "orders": "My orders"
+  },
+  "language": {
+    "label": "Change language",
+    "current": "Language: {language}"
+  },
+  "theme": {
+    "label": "Change theme",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  },
+  "footer": {
+    "about": "For years Momtaz Shahd has baked koloocheh and kolompeh with authentic recipes and fresh ingredients.",
+    "quickLinks": "Quick links",
+    "contactTitle": "Contact us",
+    "address": "Address",
+    "addressValue": "Factory address will be published soon",
+    "phone": "Phone",
+    "email": "Email",
+    "trustTitle": "Trust badges",
+    "enamad": "Enamad e-trust badge",
+    "enamadPlaceholder": "Enamad",
+    "socialTitle": "Follow us",
+    "instagram": "Momtaz Shahd on Instagram",
+    "telegram": "Momtaz Shahd on Telegram",
+    "whatsapp": "Momtaz Shahd on WhatsApp",
+    "rights": "© {year} Momtaz Shahd. All rights reserved."
+  },
+  "newsletter": {
+    "title": "Newsletter",
+    "description": "New products and special offers, straight to your inbox.",
+    "emailLabel": "Email address",
+    "emailPlaceholder": "you@example.com",
+    "submit": "Subscribe",
+    "submitting": "Subscribing…",
+    "success": "Thank you! You are subscribed.",
+    "errors": {
+      "required": "Please enter your email address.",
+      "invalid": "Please enter a valid email address.",
+      "tooLong": "This email address is too long.",
+      "server": "Something went wrong. Please try again."
+    }
+  },
+  "home": {
+    "eyebrow": "Freshly baked in Iran",
+    "title": "The authentic taste of koloocheh and kolompeh",
+    "subtitle": "Walnut-topped koloocheh and date-filled kolompeh, baked with traditional recipes and delivered fresh to your door.",
+    "shopNow": "Shop products",
+    "wholesaleCta": "Wholesale orders",
+    "productsTitle": "Our core products",
+    "productsSubtitle": "Sample items with placeholder prices — the full catalogue is coming soon.",
+    "products": {
+      "walnutKoloocheh": {
+        "name": "Walnut koloocheh",
+        "description": "Round filled cookie topped with a walnut half."
+      },
+      "plainKoloocheh": {
+        "name": "Plain koloocheh",
+        "description": "The classic soft koloocheh with a fragrant filling."
+      },
+      "dateKolompeh": {
+        "name": "Date kolompeh",
+        "description": "Rectangular date-filled cookie finished with sesame."
+      },
+      "coconutKoloocheh": {
+        "name": "Coconut koloocheh",
+        "description": "Soft koloocheh with a sweet coconut filling."
+      }
+    },
+    "checkTitle": "Localisation check",
+    "checkSubtitle": "This section verifies language, direction, digits, calendar and theme.",
+    "checkLanguage": "Language",
+    "checkDirection": "Text direction",
+    "directionRtl": "Right to left",
+    "directionLtr": "Left to right",
+    "checkPrice": "Sample price",
+    "checkDate": "Sample date",
+    "checkCalendar": "Calendar",
+    "calendarJalali": "Jalali (Solar Hijri)",
+    "calendarGregorian": "Gregorian"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "description": "The page you are looking for does not exist or is not ready yet.",
+    "backHome": "Back to home"
+  }
+}
