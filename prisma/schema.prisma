@@ -338,6 +338,22 @@ model WholesaleRequest {
   @@index([status, createdAt])
 }
 
+/// Messages sent through the public contact form.
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  phone     String?
+  email     String?
+  subject   String?
+  message   String
+  /// Locale the visitor was browsing in: "fa" | "en" | "ar".
+  locale    String   @default("fa")
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([isRead, createdAt])
+}
+
 // ───────────────────────────── Settings ─────────────────────────────
 
 /// Key/value store for admin-editable configuration: shipping rates,

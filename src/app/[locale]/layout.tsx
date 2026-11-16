@@ -11,6 +11,7 @@ import { Providers } from "@/components/providers";
 import { getDirection } from "@/i18n/locales";
 import { routing, type AppLocale } from "@/i18n/routing";
 import { formatDate } from "@/lib/format";
+import { SITE_URL } from "@/lib/site";
 
 import "../globals.css";
 
@@ -54,11 +55,8 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: { default: t("title"), template: t("titleTemplate") },
     description: t("description"),
-    alternates: {
-      languages: Object.fromEntries(
-        routing.locales.map((locale) => [locale, `/${locale}`]),
-      ),
-    },
+    metadataBase: new URL(SITE_URL),
+    openGraph: { siteName: t("siteName"), type: "website" },
   };
 }
 
@@ -88,6 +86,10 @@ export default async function RootLayout({ children }: LayoutProps<"/[locale]">)
       suppressHydrationWarning
     >
       <body className="flex min-h-full flex-col">
+        {/* Without JavaScript the entrance animations never run: show content. */}
+        <noscript>
+          <style>{"[data-reveal]{opacity:1!important;transform:none!important}"}</style>
+        </noscript>
         <NextIntlClientProvider>
           <Providers dir={dir}>
             <Header />

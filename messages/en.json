@@ -2,7 +2,8 @@
   "metadata": {
     "title": "Momtaz Shahd — Traditional Iranian Koloocheh & Kolompeh",
     "titleTemplate": "%s | Momtaz Shahd",
-    "description": "Momtaz Shahd bakes traditional Iranian cookies: walnut koloocheh, date kolompeh, coconut koloocheh, gift boxes and wholesale packs."
+    "description": "Momtaz Shahd bakes traditional Iranian cookies: walnut koloocheh, date kolompeh, coconut koloocheh, gift boxes and wholesale packs.",
+    "siteName": "Momtaz Shahd"
   },
   "brand": {
     "name": "Momtaz Shahd",
@@ -38,7 +39,8 @@
     "label": "Shopping cart",
     "labelWithCount": "{count, plural, =0 {Shopping cart, empty} one {Shopping cart, # item} other {Shopping cart, # items}}",
     "add": "Add to cart",
-    "added": "{name} added to your cart"
+    "added": "{name} added to your cart",
+    "limit": "{count, plural, one {Only {formatted} item is available.} other {Only {formatted} items are available.}}"
   },
   "account": {
     "label": "Account",
@@ -90,46 +92,217 @@
     }
   },
   "home": {
-    "eyebrow": "Freshly baked in Iran",
-    "title": "The authentic taste of koloocheh and kolompeh",
-    "subtitle": "Walnut-topped koloocheh and date-filled kolompeh, baked with traditional recipes and delivered fresh to your door.",
-    "shopNow": "Shop products",
-    "wholesaleCta": "Wholesale orders",
-    "productsTitle": "Our core products",
-    "productsSubtitle": "Sample items with placeholder prices — the full catalogue is coming soon.",
-    "products": {
-      "walnutKoloocheh": {
-        "name": "Walnut koloocheh",
-        "description": "Round filled cookie topped with a walnut half."
+    "hero": {
+      "eyebrow": "Freshly baked in Iran",
+      "title": "The authentic taste of koloocheh and kolompeh",
+      "subtitle": "Walnut-topped koloocheh and date-filled kolompeh, baked with traditional recipes and delivered fresh to your door.",
+      "shopNow": "Shop now",
+      "wholesale": "Wholesale",
+      "imageAlt": "A selection of Momtaz Shahd koloocheh and kolompeh"
+    },
+    "categories": {
+      "title": "Shop by category",
+      "subtitle": "From everyday treats to gift boxes and cartons for your shop.",
+      "count": "{count, plural, =0 {No products} one {{formatted} product} other {{formatted} products}}"
+    },
+    "featured": {
+      "title": "Featured products",
+      "subtitle": "Our customers' favourites, baked fresh every day.",
+      "viewAll": "View all"
+    },
+    "why": {
+      "title": "Why Momtaz Shahd",
+      "subtitle": "What goes into every box we send out.",
+      "ingredients": {
+        "title": "Quality ingredients",
+        "text": "Fresh walnuts, select dates and real spices — no shortcuts."
       },
-      "plainKoloocheh": {
-        "name": "Plain koloocheh",
-        "description": "The classic soft koloocheh with a fragrant filling."
+      "fresh": {
+        "title": "Baked daily",
+        "text": "Small batches baked every day, so what you receive is always fresh."
       },
-      "dateKolompeh": {
-        "name": "Date kolompeh",
-        "description": "Rectangular date-filled cookie finished with sesame."
+      "shipping": {
+        "title": "Nationwide shipping",
+        "text": "Carefully packed and shipped to every province in Iran."
       },
-      "coconutKoloocheh": {
-        "name": "Coconut koloocheh",
-        "description": "Soft koloocheh with a sweet coconut filling."
+      "dealers": {
+        "title": "Trusted dealers",
+        "text": "Find our products at verified dealers and shops near you."
       }
     },
-    "checkTitle": "Localisation check",
-    "checkSubtitle": "This section verifies language, direction, digits, calendar and theme.",
-    "checkLanguage": "Language",
-    "checkDirection": "Text direction",
-    "directionRtl": "Right to left",
-    "directionLtr": "Left to right",
-    "checkPrice": "Sample price",
-    "checkDate": "Sample date",
-    "checkCalendar": "Calendar",
-    "calendarJalali": "Jalali (Solar Hijri)",
-    "calendarGregorian": "Gregorian"
+    "testimonials": {
+      "title": "What our customers say",
+      "subtitle": "Reviews from customers who bought our products."
+    },
+    "dealers": {
+      "title": "Find a dealer near you",
+      "subtitle": "Momtaz Shahd products are available through agencies, distributors and shops across Iran.",
+      "verified": "Verified dealer",
+      "cta": "View all dealers",
+      "mapLabel": "{count, plural, one {Map of Iran showing {formatted} dealer} other {Map of Iran showing {formatted} dealers}}"
+    },
+    "instagram": {
+      "title": "Follow us on Instagram",
+      "subtitle": "Behind the scenes at the bakery, new products and special offers.",
+      "cta": "on Instagram"
+    },
+    "newsletter": {
+      "title": "Be the first to know",
+      "subtitle": "New products and special offers, straight to your inbox."
+    }
   },
   "notFound": {
     "title": "Page not found",
     "description": "The page you are looking for does not exist or is not ready yet.",
     "backHome": "Back to home"
+  },
+  "units": {
+    "g": "{value} g",
+    "kg": "{value} kg",
+    "days": "{count, plural, one {{formatted} day} other {{formatted} days}}"
+  },
+  "breadcrumbs": {
+    "label": "Breadcrumb",
+    "home": "Home"
+  },
+  "carousel": {
+    "previous": "Previous products",
+    "next": "Next products"
+  },
+  "product": {
+    "noReviews": "No reviews yet",
+    "ratingLabel": "Rated {rating} out of 5",
+    "reviewCount": "{count, plural, one {{formatted} review} other {{formatted} reviews}}",
+    "originalPrice": "Original price",
+    "salePrice": "Sale price",
+    "wishlistAdd": "Add {name} to wishlist",
+    "wishlistRemove": "Remove {name} from wishlist",
+    "outOfStock": "Out of stock",
+    "outOfStockLong": "This product is currently out of stock. Please check back soon.",
+    "discountBadge": "{percent}% off",
+    "quantity": "Quantity",
+    "decrease": "Decrease quantity",
+    "increase": "Increase quantity",
+    "lowStock": "{count, plural, one {Only {formatted} left} other {Only {formatted} left}}",
+    "inStock": "In stock",
+    "wholesaleHint": "Buying {min} or more? Wholesale price: {price} each.",
+    "wholesaleReached": "This quantity qualifies for wholesale pricing, which is available to approved wholesale accounts.",
+    "wholesaleNote": "Wholesale pricing is available to approved wholesale accounts.",
+    "wholesaleCta": "Request wholesale pricing",
+    "weight": "Weight",
+    "shelfLife": "Shelf life",
+    "category": "Category",
+    "tabs": {
+      "description": "Description",
+      "ingredients": "Ingredients",
+      "reviews": "Reviews ({count})"
+    },
+    "shelfLifeNote": "{count, plural, one {Keeps for {formatted} day} other {Keeps for {formatted} days}} from the production date when stored in a cool, dry place.",
+    "ingredientsEmpty": "The ingredient list for this product will be added soon.",
+    "allergenNote": "May contain traces of nuts, sesame, wheat and egg.",
+    "reviewsEmpty": "There are no reviews for this product yet.",
+    "reviewsSignIn": "Customers who have bought this product can leave a review from their account.",
+    "related": "You may also like",
+    "gallery": {
+      "zoomIn": "Zoom in on image",
+      "zoomOut": "Zoom out",
+      "imageAlt": "{name} — image {index} of {total}",
+      "thumbnails": "Product images",
+      "showImage": "Show image {index}"
+    }
+  },
+  "catalog": {
+    "title": "Products",
+    "description": "Koloocheh, kolompeh, gift boxes and wholesale packs — baked fresh and shipped nationwide.",
+    "category": "Category",
+    "priceRange": "Price range",
+    "priceMin": "Minimum price",
+    "priceMax": "Maximum price",
+    "inStockOnly": "In stock only",
+    "clearFilters": "Clear filters",
+    "filters": "Filters",
+    "filtersDescription": "Narrow the product list by category, price and availability.",
+    "showResults": "{count, plural, =0 {No products} one {Show {formatted} product} other {Show {formatted} products}}",
+    "sortLabel": "Sort by",
+    "sort": {
+      "newest": "Newest",
+      "priceAsc": "Price: low to high",
+      "priceDesc": "Price: high to low",
+      "rating": "Top rated"
+    },
+    "searchLabel": "Search in products",
+    "searchPlaceholder": "Search products…",
+    "results": "Products list",
+    "resultCount": "{count, plural, =0 {No products} one {{formatted} product} other {{formatted} products}}",
+    "resultCountFor": "{count, plural, =0 {No results} one {{formatted} result} other {{formatted} results}} for “{query}”",
+    "emptyTitle": "No products found",
+    "emptyDescription": "Try removing a filter or searching for something else.",
+    "pagination": {
+      "label": "Pagination",
+      "previous": "Previous page",
+      "next": "Next page",
+      "page": "Page {page}"
+    }
+  },
+  "about": {
+    "title": "About us",
+    "lead": "Momtaz Shahd bakes traditional Iranian koloocheh and kolompeh with authentic recipes and fresh ingredients.",
+    "story": {
+      "title": "Our story",
+      "p1": "Koloocheh and kolompeh are part of the memory of Iranian homes: the smell of cinnamon and cardamom, a warm cookie beside a glass of tea. Momtaz Shahd was founded to keep that taste alive, exactly as it should be.",
+      "p2": "We still work the traditional way — good flour, fresh walnuts, select dates and real spices — while baking in a clean, modern facility and packing each product so that it reaches you fresh.",
+      "imageAlt": "Inside the Momtaz Shahd bakery"
+    },
+    "principles": {
+      "title": "What we stand for",
+      "ingredients": {
+        "title": "Honest ingredients",
+        "text": "We choose every ingredient ourselves and list what goes into each product."
+      },
+      "craft": {
+        "title": "Traditional craft",
+        "text": "Authentic recipes, baked in small batches every day."
+      },
+      "trust": {
+        "title": "Lasting trust",
+        "text": "From families to shops and dealers, we aim to earn every customer's trust again with each order."
+      }
+    },
+    "cta": {
+      "title": "Taste it for yourself",
+      "text": "Browse our products, or get in touch for wholesale and dealership enquiries.",
+      "products": "View products",
+      "contact": "Contact us"
+    }
+  },
+  "contact": {
+    "title": "Contact us",
+    "lead": "Questions, feedback or wholesale enquiries — we would love to hear from you.",
+    "infoTitle": "Contact details",
+    "hours": "Working hours",
+    "hoursValue": "Saturday to Wednesday 8:00–17:00, Thursday 8:00–13:00",
+    "formTitle": "Send us a message",
+    "fields": {
+      "name": "Full name",
+      "phone": "Mobile number",
+      "email": "Email",
+      "subject": "Subject (optional)",
+      "message": "Message"
+    },
+    "contactHint": "Enter a mobile number or an email address so we can reply.",
+    "submit": "Send message",
+    "submitting": "Sending…",
+    "successTitle": "Message sent",
+    "successText": "Thank you. We have received your message and will get back to you soon.",
+    "sendAnother": "Send another message",
+    "errors": {
+      "nameRequired": "Please enter your name.",
+      "contactRequired": "Please enter a mobile number or an email address.",
+      "invalidPhone": "Please enter a valid Iranian mobile number, e.g. 09121234567.",
+      "invalidEmail": "Please enter a valid email address.",
+      "messageTooShort": "Please write at least 10 characters.",
+      "tooLong": "This text is too long.",
+      "server": "Something went wrong. Please try again."
+    }
   }
 }

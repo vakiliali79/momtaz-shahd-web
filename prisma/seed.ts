@@ -43,7 +43,7 @@ const categories: {
       en: "Round, filled cookies baked to a traditional recipe — soft, fragrant and fresh.",
       ar: "كعك مستدير محشو يُخبز بوصفة تقليدية؛ طري وعطِر وطازج.",
     },
-    image: "/images/categories/koloocheh.jpg",
+    image: "/categories/koloocheh.jpg",
   },
   {
     slug: "kolompeh",
@@ -53,7 +53,7 @@ const categories: {
       en: "Kerman-style date-filled cookies scented with cardamom and cinnamon, finished with sesame.",
       ar: "كلمبة كرمانية محشوة بالتمر والهيل والقرفة ومغطاة بالسمسم.",
     },
-    image: "/images/categories/kolompeh.jpg",
+    image: "/categories/kolompeh.jpg",
   },
   {
     slug: "gift-boxes",
@@ -63,7 +63,7 @@ const categories: {
       en: "Elegant assortments for Nowruz, gatherings and corporate gifts.",
       ar: "تشكيلات أنيقة لعيد النوروز والمناسبات وهدايا الشركات.",
     },
-    image: "/images/categories/gift-boxes.jpg",
+    image: "/categories/gift-boxes.jpg",
   },
   {
     slug: "wholesale-packs",
@@ -73,7 +73,7 @@ const categories: {
       en: "Economy cartons for shops, cafés and dealers.",
       ar: "كراتين اقتصادية للمتاجر والمقاهي والوكلاء.",
     },
-    image: "/images/categories/wholesale-packs.jpg",
+    image: "/categories/wholesale-packs.jpg",
   },
 ];
 
@@ -211,7 +211,8 @@ const products: ProductSeed[] = [
     wholesalePrice: 130000,
     minWholesaleQty: 24,
     weightGrams: 450,
-    stock: 150,
+    // Deliberately sold out, to exercise the out-of-stock state.
+    stock: 0,
     shelfLifeDays: 60,
   },
   {
@@ -468,6 +469,73 @@ const products: ProductSeed[] = [
     weightGrams: 10000,
     stock: 40,
     shelfLifeDays: 60,
+  },
+];
+
+// ───────────────────────────── Reviews ─────────────────────────────
+// Sample customers and reviews so ratings and testimonials have content
+// in development. Phone numbers are placeholders.
+
+const sampleCustomers = [
+  { phone: "09120000001", name: "مریم احمدی" },
+  { phone: "09120000002", name: "علی رضایی" },
+  { phone: "09120000003", name: "سارا کریمی" },
+  { phone: "09120000004", name: "حسین موسوی" },
+];
+
+const sampleReviews: {
+  product: string;
+  customer: string;
+  rating: number;
+  comment: string;
+}[] = [
+  {
+    product: "walnut-koloocheh-450g",
+    customer: "09120000001",
+    rating: 5,
+    comment: "تازه و خوش‌عطر بود، مغز گردوی فراوانی داشت. بسته‌بندی هم عالی بود.",
+  },
+  {
+    product: "walnut-koloocheh-450g",
+    customer: "09120000002",
+    rating: 4,
+    comment: "طعم خیلی خوبی دارد، فقط کمی شیرین‌تر از سلیقه من بود.",
+  },
+  {
+    product: "date-kolompeh-500g",
+    customer: "09120000003",
+    rating: 5,
+    comment: "دقیقاً همان طعم کلمپه‌های کرمان؛ خرمای باکیفیت و عطر هل.",
+  },
+  {
+    product: "date-kolompeh-500g",
+    customer: "09120000004",
+    rating: 5,
+    comment: "برای مهمان‌ها سفارش دادم و همه پسندیدند. ارسال هم سریع بود.",
+  },
+  {
+    product: "coconut-koloocheh-450g",
+    customer: "09120000002",
+    rating: 4,
+    comment: "نرم و تازه؛ با چای عصرانه عالی است.",
+  },
+  {
+    product: "nowruz-gift-box-1200g",
+    customer: "09120000001",
+    rating: 5,
+    comment: "جعبه بسیار شکیلی بود و به‌موقع برای عید رسید. هدیه‌ای آبرومند.",
+  },
+  {
+    product: "saffron-pistachio-kolompeh-400g",
+    customer: "09120000003",
+    rating: 5,
+    comment: "عطر زعفران و پسته فوق‌العاده است. حتماً دوباره می‌خرم.",
+  },
+  {
+    product: "plain-koloocheh-400g",
+    customer: "09120000004",
+    rating: 4,
+    comment: "ساده و خوشمزه، قیمت مناسبی هم دارد.",
   },
 ];
 
@@ -756,10 +824,11 @@ async function main() {
       minWholesaleQty: product.minWholesaleQty ?? null,
       weightGrams: product.weightGrams,
       stock: product.stock,
-      // Placeholder paths: the photos themselves are not in the repo yet.
+      // Drop photos with these names into public/products; until then the
+      // storefront shows the cream placeholder (see public/products/README.md).
       images: [
-        `/images/products/${product.slug}-1.jpg`,
-        `/images/products/${product.slug}-2.jpg`,
+        `/products/${product.slug}-1.jpg`,
+        `/products/${product.slug}-2.jpg`,
       ],
       shelfLifeDays: product.shelfLifeDays,
       isActive: true,
@@ -769,6 +838,37 @@ async function main() {
       where: { slug: product.slug },
       update: data,
       create: { slug: product.slug, ...data },
+    });
+  }
+
+  const customerIds = new Map<string, string>();
+  for (const customer of sampleCustomers) {
+    const saved = await prisma.user.upsert({
+      where: { phone: customer.phone },
+      update: {},
+      create: { ...customer, role: Role.CUSTOMER, preferredLocale: "fa" },
+    });
+    customerIds.set(customer.phone, saved.id);
+  }
+
+  for (const review of sampleReviews) {
+    const userId = customerIds.get(review.customer);
+    const product = await prisma.product.findUnique({
+      where: { slug: review.product },
+      select: { id: true },
+    });
+    if (!userId || !product) throw new Error(`Bad review seed: ${review.product}`);
+
+    await prisma.review.upsert({
+      where: { productId_userId: { productId: product.id, userId } },
+      update: {},
+      create: {
+        productId: product.id,
+        userId,
+        rating: review.rating,
+        comment: review.comment,
+        isApproved: true,
+      },
     });
   }
 
@@ -796,18 +896,25 @@ async function main() {
     });
   }
 
-  const [userCount, categoryCount, productCount, dealerCount, settingCount] =
-    await Promise.all([
-      prisma.user.count(),
-      prisma.category.count(),
-      prisma.product.count(),
-      prisma.dealer.count(),
-      prisma.setting.count(),
-    ]);
+  const [
+    userCount,
+    categoryCount,
+    productCount,
+    reviewCount,
+    dealerCount,
+    settingCount,
+  ] = await Promise.all([
+    prisma.user.count(),
+    prisma.category.count(),
+    prisma.product.count(),
+    prisma.review.count(),
+    prisma.dealer.count(),
+    prisma.setting.count(),
+  ]);
 
   console.log(
     `Seed complete: ${userCount} user(s), ${categoryCount} categories, ` +
-      `${productCount} products, ${dealerCount} dealers, ${settingCount} settings.`,
+      `${productCount} products, ${reviewCount} reviews, ${dealerCount} dealers, ${settingCount} settings.`,
   );
   console.log(
     `Admin login: ${ADMIN.phone} / ${ADMIN.password} — change this password before going live.`,

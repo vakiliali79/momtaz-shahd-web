@@ -59,3 +59,28 @@
 - Seed prices, dealers, exchange rates and contact details are sample data; product image paths point to files that do not exist yet.
 - The seeded admin password (`Admin@1234`) must be changed before going live.
 - Nothing in the UI reads from the database yet; the home page still uses its hardcoded sample products.
+
+## Stage 3 — Public storefront (2026-11-16)
+
+**Pages** (Server Components, data from Prisma, all text via next-intl in fa/en/ar)
+- Home: hero with Motion entrance, category tiles, featured products carousel (Embla), "Why Momtaz Shahd" cards, testimonials (approved reviews), dealer teaser with an SVG mini map, Instagram placeholder, newsletter CTA.
+- Products (`/products`) and Category (`/category/[slug]`): responsive grid (1 → 2 → 3 → 4 → 5 columns), filters by category, price range and in-stock (sidebar on desktop, drawer on mobile), sorting, search, pagination. All filter state lives in the URL and is validated with Zod.
+- Product detail (`/products/[slug]`): gallery with thumbnails and zoom, price, facts, quantity stepper, add to cart, wholesale price hint, tabs (Description / Ingredients / Reviews), related products, breadcrumbs, and localized metadata with Open Graph and hreflang alternates.
+- About and Contact. The contact form is validated with Zod on client and server, saved to the new `ContactMessage` table, and emailed to the admin via SMTP when configured.
+- `loading.tsx` skeletons for the products, category and product-detail routes; out-of-stock state on cards and the detail page.
+
+**How it works**
+- `src/lib/data/catalog.ts` loads the whole active catalogue once per locale with `"use cache"` (tag `catalog`, lifetime "hours"); listing pages filter, sort and paginate it in memory (`src/lib/catalog-query.ts`). Admin mutations must call `revalidateTag("catalog")` / `"reviews"` / `"dealers"`.
+- Images: `public/products/placeholder.svg` (brand cream) is shown for any image file that is missing. Drop photos into `public/products` using the names in `public/products/README.md`.
+- Wishlist is stored in the browser (localStorage) until accounts exist.
+- New env vars in `.env.example`: `NEXT_PUBLIC_SITE_URL`, `ADMIN_EMAIL`, `SMTP_*`.
+
+**Verified**: `pnpm tsc --noEmit`, `pnpm lint`, `pnpm build` pass (85 static pages). Browser-tested filters, sorting, search, pagination, cart, wishlist, tabs, zoom, contact form, out-of-stock, RTL/LTR and 320px–1920px layouts with no console errors.
+
+**Open items**
+- Email sending is untested against a real SMTP server (none configured here); without `SMTP_HOST` and `ADMIN_EMAIL` messages are only saved.
+- The contact form has a honeypot but no rate limiting.
+- Seed now includes 4 sample customers with 8 sample reviews, and one sold-out product (cinnamon koloocheh) to show the out-of-stock state.
+- The mini map outline of Iran is a rough illustration; the Instagram section shows placeholder tiles.
+- Review submission, `/wholesale`, `/dealers`, `/cart` and account pages are not built yet.
+- `pnpm build` needs a migrated and seeded database, because pages are prerendered from it.

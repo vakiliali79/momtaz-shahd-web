@@ -1,17 +1,20 @@
 "use client";
 
 import { useEffect, type ReactNode } from "react";
+import { MotionConfig } from "motion/react";
 import { ThemeProvider } from "next-themes";
 
 import { DirectionProvider } from "@/components/ui/direction";
 import { Toaster } from "@/components/ui/sonner";
 import type { Direction } from "@/i18n/locales";
 import { useCartStore } from "@/stores/cart";
+import { useWishlistStore } from "@/stores/wishlist";
 
-/** Loads the persisted cart from localStorage once the app has mounted. */
-function CartHydration() {
+/** Loads the persisted cart and wishlist from localStorage after mount. */
+function StoreHydration() {
   useEffect(() => {
     void useCartStore.persist.rehydrate();
+    void useWishlistStore.persist.rehydrate();
   }, []);
   return null;
 }
@@ -36,8 +39,9 @@ export function Providers({
       }}
     >
       <DirectionProvider dir={dir}>
-        <CartHydration />
-        {children}
+        <StoreHydration />
+        {/* Honour the visitor's "reduce motion" setting for all animations. */}
+        <MotionConfig reducedMotion="user">{children}</MotionConfig>
         <Toaster dir={dir} position="bottom-center" />
       </DirectionProvider>
     </ThemeProvider>
