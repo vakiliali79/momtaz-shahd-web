@@ -1183,6 +1183,31 @@
         "unblocked": "تم إلغاء حظر العميل."
       }
     },
+    "dashboard": {
+      "title": "لوحة التحكم",
+      "description": "نظرة سريعة على أرقام اليوم.",
+      "kpis": {
+        "today": "مبيعات اليوم",
+        "month": "مبيعات هذا الشهر",
+        "monthHint": "منذ بداية الشهر الشمسي",
+        "pending": "طلبات قيد الانتظار",
+        "lowStock": "منتجات منخفضة المخزون",
+        "wholesale": "طلبات جملة جديدة"
+      },
+      "chartTitle": "المبيعات، آخر ٣٠ يومًا",
+      "chartLabel": "المبيعات اليومية بالتومان خلال آخر ٣٠ يومًا",
+      "showTable": "عرض كجدول",
+      "day": "اليوم",
+      "orders": "الطلبات",
+      "sales": "المبيعات",
+      "ordersCount": "{count, plural, zero {لا طلبات} one {طلب واحد} two {طلبان} few {{formatted} طلبات} many {{formatted} طلبًا} other {{formatted} طلب}}",
+      "topProducts": "الأكثر مبيعًا (٣٠ يومًا)",
+      "sold": "{count, plural, one {قطعة واحدة} two {قطعتان} few {{formatted} قطع} many {{formatted} قطعة} other {{formatted} قطعة}}",
+      "noSales": "لا مبيعات خلال آخر ٣٠ يومًا.",
+      "latestOrders": "أحدث الطلبات",
+      "allOrders": "كل الطلبات",
+      "noOrders": "لا توجد طلبات بعد."
+    },
     "dealers": {
       "title": "الوكلاء",
       "description": "الوكالات والموزعون والمتاجر المعروضة على خريطة الوكلاء.",
@@ -1423,6 +1448,26 @@
         "sheba": "رقم الآيبان (شبا)",
         "cardNumber": "رقم البطاقة"
       }
+    },
+    "translations": {
+      "title": "الترجمات",
+      "description": "عدّل أي نص في الموقع بالفارسية والإنجليزية والعربية. تُطبّق التغييرات فورًا؛ ويمكنك الاستعادة للعودة إلى النص الأصلي.",
+      "search": "ابحث في المفاتيح أو النصوص…",
+      "section": "القسم",
+      "state": "عرض",
+      "states": {
+        "changed": "النصوص المعدّلة",
+        "missing": "ينقصها لغة"
+      },
+      "empty": "لا توجد نصوص تطابق هذه الفلاتر.",
+      "changed": "معدّل",
+      "missing": "ناقص",
+      "fileValue": "الأصل: {value}",
+      "save": "حفظ",
+      "saved": "تم حفظ النص.",
+      "cancel": "إلغاء",
+      "reset": "استعادة",
+      "resetDone": "تمت استعادة النص الأصلي."
     },
     "wholesale": {
       "title": "طلبات الجملة",

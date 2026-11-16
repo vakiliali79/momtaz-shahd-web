@@ -1183,6 +1183,31 @@
         "unblocked": "Customer unblocked."
       }
     },
+    "dashboard": {
+      "title": "Dashboard",
+      "description": "Today's numbers at a glance.",
+      "kpis": {
+        "today": "Sales today",
+        "month": "Sales this month",
+        "monthHint": "Since the 1st of the Persian month",
+        "pending": "Pending orders",
+        "lowStock": "Low-stock products",
+        "wholesale": "New wholesale requests"
+      },
+      "chartTitle": "Sales, last 30 days",
+      "chartLabel": "Daily sales in Toman over the last 30 days",
+      "showTable": "Show as a table",
+      "day": "Day",
+      "orders": "Orders",
+      "sales": "Sales",
+      "ordersCount": "{count, plural, one {# order} other {# orders}}",
+      "topProducts": "Top products (30 days)",
+      "sold": "{count, plural, one {# sold} other {# sold}}",
+      "noSales": "No sales in the last 30 days.",
+      "latestOrders": "Latest orders",
+      "allOrders": "All orders",
+      "noOrders": "No orders yet."
+    },
     "dealers": {
       "title": "Dealers",
       "description": "Agencies, distributors and shops shown on the dealer map.",
@@ -1423,6 +1448,26 @@
         "sheba": "IBAN (Sheba)",
         "cardNumber": "Card number"
       }
+    },
+    "translations": {
+      "title": "Translations",
+      "description": "Edit any text on the site in Persian, English and Arabic. Changes apply right away; reset to go back to the original.",
+      "search": "Search keys or texts…",
+      "section": "Section",
+      "state": "Show",
+      "states": {
+        "changed": "Edited texts",
+        "missing": "Missing a language"
+      },
+      "empty": "No texts match these filters.",
+      "changed": "Edited",
+      "missing": "Missing",
+      "fileValue": "Original: {value}",
+      "save": "Save",
+      "saved": "Text saved.",
+      "cancel": "Cancel",
+      "reset": "Reset",
+      "resetDone": "Original text restored."
     },
     "wholesale": {
       "title": "Wholesale requests",
