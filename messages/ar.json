@@ -408,7 +408,8 @@
       "tooLong": "هذا النص طويل جدًا.",
       "invalidCredentials": "رقم الجوال أو كلمة المرور غير صحيحة.",
       "phoneTaken": "يوجد حساب بهذا الرقم بالفعل. يرجى تسجيل الدخول.",
-      "server": "حدث خطأ ما. يرجى المحاولة مرة أخرى."
+      "server": "حدث خطأ ما. يرجى المحاولة مرة أخرى.",
+      "blocked": "تم حظر هذا الحساب. يرجى التواصل معنا."
     }
   },
   "map": {
@@ -886,6 +887,187 @@
         "CONTACTED": "تم التواصل",
         "CONVERTED": "تمت الموافقة",
         "REJECTED": "مرفوض"
+      }
+    }
+  },
+  "admin": {
+    "nav": {
+      "dashboard": "لوحة التحكم",
+      "orders": "الطلبات",
+      "products": "المنتجات",
+      "categories": "الفئات",
+      "customers": "العملاء",
+      "wholesale": "طلبات الجملة",
+      "dealers": "الوكلاء",
+      "coupons": "رموز الخصم",
+      "reviews": "التقييمات",
+      "settings": "الإعدادات",
+      "translations": "الترجمات"
+    },
+    "shell": {
+      "title": "إدارة ممتاز شهد",
+      "navLabel": "قائمة الإدارة",
+      "collapse": "طي القائمة",
+      "expand": "توسيع القائمة",
+      "openMenu": "فتح قائمة الإدارة",
+      "closeMenu": "إغلاق",
+      "signedInAs": "مسجّل باسم {name}",
+      "viewStore": "عرض المتجر",
+      "signOut": "تسجيل الخروج"
+    },
+    "table": {
+      "summary": "{from}–{to} من {total}",
+      "perPage": "صفوف في الصفحة",
+      "previous": "الصفحة السابقة",
+      "next": "الصفحة التالية",
+      "page": "الصفحة {page} من {total}",
+      "search": "بحث",
+      "allOf": "الكل: {label}"
+    },
+    "form": {
+      "languages": "اللغات",
+      "tabHasErrors": "في هذه اللغة أخطاء",
+      "cancel": "إلغاء",
+      "save": "حفظ",
+      "saving": "جارٍ الحفظ…",
+      "saved": "تم الحفظ.",
+      "delete": "حذف",
+      "optional": "اختياري"
+    },
+    "images": {
+      "hint": "JPG أو PNG أو WebP، بحد أقصى ٥ ميغابايت لكل صورة و{max} صور. الصورة الأولى هي الغلاف.",
+      "add": "إضافة صور",
+      "uploading": "جارٍ رفع {count}…",
+      "cover": "الغلاف",
+      "moveEarlier": "تقديم الصورة {index}",
+      "moveLater": "تأخير الصورة {index}",
+      "remove": "حذف الصورة {index}",
+      "tooMany": "يُسمح بـ {max} صور فقط؛ تم تجاهل الملفات الزائدة.",
+      "errors": {
+        "fileType": "{name}: يرجى رفع صورة JPG أو PNG أو WebP.",
+        "fileTooLarge": "{name}: حجم الملف أكبر من ٥ ميغابايت.",
+        "server": "{name}: فشل الرفع. حاول مرة أخرى."
+      }
+    },
+    "errors": {
+      "required": "هذا الحقل مطلوب.",
+      "invalid": "هذه القيمة غير صالحة.",
+      "tooLong": "هذه القيمة طويلة جدًا.",
+      "slugInvalid": "استخدم أحرفًا إنجليزية صغيرة وأرقامًا وشرطات فقط (مثل walnut-koloocheh).",
+      "slugTaken": "هذا المعرّف مستخدم بالفعل.",
+      "codeTaken": "هذا الرمز مستخدم بالفعل.",
+      "mustBePositive": "أدخل صفرًا أو رقمًا موجبًا.",
+      "mustBeWhole": "أدخل رقمًا صحيحًا.",
+      "discountTooHigh": "يجب أن يكون أقل من السعر العادي.",
+      "percentRange": "أدخل نسبة بين ١ و١٠٠.",
+      "wholesaleIncomplete": "أدخل سعر الجملة والحد الأدنى للكمية معًا أو اتركهما فارغين.",
+      "invalidPhone": "أدخل رقم جوال إيراني صالحًا.",
+      "invalidUrl": "أدخل عنوانًا صالحًا.",
+      "invalidMessage": "في هذا النص خطأ في التنسيق (تحقق من {الأقواس}).",
+      "placeholdersChanged": "احتفظ بنفس {المتغيرات} الموجودة في النص الأصلي.",
+      "notFound": "هذا العنصر لم يعد موجودًا.",
+      "inUse": "هذا العنصر مستخدم ولا يمكن حذفه.",
+      "forbidden": "ليس لديك صلاحية لهذا الإجراء.",
+      "server": "حدث خطأ ما. حاول مرة أخرى."
+    },
+    "products": {
+      "title": "المنتجات",
+      "description": "الكتالوج والأسعار والمخزون.",
+      "new": "منتج جديد",
+      "edit": "تعديل المنتج",
+      "editNamed": "تعديل: {name}",
+      "viewInStore": "عرض في المتجر",
+      "search": "ابحث بالاسم أو المعرّف",
+      "empty": "لا توجد منتجات تطابق هذه الفلاتر.",
+      "stockSaved": "تم ضبط مخزون {name} على {stock}.",
+      "stockFor": "مخزون {name}",
+      "activeFor": "{name} نشط",
+      "editFor": "تعديل {name}",
+      "duplicateFor": "نسخ {name}",
+      "duplicated": "تم إنشاء نسخة (غير نشطة). راجعها قبل التفعيل.",
+      "featured": "مميز",
+      "columns": {
+        "name": "المنتج",
+        "category": "الفئة",
+        "price": "السعر",
+        "stock": "المخزون",
+        "active": "نشط",
+        "featured": "مميز",
+        "created": "تاريخ الإضافة",
+        "actions": "إجراءات"
+      },
+      "filters": {
+        "category": "الفئة",
+        "status": "الحالة",
+        "active": "نشط",
+        "inactive": "غير نشط",
+        "stock": "المخزون",
+        "low": "مخزون منخفض",
+        "out": "نفد المخزون"
+      },
+      "form": {
+        "texts": "الاسم والوصف",
+        "name": "الاسم",
+        "description": "الوصف",
+        "ingredients": "المكونات (اختياري)",
+        "general": "عام",
+        "slug": "المعرّف في الرابط",
+        "slugHint": "أحرف إنجليزية صغيرة، مثل walnut-koloocheh-450g. تغييره يغيّر رابط المنتج.",
+        "category": "الفئة",
+        "isActive": "نشط",
+        "isActiveHint": "المنتجات غير النشطة مخفية في المتجر.",
+        "isFeatured": "مميز",
+        "isFeaturedHint": "يظهر في شريط الصفحة الرئيسية.",
+        "pricing": "الأسعار (تومان)",
+        "price": "السعر",
+        "discountPrice": "سعر التخفيض",
+        "wholesalePrice": "سعر الجملة",
+        "minWholesaleQty": "الجملة ابتداءً من (الكمية)",
+        "optional": "اختياري",
+        "inventory": "المخزون",
+        "stock": "المخزون",
+        "weightGrams": "الوزن (غ)",
+        "shelfLifeDays": "مدة الصلاحية (أيام)",
+        "images": "الصور",
+        "save": "حفظ المنتج",
+        "saving": "جارٍ الحفظ…",
+        "saved": "تم حفظ المنتج."
+      }
+    },
+    "categories": {
+      "title": "الفئات",
+      "description": "تجميع المنتجات للتصفح والتصفية.",
+      "new": "فئة جديدة",
+      "edit": "تعديل الفئة",
+      "editNamed": "تعديل: {name}",
+      "empty": "لا توجد فئات بعد.",
+      "editFor": "تعديل {name}",
+      "deleteFor": "حذف {name}",
+      "deleteDisabled": "انقل منتجاتها أو احذفها أولًا.",
+      "deleteTitle": "حذف هذه الفئة؟",
+      "deleteText": "سيتم حذف «{name}». لا يمكن التراجع عن ذلك.",
+      "delete": "حذف",
+      "deleted": "تم حذف الفئة.",
+      "columns": {
+        "name": "الاسم",
+        "slug": "المعرّف",
+        "products": "المنتجات",
+        "order": "الترتيب",
+        "actions": "إجراءات"
+      },
+      "form": {
+        "texts": "الاسم والوصف",
+        "name": "الاسم",
+        "description": "الوصف (اختياري)",
+        "general": "عام",
+        "slug": "المعرّف في الرابط",
+        "slugHint": "أحرف إنجليزية صغيرة، مثل gift-boxes.",
+        "sortOrder": "ترتيب العرض",
+        "sortOrderHint": "الأرقام الأصغر تظهر أولًا.",
+        "image": "الصورة",
+        "save": "حفظ الفئة",
+        "saving": "جارٍ الحفظ…",
+        "saved": "تم حفظ الفئة."
       }
     }
   }

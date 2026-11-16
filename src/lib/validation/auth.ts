@@ -37,6 +37,7 @@ export const authErrorKeys = [
   "tooLong",
   "invalidCredentials",
   "phoneTaken",
+  "blocked",
   "server",
 ] as const;
 export type AuthErrorKey = (typeof authErrorKeys)[number];

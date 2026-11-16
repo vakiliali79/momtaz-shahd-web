@@ -1,7 +1,7 @@
 "use server";
 
 import bcrypt from "bcryptjs";
-import { AuthError } from "next-auth";
+import { AuthError, CredentialsSignin } from "next-auth";
 
 import { signIn, signOut } from "@/auth";
 import { routing } from "@/i18n/routing";
@@ -30,6 +30,9 @@ async function signInWithPassword(phone: string, password: string): Promise<Auth
     return { ok: true };
   } catch (error) {
     if (error instanceof AuthError) {
+      if (error instanceof CredentialsSignin && error.code === "blocked") {
+        return { ok: false, error: "blocked" };
+      }
       return {
         ok: false,
         error: error.type === "CredentialsSignin" ? "invalidCredentials" : "server",

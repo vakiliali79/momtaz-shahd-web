@@ -408,7 +408,8 @@
       "tooLong": "This text is too long.",
       "invalidCredentials": "The mobile number or password is incorrect.",
       "phoneTaken": "An account with this mobile number already exists. Please sign in.",
-      "server": "Something went wrong. Please try again."
+      "server": "Something went wrong. Please try again.",
+      "blocked": "This account has been blocked. Please contact us."
     }
   },
   "map": {
@@ -886,6 +887,187 @@
         "CONTACTED": "Contacted",
         "CONVERTED": "Approved",
         "REJECTED": "Declined"
+      }
+    }
+  },
+  "admin": {
+    "nav": {
+      "dashboard": "Dashboard",
+      "orders": "Orders",
+      "products": "Products",
+      "categories": "Categories",
+      "customers": "Customers",
+      "wholesale": "Wholesale requests",
+      "dealers": "Dealers",
+      "coupons": "Coupons",
+      "reviews": "Reviews",
+      "settings": "Settings",
+      "translations": "Translations"
+    },
+    "shell": {
+      "title": "Momtaz Shahd admin",
+      "navLabel": "Admin navigation",
+      "collapse": "Collapse sidebar",
+      "expand": "Expand sidebar",
+      "openMenu": "Open admin menu",
+      "closeMenu": "Close",
+      "signedInAs": "Signed in as {name}",
+      "viewStore": "View store",
+      "signOut": "Sign out"
+    },
+    "table": {
+      "summary": "{from}–{to} of {total}",
+      "perPage": "Rows per page",
+      "previous": "Previous page",
+      "next": "Next page",
+      "page": "Page {page} of {total}",
+      "search": "Search",
+      "allOf": "All: {label}"
+    },
+    "form": {
+      "languages": "Languages",
+      "tabHasErrors": "This language has errors",
+      "cancel": "Cancel",
+      "save": "Save",
+      "saving": "Saving…",
+      "saved": "Saved.",
+      "delete": "Delete",
+      "optional": "Optional"
+    },
+    "images": {
+      "hint": "JPG, PNG or WebP, up to 5 MB each, at most {max} images. The first image is the cover.",
+      "add": "Add images",
+      "uploading": "Uploading {count}…",
+      "cover": "Cover",
+      "moveEarlier": "Move image {index} earlier",
+      "moveLater": "Move image {index} later",
+      "remove": "Remove image {index}",
+      "tooMany": "Only {max} images are allowed; extra files were skipped.",
+      "errors": {
+        "fileType": "{name}: please upload a JPG, PNG or WebP image.",
+        "fileTooLarge": "{name}: the file is larger than 5 MB.",
+        "server": "{name}: upload failed. Please try again."
+      }
+    },
+    "errors": {
+      "required": "This field is required.",
+      "invalid": "This value is not valid.",
+      "tooLong": "This value is too long.",
+      "slugInvalid": "Use lowercase English letters, digits and hyphens only (e.g. walnut-koloocheh).",
+      "slugTaken": "This slug is already used.",
+      "codeTaken": "This code is already used.",
+      "mustBePositive": "Enter zero or a positive number.",
+      "mustBeWhole": "Enter a whole number.",
+      "discountTooHigh": "Must be lower than the regular price.",
+      "percentRange": "Enter a percentage between 1 and 100.",
+      "wholesaleIncomplete": "Enter both the wholesale price and the minimum quantity, or neither.",
+      "invalidPhone": "Enter a valid Iranian mobile number.",
+      "invalidUrl": "Enter a valid address.",
+      "invalidMessage": "This text has a formatting error (check the {braces}).",
+      "placeholdersChanged": "Keep the same {placeholders} as the original text.",
+      "notFound": "This item no longer exists.",
+      "inUse": "This item is in use and can't be deleted.",
+      "forbidden": "You don't have permission to do this.",
+      "server": "Something went wrong. Please try again."
+    },
+    "products": {
+      "title": "Products",
+      "description": "Catalogue, prices and stock.",
+      "new": "New product",
+      "edit": "Edit product",
+      "editNamed": "Edit: {name}",
+      "viewInStore": "View in store",
+      "search": "Search by name or slug",
+      "empty": "No products match these filters.",
+      "stockSaved": "Stock of {name} set to {stock}.",
+      "stockFor": "Stock of {name}",
+      "activeFor": "{name} is active",
+      "editFor": "Edit {name}",
+      "duplicateFor": "Duplicate {name}",
+      "duplicated": "Copy created (inactive). Review it before activating.",
+      "featured": "Featured",
+      "columns": {
+        "name": "Product",
+        "category": "Category",
+        "price": "Price",
+        "stock": "Stock",
+        "active": "Active",
+        "featured": "Featured",
+        "created": "Added",
+        "actions": "Actions"
+      },
+      "filters": {
+        "category": "Category",
+        "status": "Status",
+        "active": "Active",
+        "inactive": "Inactive",
+        "stock": "Stock",
+        "low": "Low stock",
+        "out": "Out of stock"
+      },
+      "form": {
+        "texts": "Name and description",
+        "name": "Name",
+        "description": "Description",
+        "ingredients": "Ingredients (optional)",
+        "general": "General",
+        "slug": "URL slug",
+        "slugHint": "Lowercase English, e.g. walnut-koloocheh-450g. Changing it changes the product's address.",
+        "category": "Category",
+        "isActive": "Active",
+        "isActiveHint": "Inactive products are hidden from the store.",
+        "isFeatured": "Featured",
+        "isFeaturedHint": "Shown in the home page carousel.",
+        "pricing": "Prices (Toman)",
+        "price": "Price",
+        "discountPrice": "Sale price",
+        "wholesalePrice": "Wholesale price",
+        "minWholesaleQty": "Wholesale from (quantity)",
+        "optional": "Optional",
+        "inventory": "Inventory",
+        "stock": "Stock",
+        "weightGrams": "Weight (g)",
+        "shelfLifeDays": "Shelf life (days)",
+        "images": "Images",
+        "save": "Save product",
+        "saving": "Saving…",
+        "saved": "Product saved."
+      }
+    },
+    "categories": {
+      "title": "Categories",
+      "description": "Group products for browsing and filters.",
+      "new": "New category",
+      "edit": "Edit category",
+      "editNamed": "Edit: {name}",
+      "empty": "No categories yet.",
+      "editFor": "Edit {name}",
+      "deleteFor": "Delete {name}",
+      "deleteDisabled": "Move or delete its products first.",
+      "deleteTitle": "Delete this category?",
+      "deleteText": "“{name}” will be deleted. This can't be undone.",
+      "delete": "Delete",
+      "deleted": "Category deleted.",
+      "columns": {
+        "name": "Name",
+        "slug": "Slug",
+        "products": "Products",
+        "order": "Order",
+        "actions": "Actions"
+      },
+      "form": {
+        "texts": "Name and description",
+        "name": "Name",
+        "description": "Description (optional)",
+        "general": "General",
+        "slug": "URL slug",
+        "slugHint": "Lowercase English, e.g. gift-boxes.",
+        "sortOrder": "Display order",
+        "sortOrderHint": "Lower numbers come first.",
+        "image": "Image",
+        "save": "Save category",
+        "saving": "Saving…",
+        "saved": "Category saved."
       }
     }
   }
