@@ -5,35 +5,20 @@ import { z } from "zod";
 
 import { db } from "@/lib/db";
 import type { LocalizedText } from "@/lib/localized";
-import { shippingMethodIds, type ShippingConfig } from "@/lib/shipping";
-
-const rateSchema = z.object({
-  baseCost: z.number().int().min(0),
-  perExtraKg: z.number().int().min(0),
-});
+import { siteConfig } from "@/config/site";
+import type { ShippingConfig } from "@/lib/shipping";
+import {
+  announcementSettingSchema,
+  contactSettingSchema,
+  exchangeRatesSettingSchema,
+  freeShippingSettingSchema as freeShippingSchema,
+  shippingSettingSchema as shippingSchema,
+  type AnnouncementSetting,
+  type ContactSetting,
+  type ExchangeRatesSetting,
+} from "@/lib/settings-schemas";
 
 const localizedSchema = z.object({ fa: z.string(), en: z.string(), ar: z.string() });
-
-const shippingSchema = z.object({
-  origin: z.object({ province: z.string(), city: z.string() }),
-  pickupAddress: localizedSchema.nullable().default(null),
-  methods: z.array(
-    z.object({
-      id: z.enum(shippingMethodIds),
-      isActive: z.boolean().default(true),
-      baseWeightGrams: z.number().int().min(0).default(1000),
-      inProvince: rateSchema,
-      outOfProvince: rateSchema.nullable().default(null),
-      sameCityOnly: z.boolean().default(false),
-      estimatedDays: z.object({ min: z.number().int().min(0), max: z.number().int().min(0) }),
-    }),
-  ),
-});
-
-const freeShippingSchema = z.object({
-  enabled: z.boolean(),
-  threshold: z.number().int().min(0),
-});
 
 async function readSettings(keys: string[]): Promise<Map<string, unknown>> {
   const rows = await db.setting.findMany({ where: { key: { in: keys } } });
@@ -86,5 +71,49 @@ export async function getBankTransferInfo(): Promise<BankTransferInfo | null> {
 
   const values = await readSettings(["bankTransfer"]);
   const parsed = bankTransferSchema.safeParse(values.get("bankTransfer"));
+  return parsed.success ? parsed.data : null;
+}
+
+const emptyText = { fa: "", en: "", ar: "" };
+
+/** Shop phone, email, address and social links (admin-editable `contact`). */
+export async function getContactInfo(): Promise<ContactSetting> {
+  "use cache";
+  cacheLife("hours");
+  cacheTag("settings");
+
+  const values = await readSettings(["contact"]);
+  const parsed = contactSettingSchema.safeParse(values.get("contact"));
+  if (parsed.success) return parsed.data;
+  return {
+    phone: siteConfig.phone,
+    whatsapp: "",
+    email: siteConfig.email,
+    instagram: "momtaz_shahd",
+    address: emptyText,
+    workingHours: emptyText,
+    social: { telegram: "", aparat: "", linkedin: "", eitaa: "" },
+  };
+}
+
+/** The strip above the header; null when switched off or empty. */
+export async function getAnnouncement(): Promise<AnnouncementSetting | null> {
+  "use cache";
+  cacheLife("hours");
+  cacheTag("settings");
+
+  const values = await readSettings(["announcementBanner"]);
+  const parsed = announcementSettingSchema.safeParse(values.get("announcementBanner"));
+  return parsed.success && parsed.data.enabled ? parsed.data : null;
+}
+
+/** Admin-set rates for showing approximate USD/AED next to Toman prices. */
+export async function getExchangeRates(): Promise<ExchangeRatesSetting | null> {
+  "use cache";
+  cacheLife("hours");
+  cacheTag("settings");
+
+  const values = await readSettings(["exchangeRates"]);
+  const parsed = exchangeRatesSettingSchema.safeParse(values.get("exchangeRates"));
   return parsed.success ? parsed.data : null;
 }

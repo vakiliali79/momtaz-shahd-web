@@ -143,7 +143,13 @@
     "instagram": "Momtaz Shahd on Instagram",
     "telegram": "Momtaz Shahd on Telegram",
     "whatsapp": "Momtaz Shahd on WhatsApp",
-    "rights": "© {year} Momtaz Shahd. All rights reserved."
+    "rights": "© {year} Momtaz Shahd. All rights reserved.",
+    "social": {
+      "telegram": "Telegram",
+      "aparat": "Aparat",
+      "linkedin": "LinkedIn",
+      "eitaa": "Eitaa"
+    }
   },
   "newsletter": {
     "title": "Newsletter",
@@ -373,7 +379,8 @@
       "messageTooShort": "Please write at least 10 characters.",
       "tooLong": "This text is too long.",
       "server": "Something went wrong. Please try again."
-    }
+    },
+    "whatsapp": "WhatsApp"
   },
   "auth": {
     "login": {
@@ -1328,6 +1335,95 @@
       "rejectTitle": "Remove this review?",
       "rejectText": "The review will be deleted. The customer can write a new one."
     },
+    "settings": {
+      "title": "Settings",
+      "description": "Shipping, currency, contact details and the site banner.",
+      "save": "Save changes",
+      "saving": "Saving…",
+      "saved": "Settings saved.",
+      "tabs": {
+        "shipping": "Shipping",
+        "currency": "Currency",
+        "contact": "Contact & social",
+        "announcement": "Banner",
+        "bank": "Bank transfer"
+      },
+      "shipping": {
+        "origin": "Ships from",
+        "originHint": "Rates for the same province apply when the customer is in this province.",
+        "province": "Province",
+        "city": "City",
+        "choose": "Choose…",
+        "pickupAddress": "Pickup address (shown for in-person pickup)",
+        "freeTitle": "Free shipping",
+        "freeEnabled": "Offer free shipping",
+        "freeThreshold": "Free from (Toman)",
+        "freeThresholdHint": "Orders with a subtotal at or above this amount ship free.",
+        "methodActive": "Offer this method",
+        "daysMin": "Delivery days (from)",
+        "daysMax": "Delivery days (to)",
+        "baseWeight": "Weight included (grams)",
+        "baseWeightHint": "Each started extra kilogram adds the per-kg price.",
+        "inProvince": "Inside the origin province",
+        "outOfProvince": "Other provinces",
+        "outEnabled": "Deliver to other provinces",
+        "baseCost": "Base price (Toman)",
+        "perExtraKg": "Per extra kg (Toman)",
+        "sameCityOnly": "Only inside the origin city",
+        "sameCityOnlyHint": "For a local courier.",
+        "provinceRates": "Special prices by province",
+        "provinceRatesHint": "Overrides the rates above for the chosen provinces.",
+        "addRate": "Add province price",
+        "removeRate": "Remove this price",
+        "save": "Save shipping",
+        "saving": "Saving…"
+      },
+      "currency": {
+        "title": "Exchange rates",
+        "description": "English and Arabic visitors can see approximate prices next to Toman. Payments are always in Toman.",
+        "usd": "1 US dollar = ? Toman",
+        "aed": "1 UAE dirham = ? Toman",
+        "rateHint": "0 hides this currency.",
+        "show": "Show approximate prices",
+        "showHint": "Only for the English and Arabic site.",
+        "example": "Example: {toman} Toman ≈ {usd} ≈ {aed}",
+        "updatedAt": "Last updated {date}"
+      },
+      "contact": {
+        "title": "Contact details",
+        "phone": "Phone",
+        "whatsapp": "WhatsApp number",
+        "email": "Email",
+        "instagram": "Instagram handle",
+        "address": "Address",
+        "hours": "Working hours",
+        "social": "Other social links",
+        "socialHint": "Full https:// links. Leave empty to hide.",
+        "networks": {
+          "telegram": "Telegram",
+          "aparat": "Aparat",
+          "linkedin": "LinkedIn",
+          "eitaa": "Eitaa"
+        }
+      },
+      "announcement": {
+        "title": "Announcement banner",
+        "enabled": "Show the banner",
+        "enabledHint": "A thin strip above the site header.",
+        "text": "Banner text",
+        "textHint": "Keep it short — one line on phones.",
+        "link": "Link (optional)",
+        "linkHint": "A page on this site, e.g. /products."
+      },
+      "bank": {
+        "title": "Bank transfer details",
+        "description": "Shown to customers who choose bank transfer at checkout.",
+        "bankName": "Bank name",
+        "accountHolder": "Account holder",
+        "sheba": "IBAN (Sheba)",
+        "cardNumber": "Card number"
+      }
+    },
     "wholesale": {
       "title": "Wholesale requests",
       "description": "Enquiries from shops and distributors.",
@@ -1376,5 +1472,9 @@
       "CANCELLED": "Momtaz Shahd: order {orderNumber} was cancelled."
     },
     "tracking": "Momtaz Shahd: order {orderNumber} tracking code: {code}"
+  },
+  "currency": {
+    "approx": "≈ {values}",
+    "note": "Approximate, at the shop's exchange rate. You pay in Toman."
   }
 }

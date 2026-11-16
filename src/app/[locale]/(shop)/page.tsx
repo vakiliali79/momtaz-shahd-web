@@ -25,10 +25,10 @@ import { ProductImage } from "@/components/product/product-image";
 import { RatingStars } from "@/components/product/rating-stars";
 import { Reveal } from "@/components/shared/reveal";
 import { Button } from "@/components/ui/button";
-import { siteConfig } from "@/config/site";
 import { Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { getCatalog, getDealers, getTestimonials } from "@/lib/data/catalog";
+import { getContactInfo } from "@/lib/data/settings";
 import { resolveImage } from "@/lib/data/images";
 import { formatNumber } from "@/lib/format";
 import { localeAlternates } from "@/lib/seo";
@@ -83,12 +83,14 @@ export default async function HomePage() {
   const locale = await rootLocale();
   if (!hasLocale(routing.locales, locale)) notFound();
 
-  const [t, catalog, testimonials, dealers] = await Promise.all([
+  const [t, catalog, testimonials, dealers, contact] = await Promise.all([
     getTranslations(),
     getCatalog(locale),
     getTestimonials(locale),
     getDealers(locale),
+    getContactInfo(),
   ]);
+  const instagramUrl = `https://www.instagram.com/${contact.instagram || "momtaz_shahd"}`;
 
   const featured = catalog.products.filter((product) => product.isFeatured);
   const heroImage = resolveImage("/products/hero.jpg");
@@ -311,7 +313,7 @@ export default async function HomePage() {
             {Array.from({ length: 6 }, (_, index) => (
               <li key={index} className={index >= 3 ? "max-lg:hidden" : undefined}>
                 <a
-                  href={siteConfig.social.instagram}
+                  href={instagramUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={t("footer.instagram")}
@@ -329,8 +331,8 @@ export default async function HomePage() {
           </ul>
           <div className="mt-6 text-center">
             <Button asChild variant="outline" size="lg" className="h-11 rounded-full px-6">
-              <a href={siteConfig.social.instagram} target="_blank" rel="noopener noreferrer">
-                <span dir="ltr">@momtaz_shahd</span>
+              <a href={instagramUrl} target="_blank" rel="noopener noreferrer">
+                <span dir="ltr">@{contact.instagram || "momtaz_shahd"}</span>
                 <span>{t("home.instagram.cta")}</span>
               </a>
             </Button>

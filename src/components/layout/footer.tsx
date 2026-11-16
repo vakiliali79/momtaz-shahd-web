@@ -1,12 +1,14 @@
 import type { ReactNode } from "react";
-import { MailIcon, MapPinIcon, PhoneIcon, ShieldCheckIcon } from "lucide-react";
+import { ExternalLinkIcon, MailIcon, MapPinIcon, PhoneIcon, ShieldCheckIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 import { Container } from "@/components/layout/container";
 import { Logo } from "@/components/layout/logo";
 import { NewsletterForm } from "@/components/layout/newsletter-form";
-import { mainNav, siteConfig } from "@/config/site";
+import { mainNav } from "@/config/site";
+import type { AppLocale } from "@/i18n/routing";
 import { Link } from "@/i18n/navigation";
+import { socialKeys, type ContactSetting } from "@/lib/settings-schemas";
 
 function InstagramIcon() {
   return (
@@ -36,8 +38,10 @@ function FooterHeading({ children }: { children: ReactNode }) {
   );
 }
 
-export function Footer({ year }: { year: string }) {
+export function Footer({ year, contact, locale }: { year: string; contact: ContactSetting; locale: AppLocale }) {
   const t = useTranslations();
+  const address = contact.address[locale] || t("footer.addressValue");
+  const socials = socialKeys.flatMap((key) => (contact.social[key] ? [{ key, href: contact.social[key] }] : []));
 
   return (
     <footer className="mt-auto border-t border-border bg-muted/50 print:hidden">
@@ -47,18 +51,32 @@ export function Footer({ year }: { year: string }) {
           <p className="max-w-sm text-sm leading-7 text-muted-foreground">
             {t("footer.about")}
           </p>
-          <div>
+          <div className="flex flex-wrap gap-2">
             <h2 className="sr-only">{t("footer.socialTitle")}</h2>
+            {contact.instagram ? (
             <a
-              href={siteConfig.social.instagram}
+              href={`https://www.instagram.com/${contact.instagram}`}
               target="_blank"
               rel="noopener noreferrer"
               aria-label={t("footer.instagram")}
               className="inline-flex h-10 items-center gap-2 rounded-full border border-border bg-background px-4 text-sm font-medium transition-colors hover:border-brand-gold hover:text-primary"
             >
               <InstagramIcon />
-              <span dir="ltr">@momtaz_shahd</span>
+              <span dir="ltr">@{contact.instagram}</span>
             </a>
+            ) : null}
+            {socials.map(({ key, href }) => (
+              <a
+                key={key}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex h-10 items-center gap-2 rounded-full border border-border bg-background px-4 text-sm font-medium transition-colors hover:border-brand-gold hover:text-primary"
+              >
+                <ExternalLinkIcon className="size-4" aria-hidden="true" />
+                {t(`footer.social.${key}`)}
+              </a>
+            ))}
           </div>
         </div>
 
@@ -85,29 +103,29 @@ export function Footer({ year }: { year: string }) {
               <MapPinIcon className="mt-1 size-4 shrink-0 text-brand-gold" aria-hidden="true" />
               <span>
                 <span className="sr-only">{t("footer.address")}: </span>
-                {t("footer.addressValue")}
+                {address}
               </span>
             </li>
             <li className="flex items-center gap-3">
               <PhoneIcon className="size-4 shrink-0 text-brand-gold" aria-hidden="true" />
               <span className="sr-only">{t("footer.phone")}: </span>
               <a
-                href={`tel:${siteConfig.phone.replaceAll(" ", "")}`}
+                href={`tel:${contact.phone.replace(/[^\d+]/g, "")}`}
                 dir="ltr"
                 className="rounded transition-colors hover:text-primary"
               >
-                {siteConfig.phone}
+                {contact.phone}
               </a>
             </li>
             <li className="flex items-center gap-3">
               <MailIcon className="size-4 shrink-0 text-brand-gold" aria-hidden="true" />
               <span className="sr-only">{t("footer.email")}: </span>
               <a
-                href={`mailto:${siteConfig.email}`}
+                href={`mailto:${contact.email}`}
                 dir="ltr"
                 className="rounded break-all transition-colors hover:text-primary"
               >
-                {siteConfig.email}
+                {contact.email}
               </a>
             </li>
           </ul>

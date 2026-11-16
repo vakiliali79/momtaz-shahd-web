@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ClockIcon, MailIcon, MapPinIcon, PhoneIcon } from "lucide-react";
+import { ClockIcon, MailIcon, MapPinIcon, MessageCircleIcon, PhoneIcon } from "lucide-react";
 import { hasLocale } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
@@ -8,8 +8,8 @@ import { locale as rootLocale } from "next/root-params";
 import { ContactForm } from "@/components/contact/contact-form";
 import { Container } from "@/components/layout/container";
 import { PageHeader } from "@/components/shared/page-header";
-import { siteConfig } from "@/config/site";
 import { routing } from "@/i18n/routing";
+import { getContactInfo } from "@/lib/data/settings";
 import { pageMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -27,23 +27,18 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function ContactPage() {
   const locale = await rootLocale();
   if (!hasLocale(routing.locales, locale)) notFound();
-  const t = await getTranslations();
+  const [t, contact] = await Promise.all([getTranslations(), getContactInfo()]);
 
   const details = [
-    { Icon: MapPinIcon, label: t("footer.address"), value: t("footer.addressValue") },
-    {
-      Icon: PhoneIcon,
-      label: t("footer.phone"),
-      value: siteConfig.phone,
-      href: `tel:${siteConfig.phone.replaceAll(" ", "")}`,
-    },
-    {
-      Icon: MailIcon,
-      label: t("footer.email"),
-      value: siteConfig.email,
-      href: `mailto:${siteConfig.email}`,
-    },
-    { Icon: ClockIcon, label: t("contact.hours"), value: t("contact.hoursValue") },
+    { Icon: MapPinIcon, label: t("footer.address"), value: contact.address[locale] || t("footer.addressValue") },
+    ...(contact.phone
+      ? [{ Icon: PhoneIcon, label: t("footer.phone"), value: contact.phone, href: `tel:${contact.phone.replace(/[^\d+]/g, "")}` }]
+      : []),
+    ...(contact.whatsapp
+      ? [{ Icon: MessageCircleIcon, label: t("contact.whatsapp"), value: contact.whatsapp, href: `https://wa.me/${contact.whatsapp.replace(/\D/g, "")}` }]
+      : []),
+    ...(contact.email ? [{ Icon: MailIcon, label: t("footer.email"), value: contact.email, href: `mailto:${contact.email}` }] : []),
+    { Icon: ClockIcon, label: t("contact.hours"), value: contact.workingHours[locale] || t("contact.hoursValue") },
   ];
 
   return (

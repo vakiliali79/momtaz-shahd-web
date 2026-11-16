@@ -9,6 +9,7 @@ import { QuantityStepper } from "@/components/cart/quantity-stepper";
 import { useCartItemActions, useCartSync } from "@/components/cart/use-cart";
 import { Container } from "@/components/layout/container";
 import { ProductImage } from "@/components/product/product-image";
+import { ApproxPrice } from "@/components/currency/approx-price";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Link } from "@/i18n/navigation";
@@ -301,8 +302,9 @@ function OrderSummary({ totals, hasItems }: { totals: CartTotals; hasItems: bool
 
       <div className="flex items-baseline justify-between gap-3 border-t border-border pt-4">
         <span className="font-semibold">{t("cart.total")}</span>
-        <span className="text-xl font-bold text-primary" aria-live="polite">
+        <span className="text-end text-xl font-bold text-primary" aria-live="polite">
           {price(totals.total)}
+          <ApproxPrice amount={totals.total} />
         </span>
       </div>
 

@@ -1,8 +1,8 @@
 import { getTranslations } from "next-intl/server";
 
 import { LogoMark } from "@/components/layout/logo";
-import { siteConfig } from "@/config/site";
 import type { AppLocale } from "@/i18n/routing";
+import { getContactInfo } from "@/lib/data/settings";
 import { formatDate, formatNumber, formatPrice } from "@/lib/format";
 import type { OrderView } from "@/lib/orders/queries";
 import { placeName } from "@/lib/orders/types";
@@ -13,7 +13,7 @@ import { placeName } from "@/lib/orders/types";
  * correctly (PDF libraries such as react-pdf do not shape RTL scripts reliably).
  */
 export async function InvoiceDocument({ order, locale }: { order: OrderView; locale: AppLocale }) {
-  const t = await getTranslations({ locale });
+  const [t, contact] = await Promise.all([getTranslations({ locale }), getContactInfo()]);
   const price = (amount: number) => formatPrice(amount, locale, t("common.toman"));
   const address = order.address;
 
@@ -25,7 +25,7 @@ export async function InvoiceDocument({ order, locale }: { order: OrderView; loc
           <div>
             <p className="text-lg font-bold">{t("brand.name")}</p>
             <p className="text-muted-foreground">{t("brand.tagline")}</p>
-            <p className="text-muted-foreground" dir="ltr">{siteConfig.phone} · {siteConfig.email}</p>
+            <p className="text-muted-foreground" dir="ltr">{[contact.phone, contact.email].filter(Boolean).join(" · ")}</p>
           </div>
         </div>
         <dl className="grid grid-cols-[auto_auto] gap-x-4 gap-y-1">

@@ -4,6 +4,7 @@ import { ChevronUpIcon } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 
 import { ProductImage } from "@/components/product/product-image";
+import { ApproxPrice } from "@/components/currency/approx-price";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -103,8 +104,9 @@ function SummaryBody({ items, totals, coupon, shippingChosen }: SummaryProps) {
 
       <div className="flex items-baseline justify-between gap-3 border-t border-border pt-4">
         <span className="font-semibold">{t("cart.total")}</span>
-        <span className="text-xl font-bold text-primary" aria-live="polite">
+        <span className="text-end text-xl font-bold text-primary" aria-live="polite">
           {price(totals.total)}
+          <ApproxPrice amount={totals.total} />
         </span>
       </div>
     </div>
