@@ -73,7 +73,7 @@ export function Footer({ year, contact, locale }: { year: string; contact: Conta
                 rel="noopener noreferrer"
                 className="inline-flex h-10 items-center gap-2 rounded-full border border-border bg-background px-4 text-sm font-medium transition-colors hover:border-brand-gold hover:text-primary"
               >
-                <ExternalLinkIcon className="size-4" aria-hidden="true" />
+                <ExternalLinkIcon className="size-4 rtl:-scale-x-100" aria-hidden="true" />
                 {t(`footer.social.${key}`)}
               </a>
             ))}

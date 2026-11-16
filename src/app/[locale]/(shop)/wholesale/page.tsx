@@ -48,7 +48,7 @@ export default async function WholesalePage() {
     <>
       <PageHeader title={t("title")} description={t("lead")} crumbs={[{ label: t("title") }]} />
 
-      <Container className="grid gap-8 py-10 sm:py-14 lg:grid-cols-[1.2fr_1fr] lg:items-center lg:gap-14">
+      <Container className="grid gap-8 section-y-sm lg:grid-cols-[1.2fr_1fr] lg:items-center lg:gap-14">
         <div className="space-y-5">
           <h2 className="text-fluid-2xl font-bold text-balance">{t("hero.title")}</h2>
           <p className="leading-8 text-pretty text-muted-foreground">{t("hero.text")}</p>
@@ -74,7 +74,7 @@ export default async function WholesalePage() {
         </Reveal>
       </Container>
 
-      <section className="bg-muted/50 py-12 sm:py-16" aria-labelledby="wholesale-benefits">
+      <section className="bg-muted/50 section-y-sm" aria-labelledby="wholesale-benefits">
         <Container>
           <h2 id="wholesale-benefits" className="mb-8 text-fluid-2xl font-bold">{t("benefits.title")}</h2>
           <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -97,7 +97,7 @@ export default async function WholesalePage() {
         </Container>
       </section>
 
-      <Container as="section" className="py-12 sm:py-16" aria-labelledby="wholesale-tiers">
+      <Container as="section" className="section-y-sm" aria-labelledby="wholesale-tiers">
         <h2 id="wholesale-tiers" className="text-fluid-2xl font-bold">{t("tiers.title")}</h2>
         <p className="mt-2 max-w-2xl text-sm text-muted-foreground">{t("tiers.text")}</p>
         {tiers.length === 0 ? (
@@ -143,7 +143,7 @@ export default async function WholesalePage() {
         <p className="mt-3 text-xs text-muted-foreground">{t("tiers.note")}</p>
       </Container>
 
-      <Container as="section" className="grid gap-10 pb-12 sm:pb-16 lg:grid-cols-[1fr_1.2fr] lg:gap-14" aria-labelledby="wholesale-faq">
+      <Container as="section" className="grid gap-10 pb-[clamp(2rem,1.6rem+2vw,4rem)] lg:grid-cols-[1fr_1.2fr] lg:gap-14" aria-labelledby="wholesale-faq">
         <div>
           <h2 id="wholesale-faq" className="mb-6 text-fluid-2xl font-bold">{t("faq.title")}</h2>
           <Faq items={faqKeys.map((key) => ({ question: t(`faq.${key}.q`), answer: t(`faq.${key}.a`) }))} />

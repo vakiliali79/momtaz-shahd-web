@@ -18,11 +18,18 @@
   --color-success: var(--success);
   --shadow-soft: var(--shadow-soft);
   --breakpoint-3xl: 120rem;
+  --animate-shimmer: shimmer 1.6s ease-in-out infinite;
   /* Fluid type scale: grows smoothly from 320px phones to 4K desktops. */
   --text-fluid-sm: clamp(0.875rem, 0.84rem + 0.18vw, 1.0625rem);
   --text-fluid-base: clamp(1rem, 0.95rem + 0.25vw, 1.25rem);
   --text-fluid-lg: clamp(1.125rem, 1.03rem + 0.45vw, 1.625rem);
+  --text-fluid-sm--line-height: 1.6;
+  --text-fluid-base--line-height: 1.75;
+  --text-fluid-lg--line-height: 1.5;
+  --text-fluid-xl: clamp(1.25rem, 1.1rem + 0.75vw, 2rem);
+  --text-fluid-xl--line-height: 1.4;
   --text-fluid-2xl: clamp(1.5rem, 1.25rem + 1.2vw, 2.75rem);
+  --text-fluid-2xl--line-height: 1.3;
   --text-fluid-display: clamp(2rem, 1.35rem + 3.2vw, 5rem);
   --text-fluid-display--line-height: 1.15;
   --color-sidebar-ring: var(--sidebar-ring);
@@ -149,6 +156,33 @@
   --shadow-soft: 0 1px 2px rgb(0 0 0 / 0.3), 0 8px 24px rgb(0 0 0 / 0.35);
 }
 
+/*
+ * Spacing scale. Vertical rhythm between page sections grows with the
+ * viewport (≈40px on a 320px phone → 88px on wide screens) so pages breathe
+ * on large monitors without wasting space on phones.
+ *   section-y     — major page sections
+ *   section-y-sm  — sub-sections and page bodies under a page header
+ *   page-y        — the top of a page (headers, breadcrumbs)
+ */
+@utility section-y {
+  padding-block: clamp(2.5rem, 1.85rem + 3.25vw, 5.5rem);
+}
+@utility section-y-sm {
+  padding-block: clamp(2rem, 1.6rem + 2vw, 4rem);
+}
+@utility page-y {
+  padding-block: clamp(1.5rem, 1.2rem + 1.5vw, 2.75rem);
+}
+
+@keyframes shimmer {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -163,6 +197,29 @@
     @apply font-sans;
     scroll-behavior: smooth;
     text-size-adjust: 100%;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  /* Persian and Arabic script needs more leading than Latin. */
+  html:lang(fa),
+  html:lang(ar) {
+    line-height: 1.85;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    line-height: 1.35;
+    text-wrap: balance;
+  }
+  p,
+  li,
+  dd {
+    text-wrap: pretty;
+  }
+  /* Keep the target of in-page links clear of the sticky header. */
+  :target {
+    scroll-margin-top: 5rem;
   }
   :focus-visible {
     @apply outline-2 outline-offset-2 outline-ring;

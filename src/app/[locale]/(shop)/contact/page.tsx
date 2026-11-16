@@ -48,7 +48,7 @@ export default async function ContactPage() {
         description={t("contact.lead")}
         crumbs={[{ label: t("contact.title") }]}
       />
-      <Container className="grid gap-8 py-10 sm:py-14 lg:grid-cols-[1fr_1.4fr] lg:gap-12">
+      <Container className="grid gap-8 section-y-sm lg:grid-cols-[1fr_1.4fr] lg:gap-12">
         <section aria-labelledby="contact-info" className="space-y-4">
           <h2 id="contact-info" className="text-fluid-lg font-bold">
             {t("contact.infoTitle")}

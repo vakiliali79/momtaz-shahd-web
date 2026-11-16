@@ -5,7 +5,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 export function OrderPageShell({ children }: { children: ReactNode }) {
   return (
-    <Container className="py-10 sm:py-14">
+    <Container className="section-y-sm">
       <div className="mx-auto max-w-3xl">{children}</div>
     </Container>
   );

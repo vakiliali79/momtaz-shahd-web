@@ -44,7 +44,7 @@ async function Dashboard() {
       <div className="grid gap-4 md:grid-cols-3">
         <section aria-labelledby="dash-orders" className="rounded-2xl border border-border bg-card p-5 shadow-soft">
           <h2 id="dash-orders" className="text-sm text-muted-foreground">{t("accountPages.dashboard.orderCount")}</h2>
-          <p className="mt-1 text-3xl font-bold">{formatNumber(data.orderCount, locale)}</p>
+          <p className="mt-1 text-fluid-2xl font-bold tabular-nums">{formatNumber(data.orderCount, locale)}</p>
           <Link href="/account/orders" className="mt-3 inline-block text-sm font-medium text-primary hover:underline">
             {t("accountPages.dashboard.viewOrders")}
           </Link>
@@ -94,7 +94,7 @@ async function Dashboard() {
 
         <section aria-labelledby="dash-wishlist" className="rounded-2xl border border-border bg-card p-5 shadow-soft">
           <h2 id="dash-wishlist" className="text-sm text-muted-foreground">{t("accountPages.dashboard.wishlistCount")}</h2>
-          <p className="mt-1 text-3xl font-bold">{formatNumber(data.wishlistCount, locale)}</p>
+          <p className="mt-1 text-fluid-2xl font-bold tabular-nums">{formatNumber(data.wishlistCount, locale)}</p>
           <Link href="/account/wishlist" className="mt-3 inline-block text-sm font-medium text-primary hover:underline">
             {t("accountPages.dashboard.viewWishlist")}
           </Link>

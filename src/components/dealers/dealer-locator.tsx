@@ -178,11 +178,11 @@ export function DealerLocator({ dealers, title, lead }: { dealers: DealerSummary
                     }}
                     className={cn(
                       onMap && "cursor-pointer",
-                      "rounded-2xl border bg-card p-4 shadow-soft transition-colors",
+                      "@container rounded-2xl border bg-card p-4 shadow-soft transition-colors hover:border-brand-gold/60",
                       selected ? "border-primary ring-2 ring-primary/20" : "border-border",
                     )}
                   >
-                    <div className="flex items-start justify-between gap-3">
+                    <div className="flex flex-col gap-2 @[19rem]:flex-row @[19rem]:items-start @[19rem]:justify-between @[19rem]:gap-3">
                       <div className="min-w-0">
                         <h3 className="flex items-center gap-1.5 font-semibold">
                           <Link href={`/dealers/${dealer.id}`} className="hover:text-primary">{dealer.name}</Link>
@@ -198,7 +198,7 @@ export function DealerLocator({ dealers, title, lead }: { dealers: DealerSummary
                           type="button"
                           variant={selected ? "default" : "outline"}
                           size="sm"
-                          className="shrink-0 rounded-full"
+                          className="min-h-11 shrink-0 self-start rounded-full"
                           aria-pressed={selected}
                           onClick={() => select(selected ? null : dealer.id)}
                         >

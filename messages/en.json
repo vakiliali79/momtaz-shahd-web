@@ -228,9 +228,11 @@
     }
   },
   "notFound": {
-    "title": "Page not found",
-    "description": "The page you are looking for does not exist or is not ready yet.",
-    "backHome": "Back to home"
+    "title": "This page went missing",
+    "description": "Like the last cookie in the box — it isn't here. The link may be old, or the address mistyped.",
+    "backHome": "Back to home",
+    "browse": "Browse products",
+    "popular": "Popular pages"
   },
   "units": {
     "g": "{value} g",
@@ -1800,5 +1802,12 @@
       "tooMany": "Too many attempts. Please wait a few minutes and try again.",
       "server": "Something went wrong. Please try again."
     }
+  },
+  "errorPage": {
+    "title": "Something went wrong",
+    "description": "We couldn't load this page. It's not you — please try again in a moment.",
+    "retry": "Try again",
+    "home": "Back to home",
+    "reference": "Reference code:"
   }
 }

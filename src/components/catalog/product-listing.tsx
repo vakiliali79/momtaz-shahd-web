@@ -114,7 +114,7 @@ export function ProductListingSkeleton() {
   return (
     <>
       <div className="border-b border-border bg-secondary/40">
-        <Container className="space-y-4 py-6 sm:py-10">
+        <Container className="space-y-4 page-y">
           <Skeleton className="h-4 w-40" />
           <Skeleton className="h-9 w-64 max-w-full" />
           <Skeleton className="h-4 w-96 max-w-full" />

@@ -77,7 +77,7 @@ export default async function DealerPage({ params }: PageProps<"/[locale]/dealer
         description={`${t(`types.${dealer.type}`)} · ${t("place", { city: dealer.city, province: dealer.province })}`}
         crumbs={[{ label: t("title"), href: "/dealers" }, { label: dealer.name }]}
       />
-      <Container className="grid gap-8 py-10 sm:py-14 lg:grid-cols-[1fr_1.2fr] lg:gap-12">
+      <Container className="grid gap-8 section-y-sm lg:grid-cols-[1fr_1.2fr] lg:gap-12">
         <div className="space-y-6">
           {dealer.isVerified ? (
             <p className="inline-flex items-center gap-2 rounded-full bg-brand-leaf/15 px-3 py-1 text-sm font-medium text-brand-leaf dark:text-success">

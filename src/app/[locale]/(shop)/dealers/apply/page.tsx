@@ -32,7 +32,7 @@ export default async function DealerApplyPage() {
   return (
     <>
       <PageHeader title={t("title")} description={t("lead")} crumbs={[{ label: tDealers("title"), href: "/dealers" }, { label: t("title") }]} />
-      <Container className="grid gap-10 py-10 sm:py-14 lg:grid-cols-[1fr_1.3fr] lg:gap-14">
+      <Container className="grid gap-10 section-y-sm lg:grid-cols-[1fr_1.3fr] lg:gap-14">
         <div className="space-y-6">
           <h2 className="text-fluid-xl font-bold">{t("perksTitle")}</h2>
           <ul className="space-y-4">

@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { ShoppingBagIcon, Trash2Icon } from "lucide-react";
-import { useAnimate } from "motion/react";
+import { AnimatePresence, motion, useAnimate } from "motion/react";
 import { useLocale, useTranslations } from "next-intl";
 
 import { QuantityStepper } from "@/components/cart/quantity-stepper";
@@ -69,15 +69,23 @@ export function CartDrawer() {
           <span ref={iconScope} className="inline-flex">
             <ShoppingBagIcon aria-hidden="true" />
           </span>
-          {hydrated && count > 0 ? (
-            <span
-              aria-hidden="true"
-              className="absolute -end-1 -top-1 grid h-5 min-w-5 place-items-center rounded-full bg-primary px-1 text-[0.6875rem] leading-none font-semibold text-primary-foreground ring-2 ring-background"
-            >
-              {formatNumber(Math.min(count, 99), locale)}
-              {count > 99 ? "+" : ""}
-            </span>
-          ) : null}
+          <AnimatePresence initial={false}>
+            {hydrated && count > 0 ? (
+              <motion.span
+                // A new key per count makes the badge pop each time it changes.
+                key={count}
+                aria-hidden="true"
+                initial={{ scale: 0.4, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.4, opacity: 0 }}
+                transition={{ type: "spring", stiffness: 520, damping: 16 }}
+                className="absolute -end-1 -top-1 grid h-5 min-w-5 place-items-center rounded-full bg-primary px-1 text-[0.6875rem] leading-none font-semibold text-primary-foreground ring-2 ring-background"
+              >
+                {formatNumber(Math.min(count, 99), locale)}
+                {count > 99 ? "+" : ""}
+              </motion.span>
+            ) : null}
+          </AnimatePresence>
         </Button>
       </SheetTrigger>
 

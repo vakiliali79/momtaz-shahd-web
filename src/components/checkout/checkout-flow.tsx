@@ -215,7 +215,7 @@ export function CheckoutFlow({
 
   if (items.length === 0 && !placed) {
     return (
-      <Container className="py-14 sm:py-20">
+      <Container className="section-y">
         <div className="mx-auto grid max-w-md place-items-center gap-3 rounded-3xl border border-dashed border-input px-6 py-14 text-center">
           <ShoppingBagIcon className="size-10 text-brand-gold" strokeWidth={1.5} aria-hidden="true" />
           <h2 className="text-fluid-lg font-bold">{t("cart.empty.title")}</h2>

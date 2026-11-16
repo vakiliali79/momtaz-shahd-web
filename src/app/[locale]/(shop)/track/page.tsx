@@ -24,7 +24,7 @@ export default async function TrackPage() {
   return (
     <>
       <PageHeader title={t("title")} description={t("lead")} crumbs={[{ label: t("title") }]} />
-      <Container className="max-w-4xl py-10 sm:py-14">
+      <Container className="max-w-4xl section-y-sm">
         <TrackForm />
       </Container>
     </>

@@ -94,7 +94,7 @@ export default async function ProductPage({
   ];
 
   return (
-    <Container className="py-6 sm:py-10">
+    <Container className="page-y">
       <Breadcrumbs
         items={[
           { label: t("catalog.title"), href: "/products" },

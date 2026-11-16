@@ -23,6 +23,7 @@ import { NewsletterForm } from "@/components/layout/newsletter-form";
 import { ProductCard } from "@/components/product/product-card";
 import { ProductImage } from "@/components/product/product-image";
 import { RatingStars } from "@/components/product/rating-stars";
+import { MotionCard } from "@/components/shared/motion-card";
 import { Reveal } from "@/components/shared/reveal";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
@@ -104,7 +105,7 @@ export default async function HomePage() {
     <>
       {/* Hero */}
       <section className="relative overflow-hidden bg-linear-to-b from-secondary/80 to-background dark:from-secondary/40">
-        <Container className="grid items-center gap-10 py-12 sm:py-16 lg:grid-cols-2 lg:gap-16 lg:py-24">
+        <Container className="grid items-center gap-10 section-y-sm lg:grid-cols-2 lg:gap-16 lg:py-24">
           <HeroText>
             <p className="inline-flex items-center gap-2 rounded-full bg-background px-3 py-1.5 text-xs font-medium text-brand-leaf shadow-soft dark:text-success">
               <LeafIcon className="size-3.5" aria-hidden="true" />
@@ -139,7 +140,7 @@ export default async function HomePage() {
       </section>
 
       {/* Categories */}
-      <Container as="section" className="py-14 sm:py-20" aria-labelledby="home-categories">
+      <Container as="section" className="section-y" aria-labelledby="home-categories">
         <SectionHeading
           id="home-categories"
           title={t("home.categories.title")}
@@ -149,9 +150,10 @@ export default async function HomePage() {
           {catalog.categories.map((category, index) => (
             <li key={category.id}>
               <Reveal delay={index * 0.06} className="h-full">
+                <MotionCard className="h-full">
                 <Link
                   href={`/category/${category.slug}`}
-                  className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-soft transition duration-300 hover:-translate-y-1 hover:shadow-lg motion-reduce:transition-none motion-reduce:hover:translate-y-0"
+                  className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-soft transition-shadow duration-300 hover:shadow-lg"
                 >
                   <div className="relative aspect-4/3 overflow-hidden bg-secondary">
                     <ProductImage
@@ -171,6 +173,7 @@ export default async function HomePage() {
                     </p>
                   </div>
                 </Link>
+                </MotionCard>
               </Reveal>
             </li>
           ))}
@@ -179,7 +182,7 @@ export default async function HomePage() {
 
       {/* Featured products */}
       {featured.length > 0 ? (
-        <section className="bg-muted/50 py-14 sm:py-20" aria-labelledby="home-featured">
+        <section className="bg-muted/50 section-y" aria-labelledby="home-featured">
           <Container>
             <SectionHeading
               id="home-featured"
@@ -197,7 +200,7 @@ export default async function HomePage() {
       ) : null}
 
       {/* Why Momtaz Shahd */}
-      <Container as="section" className="py-14 sm:py-20" aria-labelledby="home-why">
+      <Container as="section" className="section-y" aria-labelledby="home-why">
         <SectionHeading id="home-why" title={t("home.why.title")} subtitle={t("home.why.subtitle")} />
         <ul className="grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
           {values.map(({ key, Icon }, index) => (
@@ -220,7 +223,7 @@ export default async function HomePage() {
 
       {/* Testimonials */}
       {testimonials.length > 0 ? (
-        <section className="bg-secondary/50 py-14 sm:py-20 dark:bg-secondary/25" aria-labelledby="home-testimonials">
+        <section className="bg-secondary/50 section-y dark:bg-secondary/25" aria-labelledby="home-testimonials">
           <Container>
             <SectionHeading
               id="home-testimonials"
@@ -259,7 +262,7 @@ export default async function HomePage() {
       ) : null}
 
       {/* Dealer locator teaser */}
-      <Container as="section" className="py-14 sm:py-20" aria-labelledby="home-dealers">
+      <Container as="section" className="section-y" aria-labelledby="home-dealers">
         <div className="grid items-center gap-8 overflow-hidden rounded-3xl border border-border bg-card p-6 shadow-soft sm:p-10 lg:grid-cols-2 lg:gap-12">
           <div className="space-y-5">
             <h2 id="home-dealers" className="text-fluid-2xl font-bold text-balance">
@@ -301,7 +304,7 @@ export default async function HomePage() {
       </Container>
 
       {/* Instagram placeholder */}
-      <section className="bg-muted/50 py-14 sm:py-20" aria-labelledby="home-instagram">
+      <section className="bg-muted/50 section-y" aria-labelledby="home-instagram">
         <Container>
           <SectionHeading
             id="home-instagram"
@@ -341,7 +344,7 @@ export default async function HomePage() {
       </section>
 
       {/* Newsletter */}
-      <Container as="section" className="py-14 sm:py-20" aria-labelledby="home-newsletter">
+      <Container as="section" className="section-y" aria-labelledby="home-newsletter">
         <div className="rounded-3xl bg-primary px-6 py-10 text-primary-foreground sm:px-12 sm:py-14">
           <div className="mx-auto max-w-xl space-y-5 text-center">
             <h2 id="home-newsletter" className="text-fluid-2xl font-bold text-balance">

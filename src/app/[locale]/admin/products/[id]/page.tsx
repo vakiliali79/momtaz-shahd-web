@@ -35,7 +35,7 @@ async function EditProduct({ params }: { params: PageProps<"/[locale]/admin/prod
         actions={
           <Button asChild variant="outline" className="rounded-full">
             <Link href={`/products/${product.slug}`} target="_blank">
-              <ExternalLinkIcon aria-hidden="true" />
+              <ExternalLinkIcon className="rtl:-scale-x-100" aria-hidden="true" />
               {t("viewInStore")}
             </Link>
           </Button>

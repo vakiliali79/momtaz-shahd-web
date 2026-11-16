@@ -57,7 +57,7 @@ export function PageHeader({
 }) {
   return (
     <div className="border-b border-border bg-linear-to-b from-secondary/60 to-background dark:from-secondary/30">
-      <Container className="space-y-4 py-6 sm:py-10">
+      <Container className="space-y-4 page-y">
         <Breadcrumbs items={crumbs} />
         <div className="space-y-2">
           <h1 className="text-fluid-2xl font-bold text-balance">{title}</h1>

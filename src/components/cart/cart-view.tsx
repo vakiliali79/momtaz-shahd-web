@@ -348,7 +348,7 @@ export function CartView({ shipping }: { shipping: ShippingConfig }) {
 
   if (items.length === 0) {
     return (
-      <Container className="py-14 sm:py-20">
+      <Container className="section-y">
         <div className="mx-auto grid max-w-md place-items-center gap-3 rounded-3xl border border-dashed border-input px-6 py-14 text-center">
           <span className="grid size-20 place-items-center rounded-full bg-secondary text-brand-gold">
             <ShoppingBagIcon className="size-9" strokeWidth={1.5} aria-hidden="true" />

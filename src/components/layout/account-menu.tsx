@@ -84,7 +84,7 @@ export function AccountMenu({ className }: { className?: string }) {
           <>
             <DropdownMenuSeparator />
             <DropdownMenuItem onSelect={logout} disabled={pending} className="gap-2">
-              <LogOutIcon aria-hidden="true" />
+              <LogOutIcon className="rtl:-scale-x-100" aria-hidden="true" />
               <span>{t("signOut")}</span>
             </DropdownMenuItem>
           </>

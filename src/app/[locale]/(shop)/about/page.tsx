@@ -42,7 +42,7 @@ export default async function AboutPage() {
     <>
       <PageHeader title={t("title")} description={t("lead")} crumbs={[{ label: t("title") }]} />
 
-      <Container className="grid items-center gap-10 py-12 sm:py-16 lg:grid-cols-2 lg:gap-16">
+      <Container className="grid items-center gap-10 section-y-sm lg:grid-cols-2 lg:gap-16">
         <div className="space-y-5">
           <h2 className="text-fluid-2xl font-bold text-balance">{t("story.title")}</h2>
           <p className="leading-8 text-pretty text-muted-foreground">{t("story.p1")}</p>
@@ -59,7 +59,7 @@ export default async function AboutPage() {
         </Reveal>
       </Container>
 
-      <section className="bg-muted/50 py-12 sm:py-16" aria-labelledby="about-principles">
+      <section className="bg-muted/50 section-y-sm" aria-labelledby="about-principles">
         <Container>
           <h2 id="about-principles" className="mb-8 text-fluid-2xl font-bold">
             {t("principles.title")}

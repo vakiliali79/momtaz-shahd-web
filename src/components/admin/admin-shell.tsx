@@ -159,14 +159,14 @@ export function AdminShell({ adminName, children }: { adminName: string; childre
           <div className="ms-auto flex items-center gap-1">
             <Button asChild variant="ghost" size="sm" className="rounded-full">
               <Link href="/" target="_blank">
-                <ExternalLinkIcon aria-hidden="true" />
+                <ExternalLinkIcon className="rtl:-scale-x-100" aria-hidden="true" />
                 <span className="max-sm:sr-only">{t("viewStore")}</span>
               </Link>
             </Button>
             <LanguageSwitcher />
             <ThemeToggle />
             <Button variant="ghost" size="icon-lg" onClick={logout} disabled={pending} aria-label={t("signOut")}>
-              <LogOutIcon aria-hidden="true" />
+              <LogOutIcon className="rtl:-scale-x-100" aria-hidden="true" />
             </Button>
           </div>
         </header>

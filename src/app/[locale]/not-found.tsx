@@ -1,21 +1,25 @@
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
-import { Container } from "@/components/layout/container";
+import { StatusPage } from "@/components/shared/status-page";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
+import { formatNumber } from "@/lib/format";
 
+/** 404 outside the shop layout (e.g. in the admin panel). */
 export default function NotFound() {
   const t = useTranslations("notFound");
-
+  const locale = useLocale();
   return (
-    <Container className="grid min-h-[50vh] place-items-center py-16 text-center">
-      <div className="space-y-4">
-        <h1 className="text-fluid-2xl font-bold">{t("title")}</h1>
-        <p className="mx-auto max-w-md text-muted-foreground">{t("description")}</p>
-        <Button asChild size="lg" className="rounded-full px-5">
+    <StatusPage
+      variant="notFound"
+      code={formatNumber(404, locale).replace(/[٬,]/g, "")}
+      title={t("title")}
+      description={t("description")}
+      actions={
+        <Button asChild size="lg" className="h-12 rounded-full px-6">
           <Link href="/">{t("backHome")}</Link>
         </Button>
-      </div>
-    </Container>
+      }
+    />
   );
 }
