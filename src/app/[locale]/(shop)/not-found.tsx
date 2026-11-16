@@ -36,7 +36,7 @@ export default function NotFound() {
       }
     >
       <div className="space-y-5">
-        <SearchForm className="mx-auto max-w-sm" />
+        <SearchForm className="mx-auto max-w-sm" landmarkLabel={t("notFound.search")} />
         <nav aria-label={t("notFound.popular")}>
           <p className="mb-3 text-sm text-muted-foreground">{t("notFound.popular")}</p>
           <ul className="flex flex-wrap justify-center gap-2">

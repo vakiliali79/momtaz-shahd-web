@@ -13,7 +13,8 @@
   "common": {
     "skipToContent": "Skip to content",
     "close": "Close",
-    "toman": "Toman"
+    "toman": "Toman",
+    "announcement": "Announcement"
   },
   "nav": {
     "label": "Main navigation",
@@ -233,7 +234,8 @@
     "description": "Like the last cookie in the box — it isn't here. The link may be old, or the address mistyped.",
     "backHome": "Back to home",
     "browse": "Browse products",
-    "popular": "Popular pages"
+    "popular": "Popular pages",
+    "search": "Search the shop"
   },
   "units": {
     "g": "{value} g",

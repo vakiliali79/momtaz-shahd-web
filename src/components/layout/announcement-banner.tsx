@@ -3,7 +3,7 @@ import { ArrowLeftIcon } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 
 /** Thin brand-coloured strip above the header, edited in Admin → Settings. */
-export function AnnouncementBanner({ text, link }: { text: string; link: string | null }) {
+export function AnnouncementBanner({ text, link, label }: { text: string; link: string | null; label: string }) {
   const content = (
     <>
       <span>{text}</span>
@@ -11,7 +11,7 @@ export function AnnouncementBanner({ text, link }: { text: string; link: string 
     </>
   );
   return (
-    <aside className="bg-brand-red px-4 text-center text-xs font-medium text-white sm:text-sm print:hidden">
+    <aside aria-label={label} className="bg-brand-red px-4 text-center text-xs font-medium text-white sm:text-sm print:hidden">
       {link ? (
         <Link href={link} className="inline-flex min-h-11 items-center justify-center gap-1.5 rounded underline-offset-4 hover:underline focus-visible:ring-2 focus-visible:ring-white focus-visible:outline-none">
           {content}
