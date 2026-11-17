@@ -14,7 +14,7 @@ import { discountPercent, formatWeight } from "@/lib/units";
 import { cn } from "@/lib/utils";
 
 export const CARD_IMAGE_SIZES =
-  "(min-width: 1536px) 18vw, (min-width: 1280px) 22vw, (min-width: 1024px) 28vw, (min-width: 420px) 46vw, 92vw";
+  "(min-width: 1920px) 340px, (min-width: 1536px) 18vw, (min-width: 1280px) 22vw, (min-width: 1024px) 28vw, (min-width: 420px) 46vw, 92vw";
 
 export function ProductCard({
   product,
@@ -33,7 +33,7 @@ export function ProductCard({
   return (
     <MotionCard
       className={cn(
-        "group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-soft transition-shadow duration-300 hover:shadow-lg",
+        "group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-soft hover:shadow-lg",
         className,
       )}
     >

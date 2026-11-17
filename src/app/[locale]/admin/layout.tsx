@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import { Suspense, type ReactNode } from "react";
-import { getTranslations } from "next-intl/server";
+import { NextIntlClientProvider } from "next-intl";
+import { getMessages, getTranslations } from "next-intl/server";
 
 import { AdminShell } from "@/components/admin/admin-shell";
 import { Skeleton } from "@/components/ui/skeleton";
+import { clientMessages } from "@/i18n/client-messages";
 import { currentLocale } from "@/lib/locale";
 import { requireAdmin } from "@/lib/session";
 
@@ -26,7 +28,12 @@ export async function generateMetadata(): Promise<Metadata> {
 async function AdminGate({ children }: { children: ReactNode }) {
   const locale = await currentLocale();
   const admin = await requireAdmin(locale, "/admin");
-  return <AdminShell adminName={admin.name ?? admin.phone}>{children}</AdminShell>;
+  // The admin panel's own texts are only sent to the browser here.
+  return (
+    <NextIntlClientProvider messages={clientMessages(await getMessages(), { includeAdmin: true })}>
+      <AdminShell adminName={admin.name ?? admin.phone}>{children}</AdminShell>
+    </NextIntlClientProvider>
+  );
 }
 
 export default function AdminLayout({ children }: LayoutProps<"/[locale]/admin">) {

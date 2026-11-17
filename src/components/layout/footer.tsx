@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 
 import { Container } from "@/components/layout/container";
 import { Logo } from "@/components/layout/logo";
-import { NewsletterForm } from "@/components/layout/newsletter-form";
+import { LazyNewsletter } from "@/components/layout/lazy-newsletter";
 import { mainNav } from "@/config/site";
 import type { AppLocale } from "@/i18n/routing";
 import { Link } from "@/i18n/navigation";
@@ -145,7 +145,7 @@ export function Footer({ year, contact, locale }: { year: string; contact: Conta
             <p className="mb-3 text-sm leading-6 text-muted-foreground">
               {t("newsletter.description")}
             </p>
-            <NewsletterForm />
+            <LazyNewsletter />
           </div>
           <div>
             <FooterHeading>{t("footer.trustTitle")}</FooterHeading>

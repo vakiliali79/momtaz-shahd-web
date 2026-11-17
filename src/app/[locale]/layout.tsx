@@ -3,9 +3,11 @@ import { IBM_Plex_Sans_Arabic, Inter, Vazirmatn } from "next/font/google";
 import { notFound } from "next/navigation";
 import { locale as rootLocale } from "next/root-params";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
-import { getTranslations } from "next-intl/server";
+import { getMessages, getTranslations } from "next-intl/server";
 
 import { Providers } from "@/components/providers";
+import { ServiceWorkerRegistration } from "@/components/pwa/service-worker";
+import { clientMessages } from "@/i18n/client-messages";
 import { getDirection } from "@/i18n/locales";
 import { routing, type AppLocale } from "@/i18n/routing";
 import { SITE_URL } from "@/lib/site";
@@ -14,6 +16,10 @@ import "../globals.css";
 
 // One font per locale. All three expose the same CSS variable, and only the
 // active locale's class is put on <html>, so only that font is downloaded.
+// `display: "swap"`: text waits up to 100ms for the font (normally enough),
+// so it paints once in the brand font instead of swapping fonts mid-load, which
+// would repaint the largest text block after hydration and delay LCP. On slow
+// connections the fallback font shows and swaps within a few seconds at most.
 const vazirmatn = Vazirmatn({
   subsets: ["arabic", "latin"],
   variable: "--font-locale",
@@ -49,8 +55,12 @@ export function generateStaticParams() {
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("metadata");
 
+  const locale = await rootLocale();
   return {
     title: { default: t("title"), template: t("titleTemplate") },
+    applicationName: t("siteName"),
+    manifest: `/${locale}/manifest.webmanifest`,
+    appleWebApp: { capable: true, title: t("siteName"), statusBarStyle: "default" },
     description: t("description"),
     metadataBase: new URL(SITE_URL),
     openGraph: { siteName: t("siteName"), type: "website" },
@@ -59,7 +69,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: light)", color: "#c8102e" },
     { media: "(prefers-color-scheme: dark)", color: "#17110c" },
   ],
 };
@@ -80,13 +90,10 @@ export default async function RootLayout({ children }: LayoutProps<"/[locale]">)
       suppressHydrationWarning
     >
       <body className="flex min-h-full flex-col">
-        {/* Without JavaScript the entrance animations never run: show content. */}
-        <noscript>
-          <style>{"[data-reveal]{opacity:1!important;transform:none!important}"}</style>
-        </noscript>
-        <NextIntlClientProvider>
+        <NextIntlClientProvider messages={clientMessages(await getMessages(), { includeAdmin: false })}>
           {/* Shop pages add the site header and footer in (shop)/layout.tsx; the admin has its own. */}
           <Providers dir={dir}>{children}</Providers>
+          <ServiceWorkerRegistration />
         </NextIntlClientProvider>
       </body>
     </html>

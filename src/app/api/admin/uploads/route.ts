@@ -2,6 +2,7 @@ import { randomBytes } from "node:crypto";
 import { NextResponse, type NextRequest } from "next/server";
 import { z } from "zod";
 
+import { optimizeUpload } from "@/lib/images/optimize-upload";
 import { getAdminUser } from "@/lib/session";
 import { getPublicStorage } from "@/lib/storage/public-files";
 import { sniffReceiptType } from "@/lib/validation/receipt";
@@ -11,7 +12,8 @@ const folderSchema = z.enum(["products", "categories", "dealers"]);
 
 /**
  * Admin image upload (multipart: `file`, `folder`). Returns `{ url }`.
- * Accepts JPEG, PNG and WebP up to 5 MB, checked from the file's bytes.
+ * Accepts JPEG, PNG and WebP up to 5 MB, checked from the file's bytes, and
+ * stores them as WebP (rotated, metadata stripped, at most 2000px).
  */
 export async function POST(request: NextRequest) {
   // Same-origin only (cookies are SameSite=Lax too, but be explicit).
@@ -34,9 +36,16 @@ export async function POST(request: NextRequest) {
   const type = sniffReceiptType(bytes);
   if (!type || type.ext === "pdf") return NextResponse.json({ error: "fileType" }, { status: 400 });
 
-  const key = `${folder.data}/${Date.now().toString(36)}-${randomBytes(6).toString("hex")}.${type.ext}`;
+  let optimized;
   try {
-    const url = await getPublicStorage().save(key, bytes, type.mime);
+    optimized = await optimizeUpload(bytes);
+  } catch {
+    // Not a readable image after all (corrupt or disguised file).
+    return NextResponse.json({ error: "fileType" }, { status: 400 });
+  }
+  const key = `${folder.data}/${Date.now().toString(36)}-${randomBytes(6).toString("hex")}.${optimized.ext}`;
+  try {
+    const url = await getPublicStorage().save(key, optimized.data, optimized.mime);
     return NextResponse.json({ url });
   } catch (error) {
     console.error("[uploads] Save failed:", error);

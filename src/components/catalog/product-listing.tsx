@@ -111,16 +111,10 @@ export function ProductListing({
 }
 
 /** Skeleton shown by loading.tsx while a listing page streams in. */
-export function ProductListingSkeleton() {
+/** The filters, toolbar and grid placeholders (below a real page header). */
+export function ProductListingBodySkeleton() {
   return (
     <>
-      <div className="border-b border-border bg-secondary/40">
-        <Container className="space-y-4 page-y">
-          <Skeleton className="h-4 w-40" />
-          <Skeleton className="h-9 w-64 max-w-full" />
-          <Skeleton className="h-4 w-96 max-w-full" />
-        </Container>
-      </div>
       <Container className="grid gap-8 py-8 lg:grid-cols-[15rem_minmax(0,1fr)] lg:gap-10 lg:py-10">
         <div className="hidden lg:block">
           <Skeleton className="h-96 rounded-2xl" />

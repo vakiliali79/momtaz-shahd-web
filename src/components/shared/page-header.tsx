@@ -1,5 +1,5 @@
 import { Fragment, type ReactNode } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 import { Container } from "@/components/layout/container";
 import {
@@ -10,14 +10,32 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import { JsonLd } from "@/components/shared/json-ld";
 import { Link } from "@/i18n/navigation";
+import { SITE_URL } from "@/lib/site";
 
 export type Crumb = { label: string; href?: string };
 
 export function Breadcrumbs({ items }: { items: readonly Crumb[] }) {
   const t = useTranslations("breadcrumbs");
+  const locale = useLocale();
+  const absolute = (href: string) => `${SITE_URL}/${locale}${href === "/" ? "" : href}`;
+  // The same trail as structured data, for search result breadcrumbs.
+  const trail = [{ label: t("home"), href: "/" }, ...items];
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: trail.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.label,
+      ...(item.href ? { item: absolute(item.href) } : {}),
+    })),
+  };
 
   return (
+    <>
+    <JsonLd data={jsonLd} />
     <Breadcrumb aria-label={t("label")}>
       <BreadcrumbList>
         <BreadcrumbItem>
@@ -41,6 +59,7 @@ export function Breadcrumbs({ items }: { items: readonly Crumb[] }) {
         ))}
       </BreadcrumbList>
     </Breadcrumb>
+    </>
   );
 }
 

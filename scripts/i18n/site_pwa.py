@@ -1,0 +1,3 @@
+EN_OTHER = {"offline": {"title": "You're offline", "description": "We couldn't reach the shop. Check your connection and try again — your cart is saved on this device.", "retry": "Try again", "cart": "View cart"}}
+FA_OTHER = {"offline": {"title": "اتصال اینترنت برقرار نیست", "description": "به فروشگاه دسترسی نداریم. اتصال خود را بررسی و دوباره تلاش کنید — سبد خرید شما روی همین دستگاه ذخیره شده است.", "retry": "تلاش دوباره", "cart": "مشاهده سبد خرید"}}
+AR_OTHER = {"offline": {"title": "أنت غير متصل", "description": "تعذّر الوصول إلى المتجر. تحقّق من اتصالك وحاول مجددًا — سلتك محفوظة على هذا الجهاز.", "retry": "حاول مجددًا", "cart": "عرض السلة"}}

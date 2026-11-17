@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { hasLocale } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { locale as rootLocale } from "next/root-params";
 
-import { ProductListing } from "@/components/catalog/product-listing";
+import { ProductListing, ProductListingBodySkeleton } from "@/components/catalog/product-listing";
 import { PageHeader } from "@/components/shared/page-header";
 import { routing } from "@/i18n/routing";
 import { parseCatalogParams } from "@/lib/catalog-query";
@@ -37,6 +38,21 @@ export async function generateMetadata({
   });
 }
 
+/** The filtered list depends on the URL query, so it streams in after the static header. */
+async function CategoryListing({
+  catalog,
+  slug,
+  searchParams,
+}: {
+  catalog: Awaited<ReturnType<typeof getCatalog>>;
+  slug: string;
+  searchParams: PageProps<"/[locale]/category/[slug]">["searchParams"];
+}) {
+  return (
+    <ProductListing catalog={catalog} params={parseCatalogParams(await searchParams)} basePath={`/category/${slug}`} fixedCategory={slug} />
+  );
+}
+
 export default async function CategoryPage({
   params,
   searchParams,
@@ -58,12 +74,9 @@ export default async function CategoryPage({
         description={category.description}
         crumbs={[{ label: t("title"), href: "/products" }, { label: category.name }]}
       />
-      <ProductListing
-        catalog={catalog}
-        params={parseCatalogParams(await searchParams)}
-        basePath={`/category/${category.slug}`}
-        fixedCategory={category.slug}
-      />
+      <Suspense fallback={<ProductListingBodySkeleton />}>
+        <CategoryListing catalog={catalog} slug={category.slug} searchParams={searchParams} />
+      </Suspense>
     </>
   );
 }

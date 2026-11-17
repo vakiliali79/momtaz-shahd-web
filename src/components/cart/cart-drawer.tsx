@@ -2,7 +2,9 @@
 
 import { useEffect } from "react";
 import { ShoppingBagIcon, Trash2Icon } from "lucide-react";
-import { AnimatePresence, motion, useAnimate } from "motion/react";
+import { AnimatePresence } from "motion/react";
+import * as m from "motion/react-m";
+import { useAnimate } from "motion/react-mini";
 import { useLocale, useTranslations } from "next-intl";
 
 import { QuantityStepper } from "@/components/cart/quantity-stepper";
@@ -46,10 +48,11 @@ export function CartDrawer() {
   useEffect(
     () =>
       useCartStore.subscribe((state, previous) => {
-        if (selectCartCount(state) > selectCartCount(previous) && iconScope.current) {
+        const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (selectCartCount(state) > selectCartCount(previous) && iconScope.current && !reduced) {
           void animate(
             iconScope.current,
-            { scale: [1, 1.35, 0.9, 1], rotate: [0, -12, 8, 0] },
+            { scale: [1, 1.35, 0.9, 1], rotate: ["0deg", "-12deg", "8deg", "0deg"] },
             { duration: 0.5 },
           );
         }
@@ -71,7 +74,7 @@ export function CartDrawer() {
           </span>
           <AnimatePresence initial={false}>
             {hydrated && count > 0 ? (
-              <motion.span
+              <m.span
                 // A new key per count makes the badge pop each time it changes.
                 key={count}
                 aria-hidden="true"
@@ -83,7 +86,7 @@ export function CartDrawer() {
               >
                 {formatNumber(Math.min(count, 99), locale)}
                 {count > 99 ? "+" : ""}
-              </motion.span>
+              </m.span>
             ) : null}
           </AnimatePresence>
         </Button>

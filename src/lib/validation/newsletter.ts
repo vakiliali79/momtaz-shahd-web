@@ -1,16 +1,16 @@
-import { z } from "zod";
+import * as z from "zod/mini";
 
 /**
  * Error messages are translation keys under `newsletter.errors`, so the same
  * schema can be shared by the client form and the server action.
  */
+// zod/mini: the newsletter form is in the footer of every page, so it uses
+// the tree-shakeable build to keep the full Zod library out of the first load.
 export const newsletterSchema = z.object({
-  email: z
-    .string()
-    .trim()
-    .min(1, "required")
-    .max(254, "tooLong")
-    .pipe(z.email("invalid")),
+  email: z.pipe(
+    z.string().check(z.trim(), z.minLength(1, "required"), z.maxLength(254, "tooLong")),
+    z.email("invalid"),
+  ),
 });
 
 export type NewsletterInput = z.infer<typeof newsletterSchema>;

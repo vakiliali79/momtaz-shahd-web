@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { CheckIcon, ShoppingBagIcon } from "lucide-react";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence } from "motion/react";
+import * as m from "motion/react-m";
 import { useLocale, useTranslations } from "next-intl";
 import { toast } from "sonner";
 
@@ -62,7 +63,7 @@ export function AddToCartButton({
 
   const icon = (
     <AnimatePresence mode="popLayout" initial={false}>
-      <motion.span
+      <m.span
         key={justAdded ? "added" : "idle"}
         initial={{ scale: 0.3, opacity: 0, rotate: -30 }}
         animate={{ scale: 1, opacity: 1, rotate: 0 }}
@@ -72,7 +73,7 @@ export function AddToCartButton({
         aria-hidden="true"
       >
         {justAdded ? <CheckIcon /> : <ShoppingBagIcon />}
-      </motion.span>
+      </m.span>
     </AnimatePresence>
   );
 

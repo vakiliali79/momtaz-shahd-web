@@ -78,7 +78,7 @@ export function Gallery({
               index: formatNumber(index + 1, locale),
               total: formatNumber(images.length, locale),
             })}
-            sizes="(min-width: 1024px) 45vw, 92vw"
+            sizes="(min-width: 1440px) 620px, (min-width: 1024px) 45vw, 92vw"
             priority
             className={cn(dimmed && "opacity-60 grayscale")}
           />

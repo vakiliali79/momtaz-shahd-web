@@ -86,6 +86,8 @@ function layoutChecks(locale) {
   };
   for (const element of document.querySelectorAll("a[href], button, input:not([type=hidden]), select, textarea, summary, [role=button], [role=tab], [role=checkbox], [role=switch], [role=combobox], [role=radio]")) {
     if (!visible(element) || element.closest(".leaflet-control-attribution")) continue;
+    // Disabled controls are exempt from target-size rules (and ignore pointer events).
+    if (element.matches(":disabled, [aria-disabled=true]")) continue;
     let rect = element.getBoundingClientRect();
     if (rect.width >= 44 && rect.height >= 44) continue;
     // Inline links inside running text are exempt (WCAG 2.5.8 "inline").

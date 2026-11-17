@@ -1,47 +1,30 @@
-"use client";
-
 import type { ReactNode } from "react";
-import { motion } from "motion/react";
 
-/** Subtle entrance for the hero product image: fade, lift and settle. */
+/*
+ * Hero entrance in CSS, not JavaScript: the text and image are visible from
+ * the first paint (only position animates), so the largest contentful paint
+ * is never held back waiting for scripts. Reduced motion turns it off.
+ */
+
+/** The hero product image: lifts into place; two brand dots pop in after. */
 export function HeroVisual({ children }: { children: ReactNode }) {
   return (
-    <motion.div
-      data-reveal
-      initial={{ opacity: 0, y: 32, scale: 0.96 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-      className="relative mx-auto w-full max-w-lg lg:max-w-none"
-    >
+    <div className="relative mx-auto w-full max-w-lg motion-safe:animate-rise lg:max-w-none">
       {children}
-      <motion.span
+      <span
         aria-hidden="true"
-        initial={{ opacity: 0, scale: 0.5 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5, delay: 0.5 }}
-        className="absolute -end-3 -top-3 size-16 rounded-full bg-brand-red shadow-soft sm:size-20"
+        className="absolute -end-3 -top-3 size-16 rounded-full bg-brand-red shadow-soft motion-safe:animate-pop sm:size-20"
+        style={{ animationDelay: "0.45s" }}
       />
-      <motion.span
+      <span
         aria-hidden="true"
-        initial={{ opacity: 0, scale: 0.5 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5, delay: 0.65 }}
-        className="absolute -start-2 bottom-8 size-10 rounded-full bg-brand-leaf shadow-soft sm:size-12"
+        className="absolute -start-2 bottom-8 size-10 rounded-full bg-brand-leaf shadow-soft motion-safe:animate-pop sm:size-12"
+        style={{ animationDelay: "0.6s" }}
       />
-    </motion.div>
+    </div>
   );
 }
 
 export function HeroText({ children }: { children: ReactNode }) {
-  return (
-    <motion.div
-      data-reveal
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      className="space-y-6"
-    >
-      {children}
-    </motion.div>
-  );
+  return <div className="space-y-6 motion-safe:animate-rise">{children}</div>;
 }

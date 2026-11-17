@@ -13,6 +13,7 @@ import { ProductGrid } from "@/components/product/product-grid";
 import { PurchasePanel } from "@/components/product/purchase-panel";
 import { RatingStars } from "@/components/product/rating-stars";
 import { ReviewFormGate } from "@/components/reviews/review-form-gate";
+import { JsonLd } from "@/components/shared/json-ld";
 import { Breadcrumbs } from "@/components/shared/page-header";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Link } from "@/i18n/navigation";
@@ -21,6 +22,7 @@ import { toCartProduct } from "@/lib/cart";
 import { getCatalog, getProductReviews } from "@/lib/data/catalog";
 import { formatDate, formatNumber } from "@/lib/format";
 import { pageMetadata } from "@/lib/seo";
+import { productJsonLd } from "@/lib/structured-data";
 import { PLACEHOLDER_IMAGE } from "@/lib/site";
 import { discountPercent, formatWeight } from "@/lib/units";
 
@@ -95,6 +97,7 @@ export default async function ProductPage({
 
   return (
     <Container className="page-y">
+      <JsonLd data={productJsonLd(product, locale, t("brand.name"), reviews)} />
       <Breadcrumbs
         items={[
           { label: t("catalog.title"), href: "/products" },
