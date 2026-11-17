@@ -9,9 +9,13 @@ import { headers } from "next/headers";
  */
 const windows = new Map<string, { count: number; resetAt: number }>();
 
-export async function clientIp(): Promise<string> {
-  const list = await headers();
+/** The client's IP from proxy headers (set X-Forwarded-For at your reverse proxy). */
+export function ipFromHeaders(list: Headers): string {
   return list.get("x-forwarded-for")?.split(",")[0]?.trim() || list.get("x-real-ip") || "unknown";
+}
+
+export async function clientIp(): Promise<string> {
+  return ipFromHeaders(await headers());
 }
 
 /** True when `key` may make another request (and counts it). */
