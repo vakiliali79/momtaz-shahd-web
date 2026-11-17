@@ -445,3 +445,15 @@ All keyboard checks pass in fa, en and ar at desktop and phone widths.
 **Open items**
 - The newsletter form validates and rate-limits, but doesn't store subscribers yet (a TODO from Stage 1).
 - Rate limits are kept in each server's memory; with several instances, use a shared store (e.g. Redis).
+
+## Image pipeline & visual identity (images not yet generated)
+- **Blocked:** this environment has no image-generation tool or provider API key, and provider hosts are not reachable on its network. No images were generated. No stock or placeholder art was used instead. Every slot still shows the brand placeholder.
+- `docs/visual-identity.md`: identity report taken from the implemented tokens and catalog, with one photography art direction and the slot map.
+- `scripts/images/shot-list.mjs`: 40 shots with prompts based only on stored product descriptions, set to show no text or labels:
+  - 14 products × 2;
+  - 4 categories;
+  - hero;
+  - about;
+  - 6 Instagram tiles.
+- `scripts/images/import-generated.mjs`: converts generated files to sized WebP (q80) under `public/`.
+- `resolveImage(s)` now serves a `.webp` sibling for `.jpg`/`.png` references, so product and category data are unchanged. Covered by `src/lib/data/images.test.ts`.
