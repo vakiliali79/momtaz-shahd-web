@@ -45,7 +45,7 @@ async function Request({ params }: { params: PageProps<"/[locale]/admin/wholesal
           </>
         }
       />
-      <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_22rem]">
+      <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_22rem] [&>*]:min-w-0">
         <div className="space-y-6">
           <AdminCard title={t("detail.contactInfo")}>
             <dl className="grid gap-3 text-sm sm:grid-cols-2">

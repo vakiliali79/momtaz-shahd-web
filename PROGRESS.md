@@ -287,3 +287,51 @@
 - OpenStreetMap tiles and Neshan are not reachable from the development machine, so map tiles and Neshan were not seen loading; markers, clusters, popups and fallbacks were tested.
 - The Neshan and Balad directions links open the location in those apps; check their exact routing URL formats on a phone.
 - The tracking rate limit is per server instance; use a shared store if the site runs on several instances.
+
+## Stage 10 — Design, accessibility and responsiveness pass (2026-11-17)
+
+**Audit tooling** (rerun after changes; start the site with `pnpm build && pnpm start` first)
+- `pnpm audit:design [baseUrl] [report.json]`: every storefront, account and admin page in fa/en/ar at 320, 375, 768, 1024, 1440 and 2560px, light and dark. It checks horizontal overflow (and what causes it), tap targets, axe-core WCAG 2.1 AA (including colour contrast), Latin digits in Persian/Arabic text, and `lang`/`dir`. Tap targets are checked by hit-testing: a 44×44px area around each control must reach it, so invisible hit areas count and crowded neighbours fail. Set `AUDIT_USER_*` / `AUDIT_ADMIN_*` to include signed-in pages.
+- `pnpm audit:keyboard [baseUrl]`: skip link, header tab order with visible focus, mobile menu and cart drawers (focus moves in, is trapped, Escape closes, focus returns, correct side per direction), focus on the first invalid field in forms, and keyboard use of the dealer list and map.
+
+**Design system**
+- Spacing scale: `section-y`, `section-y-sm` and `page-y` utilities, fluid with `clamp()` (≈40px on phones to 88px on wide screens). They replace six ad-hoc padding pairs across 17 files.
+- Fluid type scale completed (`text-fluid-xl` was missing) with line heights; more leading for Persian and Arabic (1.85) than English; balanced headings and pretty-wrapped paragraphs.
+- Container queries: product and dealer cards adapt to their own width (padding, title size, header layout), not the viewport.
+
+**Colour and dark mode**
+- Text-safe tokens `gold-ink` and `leaf-ink` (≥4.5:1 in both themes) for gold and green text. The brand hex values stay for fills.
+- Dark mode: red text uses `#f26b7c` (≥4.9:1 on dark surfaces); filled buttons, badges and the banner keep the deep brand red with white text (5.9:1).
+- Inactive tabs, badges and status pills meet AA contrast. axe reports no contrast failures on any audited page in either theme.
+
+**Motion** (Framer Motion; `MotionConfig reducedMotion="user"`, and skeleton shimmer is CSS-disabled under reduced motion)
+- Cards lift on hover with a spring (product and category cards).
+- Pages fade in on client navigation (`(shop)/template.tsx`). The first server-rendered page appears at once, so the largest paint isn't delayed.
+- The cart icon bounces and the count badge pops when items are added.
+- Skeletons shimmer in the reading direction (right to left in fa/ar).
+
+**Responsive and RTL**
+- No horizontal overflow on any page at 320–2560px. Fixed two causes: hidden checkbox/switch inputs escaping table scrollers (scroll wrappers are now `relative`), and admin grid columns that couldn't shrink.
+- Tap targets: a `touch-target` utility gives small controls a 44×44px hit area. Inputs, selects, pagination, nav, footer links, the banner, filter rows, map zoom buttons and markers are 44px. Spacing was adjusted so neighbouring hit areas don't overlap.
+- Directional icons (log-out, external link, arrows, chevrons) mirror in RTL. Carousel arrow keys follow the visual direction. Drawers open from the inline-start (menu) or inline-end (cart) edge. Arabic admin dates now use Arabic digits.
+
+**States**
+- Branded 404 in all three languages: illustration, "404" in locale digits, search and popular links.
+- Error pages: `error.tsx` for the shop, admin and locale levels with "Try again" and a reference code; `global-error.tsx` reads its texts from the message files using the URL's language.
+- Empty states for search results, cart, wishlist, orders, reviews, addresses and admin lists, reviewed.
+
+**Keyboard and screen readers**
+- The skip link is now the first focusable element on every page, before the announcement banner, and the admin panel has one too.
+- Landmarks have unique names (two search forms, two account navs, the banner). Heading levels no longer skip. Fixed a `<dl>` with an invalid child and a link whose accessible name didn't contain its visible text.
+
+**Verified**: `pnpm tsc --noEmit`, `pnpm lint`, `pnpm test` and `pnpm build` pass. Results of the last full audit run, plus a targeted re-run of the changed admin, account, 404 and product pages:
+- axe: no violations;
+- no overflow at any width;
+- no Latin digits in Persian/Arabic text;
+- no page errors.
+
+All keyboard checks pass in fa, en and ar at desktop and phone widths.
+
+**Open items**
+- At 320px some tap targets sit right at the edge of a horizontal scroller (admin tables, the related-products carousel), so part of their 44px area falls outside it. They're usable once scrolled into view.
+- Some 16px admin checkboxes (e.g. "notify customer") rely on their label for the larger tap area.

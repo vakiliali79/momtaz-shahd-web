@@ -60,7 +60,7 @@ async function Dashboard() {
         <SalesChart data={data.daily} />
       </AdminCard>
 
-      <div className="mt-6 grid gap-6 xl:grid-cols-2">
+      <div className="mt-6 grid gap-6 xl:grid-cols-2 [&>*]:min-w-0">
         <AdminCard title={t("topProducts")}>
           {data.topProducts.length === 0 ? (
             <p className="text-sm text-muted-foreground">{t("noSales")}</p>

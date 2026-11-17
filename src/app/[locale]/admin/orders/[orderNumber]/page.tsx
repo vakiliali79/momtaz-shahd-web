@@ -67,7 +67,7 @@ async function AdminOrder({ params }: { params: PageProps<"/[locale]/admin/order
           </>
         }
       />
-      <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_22rem]">
+      <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_22rem] [&>*]:min-w-0">
         <div className="space-y-6">
           <OrderDetails order={order} />
           <AdminCard title={t("history")}>
