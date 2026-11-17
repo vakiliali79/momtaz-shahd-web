@@ -335,3 +335,61 @@ All keyboard checks pass in fa, en and ar at desktop and phone widths.
 **Open items**
 - At 320px some tap targets sit right at the edge of a horizontal scroller (admin tables, the related-products carousel), so part of their 44px area falls outside it. They're usable once scrolled into view.
 - Some 16px admin checkboxes (e.g. "notify customer") rely on their label for the larger tap area.
+
+## Stage 11 — SEO, PWA and performance (2026-11-17)
+
+**SEO**
+- `sitemap.xml` (`src/app/sitemap.ts`): every public page in fa/en/ar, each with hreflang alternates for all three languages plus x-default. It covers static pages, categories, products (`lastModified` from the product) and dealers, read through a cached query tagged `catalog`/`dealers`.
+- `robots.txt`: everything public is allowed; admin, account, checkout, cart, payment, login, register and `/api/` are disallowed. Links the sitemap.
+- JSON-LD:
+  - `Organization` and `WebSite` (with a search action) on the home page.
+  - `Product` on product pages: price in IRR (Toman × 10, since Toman has no ISO code), availability, condition, brand, weight, aggregate rating and up to five reviews.
+  - `BreadcrumbList` from the shared breadcrumb component, so on every page with breadcrumbs.
+  - `Store`/`WholesaleStore` (LocalBusiness types) with address and coordinates on dealer pages.
+- `NEXT_PUBLIC_SITE_URL` must be set at build time to the public URL: canonical links, hreflang, sitemap and JSON-LD use it.
+
+**Images**
+- Admin uploads are re-encoded on the server with `sharp`: camera rotation applied, metadata (GPS) stripped, at most 2000px, stored as WebP. A 1.3 MB JPEG becomes about 250 KB.
+- `next/image` serves AVIF (else WebP) at the size each screen needs; the same photo at 640px is about 11 KB.
+- `sizes` are capped for wide screens. The main image of a page is preloaded with `fetchpriority=high` and decoded with the first frame; only the first two cards in a grid are prioritised.
+- Alt text is localized on meaningful images (hero, gallery, dealer photo, about). Images inside named links or buttons stay `alt=""` so the name isn't read twice.
+
+**JavaScript and loading**
+- Removed `embla-carousel-react`: the featured row is a native CSS scroll-snap list. Swipe and arrow keys work in the reading direction, and the previous/next buttons disable themselves at either end.
+- Motion: `LazyMotion` with `m` components loads the animation code after the page. The cart icon bounce uses `motion/react-mini`.
+- Card hover lift and scroll-reveal are now CSS (a spring-like curve and scroll-driven animations), so they need no JavaScript.
+- The hero entrance is CSS that only moves content, never hides it, so the largest paint isn't delayed.
+- The footer newsletter form loads when the footer comes near the screen. The header search and newsletter use `zod/mini`; `toLatinDigits` moved to a dependency-free module, keeping full Zod out of the first load on every page.
+- The browser only receives the translation namespaces that client components use; the admin panel adds its own.
+- The products, category and product pages no longer have a route-level `loading.tsx`. Their main content is now in the prerendered HTML instead of being swapped in by script; only the filtered product list streams.
+- The dealer map was already client-only and loaded on demand.
+- Results: the home page HTML went from 952 KB to about 470 KB, and the JavaScript loaded by the home page from about 433 KB to about 360 KB gzipped.
+
+**Caching**: every cached read uses `"use cache"` with `cacheTag`, which replaces `unstable_cache` in Next.js 16. Admin changes call `updateTag` (products and categories → `catalog`, reviews → `reviews` + `catalog`, dealers, settings, translations); stock changes from orders call `revalidateTag(…, "max")`. Tested: deactivating a product removes it from listings at once. Prerendered pages are revalidated in the background, so the first visitor after a change may still see the old version once. Checkout always re-reads prices and stock from the database.
+
+**PWA**
+- A web app manifest per language (`/{locale}/manifest.webmanifest`): name, direction, language, start page, brand colours, icons (including maskable) and shortcuts (products, cart, order tracking).
+- Icons are generated from the logo: `pnpm icons`.
+- A service worker (`public/sw.js`, production only):
+  - Pages always come from the network; when that fails, the cached copy or the offline page in the visitor's language is shown.
+  - Build assets and icons are cached.
+  - Admin, account, checkout, payment and API requests are never cached.
+- Tested offline: an unvisited page shows the offline page, a visited page loads from cache.
+
+**Lighthouse** (mobile, default throttling, median of 3 runs, `pnpm audit:lighthouse`). Measured locally with `next start` over HTTP/1.1, with a placeholder hero image:
+
+| Page | Performance | Accessibility | Best practices | SEO |
+|---|---|---|---|---|
+| Home fa / en / ar | 91 / 85 / 96 | 100 | 100 | 100 |
+| Products fa / en / ar | 96 / 96 / 95 | 100 | 100 | 100 |
+| Product fa / en / ar | 96 / 93 / 94 | 100 | 100 | 100 |
+
+- English home misses 90 because its largest element is the hero image (the others are text): simulated LCP ~3s, observed 0.36s.
+- Behind an HTTP/2 + TLS proxy (closer to production) LCP improves, but blocking time is noisier on this machine.
+- Remaining blocking time is mostly React hydration, plus Next.js inlining the page payload twice.
+
+**Verified**: `pnpm tsc --noEmit`, `pnpm lint`, `pnpm test` and `pnpm build` pass. A sweep of 117 page visits (storefront, account and admin in three languages, including the open menu and cart) found no missing translations or page errors. Keyboard checks pass. The design audit of home, products and product detail is clean (axe, overflow, tap targets, digits) at all widths, in both themes.
+
+**Open items**
+- Replace the placeholder hero and product images with real photos, then re-run `pnpm audit:lighthouse` against the deployed (HTTP/2) site.
+- To push English home above 90: give the hero a smaller image on phones or make the headline the largest element there. Reducing hydration further means fewer client components per product card.

@@ -171,7 +171,7 @@ export default async function HomePage() {
                 <MotionCard className="h-full">
                 <Link
                   href={`/category/${category.slug}`}
-                  className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-soft transition-shadow duration-300 hover:shadow-lg"
+                  className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-soft hover:shadow-lg"
                 >
                   <div className="relative aspect-4/3 overflow-hidden bg-secondary">
                     <ProductImage

@@ -1,28 +1,17 @@
-"use client";
+import type { CSSProperties, ReactNode } from "react";
 
-import type { ReactNode } from "react";
-import * as m from "motion/react-m";
+import { cn } from "@/lib/utils";
 
-/** Fades and lifts its children into place the first time they scroll into view. */
-export function Reveal({
-  children,
-  delay = 0,
-  className,
-}: {
-  children: ReactNode;
-  delay?: number;
-  className?: string;
-}) {
+/**
+ * Fades and lifts its children into place as they scroll into view, with
+ * CSS scroll-driven animations (no JavaScript, nothing to hydrate). Browsers
+ * without `animation-timeline` support, and reduced-motion users, simply see
+ * the content in place. `delay` staggers items in a row (seconds).
+ */
+export function Reveal({ children, delay = 0, className }: { children: ReactNode; delay?: number; className?: string }) {
   return (
-    <m.div
-      data-reveal
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.5, delay, ease: [0.22, 1, 0.36, 1] }}
-      className={className}
-    >
+    <div className={cn("reveal", className)} style={{ "--reveal-delay": `${delay * 100}%` } as CSSProperties}>
       {children}
-    </m.div>
+    </div>
   );
 }

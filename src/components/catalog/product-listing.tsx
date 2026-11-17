@@ -111,21 +111,6 @@ export function ProductListing({
 }
 
 /** Skeleton shown by loading.tsx while a listing page streams in. */
-export function ProductListingSkeleton() {
-  return (
-    <>
-      <div className="border-b border-border bg-secondary/40">
-        <Container className="space-y-4 page-y">
-          <Skeleton className="h-4 w-40" />
-          <Skeleton className="h-9 w-64 max-w-full" />
-          <Skeleton className="h-4 w-96 max-w-full" />
-        </Container>
-      </div>
-      <ProductListingBodySkeleton />
-    </>
-  );
-}
-
 /** The filters, toolbar and grid placeholders (below a real page header). */
 export function ProductListingBodySkeleton() {
   return (

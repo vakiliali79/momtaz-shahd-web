@@ -33,7 +33,7 @@ export function ProductCard({
   return (
     <MotionCard
       className={cn(
-        "group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-soft transition-shadow duration-300 hover:shadow-lg",
+        "group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-soft hover:shadow-lg",
         className,
       )}
     >

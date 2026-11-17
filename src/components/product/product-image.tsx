@@ -22,7 +22,12 @@ export function ProductImage({
       alt={alt}
       fill
       sizes={sizes}
-      priority={priority}
+      // The page's main image: preloaded, fetched first and never lazy.
+      preload={priority}
+      fetchPriority={priority ? "high" : undefined}
+      loading={priority ? "eager" : undefined}
+      // Decode with the first frame so the main image paints as soon as it arrives.
+      decoding={priority ? "sync" : "async"}
       // SVG placeholders are served as-is; photos go through the optimizer.
       unoptimized={src.endsWith(".svg")}
       className={cn("object-cover", className)}

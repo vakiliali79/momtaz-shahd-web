@@ -22,7 +22,7 @@ export function ProductGrid({
     <ul className={className}>
       {products.map((product, index) => (
         <li key={product.id}>
-          <ProductCard product={product} priority={index < 4} />
+          <ProductCard product={product} priority={index < 2} />
         </li>
       ))}
     </ul>
