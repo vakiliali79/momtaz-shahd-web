@@ -38,6 +38,7 @@ export const authErrorKeys = [
   "invalidCredentials",
   "phoneTaken",
   "blocked",
+  "tooManyAttempts",
   "server",
 ] as const;
 export type AuthErrorKey = (typeof authErrorKeys)[number];
@@ -52,6 +53,9 @@ export function toAuthErrorKey(message: string | undefined): AuthErrorKey {
  */
 export function safeCallbackUrl(value: unknown, fallback: string): string {
   if (typeof value !== "string") return fallback;
+  // Browsers drop tabs and newlines in URLs ("/\t/evil.com" → "//evil.com"),
+  // so any whitespace or control character is refused outright.
+  if (/[\s\u0000-\u001f\u007f]/.test(value)) return fallback;
   if (!value.startsWith("/") || value.startsWith("//") || value.includes("\\")) {
     return fallback;
   }

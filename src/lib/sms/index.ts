@@ -33,11 +33,15 @@ class KavenegarSmsProvider implements SmsProvider {
     const key = process.env.KAVENEGAR_API_KEY;
     const sender = process.env.KAVENEGAR_SENDER;
     if (!key || !sender) throw new Error("KAVENEGAR_API_KEY and KAVENEGAR_SENDER must be set.");
+    // The API key is part of the URL: never let a network error (which may
+    // include the URL) reach the logs.
     const response = await fetch(`https://api.kavenegar.com/v1/${encodeURIComponent(key)}/sms/send.json`, {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: new URLSearchParams({ receptor: phone, sender, message }),
       signal: AbortSignal.timeout(10_000),
+    }).catch(() => {
+      throw new Error("Kavenegar could not be reached.");
     });
     const body: unknown = await response.json().catch(() => null);
     const status =

@@ -3,6 +3,7 @@ import { z } from "zod";
 
 import { db } from "@/lib/db";
 import { getPaymentGateway } from "@/lib/payments";
+import { getAppOrigin } from "@/lib/site";
 
 const schema = z.object({
   authority: z.string().regex(/^MOCK[0-9A-F]{24}$/),
@@ -28,9 +29,12 @@ export async function POST(request: NextRequest) {
   if (!parsed.success) return NextResponse.redirect(home, 303);
   const { authority, decision, callback } = parsed.data;
 
-  // Only ever return to our own callback endpoint.
+  // Only ever return to our own callback endpoint on this site (no open redirect).
   const target = new URL(callback);
-  if (target.pathname !== "/api/payment/callback") return NextResponse.redirect(home, 303);
+  const ownOrigins = new Set([request.nextUrl.origin, new URL(getAppOrigin()).origin]);
+  if (!ownOrigins.has(target.origin) || target.pathname !== "/api/payment/callback") {
+    return NextResponse.redirect(home, 303);
+  }
 
   await db.payment.updateMany({
     where: { authority, gateway: "mock", status: "PENDING" },

@@ -3,7 +3,13 @@ import NextAuth, { CredentialsSignin } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 
 import { db } from "@/lib/db";
+import { allowRequest, ipFromHeaders } from "@/lib/rate-limit";
 import { loginSchema } from "@/lib/validation/auth";
+
+/** Sign-in refused: too many attempts for this phone number or network. */
+export class TooManyAttemptsError extends CredentialsSignin {
+  code = "rateLimited";
+}
 
 /** Sign-in refused because an admin blocked the account. */
 export class BlockedAccountError extends CredentialsSignin {
@@ -22,9 +28,14 @@ export const { handlers, auth, signIn, signOut, unstable_update: updateSession }
   providers: [
     Credentials({
       credentials: { phone: {}, password: {} },
-      async authorize(credentials) {
+      async authorize(credentials, request) {
         const parsed = loginSchema.safeParse(credentials);
         if (!parsed.success) throw new CredentialsSignin();
+        // Slow down password guessing, per account and per network.
+        const ip = ipFromHeaders(request.headers);
+        if (!allowRequest(`login:phone:${parsed.data.phone}`, 10, 15 * 60_000) || !allowRequest(`login:ip:${ip}`, 30, 15 * 60_000)) {
+          throw new TooManyAttemptsError();
+        }
 
         const user = await db.user.findUnique({ where: { phone: parsed.data.phone } });
         // Compare against a dummy hash when the user does not exist, so the

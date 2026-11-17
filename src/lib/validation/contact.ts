@@ -44,6 +44,7 @@ export const contactErrorKeys = [
   "invalidEmail",
   "messageTooShort",
   "tooLong",
+  "tooMany",
   "server",
 ] as const;
 export type ContactErrorKey = (typeof contactErrorKeys)[number];

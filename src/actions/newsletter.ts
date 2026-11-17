@@ -1,5 +1,6 @@
 "use server";
 
+import { allowRequest, clientIp } from "@/lib/rate-limit";
 import {
   newsletterSchema,
   toNewsletterErrorKey,
@@ -20,6 +21,8 @@ export async function subscribeToNewsletter(
       error: toNewsletterErrorKey(parsed.error.issues[0]?.message),
     };
   }
+
+  if (!allowRequest(`newsletter:ip:${await clientIp()}`, 5, 60 * 60_000)) return { ok: false, error: "tooMany" };
 
   // TODO: persist the subscriber once the database (Prisma) stage lands.
   return { ok: true };

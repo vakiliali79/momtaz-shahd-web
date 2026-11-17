@@ -3,10 +3,10 @@
  * Response bodies follow the documented v4 shapes; re-check them against a
  * real sandbox run before going live.
  *
- * Run with `pnpm test`.
+ * Run with `pnpm test` (Vitest).
  */
 import assert from "node:assert/strict";
-import { test } from "node:test";
+import { test } from "vitest";
 
 import { ZarinpalGateway } from "./zarinpal";
 

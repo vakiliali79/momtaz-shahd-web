@@ -1,6 +1,7 @@
 "use server";
 
 import { db } from "@/lib/db";
+import { allowRequest, clientIp } from "@/lib/rate-limit";
 import { sendAdminEmail } from "@/lib/email";
 import {
   contactSchema,
@@ -26,6 +27,7 @@ export async function sendContactMessage(input: unknown): Promise<ContactResult>
   }
 
   const { name, phone, email, subject, message, locale } = parsed.data;
+  if (!allowRequest(`contact:ip:${await clientIp()}`, 5, 60 * 60_000)) return { ok: false, error: "tooMany" };
 
   try {
     await db.contactMessage.create({

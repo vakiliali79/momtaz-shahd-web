@@ -4,6 +4,7 @@ import { z } from "zod";
 
 import { effectivePrice, type AppliedCoupon, type CartProduct } from "@/lib/cart";
 import { resolveImages } from "@/lib/data/images";
+import { couponIssue } from "@/lib/coupons";
 import { db } from "@/lib/db";
 import { toLocalizedText } from "@/lib/localized";
 import {
@@ -56,15 +57,9 @@ export async function checkCoupon(input: unknown): Promise<CouponResult> {
   const { code, subtotal } = parsed.data;
   try {
     const coupon = await db.coupon.findUnique({ where: { code } });
-    if (!coupon || !coupon.isActive) return { ok: false, error: "notFound" };
-    if (coupon.expiresAt && coupon.expiresAt.getTime() <= Date.now()) {
-      return { ok: false, error: "expired" };
-    }
-    if (coupon.maxUses !== null && coupon.usedCount >= coupon.maxUses) {
-      return { ok: false, error: "usedUp" };
-    }
-    if (subtotal < coupon.minOrder) {
-      return { ok: false, error: "minOrder", minOrder: coupon.minOrder };
+    const issue = couponIssue(coupon, subtotal);
+    if (issue || !coupon) {
+      return issue === "minOrder" && coupon ? { ok: false, error: "minOrder", minOrder: coupon.minOrder } : { ok: false, error: issue ?? "notFound" };
     }
     return {
       ok: true,

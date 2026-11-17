@@ -6,6 +6,7 @@ import { AuthError, CredentialsSignin } from "next-auth";
 import { signIn, signOut } from "@/auth";
 import { routing } from "@/i18n/routing";
 import { db } from "@/lib/db";
+import { allowRequest, clientIp } from "@/lib/rate-limit";
 import {
   loginSchema,
   registerSchema,
@@ -33,6 +34,9 @@ async function signInWithPassword(phone: string, password: string): Promise<Auth
       if (error instanceof CredentialsSignin && error.code === "blocked") {
         return { ok: false, error: "blocked" };
       }
+      if (error instanceof CredentialsSignin && error.code === "rateLimited") {
+        return { ok: false, error: "tooManyAttempts" };
+      }
       return {
         ok: false,
         error: error.type === "CredentialsSignin" ? "invalidCredentials" : "server",
@@ -52,6 +56,9 @@ export async function register(input: unknown, locale: unknown): Promise<AuthRes
   const parsed = registerSchema.safeParse(input);
   if (!parsed.success) return firstIssue(parsed.error.issues);
   const { name, phone, password } = parsed.data;
+  if (!allowRequest(`register:ip:${await clientIp()}`, 10, 60 * 60_000)) {
+    return { ok: false, error: "tooManyAttempts" };
+  }
 
   const existing = await db.user.findUnique({ where: { phone }, select: { id: true } });
   if (existing) return { ok: false, error: "phoneTaken", field: "phone" };

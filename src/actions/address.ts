@@ -85,9 +85,10 @@ export async function deleteAddress(id: unknown): Promise<AddressActionResult> {
   if (!isId(id)) return { ok: false, error: "server" };
 
   try {
-    await db.$transaction(async (tx) => {
+    const deleted = await db.$transaction(async (tx) => {
+      // Scoped to the user's own addresses: someone else's id finds nothing.
       const address = await tx.address.findFirst({ where: { id, userId: user.id } });
-      if (!address) return;
+      if (!address) return false;
       await tx.address.delete({ where: { id } });
       // Past orders keep their own copy of the address, so deleting is safe.
       // If the default went away, the oldest remaining address takes over.
@@ -95,8 +96,9 @@ export async function deleteAddress(id: unknown): Promise<AddressActionResult> {
         const next = await tx.address.findFirst({ where: { userId: user.id }, orderBy: { id: "asc" } });
         if (next) await tx.address.update({ where: { id: next.id }, data: { isDefault: true } });
       }
+      return true;
     });
-    return { ok: true };
+    return deleted ? { ok: true } : { ok: false, error: "server" };
   } catch (error) {
     console.error("[address] Delete failed:", error);
     return { ok: false, error: "server" };

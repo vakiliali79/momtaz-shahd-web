@@ -1,6 +1,6 @@
-/** Shipping price rules (rates, weight steps, province overrides, free shipping). Run with `pnpm test`. */
+/** Shipping price rules (rates, weight steps, province overrides, free shipping). Run with `pnpm test` (Vitest). */
 import assert from "node:assert/strict";
-import { test } from "node:test";
+import { test } from "vitest";
 
 import { applyFreeShipping, calculateShipping, shippingAvailability, type ShippingConfig } from "./shipping";
 
@@ -53,4 +53,20 @@ test("orders at the threshold ship free", () => {
   assert.equal(applyFreeShipping(config, 50_000, 999_999), 50_000);
   assert.equal(applyFreeShipping(config, 50_000, 1_000_000), 0);
   assert.equal(applyFreeShipping(config, null, 2_000_000), null);
+});
+
+test("weight steps: exactly the included weight costs the base price, one gram more adds a kilo", () => {
+  const tehran = { province: "tehran", city: "tehran" };
+  assert.equal(calculateShipping(config, "post", 1000, tehran), 50_000);
+  assert.equal(calculateShipping(config, "post", 1001, tehran), 60_000);
+  assert.equal(calculateShipping(config, "post", 3000, tehran), 70_000);
+});
+
+test("inactive or unknown methods have no price; an unknown destination is priced cautiously", () => {
+  const inactive: ShippingConfig = { ...config, methods: config.methods.map((method) => ({ ...method, isActive: false })) };
+  assert.equal(calculateShipping(inactive, "post", 1000, { province: "tehran", city: "tehran" }), null);
+  assert.equal(calculateShipping(config, "tipax", 1000, { province: "tehran", city: "tehran" }), null);
+  // No address yet: priced as another province (post has no out-of-province rate here).
+  assert.equal(calculateShipping(config, "post", 1000, null), null);
+  assert.equal(calculateShipping(config, "courier", 1000, null), null);
 });

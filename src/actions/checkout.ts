@@ -6,6 +6,7 @@ import { updateTag } from "next/cache";
 
 import { Prisma, type OrderType } from "@/generated/prisma/client";
 import { computeCartTotals, effectivePrice, lineUnitPrice, type CartItem } from "@/lib/cart";
+import { couponIssue } from "@/lib/coupons";
 import { db } from "@/lib/db";
 import { notifyAdminsNewOrder, notifyOrderCustomer } from "@/lib/notifications";
 import { getCity, getProvince } from "@/lib/locations";
@@ -129,11 +130,9 @@ export async function placeOrder(input: unknown): Promise<PlaceOrderResult> {
         if (data.couponCode) {
           const found = await tx.coupon.findUnique({ where: { code: data.couponCode } });
           const preliminary = computeCartTotals(items, null);
-          if (!found || !found.isActive) throw new OrderError("couponInvalid", "notFound");
-          if (found.expiresAt && found.expiresAt.getTime() <= Date.now()) {
-            throw new OrderError("couponInvalid", "expired");
-          }
-          if (preliminary.subtotal < found.minOrder) throw new OrderError("couponInvalid", "minOrder");
+          const issue = couponIssue(found, preliminary.subtotal);
+          if (issue || !found) throw new OrderError("couponInvalid", issue ?? "notFound");
+          // Count the use only while uses remain (atomic against concurrent orders).
           const used = await tx.coupon.updateMany({
             where: {
               id: found.id,

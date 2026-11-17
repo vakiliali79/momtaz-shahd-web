@@ -15,7 +15,7 @@ export const newsletterSchema = z.object({
 
 export type NewsletterInput = z.infer<typeof newsletterSchema>;
 
-export const newsletterErrorKeys = ["required", "invalid", "tooLong", "server"] as const;
+export const newsletterErrorKeys = ["required", "invalid", "tooLong", "tooMany", "server"] as const;
 export type NewsletterErrorKey = (typeof newsletterErrorKeys)[number];
 
 export function toNewsletterErrorKey(message: string | undefined): NewsletterErrorKey {

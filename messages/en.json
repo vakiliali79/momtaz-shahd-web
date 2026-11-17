@@ -165,7 +165,8 @@
       "required": "Please enter your email address.",
       "invalid": "Please enter a valid email address.",
       "tooLong": "This email address is too long.",
-      "server": "Something went wrong. Please try again."
+      "server": "Something went wrong. Please try again.",
+      "tooMany": "Too many attempts. Please try again later."
     }
   },
   "home": {
@@ -386,7 +387,8 @@
       "invalidEmail": "Please enter a valid email address.",
       "messageTooShort": "Please write at least 10 characters.",
       "tooLong": "This text is too long.",
-      "server": "Something went wrong. Please try again."
+      "server": "Something went wrong. Please try again.",
+      "tooMany": "You've sent several messages already. Please try again later."
     },
     "whatsapp": "WhatsApp"
   },
@@ -424,7 +426,8 @@
       "invalidCredentials": "The mobile number or password is incorrect.",
       "phoneTaken": "An account with this mobile number already exists. Please sign in.",
       "server": "Something went wrong. Please try again.",
-      "blocked": "This account has been blocked. Please contact us."
+      "blocked": "This account has been blocked. Please contact us.",
+      "tooManyAttempts": "Too many attempts. Please wait a few minutes and try again."
     }
   },
   "map": {
