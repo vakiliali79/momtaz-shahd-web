@@ -393,3 +393,55 @@ All keyboard checks pass in fa, en and ar at desktop and phone widths.
 **Open items**
 - Replace the placeholder hero and product images with real photos, then re-run `pnpm audit:lighthouse` against the deployed (HTTP/2) site.
 - To push English home above 90: give the hero a smaller image on phones or make the headline the largest element there. Reducing hydration further means fewer client components per product card.
+
+## Stage 12 — Tests, security review and configuration (2026-11-17)
+
+**Unit and integration tests** (Vitest; `pnpm test`, 67 tests). Integration tests run against a throwaway SQLite database built from the real migrations (`tests/global-setup.ts`); only framework edges (session, cache tags, `after()`) are mocked.
+- `formatPrice` and `formatDate` in fa/en/ar: exact digits, separators, the no-break space before the unit, Solar Hijri dates for Persian.
+- Coupons: every rule in the shared `couponIssue()` (now used by both the cart check and `placeOrder`), the Zod code schema, and the discount maths. `checkCoupon` is also tested against the database.
+- `calculateShipping`: weight steps, province overrides, city-only couriers, inactive methods, free-shipping threshold.
+- Cart store: stock caps, merging, remove/undo, coupons, server sync, persisted shape.
+- `placeOrder`:
+  - the full COD order (prices from the database, stock decremented, coupon counted, history, notifications);
+  - signed-out refusal and Zod errors;
+  - a stale total changes nothing;
+  - out of stock (with what's available) and inactive products;
+  - another user's address (IDOR);
+  - a single-use coupon used twice;
+  - bank transfer refused for retail orders.
+- Security regression tests:
+  - all 21 admin actions answer "forbidden" to anonymous users and customers;
+  - orders, order cancellation, addresses and receipt downloads refuse other users;
+  - upload checks: admin only, same origin, real image bytes, size limit, stored as WebP under a random name;
+  - the mock payment endpoint never redirects off-site;
+  - `safeCallbackUrl` rejects known open-redirect tricks.
+
+**End-to-end tests** (Playwright; `pnpm test:e2e`). Playwright builds and starts the app on port 3200 with a fresh seeded database (`scripts/e2e/start-server.sh`) and the mock gateway; your development database is never touched. Each flow runs in Persian and English, with texts read from the message files:
+- **Purchase flow:** register → add two products → checkout (new address, Express Post, online payment) → pay on the mock gateway → the order shows as paid in the customer panel → an admin changes the status to "being prepared" → the customer sees it.
+- **Dealer locator:** markers load, "near me" (with a mocked location) puts the nearest dealer first, and choosing a dealer opens its popup.
+
+**Security review**
+- Every Server Action was inventoried:
+  - admin actions check the ADMIN role on the server;
+  - customer actions check the session and scope every query to the user (orders, addresses, wishlist, reviews, receipts, payments);
+  - public actions (contact, newsletter, wholesale request, tracking, coupon check, sign-in, register) validate with Zod.
+- Admin pages also check the role in the layout and in each page, not only in the proxy.
+- CSRF:
+  - Server Actions are protected by Next.js's Origin/Host check;
+  - Auth.js protects its own endpoints with CSRF tokens and SameSite cookies;
+  - the upload route checks the Origin.
+- Added:
+  - **Security headers:** Content-Security-Policy (inline scripts allowed because a nonce would disable prerendering; foreign scripts blocked except Neshan's SDK when enabled; no framing, plugins or foreign form targets), X-Frame-Options DENY, nosniff, Referrer-Policy, Permissions-Policy, COOP, and HSTS in production. The `X-Powered-By` header is removed. A sweep of 117 page visits shows no CSP violations.
+  - **Rate limits:** sign-in (10 per phone and 30 per IP every 15 minutes, enforced inside Auth.js `authorize`, so it also covers the credentials endpoint), registration, contact form and newsletter.
+- Fixed:
+  - an open redirect in the mock payment endpoint (callback URLs on other origins);
+  - `callbackUrl` accepting tab/newline tricks;
+  - the Kavenegar API key (part of its URL) possibly appearing in an error log;
+  - deleting another user's address reporting success (nothing was deleted).
+- Logging: no passwords, tokens or keys are logged; errors log only the error object.
+
+**Configuration**: `.env.example` now documents every variable the code reads, grouped by area, with what it does, its default and whether production requires it, plus the test/audit-only variables.
+
+**Open items**
+- The newsletter form validates and rate-limits, but doesn't store subscribers yet (a TODO from Stage 1).
+- Rate limits are kept in each server's memory; with several instances, use a shared store (e.g. Redis).
