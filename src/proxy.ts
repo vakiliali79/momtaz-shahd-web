@@ -13,7 +13,7 @@ function hasLocalePrefix(pathname: string): boolean {
 }
 
 /** Pages that need a signed-in user, without the locale prefix. */
-const PROTECTED_PATHS = [/^\/checkout(\/|$)/, /^\/account(\/|$)/];
+const PROTECTED_PATHS = [/^\/checkout(\/|$)/, /^\/account(\/|$)/, /^\/admin(\/|$)/];
 
 /**
  * Auth.js session cookie (`__Secure-` prefix on HTTPS, `.0`/`.1` suffixes

@@ -19,6 +19,8 @@ export type ShippingMethodConfig = {
   inProvince: ShippingRate;
   /** Rate for other provinces; null when the method does not go there. */
   outOfProvince: ShippingRate | null;
+  /** Per-province prices (keyed by province id) that replace the two rates above. */
+  provinceRates: Record<string, ShippingRate>;
   /** Courier: only delivers inside the factory's city. */
   sameCityOnly: boolean;
   estimatedDays: { min: number; max: number };
@@ -54,7 +56,7 @@ export function shippingAvailability(
       ? { available: true }
       : { available: false, reason: "sameCityOnly" };
   }
-  return sameProvince || method.outOfProvince
+  return sameProvince || method.outOfProvince || (destination && method.provinceRates[destination.province])
     ? { available: true }
     : { available: false, reason: "noRate" };
 }
@@ -77,7 +79,8 @@ export function calculateShipping(
   if (!destination && method.sameCityOnly) return null;
 
   const sameProvince = destination?.province === config.origin.province;
-  const rate = sameProvince ? method.inProvince : method.outOfProvince;
+  const override = destination ? method.provinceRates[destination.province] : undefined;
+  const rate = override ?? (sameProvince ? method.inProvince : method.outOfProvince);
   if (!rate) return null;
   const extraKg = Math.ceil(Math.max(0, weightGrams - method.baseWeightGrams) / 1000);
   return rate.baseCost + extraKg * rate.perExtraKg;

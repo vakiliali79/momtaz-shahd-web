@@ -77,10 +77,15 @@ function Carousel({
 
   const handleKeyDown = React.useCallback(
     (event: React.KeyboardEvent<HTMLDivElement>) => {
-      if (event.key === "ArrowLeft") {
+      // Arrow keys follow the visual direction: in right-to-left pages the
+      // next slide is to the left.
+      const rtl = getComputedStyle(event.currentTarget).direction === "rtl"
+      const forward = rtl ? "ArrowLeft" : "ArrowRight"
+      const backward = rtl ? "ArrowRight" : "ArrowLeft"
+      if (event.key === backward) {
         event.preventDefault()
         scrollPrev()
-      } else if (event.key === "ArrowRight") {
+      } else if (event.key === forward) {
         event.preventDefault()
         scrollNext()
       }

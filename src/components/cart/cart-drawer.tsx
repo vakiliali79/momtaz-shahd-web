@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { ShoppingBagIcon, Trash2Icon } from "lucide-react";
-import { useAnimate } from "motion/react";
+import { AnimatePresence, motion, useAnimate } from "motion/react";
 import { useLocale, useTranslations } from "next-intl";
 
 import { QuantityStepper } from "@/components/cart/quantity-stepper";
@@ -69,15 +69,23 @@ export function CartDrawer() {
           <span ref={iconScope} className="inline-flex">
             <ShoppingBagIcon aria-hidden="true" />
           </span>
-          {hydrated && count > 0 ? (
-            <span
-              aria-hidden="true"
-              className="absolute -end-1 -top-1 grid h-5 min-w-5 place-items-center rounded-full bg-primary px-1 text-[0.6875rem] leading-none font-semibold text-primary-foreground ring-2 ring-background"
-            >
-              {formatNumber(Math.min(count, 99), locale)}
-              {count > 99 ? "+" : ""}
-            </span>
-          ) : null}
+          <AnimatePresence initial={false}>
+            {hydrated && count > 0 ? (
+              <motion.span
+                // A new key per count makes the badge pop each time it changes.
+                key={count}
+                aria-hidden="true"
+                initial={{ scale: 0.4, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.4, opacity: 0 }}
+                transition={{ type: "spring", stiffness: 520, damping: 16 }}
+                className="absolute -end-1 -top-1 grid h-5 min-w-5 place-items-center rounded-full bg-brand-red px-1 text-[0.6875rem] leading-none font-semibold text-white ring-2 ring-background"
+              >
+                {formatNumber(Math.min(count, 99), locale)}
+                {count > 99 ? "+" : ""}
+              </motion.span>
+            ) : null}
+          </AnimatePresence>
         </Button>
       </SheetTrigger>
 
@@ -115,7 +123,7 @@ export function CartDrawer() {
         ) : items.length === 0 ? (
           <div className="grid flex-1 place-items-center p-6 text-center">
             <div className="space-y-3">
-              <span className="mx-auto grid size-16 place-items-center rounded-full bg-secondary text-brand-gold">
+              <span className="mx-auto grid size-16 place-items-center rounded-full bg-secondary text-gold-ink">
                 <ShoppingBagIcon className="size-7" strokeWidth={1.5} aria-hidden="true" />
               </span>
               <p className="font-semibold">{t("cart.empty.title")}</p>
@@ -150,7 +158,7 @@ export function CartDrawer() {
                         <Link
                           href={`/products/${item.slug}`}
                           onClick={close}
-                          className="line-clamp-2 rounded text-sm font-medium hover:text-primary"
+                          className="touch-target line-clamp-2 rounded text-sm font-medium hover:text-primary"
                         >
                           {name}
                         </Link>
@@ -166,7 +174,7 @@ export function CartDrawer() {
                       <p className="mt-0.5 flex flex-wrap items-center gap-1.5 text-xs text-muted-foreground">
                         <span>{t("cart.each", { price: formatPrice(unit, locale, toman) })}</span>
                         {wholesale ? (
-                          <span className="rounded-full bg-brand-leaf/15 px-2 py-0.5 font-medium text-brand-leaf dark:text-success">
+                          <span className="rounded-full bg-brand-leaf/15 px-2 py-0.5 font-medium text-leaf-ink">
                             {t("cart.wholesaleApplied")}
                           </span>
                         ) : null}
@@ -194,7 +202,7 @@ export function CartDrawer() {
 
             <SheetFooter className="gap-3 border-t border-border bg-muted/40">
               {totals.wholesaleSavings > 0 ? (
-                <div className="flex justify-between gap-2 text-sm text-brand-leaf dark:text-success">
+                <div className="flex justify-between gap-2 text-sm text-leaf-ink">
                   <span>{t("cart.wholesaleSavings")}</span>
                   <span>−{formatPrice(totals.wholesaleSavings, locale, toman)}</span>
                 </div>

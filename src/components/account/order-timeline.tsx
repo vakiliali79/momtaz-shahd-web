@@ -1,27 +1,9 @@
 import { useLocale, useTranslations } from "next-intl";
 
+import { noteKey } from "@/lib/orders/history-notes";
 import type { OrderView } from "@/lib/orders/queries";
 import { formatDate } from "@/lib/format";
 import { cn } from "@/lib/utils";
-
-/** History notes the customer may see, keyed by the code before any ":" detail. */
-const visibleNotes = [
-  "order_placed",
-  "order_placed_cod",
-  "payment_received",
-  "payment_failed",
-  "payment_needs_review",
-  "receipt_uploaded",
-  "receipt_rejected",
-  "bank_transfer_confirmed",
-  "cancelled_by_customer",
-] as const;
-type VisibleNote = (typeof visibleNotes)[number];
-
-function noteKey(note: string | null): VisibleNote | null {
-  const code = note?.split(":")[0];
-  return visibleNotes.find((key) => key === code) ?? null;
-}
 
 export function OrderTimeline({ history }: { history: OrderView["history"] }) {
   const t = useTranslations();
@@ -41,7 +23,7 @@ export function OrderTimeline({ history }: { history: OrderView["history"] }) {
               aria-hidden="true"
               className={cn(
                 "relative mt-1 size-6 shrink-0 rounded-full border-4 border-background",
-                last ? "bg-primary" : "bg-brand-leaf",
+                last ? "bg-brand-red" : "bg-brand-leaf",
               )}
             />
             <div className="min-w-0">

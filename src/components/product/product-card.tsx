@@ -5,6 +5,7 @@ import { Price } from "@/components/product/price";
 import { ProductImage } from "@/components/product/product-image";
 import { RatingStars } from "@/components/product/rating-stars";
 import { WishlistButton } from "@/components/product/wishlist-button";
+import { MotionCard } from "@/components/shared/motion-card";
 import { Link } from "@/i18n/navigation";
 import { toCartProduct } from "@/lib/cart";
 import type { CatalogProduct } from "@/lib/data/catalog";
@@ -30,9 +31,9 @@ export function ProductCard({
   const outOfStock = product.stock <= 0;
 
   return (
-    <article
+    <MotionCard
       className={cn(
-        "group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-soft transition duration-300 hover:-translate-y-1 hover:shadow-lg motion-reduce:transition-none motion-reduce:hover:translate-y-0",
+        "group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-soft transition-shadow duration-300 hover:shadow-lg",
         className,
       )}
     >
@@ -53,7 +54,7 @@ export function ProductCard({
               {t("product.outOfStock")}
             </span>
           ) : product.discountPrice !== null ? (
-            <span className="rounded-full bg-primary px-2.5 py-1 text-xs font-semibold text-primary-foreground">
+            <span className="rounded-full bg-brand-red px-2.5 py-1 text-xs font-semibold text-white">
               {t("product.discountBadge", {
                 percent: formatNumber(
                   discountPercent(product.price, product.discountPrice),
@@ -70,8 +71,9 @@ export function ProductCard({
         />
       </div>
 
-      <div className="flex flex-1 flex-col gap-2 p-4">
-        <h3 className="leading-snug font-semibold">
+      {/* Sized by the card's own width (container query), not the viewport. */}
+      <div className="@container flex flex-1 flex-col gap-2 p-3 @[15rem]:p-4">
+        <h3 className="text-sm leading-snug font-semibold @[15rem]:text-base">
           {/* The link's ::after covers the whole card, making all of it clickable. */}
           <Link
             href={`/products/${product.slug}`}
@@ -84,7 +86,7 @@ export function ProductCard({
           {t(`units.${weight.unit}`, { value: weight.value })}
         </p>
         <RatingStars rating={product.rating} reviewCount={product.reviewCount} />
-        <div className="mt-auto flex items-end justify-between gap-2 pt-2">
+        <div className="mt-auto flex flex-wrap items-end justify-between gap-2 pt-2">
           <Price price={product.price} discountPrice={product.discountPrice} />
           <AddToCartButton
             variant="icon"
@@ -93,6 +95,6 @@ export function ProductCard({
           />
         </div>
       </div>
-    </article>
+    </MotionCard>
   );
 }

@@ -13,7 +13,8 @@
   "common": {
     "skipToContent": "Skip to content",
     "close": "Close",
-    "toman": "Toman"
+    "toman": "Toman",
+    "announcement": "Announcement"
   },
   "nav": {
     "label": "Main navigation",
@@ -143,7 +144,14 @@
     "instagram": "Momtaz Shahd on Instagram",
     "telegram": "Momtaz Shahd on Telegram",
     "whatsapp": "Momtaz Shahd on WhatsApp",
-    "rights": "© {year} Momtaz Shahd. All rights reserved."
+    "rights": "© {year} Momtaz Shahd. All rights reserved.",
+    "social": {
+      "telegram": "Telegram",
+      "aparat": "Aparat",
+      "linkedin": "LinkedIn",
+      "eitaa": "Eitaa"
+    },
+    "track": "Track an order"
   },
   "newsletter": {
     "title": "Newsletter",
@@ -177,7 +185,8 @@
     "featured": {
       "title": "Featured products",
       "subtitle": "Our customers' favourites, baked fresh every day.",
-      "viewAll": "View all"
+      "viewAll": "View all",
+      "carousel": "Featured products — scroll sideways"
     },
     "why": {
       "title": "Why Momtaz Shahd",
@@ -221,9 +230,12 @@
     }
   },
   "notFound": {
-    "title": "Page not found",
-    "description": "The page you are looking for does not exist or is not ready yet.",
-    "backHome": "Back to home"
+    "title": "This page went missing",
+    "description": "Like the last cookie in the box — it isn't here. The link may be old, or the address mistyped.",
+    "backHome": "Back to home",
+    "browse": "Browse products",
+    "popular": "Popular pages",
+    "search": "Search the shop"
   },
   "units": {
     "g": "{value} g",
@@ -312,7 +324,8 @@
       "previous": "Previous page",
       "next": "Next page",
       "page": "Page {page}"
-    }
+    },
+    "resultsTitle": "Products"
   },
   "about": {
     "title": "About us",
@@ -373,7 +386,8 @@
       "messageTooShort": "Please write at least 10 characters.",
       "tooLong": "This text is too long.",
       "server": "Something went wrong. Please try again."
-    }
+    },
+    "whatsapp": "WhatsApp"
   },
   "auth": {
     "login": {
@@ -408,7 +422,8 @@
       "tooLong": "This text is too long.",
       "invalidCredentials": "The mobile number or password is incorrect.",
       "phoneTaken": "An account with this mobile number already exists. Please sign in.",
-      "server": "Something went wrong. Please try again."
+      "server": "Something went wrong. Please try again.",
+      "blocked": "This account has been blocked. Please contact us."
     }
   },
   "map": {
@@ -719,7 +734,8 @@
         "reviews": "Reviews",
         "profile": "Profile",
         "wholesale": "Wholesale"
-      }
+      },
+      "tabsLabel": "Account sections"
     },
     "dashboard": {
       "title": "My account",
@@ -888,5 +904,915 @@
         "REJECTED": "Declined"
       }
     }
+  },
+  "admin": {
+    "nav": {
+      "dashboard": "Dashboard",
+      "orders": "Orders",
+      "products": "Products",
+      "categories": "Categories",
+      "customers": "Customers",
+      "wholesale": "Wholesale requests",
+      "dealers": "Dealers",
+      "coupons": "Coupons",
+      "reviews": "Reviews",
+      "settings": "Settings",
+      "translations": "Translations"
+    },
+    "shell": {
+      "title": "Momtaz Shahd admin",
+      "navLabel": "Admin navigation",
+      "collapse": "Collapse sidebar",
+      "expand": "Expand sidebar",
+      "openMenu": "Open admin menu",
+      "closeMenu": "Close",
+      "signedInAs": "Signed in as {name}",
+      "viewStore": "View store",
+      "signOut": "Sign out"
+    },
+    "table": {
+      "summary": "{from}–{to} of {total}",
+      "perPage": "Rows per page",
+      "previous": "Previous page",
+      "next": "Next page",
+      "page": "Page {page} of {total}",
+      "search": "Search",
+      "allOf": "All: {label}"
+    },
+    "form": {
+      "languages": "Languages",
+      "tabHasErrors": "This language has errors",
+      "cancel": "Cancel",
+      "save": "Save",
+      "saving": "Saving…",
+      "saved": "Saved.",
+      "delete": "Delete",
+      "optional": "Optional"
+    },
+    "images": {
+      "hint": "JPG, PNG or WebP, up to 5 MB each, at most {max} images. The first image is the cover.",
+      "add": "Add images",
+      "uploading": "Uploading {count}…",
+      "cover": "Cover",
+      "moveEarlier": "Move image {index} earlier",
+      "moveLater": "Move image {index} later",
+      "remove": "Remove image {index}",
+      "tooMany": "Only {max} images are allowed; extra files were skipped.",
+      "errors": {
+        "fileType": "{name}: please upload a JPG, PNG or WebP image.",
+        "fileTooLarge": "{name}: the file is larger than 5 MB.",
+        "server": "{name}: upload failed. Please try again."
+      }
+    },
+    "errors": {
+      "required": "This field is required.",
+      "invalid": "This value is not valid.",
+      "tooLong": "This value is too long.",
+      "slugInvalid": "Use lowercase English letters, digits and hyphens only (e.g. walnut-koloocheh).",
+      "slugTaken": "This slug is already used.",
+      "codeTaken": "This code is already used.",
+      "mustBePositive": "Enter zero or a positive number.",
+      "mustBeWhole": "Enter a whole number.",
+      "discountTooHigh": "Must be lower than the regular price.",
+      "percentRange": "Enter a percentage between 1 and 100.",
+      "wholesaleIncomplete": "Enter both the wholesale price and the minimum quantity, or neither.",
+      "invalidPhone": "Enter a valid Iranian mobile number.",
+      "invalidUrl": "Enter a valid address.",
+      "invalidMessage": "This text has a formatting error (check the {braces}).",
+      "placeholdersChanged": "Keep the same {placeholders} as the original text.",
+      "notFound": "This item no longer exists.",
+      "inUse": "This item is in use and can't be deleted.",
+      "forbidden": "You don't have permission to do this.",
+      "server": "Something went wrong. Please try again."
+    },
+    "products": {
+      "title": "Products",
+      "description": "Catalogue, prices and stock.",
+      "new": "New product",
+      "edit": "Edit product",
+      "editNamed": "Edit: {name}",
+      "viewInStore": "View in store",
+      "search": "Search by name or slug",
+      "empty": "No products match these filters.",
+      "stockSaved": "Stock of {name} set to {stock}.",
+      "stockFor": "Stock of {name}",
+      "activeFor": "{name} is active",
+      "editFor": "Edit {name}",
+      "duplicateFor": "Duplicate {name}",
+      "duplicated": "Copy created (inactive). Review it before activating.",
+      "featured": "Featured",
+      "columns": {
+        "name": "Product",
+        "category": "Category",
+        "price": "Price",
+        "stock": "Stock",
+        "active": "Active",
+        "featured": "Featured",
+        "created": "Added",
+        "actions": "Actions"
+      },
+      "filters": {
+        "category": "Category",
+        "status": "Status",
+        "active": "Active",
+        "inactive": "Inactive",
+        "stock": "Stock",
+        "low": "Low stock",
+        "out": "Out of stock"
+      },
+      "form": {
+        "texts": "Name and description",
+        "name": "Name",
+        "description": "Description",
+        "ingredients": "Ingredients (optional)",
+        "general": "General",
+        "slug": "URL slug",
+        "slugHint": "Lowercase English, e.g. walnut-koloocheh-450g. Changing it changes the product's address.",
+        "category": "Category",
+        "isActive": "Active",
+        "isActiveHint": "Inactive products are hidden from the store.",
+        "isFeatured": "Featured",
+        "isFeaturedHint": "Shown in the home page carousel.",
+        "pricing": "Prices (Toman)",
+        "price": "Price",
+        "discountPrice": "Sale price",
+        "wholesalePrice": "Wholesale price",
+        "minWholesaleQty": "Wholesale from (quantity)",
+        "optional": "Optional",
+        "inventory": "Inventory",
+        "stock": "Stock",
+        "weightGrams": "Weight (g)",
+        "shelfLifeDays": "Shelf life (days)",
+        "images": "Images",
+        "save": "Save product",
+        "saving": "Saving…",
+        "saved": "Product saved."
+      }
+    },
+    "categories": {
+      "title": "Categories",
+      "description": "Group products for browsing and filters.",
+      "new": "New category",
+      "edit": "Edit category",
+      "editNamed": "Edit: {name}",
+      "empty": "No categories yet.",
+      "editFor": "Edit {name}",
+      "deleteFor": "Delete {name}",
+      "deleteDisabled": "Move or delete its products first.",
+      "deleteTitle": "Delete this category?",
+      "deleteText": "“{name}” will be deleted. This can't be undone.",
+      "delete": "Delete",
+      "deleted": "Category deleted.",
+      "columns": {
+        "name": "Name",
+        "slug": "Slug",
+        "products": "Products",
+        "order": "Order",
+        "actions": "Actions"
+      },
+      "form": {
+        "texts": "Name and description",
+        "name": "Name",
+        "description": "Description (optional)",
+        "general": "General",
+        "slug": "URL slug",
+        "slugHint": "Lowercase English, e.g. gift-boxes.",
+        "sortOrder": "Display order",
+        "sortOrderHint": "Lower numbers come first.",
+        "image": "Image",
+        "save": "Save category",
+        "saving": "Saving…",
+        "saved": "Category saved."
+      }
+    },
+    "coupons": {
+      "title": "Coupons",
+      "description": "Discount codes customers enter at checkout.",
+      "new": "New coupon",
+      "edit": "Edit coupon",
+      "editNamed": "Edit coupon {code}",
+      "empty": "No coupons yet.",
+      "editFor": "Edit {code}",
+      "deleteFor": "Delete {code}",
+      "activeFor": "{code} is active",
+      "deleteTitle": "Delete this coupon?",
+      "deleteText": "Code {code} will stop working. Past orders keep their discount.",
+      "delete": "Delete",
+      "deleted": "Coupon deleted.",
+      "expired": "Expired",
+      "usedUp": "Used up",
+      "never": "Never",
+      "percentValue": "{value}%",
+      "usesOf": "{used} of {max}",
+      "usesUnlimited": "{used} (no limit)",
+      "types": {
+        "PERCENT": "Percentage",
+        "FIXED": "Fixed amount"
+      },
+      "columns": {
+        "code": "Code",
+        "discount": "Discount",
+        "minOrder": "Minimum order",
+        "uses": "Uses",
+        "expires": "Expires",
+        "active": "Active",
+        "actions": "Actions"
+      },
+      "form": {
+        "code": "Code",
+        "codeHint": "English letters, digits, - and _. Saved in capitals.",
+        "type": "Discount type",
+        "percent": "Percent off (1–100)",
+        "amount": "Amount off (Toman)",
+        "minOrder": "Minimum order (Toman)",
+        "minOrderHint": "0 for no minimum.",
+        "maxUses": "Usage limit",
+        "maxUsesHint": "Leave empty for unlimited.",
+        "expiresAt": "Last valid day",
+        "expiresHint": "Gregorian date as YYYY-MM-DD; leave empty for no expiry.",
+        "expiresPreview": "Valid until the end of {date}",
+        "active": "Active",
+        "activeHint": "Inactive codes are refused at checkout.",
+        "save": "Save coupon",
+        "saving": "Saving…",
+        "saved": "Coupon saved."
+      }
+    },
+    "customers": {
+      "title": "Customers",
+      "description": "Everyone with an account, their orders and access.",
+      "search": "Name, phone or email…",
+      "empty": "No customers match these filters.",
+      "noName": "(no name)",
+      "columns": {
+        "name": "Name",
+        "phone": "Mobile",
+        "role": "Role",
+        "orders": "Orders",
+        "state": "Status",
+        "joined": "Joined"
+      },
+      "roles": {
+        "CUSTOMER": "Customer",
+        "WHOLESALE": "Wholesale",
+        "ADMIN": "Admin"
+      },
+      "states": {
+        "active": "Active",
+        "blocked": "Blocked"
+      },
+      "detail": {
+        "title": "Customer",
+        "joined": "Customer since {date}",
+        "orders": "Orders",
+        "spent": "Total spent",
+        "reviews": "Reviews",
+        "orderList": "Orders",
+        "noOrders": "No orders yet.",
+        "contact": "Contact",
+        "email": "Email",
+        "language": "Language",
+        "addresses": "Addresses",
+        "noAddresses": "No saved addresses.",
+        "addressLine": "{province}, {city} — {address}",
+        "manage": "Access",
+        "roleHint": "Wholesale customers see bulk prices and the bulk order form.",
+        "roleChanged": "Role changed to {role}.",
+        "notEditable": "Admin accounts can't be changed here.",
+        "block": "Block customer",
+        "unblock": "Unblock",
+        "blockHint": "Blocking signs the customer out and stops them signing in.",
+        "blockedText": "This customer is blocked and cannot sign in.",
+        "blockTitle": "Block this customer?",
+        "blockText": "They will be signed out and won't be able to sign in until unblocked. Their orders are kept.",
+        "unblockTitle": "Unblock this customer?",
+        "unblockText": "They will be able to sign in again.",
+        "blocked": "Customer blocked.",
+        "unblocked": "Customer unblocked."
+      }
+    },
+    "dashboard": {
+      "title": "Dashboard",
+      "description": "Today's numbers at a glance.",
+      "kpis": {
+        "today": "Sales today",
+        "month": "Sales this month",
+        "monthHint": "Since the 1st of the Persian month",
+        "pending": "Pending orders",
+        "lowStock": "Low-stock products",
+        "wholesale": "New wholesale requests"
+      },
+      "chartTitle": "Sales, last 30 days",
+      "chartLabel": "Daily sales in Toman over the last 30 days",
+      "showTable": "Show as a table",
+      "day": "Day",
+      "orders": "Orders",
+      "sales": "Sales",
+      "ordersCount": "{count, plural, one {# order} other {# orders}}",
+      "topProducts": "Top products (30 days)",
+      "sold": "{count, plural, one {# sold} other {# sold}}",
+      "noSales": "No sales in the last 30 days.",
+      "latestOrders": "Latest orders",
+      "allOrders": "All orders",
+      "noOrders": "No orders yet."
+    },
+    "dealers": {
+      "title": "Dealers",
+      "description": "Agencies, distributors and shops shown on the dealer map.",
+      "new": "New dealer",
+      "edit": "Edit dealer",
+      "editNamed": "Edit: {name}",
+      "empty": "No dealers yet.",
+      "editFor": "Edit {name}",
+      "deleteFor": "Delete {name}",
+      "verifiedFor": "{name} is verified",
+      "activeFor": "{name} is shown",
+      "hasPin": "Location on map",
+      "deleteTitle": "Delete this dealer?",
+      "deleteText": "“{name}” will be removed from the site. This can't be undone.",
+      "delete": "Delete",
+      "deleted": "Dealer deleted.",
+      "place": "{city}, {province}",
+      "types": {
+        "DISTRIBUTOR": "Distributor",
+        "RETAIL_STORE": "Retail store",
+        "AGENCY": "Agency"
+      },
+      "columns": {
+        "name": "Name",
+        "type": "Type",
+        "place": "City",
+        "phone": "Phone",
+        "verified": "Verified",
+        "active": "Shown",
+        "actions": "Actions"
+      },
+      "form": {
+        "texts": "Name, address and hours",
+        "name": "Name",
+        "address": "Address",
+        "hours": "Opening hours (optional)",
+        "hoursHint": "e.g. Sat–Thu 9:00–21:00",
+        "general": "Details",
+        "type": "Type",
+        "province": "Province",
+        "city": "City",
+        "choose": "Choose…",
+        "provinceFirst": "Choose a province first",
+        "phone": "Phone (optional)",
+        "whatsapp": "WhatsApp (optional)",
+        "instagram": "Instagram handle (optional)",
+        "active": "Show on the site",
+        "activeHint": "Hidden dealers stay in the panel only.",
+        "verified": "Verified dealer",
+        "verifiedHint": "Shows a verified badge and lists them first.",
+        "location": "Location on the map",
+        "image": "Photo",
+        "save": "Save dealer",
+        "saving": "Saving…",
+        "saved": "Dealer saved."
+      }
+    },
+    "orders": {
+      "title": "Orders",
+      "description": "Track, update and ship customer orders.",
+      "search": "Order number, phone or name…",
+      "empty": "No orders match these filters.",
+      "receiptWaiting": "Receipt",
+      "columns": {
+        "number": "Order",
+        "date": "Date",
+        "customer": "Customer",
+        "type": "Type",
+        "payment": "Payment",
+        "total": "Total",
+        "status": "Status"
+      },
+      "types": {
+        "RETAIL": "Retail",
+        "WHOLESALE": "Wholesale"
+      },
+      "filters": {
+        "status": "Status",
+        "period": "Date",
+        "type": "Type",
+        "payment": "Payment"
+      },
+      "periods": {
+        "today": "Today",
+        "7d": "Last 7 days",
+        "30d": "Last 30 days"
+      },
+      "detail": {
+        "title": "Order {number}",
+        "invoice": "Print invoice",
+        "history": "Status history",
+        "adminNote": "Staff note: {text}",
+        "systemNote": "System: {text}",
+        "payments": "Payment attempts",
+        "paymentStatus": {
+          "PENDING": "Pending",
+          "PAID": "Paid",
+          "FAILED": "Failed"
+        },
+        "customer": "Customer",
+        "viewCustomer": "View customer",
+        "statusTitle": "Change status",
+        "finalStatus": "This order is closed; its status can no longer change.",
+        "statusChanged": "Status changed to {status}.",
+        "newStatus": "New status",
+        "chooseStatus": "Choose a status",
+        "cancelWarning": "Cancelling returns the items to stock and frees the coupon use.",
+        "internalNote": "Internal note (optional)",
+        "notifyCustomer": "Text the customer",
+        "saving": "Saving…",
+        "applyStatus": "Apply",
+        "trackingTitle": "Tracking code",
+        "trackingSaved": "Tracking code saved.",
+        "saveTracking": "Save tracking code",
+        "bankTitle": "Bank transfer",
+        "bankWithReceipt": "The customer uploaded a receipt. Check your bank account, then confirm or reject it.",
+        "bankNoReceipt": "No receipt uploaded yet. You can still confirm once the money arrives.",
+        "viewReceipt": "View receipt",
+        "confirmTransfer": "Confirm payment",
+        "confirmTransferTitle": "Confirm this transfer?",
+        "confirmTransferText": "Order {number} will be marked as paid and the customer will be notified.",
+        "transferConfirmed": "Payment confirmed.",
+        "rejectReceipt": "Reject receipt",
+        "rejectReceiptTitle": "Reject this receipt?",
+        "rejectReceiptText": "The receipt will be removed and the customer can upload a new one.",
+        "receiptRejected": "Receipt rejected."
+      }
+    },
+    "reviews": {
+      "title": "Reviews",
+      "description": "New reviews appear on the shop only after you approve them.",
+      "search": "Comment or customer…",
+      "empty": "Nothing here — no reviews match these filters.",
+      "noComment": "(rating only, no comment)",
+      "rating": "{value} out of 5 stars",
+      "stars": "{count, plural, one {# star} other {# stars}}",
+      "filters": {
+        "state": "Status",
+        "rating": "Rating"
+      },
+      "states": {
+        "pending": "Waiting for approval",
+        "approved": "Approved"
+      },
+      "approve": "Approve",
+      "approved": "Review published.",
+      "reject": "Reject",
+      "remove": "Remove",
+      "rejected": "Review removed.",
+      "rejectTitle": "Remove this review?",
+      "rejectText": "The review will be deleted. The customer can write a new one."
+    },
+    "settings": {
+      "title": "Settings",
+      "description": "Shipping, currency, contact details and the site banner.",
+      "save": "Save changes",
+      "saving": "Saving…",
+      "saved": "Settings saved.",
+      "tabs": {
+        "shipping": "Shipping",
+        "currency": "Currency",
+        "contact": "Contact & social",
+        "announcement": "Banner",
+        "bank": "Bank transfer"
+      },
+      "shipping": {
+        "origin": "Ships from",
+        "originHint": "Rates for the same province apply when the customer is in this province.",
+        "province": "Province",
+        "city": "City",
+        "choose": "Choose…",
+        "pickupAddress": "Pickup address (shown for in-person pickup)",
+        "freeTitle": "Free shipping",
+        "freeEnabled": "Offer free shipping",
+        "freeThreshold": "Free from (Toman)",
+        "freeThresholdHint": "Orders with a subtotal at or above this amount ship free.",
+        "methodActive": "Offer this method",
+        "daysMin": "Delivery days (from)",
+        "daysMax": "Delivery days (to)",
+        "baseWeight": "Weight included (grams)",
+        "baseWeightHint": "Each started extra kilogram adds the per-kg price.",
+        "inProvince": "Inside the origin province",
+        "outOfProvince": "Other provinces",
+        "outEnabled": "Deliver to other provinces",
+        "baseCost": "Base price (Toman)",
+        "perExtraKg": "Per extra kg (Toman)",
+        "sameCityOnly": "Only inside the origin city",
+        "sameCityOnlyHint": "For a local courier.",
+        "provinceRates": "Special prices by province",
+        "provinceRatesHint": "Overrides the rates above for the chosen provinces.",
+        "addRate": "Add province price",
+        "removeRate": "Remove this price",
+        "save": "Save shipping",
+        "saving": "Saving…"
+      },
+      "currency": {
+        "title": "Exchange rates",
+        "description": "English and Arabic visitors can see approximate prices next to Toman. Payments are always in Toman.",
+        "usd": "1 US dollar = ? Toman",
+        "aed": "1 UAE dirham = ? Toman",
+        "rateHint": "0 hides this currency.",
+        "show": "Show approximate prices",
+        "showHint": "Only for the English and Arabic site.",
+        "example": "Example: {toman} Toman ≈ {usd} ≈ {aed}",
+        "updatedAt": "Last updated {date}"
+      },
+      "contact": {
+        "title": "Contact details",
+        "phone": "Phone",
+        "whatsapp": "WhatsApp number",
+        "email": "Email",
+        "instagram": "Instagram handle",
+        "address": "Address",
+        "hours": "Working hours",
+        "social": "Other social links",
+        "socialHint": "Full https:// links. Leave empty to hide.",
+        "networks": {
+          "telegram": "Telegram",
+          "aparat": "Aparat",
+          "linkedin": "LinkedIn",
+          "eitaa": "Eitaa"
+        }
+      },
+      "announcement": {
+        "title": "Announcement banner",
+        "enabled": "Show the banner",
+        "enabledHint": "A thin strip above the site header.",
+        "text": "Banner text",
+        "textHint": "Keep it short — one line on phones.",
+        "link": "Link (optional)",
+        "linkHint": "A page on this site, e.g. /products."
+      },
+      "bank": {
+        "title": "Bank transfer details",
+        "description": "Shown to customers who choose bank transfer at checkout.",
+        "bankName": "Bank name",
+        "accountHolder": "Account holder",
+        "sheba": "IBAN (Sheba)",
+        "cardNumber": "Card number"
+      }
+    },
+    "translations": {
+      "title": "Translations",
+      "description": "Edit any text on the site in Persian, English and Arabic. Changes apply right away; reset to go back to the original.",
+      "search": "Search keys or texts…",
+      "section": "Section",
+      "state": "Show",
+      "states": {
+        "changed": "Edited texts",
+        "missing": "Missing a language"
+      },
+      "empty": "No texts match these filters.",
+      "changed": "Edited",
+      "missing": "Missing",
+      "fileValue": "Original: {value}",
+      "save": "Save",
+      "saved": "Text saved.",
+      "cancel": "Cancel",
+      "reset": "Reset",
+      "resetDone": "Original text restored."
+    },
+    "wholesale": {
+      "title": "Wholesale requests",
+      "description": "Wholesale enquiries and dealership applications.",
+      "search": "Company, contact, phone or city…",
+      "empty": "No requests match these filters.",
+      "types": {
+        "WHOLESALE": "Wholesale",
+        "AGENCY": "Dealership"
+      },
+      "columns": {
+        "type": "Type",
+        "company": "Company",
+        "contact": "Contact",
+        "city": "City",
+        "status": "Status",
+        "date": "Received"
+      },
+      "statuses": {
+        "NEW": "New",
+        "CONTACTED": "Contacted",
+        "CONVERTED": "Converted",
+        "REJECTED": "Rejected"
+      },
+      "detail": {
+        "title": "Wholesale request",
+        "received": "Received {date}",
+        "contactInfo": "Contact details",
+        "phone": "Phone",
+        "email": "Email",
+        "quantity": "Estimated monthly quantity",
+        "language": "Language",
+        "products": "Products of interest",
+        "message": "Message",
+        "hasAccount": "This phone has an account — open the customer to grant wholesale prices.",
+        "noAccount": "No account uses this phone number yet.",
+        "workflow": "Follow-up",
+        "note": "Team notes",
+        "noteHint": "Only visible to staff.",
+        "save": "Save",
+        "saving": "Saving…",
+        "saved": "Request updated."
+      }
+    }
+  },
+  "sms": {
+    "status": {
+      "PENDING": "Momtaz Shahd: we received order {orderNumber}.",
+      "PAID": "Momtaz Shahd: payment for order {orderNumber} is confirmed. Thank you!",
+      "PROCESSING": "Momtaz Shahd: we're preparing order {orderNumber}.",
+      "SHIPPED": "Momtaz Shahd: order {orderNumber} has been shipped.",
+      "DELIVERED": "Momtaz Shahd: order {orderNumber} was delivered. Enjoy!",
+      "CANCELLED": "Momtaz Shahd: order {orderNumber} was cancelled."
+    },
+    "tracking": "Momtaz Shahd: order {orderNumber} tracking code: {code}",
+    "placed": "Momtaz Shahd: we received order {orderNumber} ({total} Toman). We'll text you when it ships.",
+    "placedCod": "Momtaz Shahd: order {orderNumber} is confirmed and being prepared. Pay {total} Toman on delivery.",
+    "wholesaleReceived": "Momtaz Shahd: thank you {name}, we received your wholesale request and will call you within 2 working days.",
+    "dealerReceived": "Momtaz Shahd: thank you {name}, we received your dealership application and will be in touch soon."
+  },
+  "currency": {
+    "approx": "≈ {values}",
+    "note": "Approximate, at the shop's exchange rate. You pay in Toman."
+  },
+  "notifications": {
+    "orderTypes": {
+      "RETAIL": "Retail",
+      "WHOLESALE": "Wholesale"
+    },
+    "payments": {
+      "ONLINE": "Online",
+      "COD": "Cash on delivery",
+      "BANK_TRANSFER": "Bank transfer"
+    },
+    "requestTypes": {
+      "WHOLESALE": "Wholesale request",
+      "AGENCY": "Dealership application"
+    },
+    "newOrder": {
+      "subject": "[Momtaz Shahd] New order {orderNumber}",
+      "sms": "New order {orderNumber}: {total} Toman, {customer} ({payment})",
+      "body": "New {type} order {orderNumber}\nCustomer: {customer} ({phone})\nItems: {items}\nTotal: {total} Toman\nPayment: {payment}"
+    },
+    "newRequest": {
+      "subject": "[Momtaz Shahd] {kind}: {company}",
+      "sms": "{kind}: {company}, {city}, {phone}",
+      "body": "{kind}\nCompany: {company}\nContact: {contact}\nPhone: {phone}\nEmail: {email}\nCity: {city}\nProducts: {products}\nMonthly quantity: {quantity}\n\n{message}"
+    }
+  },
+  "wholesalePage": {
+    "title": "Wholesale",
+    "lead": "Koloocheh and kolompeh for shops, cafés, hotels and distributors — at factory prices.",
+    "hero": {
+      "title": "Fresh from our bakery to your shelves",
+      "text": "Momtaz Shahd supplies shops, cafés, hotels, offices and distributors across Iran. Order by the carton at wholesale prices, pay by bank transfer with an official invoice, and get regular deliveries straight from the bakery.",
+      "cta": "Request wholesale prices",
+      "dealer": "Become a dealer"
+    },
+    "terms": {
+      "title": "Wholesale terms at a glance",
+      "minimum": {
+        "label": "Minimum order",
+        "value": "From 5,000,000 Toman per order — products can be mixed"
+      },
+      "payment": {
+        "label": "Payment",
+        "value": "Bank transfer or online payment, with an official invoice"
+      },
+      "delivery": {
+        "label": "Delivery",
+        "value": "Nationwide by freight or Tipax, usually within 2–5 working days"
+      }
+    },
+    "benefits": {
+      "title": "Why buy wholesale from us",
+      "prices": {
+        "title": "Factory prices",
+        "text": "Lower unit prices from the minimum quantity, with no middleman."
+      },
+      "fresh": {
+        "title": "Baked to order",
+        "text": "Large orders are baked fresh and packed for a long shelf life."
+      },
+      "shipping": {
+        "title": "Reliable shipping",
+        "text": "Careful packing in cartons and tracked delivery to every province."
+      },
+      "invoice": {
+        "title": "Official invoice",
+        "text": "Every wholesale order comes with a proper invoice for your books."
+      },
+      "support": {
+        "title": "A dedicated contact",
+        "text": "One person on our sales team follows your orders from start to finish."
+      },
+      "display": {
+        "title": "Shop display support",
+        "text": "Shelf displays and promotional material for regular partners."
+      }
+    },
+    "tiers": {
+      "title": "Wholesale price list",
+      "text": "Wholesale prices apply automatically in the cart when you order at least the minimum quantity of a product. Signed-in wholesale customers also get the quick bulk order form.",
+      "product": "Product",
+      "retail": "Retail price",
+      "wholesale": "Wholesale price",
+      "minimum": "From",
+      "saving": "You save",
+      "units": "{count, plural, one {# unit} other {# units}}",
+      "percent": "{value}%",
+      "empty": "The wholesale price list will be published soon.",
+      "note": "Prices include packaging and exclude shipping. Larger or recurring orders: ask us for a quote."
+    },
+    "faq": {
+      "title": "Frequently asked questions",
+      "who": {
+        "q": "Who can buy wholesale?",
+        "a": "Shops, supermarkets, cafés, restaurants, hotels, offices and distributors. Individuals buying for events are welcome too."
+      },
+      "minimum": {
+        "q": "Is there a minimum order?",
+        "a": "Each product has a minimum quantity for its wholesale price, shown in the table above. Mixed orders from about 5 million Toman are easiest for us to ship."
+      },
+      "prices": {
+        "q": "How do I get the wholesale price?",
+        "a": "Add at least the minimum quantity of a product to your cart and the wholesale price applies automatically. After we approve your request, your account also gets the bulk order form."
+      },
+      "payment": {
+        "q": "How can I pay?",
+        "a": "Online payment or bank transfer. For bank transfers you upload the receipt on your order page and we confirm it within a working day."
+      },
+      "delivery": {
+        "q": "How long does delivery take?",
+        "a": "Usually 2–5 working days depending on the city. Very large orders are baked to order and may need a few extra days."
+      },
+      "samples": {
+        "q": "Can I try the products first?",
+        "a": "Yes. Mention it in your request and we will arrange a sample box for businesses."
+      },
+      "dealer": {
+        "q": "How do I become an official dealer?",
+        "a": "Fill in the dealership application. We look at your location and sales channel and get back to you."
+      }
+    },
+    "form": {
+      "title": "Request wholesale prices",
+      "text": "Tell us a little about your business. We usually reply within 2 working days."
+    }
+  },
+  "wholesaleForm": {
+    "fields": {
+      "contactName": "Your name",
+      "phone": "Mobile number",
+      "email": "Email (optional)",
+      "province": "Province",
+      "city": "City",
+      "choose": "Choose…",
+      "provinceFirst": "Choose a province first",
+      "estimatedQty": "Estimated monthly quantity (optional)",
+      "estimatedQtyPlaceholder": "e.g. 200 kg or 50 cartons"
+    },
+    "wholesale": {
+      "company": "Business name",
+      "products": "Products you're interested in",
+      "productsPlaceholder": "e.g. walnut koloocheh, date kolompeh, gift boxes",
+      "message": "Anything else? (optional)",
+      "submit": "Send request",
+      "successTitle": "Request received",
+      "successText": "Thank you! Our sales team will call you within 2 working days."
+    },
+    "dealer": {
+      "company": "Shop or company name",
+      "products": "Which products would you sell?",
+      "productsPlaceholder": "e.g. the whole range, gift boxes only…",
+      "message": "Tell us about your business: shop size, years in business, sales channels (optional)",
+      "submit": "Send application",
+      "successTitle": "Application received",
+      "successText": "Thank you! We will review your application and contact you soon."
+    },
+    "privacy": "We only use these details to answer your request.",
+    "submitting": "Sending…",
+    "sendAnother": "Send another",
+    "errors": {
+      "companyRequired": "Please enter the business name.",
+      "nameRequired": "Please enter your name.",
+      "invalidPhone": "Enter a valid mobile number, e.g. 09121234567.",
+      "invalidEmail": "Enter a valid email address.",
+      "provinceRequired": "Choose a province.",
+      "cityRequired": "Choose a city.",
+      "productsRequired": "Tell us which products you're interested in.",
+      "tooLong": "This is too long.",
+      "tooMany": "We already have your requests from today. We'll be in touch soon.",
+      "server": "Something went wrong. Please try again."
+    }
+  },
+  "dealers": {
+    "title": "Find a dealer",
+    "lead": "Buy Momtaz Shahd at an agency, distributor or shop near you.",
+    "listTitle": "Dealers",
+    "search": "Search by city or name…",
+    "filterLabel": "Dealer type",
+    "allTypes": "All",
+    "types": {
+      "DISTRIBUTOR": "Distributor",
+      "RETAIL_STORE": "Retail store",
+      "AGENCY": "Agency"
+    },
+    "nearMe": "Near me",
+    "locating": "Finding you…",
+    "clearLocation": "Clear location",
+    "sortedByDistance": "nearest first",
+    "geoUnsupported": "Your browser can't share your location.",
+    "geoDenied": "Location access was denied. Search by city instead.",
+    "geoFailed": "We couldn't find your location. Try again or search by city.",
+    "count": "{count, plural, =0 {No dealers} one {# dealer} other {# dealers}}",
+    "empty": "No dealers match. Try another city or type.",
+    "distance": "{value} km",
+    "showOnMap": "Show on map",
+    "verified": "Verified dealer",
+    "verifiedDealer": "Verified Momtaz Shahd dealer",
+    "moreInfo": "More details",
+    "mapLabel": "Map of dealers",
+    "mapOf": "Map showing {name}",
+    "mapUnavailable": "The map couldn't load. The list still shows every dealer.",
+    "osm": "OpenStreetMap contributors",
+    "address": "Address",
+    "hours": "Opening hours",
+    "call": "Call {phone}",
+    "whatsapp": "WhatsApp",
+    "directions": "Directions",
+    "apps": {
+      "google": "Google Maps",
+      "neshan": "Neshan",
+      "balad": "Balad"
+    },
+    "applyPrompt": "Have a shop?",
+    "applyLink": "Become a dealer",
+    "place": "{city}, {province}",
+    "detailTitle": "{name} — Momtaz Shahd dealer in {city}",
+    "detailDescription": "{name}, {type} of Momtaz Shahd koloocheh and kolompeh in {city}. Address: {address}",
+    "photoAlt": "{name}",
+    "contactTitle": "Contact and directions",
+    "backToMap": "All dealers",
+    "cluster": "{count, plural, other {# dealers here — select to zoom in}}",
+    "youAreHere": "You are here"
+  },
+  "dealerApply": {
+    "title": "Become a dealer",
+    "lead": "Sell Momtaz Shahd koloocheh and kolompeh in your city.",
+    "perksTitle": "What dealers get",
+    "formTitle": "Dealership application",
+    "perks": {
+      "listing": {
+        "title": "On our dealer map",
+        "text": "Customers in your area find you on our website and are sent your way."
+      },
+      "pricing": {
+        "title": "Dealer pricing",
+        "text": "Better prices than wholesale, with priority on fresh batches."
+      },
+      "marketing": {
+        "title": "Marketing support",
+        "text": "Shelf displays, posters and promotions for the Nowruz and Ramadan seasons."
+      }
+    },
+    "process": "After you apply, our sales team reviews your location and business, calls you to talk it through, and sends a trial order. Most applications get an answer within a week."
+  },
+  "track": {
+    "title": "Track your order",
+    "lead": "Enter your order number and the mobile number you ordered with — no sign-in needed.",
+    "orderNumber": "Order number",
+    "orderNumberHint": "In your confirmation text, e.g. MS-20261116-0001.",
+    "phone": "Mobile number",
+    "phoneHint": "The number on the order.",
+    "submit": "Track order",
+    "searching": "Looking…",
+    "orderTitle": "Order",
+    "trackingCode": "Shipment tracking code",
+    "carrier": "Sent by {carrier}",
+    "progress": "Progress",
+    "items": "Items",
+    "payment": "Payment",
+    "accountHint": "Want to pay, upload a receipt or reorder?",
+    "accountLink": "Open it in your account",
+    "errors": {
+      "invalidNumber": "Enter the order number as it appears in your text, e.g. MS-20261116-0001.",
+      "invalidPhone": "Enter a valid mobile number, e.g. 09121234567.",
+      "notFound": "We couldn't find an order with this number and mobile number. Check both and try again.",
+      "tooMany": "Too many attempts. Please wait a few minutes and try again.",
+      "server": "Something went wrong. Please try again."
+    }
+  },
+  "errorPage": {
+    "title": "Something went wrong",
+    "description": "We couldn't load this page. It's not you — please try again in a moment.",
+    "retry": "Try again",
+    "home": "Back to home",
+    "reference": "Reference code:"
   }
 }

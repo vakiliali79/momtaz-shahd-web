@@ -1,6 +1,6 @@
 import "server-only";
 
-import { redirect } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { connection } from "next/server";
 
 import { auth } from "@/auth";
@@ -16,7 +16,10 @@ import { db } from "@/lib/db";
 
 export type SessionUser = { id: string; name: string };
 
-/** Lightweight: reads the session token only (no database query). */
+/**
+ * The signed-in user's id and name. Also confirms the account still exists
+ * and is not blocked, so a blocked user's existing session stops working.
+ */
 export async function getSessionUser(): Promise<SessionUser | null> {
   // Auth.js creates random tokens before it reads the request, which Cache
   // Components would treat as prerendered randomness: mark the read dynamic.
@@ -24,7 +27,12 @@ export async function getSessionUser(): Promise<SessionUser | null> {
   const session = await auth();
   const id = session?.user?.id;
   if (!id) return null;
-  return { id, name: session.user?.name ?? "" };
+  const user = await db.user.findUnique({
+    where: { id },
+    select: { id: true, name: true, phone: true, isBlocked: true },
+  });
+  if (!user || user.isBlocked) return null;
+  return { id: user.id, name: user.name ?? user.phone };
 }
 
 export type CurrentUser = {
@@ -43,6 +51,22 @@ export async function getCurrentUser(): Promise<CurrentUser | null> {
     where: { id: sessionUser.id },
     select: { id: true, name: true, phone: true, email: true, role: true },
   });
+}
+
+/**
+ * For admin pages: redirects signed-out visitors to the login page and shows
+ * a 404 to anyone who is not an ADMIN (so the admin area is not advertised).
+ */
+export async function requireAdmin(locale: AppLocale, callbackPath: string): Promise<CurrentUser> {
+  const user = await requireUser(locale, callbackPath);
+  if (user.role !== "ADMIN") notFound();
+  return user;
+}
+
+/** For admin server actions and route handlers: the admin, or null. */
+export async function getAdminUser(): Promise<CurrentUser | null> {
+  const user = await getCurrentUser();
+  return user?.role === "ADMIN" ? user : null;
 }
 
 /** Like getCurrentUser, but redirects to the login page when signed out. */

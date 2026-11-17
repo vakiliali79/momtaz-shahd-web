@@ -5,12 +5,9 @@ import { locale as rootLocale } from "next/root-params";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations } from "next-intl/server";
 
-import { Footer } from "@/components/layout/footer";
-import { Header } from "@/components/layout/header";
 import { Providers } from "@/components/providers";
 import { getDirection } from "@/i18n/locales";
 import { routing, type AppLocale } from "@/i18n/routing";
-import { formatDate } from "@/lib/format";
 import { SITE_URL } from "@/lib/site";
 
 import "../globals.css";
@@ -67,9 +64,6 @@ export const viewport: Viewport = {
   ],
 };
 
-// Footer copyright year. Fixed at build time; bump on the yearly release.
-const COPYRIGHT_DATE = "2026-11-16T12:00:00Z";
-
 export default async function RootLayout({ children }: LayoutProps<"/[locale]">) {
   const locale = await rootLocale();
   if (!hasLocale(routing.locales, locale)) notFound();
@@ -91,13 +85,8 @@ export default async function RootLayout({ children }: LayoutProps<"/[locale]">)
           <style>{"[data-reveal]{opacity:1!important;transform:none!important}"}</style>
         </noscript>
         <NextIntlClientProvider>
-          <Providers dir={dir}>
-            <Header />
-            <main id="main-content" tabIndex={-1} className="flex-1 outline-none">
-              {children}
-            </main>
-            <Footer year={formatDate(COPYRIGHT_DATE, locale, { year: "numeric" })} />
-          </Providers>
+          {/* Shop pages add the site header and footer in (shop)/layout.tsx; the admin has its own. */}
+          <Providers dir={dir}>{children}</Providers>
         </NextIntlClientProvider>
       </body>
     </html>

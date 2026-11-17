@@ -93,7 +93,7 @@ export function Gallery({
       </button>
 
       {images.length > 1 ? (
-        <ul aria-label={t("thumbnails")} className="flex gap-2 overflow-x-auto p-1">
+        <ul aria-label={t("thumbnails")} className="flex gap-2 relative overflow-x-auto p-1">
           {images.map((src, i) => (
             <li key={src}>
               <button

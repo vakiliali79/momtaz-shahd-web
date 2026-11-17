@@ -123,7 +123,7 @@ export function MobileNav({ className }: { className?: string }) {
                   }}
                   className="flex min-h-11 w-full items-center gap-3 rounded-xl px-3 text-sm font-medium transition-colors hover:bg-muted"
                 >
-                  <LogOutIcon className="size-4 text-muted-foreground" aria-hidden="true" />
+                  <LogOutIcon className="size-4 text-muted-foreground rtl:-scale-x-100" aria-hidden="true" />
                   {t("account.signOut")}
                 </button>
               </li>

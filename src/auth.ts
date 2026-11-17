@@ -5,6 +5,11 @@ import Credentials from "next-auth/providers/credentials";
 import { db } from "@/lib/db";
 import { loginSchema } from "@/lib/validation/auth";
 
+/** Sign-in refused because an admin blocked the account. */
+export class BlockedAccountError extends CredentialsSignin {
+  code = "blocked";
+}
+
 /**
  * Auth.js v5 with phone + password sign-in and JWT sessions (no database
  * session table). Server code should use the helpers in `src/lib/session.ts`
@@ -28,6 +33,7 @@ export const { handlers, auth, signIn, signOut, unstable_update: updateSession }
           user?.passwordHash ?? "$2b$12$QhU6oxwc7J3LjRa7faYOLe1OmfCDSIfHX2h6schiFA3mg363DI/Pe";
         const valid = await bcrypt.compare(parsed.data.password, hash);
         if (!user || !user.passwordHash || !valid) throw new CredentialsSignin();
+        if (user.isBlocked) throw new BlockedAccountError();
 
         return { id: user.id, name: user.name ?? user.phone, email: user.email };
       },

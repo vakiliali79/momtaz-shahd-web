@@ -87,7 +87,7 @@ export function WishlistButton({
       aria-label={t(active ? "wishlistRemove" : "wishlistAdd", { name: productName })}
       onClick={() => toggle(productId)}
       className={cn(
-        "grid size-9 place-items-center rounded-full bg-background/90 text-muted-foreground shadow-soft backdrop-blur transition hover:text-primary active:scale-95",
+        "touch-target grid size-9 place-items-center rounded-full bg-background/90 text-muted-foreground shadow-soft backdrop-blur transition hover:text-primary active:scale-95",
         active && "text-primary",
         className,
       )}

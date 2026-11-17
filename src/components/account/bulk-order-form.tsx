@@ -84,7 +84,7 @@ export function BulkOrderForm({ products }: { products: CartProduct[] }) {
 
   return (
     <div className="space-y-4">
-      <div className="overflow-x-auto rounded-2xl border border-border">
+      <div className="relative overflow-x-auto rounded-2xl border border-border">
         <table className="w-full min-w-[36rem] text-sm">
           <caption className="sr-only">{t("accountPages.wholesale.bulkTitle")}</caption>
           <thead className="bg-muted/60 text-xs text-muted-foreground">
@@ -115,7 +115,7 @@ export function BulkOrderForm({ products }: { products: CartProduct[] }) {
                   <td className="p-3 whitespace-nowrap">
                     {formatPrice(unit, locale, toman)}
                     {wholesale ? (
-                      <span className="ms-2 rounded-full bg-brand-leaf/15 px-2 py-0.5 text-xs font-medium text-brand-leaf dark:text-success">
+                      <span className="ms-2 rounded-full bg-brand-leaf/15 px-2 py-0.5 text-xs font-medium text-leaf-ink">
                         {t("cart.wholesaleApplied")}
                       </span>
                     ) : null}
@@ -132,7 +132,7 @@ export function BulkOrderForm({ products }: { products: CartProduct[] }) {
                         const digits = toLatinDigits(event.target.value).replace(/\D/g, "").slice(0, 6);
                         setQuantities((current) => ({ ...current, [product.productId]: Number(digits) || 0 }));
                       }}
-                      className="h-10 w-24 rounded-xl text-center tabular-nums"
+                      className="h-11 w-24 rounded-xl text-center tabular-nums"
                     />
                     {over ? (
                       <p id={`${inputId}-error`} role="alert" className="mt-1 text-xs text-destructive">

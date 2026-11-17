@@ -14,7 +14,7 @@ export function AuthCard({
   children: ReactNode;
 }) {
   return (
-    <Container className="grid place-items-center py-10 sm:py-16">
+    <Container className="grid place-items-center section-y-sm">
       <div className="w-full max-w-md rounded-3xl border border-border bg-card p-6 shadow-soft sm:p-8">
         <div className="mb-6 space-y-2 text-center">
           <LogoMark className="mx-auto size-12" />

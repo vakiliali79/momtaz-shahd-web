@@ -47,7 +47,7 @@ export function MyReviews({ initialReviews }: { initialReviews: MyReview[] }) {
         <li key={review.id} className="rounded-2xl border border-border bg-card p-5 shadow-soft">
           <div className="flex flex-wrap items-start justify-between gap-2">
             <div className="space-y-1">
-              <Link href={`/products/${review.productSlug}`} className="font-semibold hover:text-primary">
+              <Link href={`/products/${review.productSlug}`} className="touch-target font-semibold hover:text-primary">
                 {review.productName}
               </Link>
               <RatingStars rating={review.rating} showCount={false} />
@@ -55,8 +55,8 @@ export function MyReviews({ initialReviews }: { initialReviews: MyReview[] }) {
             <span
               className={
                 review.isApproved
-                  ? "rounded-full bg-brand-leaf/15 px-2.5 py-0.5 text-xs font-semibold text-brand-leaf dark:text-success"
-                  : "rounded-full bg-brand-gold/15 px-2.5 py-0.5 text-xs font-semibold text-brand-gold"
+                  ? "rounded-full bg-brand-leaf/15 px-2.5 py-0.5 text-xs font-semibold text-leaf-ink"
+                  : "rounded-full bg-brand-gold/15 px-2.5 py-0.5 text-xs font-semibold text-gold-ink"
               }
             >
               {review.isApproved ? t("reviews.published") : t("reviews.pending")}

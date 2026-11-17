@@ -227,3 +227,111 @@
 - Admin moderation of reviews, order status changes (shipped/delivered, tracking codes) and wholesale role approval need the admin panel.
 - The public wholesale request form (`/wholesale`) is not built yet, so the request list will stay empty until it is.
 - Changing a password does not sign out other devices (JWT sessions stay valid until they expire).
+
+## Stage 8 — Admin panel (2026-11-16)
+
+**Access**: `/admin` has its own layout (the storefront moved into a `(shop)` route group) with a collapsible sidebar (remembered per browser) and a drawer on phones. The ADMIN role is checked on the server in the layout, in every page, in every server action and in the upload route — not only in `proxy.ts`. Non-admins get a 404; guests are sent to the login page. Blocked accounts can't sign in and their open sessions stop working.
+
+**Modules**
+- Dashboard: sales today and this (Persian) month, pending orders, low-stock products, new wholesale requests; a 30-day daily sales bar chart (Recharts, brand red, hover tooltip, table view, right-to-left in fa/ar); top products for 30 days; latest orders.
+- Products: TanStack Table with search, status/category/stock filters, sortable columns and server-side pagination (state in the URL); create/edit form with a tab per language; multi-image upload (`/api/admin/uploads` → `public/uploads`, S3-compatible adapter stub for Liara/Arvan via `STORAGE_DRIVER`); inline stock edit, active toggle, duplicate.
+- Categories: CRUD with translated name/description, image and display order; deleting a category that still has products is refused.
+- Orders: filters by status, date range, retail/wholesale and payment method, plus search; detail page with customer, items, payment attempts and full history. Status changes follow the allowed transitions (PENDING → PAID/PROCESSING/CANCELLED, PAID → PROCESSING/SHIPPED/CANCELLED, PROCESSING → SHIPPED/CANCELLED, SHIPPED → DELIVERED), write `OrderStatusHistory` with an optional internal note, and can text the customer. Cancelling returns stock and the coupon use. Tracking code (with SMS), bank-transfer confirm/reject with receipt preview, printable invoice (shared with the customer invoice).
+- SMS: `SMS_PROVIDER` = console (default) or Kavenegar (stub); texts use the customer's language; every attempt is logged in `SmsLog`.
+- Customers: list with search and role/blocked filters, detail with stats, orders and addresses; promote to WHOLESALE or back; block/unblock. Admin accounts (and yourself) can't be changed from the panel.
+- Dealers: CRUD with translated name/address/hours, type, province/city from the location list (seed dealers now use location ids), map picker (click to pin, pin at centre, my location), verified and visible toggles, photo.
+- Wholesale requests: inbox with status filter and search; detail with contact info, link to the customer if the phone has an account, status workflow (new → contacted → converted/rejected) and team notes.
+- Coupons: CRUD (percent or fixed, minimum order, usage limit, last valid day in Tehran time with a calendar-aware preview), active toggle, expired/used-up badges.
+- Reviews: moderation queue (pending by default), approve or reject (rejecting deletes, so the customer can write again); the storefront updates immediately.
+- Settings: shipping per method (in-province, other provinces, per-province special prices, weight steps, delivery days, city-only courier, pickup address), free-shipping threshold, USD/AED exchange rates, contact details and social links, announcement banner per language, bank-transfer details. The footer, contact page, invoice, home page and a new announcement strip read these settings. English and Arabic visitors see approximate USD/AED under product prices and cart/checkout totals when enabled (payment is always in Toman).
+- Translations: every key of `messages/*.json` side by side in fa/en/ar, with search, section filter, "edited" and "missing a language" filters. Edits are saved in `TranslationOverride` and merged over the files in `src/i18n/request.ts` (cached, tag `translations`), so they show on the site right away; invalid ICU syntax or changed `{placeholders}` are refused; "Reset" restores the file text.
+
+**Database**: migration `admin_panel` (SQLite and PostgreSQL): `User.isBlocked`, `WholesaleRequest.adminNote/updatedAt`, `TranslationOverride`, `SmsLog`.
+
+**Verified**: `pnpm tsc --noEmit`, `pnpm lint`, `pnpm test` (new shipping rule tests) and `pnpm build` pass with no warnings. Browser-tested against the production build: every admin page in fa/en/ar returns 200 with no console errors; guests are redirected to login; a status change PAID → PROCESSING writes history and an SMS log; a tracking code is saved and texted; a translation edit appears on the storefront and resets; a broken placeholder is refused; no horizontal scrolling at 320px.
+
+**Open items**
+- S3 storage and Kavenegar SMS are stubs: implement before switching `STORAGE_DRIVER`/`SMS_PROVIDER`.
+- Admin accounts can only be created by the seed (or the database); there is no admin-user management screen.
+- The public wholesale request form is still to be built.
+
+## Stage 9 — Wholesale, dealers, tracking and notifications (2026-11-16)
+
+**Pages**
+- `/wholesale`: hero with the wholesale terms, benefits, a price tiers table built from the live catalogue (retail price, wholesale price, minimum quantity, saving), FAQ accordion (`<details>`, works without JavaScript) and the request form. The terms and FAQ are sample copy: confirm with the sales team, then edit in `scripts/i18n/site_wholesale.py` or Admin → Translations.
+- Request form (shared with `/dealers/apply`): business name, contact name, mobile, email, province and city (from the location list), products of interest, estimated monthly quantity, message. Zod on client and server, honeypot field, and at most 3 requests per phone number per day. Saved as `WholesaleRequest` (`type` WHOLESALE or AGENCY, plus the visitor's language).
+- `/dealers`: full-height locator. The list panel (beside the map on desktop, below it on phones) has search by city or name, filter by type, and "Near me" (browser geolocation, sorted by distance). Clicking a card zooms to its marker and opens the popup; clicking a marker opens the popup: name, address, tap-to-call phone, WhatsApp, Instagram, opening hours, and directions in Google Maps / Neshan / Balad. Markers cluster when zoomed out (`supercluster`). Verified dealers have red pins, the others gold.
+- Map provider abstraction (`src/components/map/providers`): Neshan's web SDK when `NEXT_PUBLIC_NESHAN_KEY` is set, otherwise Leaflet + OpenStreetMap (also the fallback if Neshan fails to load). The map loads client-side only.
+- `/dealers/[id]`: dealer detail with photo, contact and directions, a map, SEO metadata (canonical, hreflang, Open Graph) and `LocalBusiness`-type JSON-LD (`Store` / `WholesaleStore`, with address, geo and phone).
+- `/dealers/apply`: "Become a dealer" page; applications land in the same admin inbox as type AGENCY. The inbox now shows and filters by type, and shows city names in the admin's language.
+- `/track`: order tracking without signing in, by order number + mobile number. Shows status, timeline (customer-facing notes only), tracking code, items and total. The same "not found" answer is given for a wrong number or phone, and attempts are rate-limited per IP and per order number (in memory). Linked from the footer.
+
+**Notifications** (`src/lib/notifications`)
+- Customer SMS in their language: order placed (online/bank transfer, and a separate cash-on-delivery text), paid (online payment or confirmed bank transfer), status changes including shipped and delivered, tracking code, and a thank-you for wholesale and dealer requests.
+- Team alerts in Persian for new orders and new requests, by SMS to `ADMIN_NOTIFY_PHONES` and by email to `ADMIN_EMAIL`. They are sent after the response with `after()`, so customers never wait for them, and a failure never fails an order.
+- All templates are in the `sms` and `notifications` message namespaces, so they can be edited in Admin → Translations.
+- The Kavenegar SMS provider is now implemented (`KAVENEGAR_API_KEY`, `KAVENEGAR_SENDER`). It could not be tested from the development machine.
+
+**Database**: migration `public_forms_dealers` (SQLite and PostgreSQL): `WholesaleRequest.type`, `province`, `locale`, and an index on phone + date.
+
+**Verified**: `pnpm tsc --noEmit`, `pnpm lint`, `pnpm test` and `pnpm build` pass. Browser-tested against the production build:
+- wholesale form validation and submission (saved with province/city ids, customer and team SMS logged);
+- an English dealer application saved as AGENCY;
+- locator markers, card → popup with call and directions links, type filter, city search, "Near me" sorting with distances;
+- dealer detail title, canonical URL and JSON-LD;
+- tracking with a wrong phone (refused) and the right one (status and tracking code shown);
+- a cash-on-delivery checkout sending the customer SMS and the team SMS;
+- no horizontal scrolling at 320px on all new pages.
+
+**Open items**
+- OpenStreetMap tiles and Neshan are not reachable from the development machine, so map tiles and Neshan were not seen loading; markers, clusters, popups and fallbacks were tested.
+- The Neshan and Balad directions links open the location in those apps; check their exact routing URL formats on a phone.
+- The tracking rate limit is per server instance; use a shared store if the site runs on several instances.
+
+## Stage 10 — Design, accessibility and responsiveness pass (2026-11-17)
+
+**Audit tooling** (rerun after changes; start the site with `pnpm build && pnpm start` first)
+- `pnpm audit:design [baseUrl] [report.json]`: every storefront, account and admin page in fa/en/ar at 320, 375, 768, 1024, 1440 and 2560px, light and dark. It checks horizontal overflow (and what causes it), tap targets, axe-core WCAG 2.1 AA (including colour contrast), Latin digits in Persian/Arabic text, and `lang`/`dir`. Tap targets are checked by hit-testing: a 44×44px area around each control must reach it, so invisible hit areas count and crowded neighbours fail. Set `AUDIT_USER_*` / `AUDIT_ADMIN_*` to include signed-in pages.
+- `pnpm audit:keyboard [baseUrl]`: skip link, header tab order with visible focus, mobile menu and cart drawers (focus moves in, is trapped, Escape closes, focus returns, correct side per direction), focus on the first invalid field in forms, and keyboard use of the dealer list and map.
+
+**Design system**
+- Spacing scale: `section-y`, `section-y-sm` and `page-y` utilities, fluid with `clamp()` (≈40px on phones to 88px on wide screens). They replace six ad-hoc padding pairs across 17 files.
+- Fluid type scale completed (`text-fluid-xl` was missing) with line heights; more leading for Persian and Arabic (1.85) than English; balanced headings and pretty-wrapped paragraphs.
+- Container queries: product and dealer cards adapt to their own width (padding, title size, header layout), not the viewport.
+
+**Colour and dark mode**
+- Text-safe tokens `gold-ink` and `leaf-ink` (≥4.5:1 in both themes) for gold and green text. The brand hex values stay for fills.
+- Dark mode: red text uses `#f26b7c` (≥4.9:1 on dark surfaces); filled buttons, badges and the banner keep the deep brand red with white text (5.9:1).
+- Inactive tabs, badges and status pills meet AA contrast. axe reports no contrast failures on any audited page in either theme.
+
+**Motion** (Framer Motion; `MotionConfig reducedMotion="user"`, and skeleton shimmer is CSS-disabled under reduced motion)
+- Cards lift on hover with a spring (product and category cards).
+- Pages fade in on client navigation (`(shop)/template.tsx`). The first server-rendered page appears at once, so the largest paint isn't delayed.
+- The cart icon bounces and the count badge pops when items are added.
+- Skeletons shimmer in the reading direction (right to left in fa/ar).
+
+**Responsive and RTL**
+- No horizontal overflow on any page at 320–2560px. Fixed two causes: hidden checkbox/switch inputs escaping table scrollers (scroll wrappers are now `relative`), and admin grid columns that couldn't shrink.
+- Tap targets: a `touch-target` utility gives small controls a 44×44px hit area. Inputs, selects, pagination, nav, footer links, the banner, filter rows, map zoom buttons and markers are 44px. Spacing was adjusted so neighbouring hit areas don't overlap.
+- Directional icons (log-out, external link, arrows, chevrons) mirror in RTL. Carousel arrow keys follow the visual direction. Drawers open from the inline-start (menu) or inline-end (cart) edge. Arabic admin dates now use Arabic digits.
+
+**States**
+- Branded 404 in all three languages: illustration, "404" in locale digits, search and popular links.
+- Error pages: `error.tsx` for the shop, admin and locale levels with "Try again" and a reference code; `global-error.tsx` reads its texts from the message files using the URL's language.
+- Empty states for search results, cart, wishlist, orders, reviews, addresses and admin lists, reviewed.
+
+**Keyboard and screen readers**
+- The skip link is now the first focusable element on every page, before the announcement banner, and the admin panel has one too.
+- Landmarks have unique names (two search forms, two account navs, the banner). Heading levels no longer skip. Fixed a `<dl>` with an invalid child and a link whose accessible name didn't contain its visible text.
+
+**Verified**: `pnpm tsc --noEmit`, `pnpm lint`, `pnpm test` and `pnpm build` pass. Results of the last full audit run, plus a targeted re-run of the changed admin, account, 404 and product pages:
+- axe: no violations;
+- no overflow at any width;
+- no Latin digits in Persian/Arabic text;
+- no page errors.
+
+All keyboard checks pass in fa, en and ar at desktop and phone widths.
+
+**Open items**
+- At 320px some tap targets sit right at the edge of a horizontal scroller (admin tables, the related-products carousel), so part of their 44px area falls outside it. They're usable once scrolled into view.
+- Some 16px admin checkboxes (e.g. "notify customer") rely on their label for the larger tap area.

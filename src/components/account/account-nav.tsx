@@ -36,7 +36,7 @@ export function AccountNav({ name, isWholesale }: { name: string; isWholesale: b
 
   return (
     <>
-      <aside className="hidden print:hidden lg:block">
+      <div className="hidden print:hidden lg:block">
         <nav aria-label={t("label")} className="sticky top-24 rounded-2xl border border-border bg-card p-3 shadow-soft">
           <p className="truncate px-3 pt-1 pb-3 text-sm text-muted-foreground">
             {t("greeting", { name })}
@@ -62,14 +62,14 @@ export function AccountNav({ name, isWholesale }: { name: string; isWholesale: b
             })}
           </ul>
         </nav>
-      </aside>
+      </div>
 
       <nav
-        aria-label={t("label")}
+        aria-label={t("tabsLabel")}
         data-account-tabs
         className="fixed inset-x-0 bottom-0 z-30 border-t border-border bg-background/95 backdrop-blur print:hidden lg:hidden"
       >
-        <ul className="flex overflow-x-auto px-1 pb-[env(safe-area-inset-bottom)]">
+        <ul className="flex relative overflow-x-auto px-1 pb-[env(safe-area-inset-bottom)]">
           {visible.map(({ key, href, Icon }) => {
             const active = isActive(pathname, href);
             return (

@@ -1,10 +1,13 @@
 "use server";
 
+import { after } from "next/server";
+
 import { updateTag } from "next/cache";
 
 import { Prisma, type OrderType } from "@/generated/prisma/client";
 import { computeCartTotals, effectivePrice, lineUnitPrice, type CartItem } from "@/lib/cart";
 import { db } from "@/lib/db";
+import { notifyAdminsNewOrder, notifyOrderCustomer } from "@/lib/notifications";
 import { getCity, getProvince } from "@/lib/locations";
 import { localize, toLocalizedText } from "@/lib/localized";
 import { nextOrderNumber, orderNumberPrefix } from "@/lib/orders/order-number";
@@ -220,6 +223,8 @@ export async function placeOrder(input: unknown): Promise<PlaceOrderResult> {
 
       // Stock changed: refresh the cached catalogue for the next visitor.
       updateTag("catalog");
+      // Text the customer and alert the team once the response is on its way.
+      after(() => Promise.all([notifyOrderCustomer(order.id, { type: "placed" }), notifyAdminsNewOrder(order.id)]));
 
       const base = `/${data.locale}/checkout`;
       if (data.paymentMethod !== "ONLINE") {

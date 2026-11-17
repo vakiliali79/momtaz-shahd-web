@@ -68,6 +68,12 @@ enum DealerType {
   AGENCY
 }
 
+/// A buyer asking for wholesale prices, or a shop applying to become a dealer.
+enum WholesaleRequestType {
+  WHOLESALE
+  AGENCY
+}
+
 enum WholesaleRequestStatus {
   NEW
   CONTACTED
@@ -88,6 +94,8 @@ model User {
   role            Role     @default(CUSTOMER)
   /// "fa" | "en" | "ar"
   preferredLocale String   @default("fa")
+  /// Blocked users cannot sign in, and existing sessions stop working.
+  isBlocked       Boolean  @default(false)
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
 
@@ -363,19 +371,28 @@ model Dealer {
 
 model WholesaleRequest {
   id           String                 @id @default(cuid())
+  type         WholesaleRequestType   @default(WHOLESALE)
   companyName  String
   contactName  String
   phone        String
   email        String?
+  /// Province id (src/data/iran-locations.json); dealer applications only.
+  province     String?
   city         String
   /// Free text: which products the buyer is interested in.
   products     String
   estimatedQty String?
   message      String?
+  /// Language the visitor used, for replies: "fa" | "en" | "ar".
+  locale       String                 @default("fa")
   status       WholesaleRequestStatus @default(NEW)
+  /// Internal notes from the sales team (not shown to the customer).
+  adminNote    String?
   createdAt    DateTime               @default(now())
+  updatedAt    DateTime               @default(now()) @updatedAt
 
   @@index([status, createdAt])
+  @@index([phone, createdAt])
 }
 
 /// Messages sent through the public contact form.
@@ -402,4 +419,31 @@ model Setting {
   key       String   @id
   value     Json
   updatedAt DateTime @updatedAt
+}
+
+/// Admin edits to interface texts. A row overrides the value of `key` in
+/// messages/{locale}.json; deleting the row restores the file's value.
+model TranslationOverride {
+  locale    String
+  /// Dot path in the message files, e.g. "home.hero.title".
+  key       String
+  value     String
+  updatedAt DateTime @updatedAt
+
+  @@id([locale, key])
+}
+
+/// Every SMS the shop tried to send, for support and auditing.
+model SmsLog {
+  id        String   @id @default(cuid())
+  phone     String
+  message   String
+  /// "console" | "kavenegar" | …
+  provider  String
+  /// "sent" | "failed"
+  status    String
+  error     String?
+  createdAt DateTime @default(now())
+
+  @@index([phone, createdAt])
 }

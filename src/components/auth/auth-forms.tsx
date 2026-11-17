@@ -61,7 +61,7 @@ function Field<T extends FieldValues>({
           autoComplete={autoComplete}
           aria-invalid={error ? true : undefined}
           aria-describedby={describedBy || undefined}
-          className={cn("h-11 rounded-xl px-3.5 text-start placeholder:text-start", isPassword && "pe-11")}
+          className={cn("h-11 rounded-xl px-3.5 text-start placeholder:text-start", isPassword && "pe-12")}
           {...register(name)}
         />
         {isPassword ? (
@@ -70,7 +70,7 @@ function Field<T extends FieldValues>({
             onClick={() => setVisible((value) => !value)}
             aria-label={visible ? t("hidePassword") : t("showPassword")}
             aria-pressed={visible}
-            className="absolute end-1 top-1/2 grid size-9 -translate-y-1/2 place-items-center rounded-lg text-muted-foreground hover:text-foreground"
+            className="absolute end-0 top-1/2 grid size-11 -translate-y-1/2 place-items-center rounded-xl text-muted-foreground hover:text-foreground"
           >
             {visible ? <EyeOffIcon className="size-4" aria-hidden="true" /> : <EyeIcon className="size-4" aria-hidden="true" />}
           </button>
@@ -159,7 +159,7 @@ export function LoginForm({ callbackUrl }: { callbackUrl: string }) {
       </Button>
       <p className="text-center text-sm text-muted-foreground">
         {t("noAccount")}{" "}
-        <Link href={{ pathname: "/register", query: { callbackUrl } }} className="font-medium text-primary hover:underline">
+        <Link href={{ pathname: "/register", query: { callbackUrl } }} className="touch-target font-medium text-primary hover:underline">
           {t("createAccount")}
         </Link>
       </p>
@@ -205,7 +205,7 @@ export function RegisterForm({ callbackUrl }: { callbackUrl: string }) {
       </Button>
       <p className="text-center text-sm text-muted-foreground">
         {t("haveAccount")}{" "}
-        <Link href={{ pathname: "/login", query: { callbackUrl } }} className="font-medium text-primary hover:underline">
+        <Link href={{ pathname: "/login", query: { callbackUrl } }} className="touch-target font-medium text-primary hover:underline">
           {t("signIn")}
         </Link>
       </p>

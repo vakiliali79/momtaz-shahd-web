@@ -1,5 +1,6 @@
 import { useLocale, useTranslations } from "next-intl";
 
+import { ApproxPrice } from "@/components/currency/approx-price";
 import { formatPrice } from "@/lib/format";
 import { cn } from "@/lib/utils";
 
@@ -40,6 +41,7 @@ export function Price({
           {toman}
         </span>
       </span>
+      {size === "lg" ? <ApproxPrice amount={discountPrice ?? price} className="basis-full" /> : null}
     </p>
   );
 }

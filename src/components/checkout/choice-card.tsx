@@ -48,7 +48,7 @@ export function ChoiceCard({
         aria-hidden="true"
         className={cn(
           "mt-0.5 grid size-5 shrink-0 place-items-center rounded-full border-2 transition-colors",
-          checked ? "border-primary bg-primary text-primary-foreground" : "border-input",
+          checked ? "border-primary bg-brand-red text-white" : "border-input",
         )}
       >
         {checked ? <CheckIcon className="size-3" strokeWidth={3} /> : null}

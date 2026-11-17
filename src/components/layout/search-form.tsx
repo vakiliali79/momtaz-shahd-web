@@ -14,8 +14,11 @@ const searchSchema = z.object({ q: z.string().trim().min(1).max(100) });
 export function SearchForm({
   className,
   onSearch,
+  landmarkLabel,
 }: {
   className?: string;
+  /** Name of the search landmark when the page has a second search form. */
+  landmarkLabel?: string;
   /** Called after a valid search is submitted (e.g. to close the drawer). */
   onSearch?: () => void;
 }) {
@@ -36,6 +39,7 @@ export function SearchForm({
   return (
     <form
       role="search"
+      aria-label={landmarkLabel ?? t("label")}
       onSubmit={handleSubmit}
       className={cn("relative", className)}
     >
@@ -53,7 +57,7 @@ export function SearchForm({
         maxLength={100}
         enterKeyHint="search"
         placeholder={t("placeholder")}
-        className="h-9 rounded-full bg-muted/60 ps-9"
+        className="h-11 rounded-full bg-muted/60 ps-9"
       />
       <button type="submit" className="sr-only">
         {t("submit")}

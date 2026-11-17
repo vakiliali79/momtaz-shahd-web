@@ -60,7 +60,7 @@ function StarRating({
             <span className="sr-only">{t("stars", { count: star, formatted: formatNumber(star, locale) })}</span>
             <StarIcon
               aria-hidden="true"
-              className={cn("size-8 transition-colors", star <= shown ? "fill-brand-gold text-brand-gold" : "text-border")}
+              className={cn("size-8 transition-colors", star <= shown ? "fill-brand-gold text-gold-ink" : "text-border")}
             />
           </label>
         ))}

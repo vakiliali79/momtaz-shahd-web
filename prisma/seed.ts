@@ -558,6 +558,7 @@ const dealers: {
   id: string;
   name: LocalizedText;
   type: DealerType;
+  /** Location ids from src/data/iran-locations.json. */
   province: string;
   city: string;
   address: LocalizedText;
@@ -577,8 +578,8 @@ const dealers: {
       ar: "وكالة طهران المركزية",
     },
     type: DealerType.AGENCY,
-    province: "تهران",
-    city: "تهران",
+    province: "tehran",
+    city: "tehran",
     address: {
       fa: "تهران، خیابان ولیعصر، بالاتر از میدان ونک، پلاک ۲۴۱۰",
       en: "No. 2410, Valiasr St., above Vanak Sq., Tehran",
@@ -600,8 +601,8 @@ const dealers: {
       ar: "مركز توزيع كرمان",
     },
     type: DealerType.DISTRIBUTOR,
-    province: "کرمان",
-    city: "کرمان",
+    province: "kerman",
+    city: "kerman",
     address: {
       fa: "کرمان، بلوار جمهوری اسلامی، نبش کوچه ۱۲",
       en: "Corner of Alley 12, Jomhouri Eslami Blvd., Kerman",
@@ -622,8 +623,8 @@ const dealers: {
       ar: "متجر حلويات نقش جهان",
     },
     type: DealerType.RETAIL_STORE,
-    province: "اصفهان",
-    city: "اصفهان",
+    province: "isfahan",
+    city: "isfahan",
     address: {
       fa: "اصفهان، خیابان چهارباغ عباسی، روبه‌روی هشت‌بهشت",
       en: "Chaharbagh Abbasi St., opposite Hasht Behesht, Isfahan",
@@ -643,8 +644,8 @@ const dealers: {
       ar: "وكالة شيراز",
     },
     type: DealerType.AGENCY,
-    province: "فارس",
-    city: "شیراز",
+    province: "fars",
+    city: "shiraz",
     address: {
       fa: "شیراز، بلوار کریم‌خان زند، نرسیده به چهارراه ملاصدرا",
       en: "Karim Khan Zand Blvd., before Mulla Sadra Junction, Shiraz",
@@ -665,8 +666,8 @@ const dealers: {
       ar: "توزيع خراسان",
     },
     type: DealerType.DISTRIBUTOR,
-    province: "خراسان رضوی",
-    city: "مشهد",
+    province: "razavi-khorasan",
+    city: "mashhad",
     address: {
       fa: "مشهد، بلوار وکیل‌آباد، بین وکیل‌آباد ۲۵ و ۲۷",
       en: "Vakilabad Blvd., between Vakilabad 25 and 27, Mashhad",
@@ -687,8 +688,8 @@ const dealers: {
       ar: "متجر ائل غولي",
     },
     type: DealerType.RETAIL_STORE,
-    province: "آذربایجان شرقی",
-    city: "تبریز",
+    province: "east-azerbaijan",
+    city: "tabriz",
     address: {
       fa: "تبریز، خیابان امام خمینی، نزدیک میدان ساعت",
       en: "Imam Khomeini St., near Saat Sq., Tabriz",

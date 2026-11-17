@@ -27,7 +27,7 @@ export function CatalogSearch({
   }
 
   return (
-    <form role="search" onSubmit={handleSubmit} className={cn("relative", className)}>
+    <form role="search" aria-label={t("searchLabel")} onSubmit={handleSubmit} className={cn("relative", className)}>
       <label htmlFor={id} className="sr-only">
         {t("searchLabel")}
       </label>
@@ -45,7 +45,7 @@ export function CatalogSearch({
         maxLength={100}
         enterKeyHint="search"
         placeholder={t("searchPlaceholder")}
-        className="h-10 rounded-full ps-10"
+        className="h-11 rounded-full ps-10"
       />
     </form>
   );
