@@ -15,7 +15,9 @@
     "db:seed": "prisma db seed",
     "db:reset": "prisma migrate reset",
     "db:studio": "prisma studio",
-    "test": "node --conditions=react-server --import tsx --test \"src/**/*.test.ts\""
+    "test": "node --conditions=react-server --import tsx --test \"src/**/*.test.ts\"",
+    "audit:design": "node scripts/audit/design-audit.mjs",
+    "audit:keyboard": "node scripts/audit/keyboard-audit.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^7.0.6",

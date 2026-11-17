@@ -98,15 +98,15 @@ function ActionsCell({ row }: { row: AdminProductRow }) {
   const locale = useLocale();
   const [pending, startTransition] = useTransition();
   return (
-    <div className="flex justify-end gap-1">
-      <Button asChild variant="ghost" size="icon-sm" aria-label={t("editFor", { name: row.name })}>
+    <div className="flex justify-end gap-2">
+      <Button asChild variant="ghost" size="icon-lg" aria-label={t("editFor", { name: row.name })}>
         <Link href={`/admin/products/${row.id}`}>
           <PencilIcon aria-hidden="true" />
         </Link>
       </Button>
       <Button
         variant="ghost"
-        size="icon-sm"
+        size="icon-lg"
         disabled={pending}
         aria-label={t("duplicateFor", { name: row.name })}
         onClick={() =>

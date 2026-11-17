@@ -16,7 +16,7 @@ export function DeleteCategoryButton({ id, name, disabled }: { id: string; name:
   return (
     <ConfirmButton
       trigger={
-        <Button variant="ghost" size="icon-sm" disabled={disabled} aria-label={t("deleteFor", { name })} title={disabled ? t("deleteDisabled") : undefined}>
+        <Button variant="ghost" size="icon-lg" disabled={disabled} aria-label={t("deleteFor", { name })} title={disabled ? t("deleteDisabled") : undefined}>
           <Trash2Icon className="text-destructive" aria-hidden="true" />
         </Button>
       }

@@ -64,8 +64,8 @@ async function Categories() {
                   <td className="p-3">{formatNumber(category.productCount, locale)}</td>
                   <td className="p-3">{formatNumber(category.sortOrder, locale)}</td>
                   <td className="p-3">
-                    <div className="flex justify-end gap-1">
-                      <Button asChild variant="ghost" size="icon-sm" aria-label={t("editFor", { name: category.name })}>
+                    <div className="flex justify-end gap-2">
+                      <Button asChild variant="ghost" size="icon-lg" aria-label={t("editFor", { name: category.name })}>
                         <Link href={`/admin/categories/${category.id}`}><PencilIcon aria-hidden="true" /></Link>
                       </Button>
                       <DeleteCategoryButton id={category.id} name={category.name} disabled={category.productCount > 0} />

@@ -52,7 +52,7 @@ export function DeleteDealerButton({ id, name }: { id: string; name: string }) {
   return (
     <ConfirmButton
       trigger={
-        <Button variant="ghost" size="icon-sm" aria-label={t("deleteFor", { name })}>
+        <Button variant="ghost" size="icon-lg" aria-label={t("deleteFor", { name })}>
           <Trash2Icon className="text-destructive" aria-hidden="true" />
         </Button>
       }

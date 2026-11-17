@@ -43,7 +43,7 @@ export function DeleteCouponButton({ id, code }: { id: string; code: string }) {
   return (
     <ConfirmButton
       trigger={
-        <Button variant="ghost" size="icon-sm" aria-label={t("deleteFor", { code })}>
+        <Button variant="ghost" size="icon-lg" aria-label={t("deleteFor", { code })}>
           <Trash2Icon className="text-destructive" aria-hidden="true" />
         </Button>
       }

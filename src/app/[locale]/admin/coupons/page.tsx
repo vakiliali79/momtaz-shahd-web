@@ -73,8 +73,8 @@ async function Coupons() {
                     <td className="p-3 whitespace-nowrap">{coupon.expiresAt ? formatDate(coupon.expiresAt, locale, { dateStyle: "medium" }) : t("never")}</td>
                     <td className="p-3"><CouponActiveSwitch id={coupon.id} code={coupon.code} active={coupon.isActive} /></td>
                     <td className="p-3">
-                      <div className="flex justify-end gap-1">
-                        <Button asChild variant="ghost" size="icon-sm" aria-label={t("editFor", { code: coupon.code })}>
+                      <div className="flex justify-end gap-2">
+                        <Button asChild variant="ghost" size="icon-lg" aria-label={t("editFor", { code: coupon.code })}>
                           <Link href={`/admin/coupons/${coupon.id}`}><PencilIcon aria-hidden="true" /></Link>
                         </Button>
                         <DeleteCouponButton id={coupon.id} code={coupon.code} />

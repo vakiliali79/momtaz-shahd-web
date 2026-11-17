@@ -72,8 +72,8 @@ async function Dealers() {
                   <td className="p-3"><DealerFlagSwitch id={dealer.id} field="isVerified" value={dealer.isVerified} label={t("verifiedFor", { name: dealer.name })} /></td>
                   <td className="p-3"><DealerFlagSwitch id={dealer.id} field="isActive" value={dealer.isActive} label={t("activeFor", { name: dealer.name })} /></td>
                   <td className="p-3">
-                    <div className="flex justify-end gap-1">
-                      <Button asChild variant="ghost" size="icon-sm" aria-label={t("editFor", { name: dealer.name })}>
+                    <div className="flex justify-end gap-2">
+                      <Button asChild variant="ghost" size="icon-lg" aria-label={t("editFor", { name: dealer.name })}>
                         <Link href={`/admin/dealers/${dealer.id}`}><PencilIcon aria-hidden="true" /></Link>
                       </Button>
                       <DeleteDealerButton id={dealer.id} name={dealer.name} />
