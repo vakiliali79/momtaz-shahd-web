@@ -4,6 +4,24 @@ import createNextIntlPlugin from "next-intl/plugin";
 const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
 const isProduction = process.env.NODE_ENV === "production";
+
+/** True when the configured public URL is served over HTTPS (invalid or missing URL: false). */
+function siteUsesHttps(url: string | undefined): boolean {
+  try {
+    return url ? new URL(url).protocol === "https:" : false;
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * HTTPS-only protections (upgrade-insecure-requests, HSTS) are sent only in
+ * production when NEXT_PUBLIC_SITE_URL is https://. On a plain-HTTP server they
+ * would make browsers request CSS/JS over HTTPS and break the site.
+ * Both NODE_ENV and NEXT_PUBLIC_SITE_URL are read at build time: rebuild after
+ * switching the site to HTTPS.
+ */
+const enforceHttps = isProduction && siteUsesHttps(process.env.NEXT_PUBLIC_SITE_URL);
 const neshan = Boolean(process.env.NEXT_PUBLIC_NESHAN_KEY);
 const s3Origin = process.env.S3_PUBLIC_URL ? new URL(process.env.S3_PUBLIC_URL).origin : null;
 
@@ -29,7 +47,7 @@ const csp = [
   "base-uri 'self'",
   "form-action 'self' https://www.zarinpal.com https://payment.zarinpal.com https://sandbox.zarinpal.com",
   "frame-ancestors 'none'",
-  ...(isProduction ? ["upgrade-insecure-requests"] : []),
+  ...(enforceHttps ? ["upgrade-insecure-requests"] : []),
 ].join("; ");
 
 const securityHeaders = [
@@ -40,7 +58,7 @@ const securityHeaders = [
   // The dealer map may ask for the visitor's location; nothing else is needed.
   { key: "Permissions-Policy", value: "camera=(), microphone=(), payment=(), usb=(), interest-cohort=(), geolocation=(self)" },
   { key: "Cross-Origin-Opener-Policy", value: "same-origin" },
-  ...(isProduction ? [{ key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains" }] : []),
+  ...(enforceHttps ? [{ key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains" }] : []),
 ];
 
 const nextConfig: NextConfig = {
