@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, type ReactNode } from "react";
-import { MotionConfig } from "motion/react";
+import { LazyMotion, MotionConfig } from "motion/react";
 import { ThemeProvider } from "next-themes";
 
 import { WishlistSync } from "@/components/product/wishlist-button";
@@ -30,6 +30,9 @@ function StoreHydration() {
   return null;
 }
 
+/** Motion's animation code loads after the page, keeping it out of the first download. */
+const loadMotionFeatures = () => import("@/components/shared/motion-features").then((module) => module.default);
+
 export function Providers({
   dir,
   children,
@@ -53,7 +56,9 @@ export function Providers({
         <StoreHydration />
         <WishlistSync />
         {/* Honour the visitor's "reduce motion" setting for all animations. */}
-        <MotionConfig reducedMotion="user">{children}</MotionConfig>
+        <LazyMotion features={loadMotionFeatures} strict>
+          <MotionConfig reducedMotion="user">{children}</MotionConfig>
+        </LazyMotion>
         <Toaster dir={dir} position="bottom-center" />
       </DirectionProvider>
     </ThemeProvider>

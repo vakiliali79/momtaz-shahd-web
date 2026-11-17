@@ -23,6 +23,7 @@ import { NewsletterForm } from "@/components/layout/newsletter-form";
 import { ProductCard } from "@/components/product/product-card";
 import { ProductImage } from "@/components/product/product-image";
 import { RatingStars } from "@/components/product/rating-stars";
+import { JsonLd } from "@/components/shared/json-ld";
 import { MotionCard } from "@/components/shared/motion-card";
 import { Reveal } from "@/components/shared/reveal";
 import { Button } from "@/components/ui/button";
@@ -31,6 +32,7 @@ import { routing } from "@/i18n/routing";
 import { getCatalog, getDealers, getTestimonials } from "@/lib/data/catalog";
 import { getContactInfo } from "@/lib/data/settings";
 import { resolveImage } from "@/lib/data/images";
+import { organizationJsonLd, websiteJsonLd } from "@/lib/structured-data";
 import { formatNumber } from "@/lib/format";
 import { localeAlternates } from "@/lib/seo";
 
@@ -101,8 +103,24 @@ export default async function HomePage() {
       : [],
   );
 
+  const sameAs = [
+    ...(contact.instagram ? [instagramUrl] : []),
+    ...Object.values(contact.social).filter((url): url is string => Boolean(url)),
+  ];
+
   return (
     <>
+      <JsonLd
+        data={organizationJsonLd({
+          name: t("brand.name"),
+          description: t("metadata.description"),
+          logo: "/icons/icon-512.png",
+          phone: contact.phone,
+          email: contact.email,
+          sameAs,
+        })}
+      />
+      <JsonLd data={websiteJsonLd(locale, t("brand.name"))} />
       {/* Hero */}
       <section className="relative overflow-hidden bg-linear-to-b from-secondary/80 to-background dark:from-secondary/40">
         <Container className="grid items-center gap-10 section-y-sm lg:grid-cols-2 lg:gap-16 lg:py-24">
@@ -131,7 +149,7 @@ export default async function HomePage() {
               <ProductImage
                 src={heroImage}
                 alt={t("home.hero.imageAlt")}
-                sizes="(min-width: 1024px) 45vw, 92vw"
+                sizes="(min-width: 1440px) 620px, (min-width: 1024px) 45vw, 92vw"
                 priority
               />
             </div>
@@ -159,7 +177,7 @@ export default async function HomePage() {
                     <ProductImage
                       src={category.image}
                       alt=""
-                      sizes="(min-width: 1024px) 23vw, 46vw"
+                      sizes="(min-width: 1920px) 440px, (min-width: 1024px) 23vw, 46vw"
                       className="transition-transform duration-500 group-hover:scale-105 motion-reduce:transition-none"
                     />
                   </div>

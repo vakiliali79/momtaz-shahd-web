@@ -3,13 +3,14 @@
 import { useId, type FormEvent } from "react";
 import { SearchIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { z } from "zod";
+import * as z from "zod/mini";
 
 import { Input } from "@/components/ui/input";
 import { useRouter } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 
-const searchSchema = z.object({ q: z.string().trim().min(1).max(100) });
+// zod/mini: this form is on every page, so it uses the tree-shakeable build.
+const searchSchema = z.object({ q: z.string().check(z.trim(), z.minLength(1), z.maxLength(100)) });
 
 export function SearchForm({
   className,

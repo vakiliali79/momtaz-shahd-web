@@ -248,7 +248,8 @@
   },
   "carousel": {
     "previous": "Previous products",
-    "next": "Next products"
+    "next": "Next products",
+    "roleDescription": "carousel"
   },
   "product": {
     "noReviews": "No reviews yet",
@@ -1814,5 +1815,11 @@
     "retry": "Try again",
     "home": "Back to home",
     "reference": "Reference code:"
+  },
+  "offline": {
+    "title": "You're offline",
+    "description": "We couldn't reach the shop. Check your connection and try again — your cart is saved on this device.",
+    "retry": "Try again",
+    "cart": "View cart"
   }
 }

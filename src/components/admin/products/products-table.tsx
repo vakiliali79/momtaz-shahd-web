@@ -18,7 +18,7 @@ import { Link } from "@/i18n/navigation";
 import type { AdminProductRow } from "@/lib/admin/products";
 import { formatDate, formatNumber, formatPrice } from "@/lib/format";
 import { cn } from "@/lib/utils";
-import { toLatinDigits } from "@/lib/validation/phone";
+import { toLatinDigits } from "@/lib/digits";
 
 const helper = createColumnHelper<typeof adminTableFeatures, AdminProductRow>();
 

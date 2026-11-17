@@ -5,7 +5,7 @@ import { useLocale, useTranslations } from "next-intl";
 
 import { formatNumber } from "@/lib/format";
 import { cn } from "@/lib/utils";
-import { toLatinDigits } from "@/lib/validation/phone";
+import { toLatinDigits } from "@/lib/digits";
 
 export function QuantityStepper({
   value,

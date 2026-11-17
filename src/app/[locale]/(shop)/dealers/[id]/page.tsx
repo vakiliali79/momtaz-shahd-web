@@ -87,7 +87,7 @@ export default async function DealerPage({ params }: PageProps<"/[locale]/dealer
           ) : null}
           {dealer.image ? (
             <div className="relative aspect-4/3 overflow-hidden rounded-3xl bg-secondary shadow-soft">
-              <ProductImage src={resolveImage(dealer.image)} alt={t("photoAlt", { name: dealer.name })} sizes="(min-width: 1024px) 40vw, 92vw" priority />
+              <ProductImage src={resolveImage(dealer.image)} alt={t("photoAlt", { name: dealer.name })} sizes="(min-width: 1440px) 560px, (min-width: 1024px) 40vw, 92vw" priority />
             </div>
           ) : null}
           <section aria-labelledby="dealer-contact" className="rounded-3xl border border-border bg-card p-5 shadow-soft sm:p-6">

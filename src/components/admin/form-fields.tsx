@@ -24,7 +24,7 @@ import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { adminErrorKeys, type AdminErrorKey } from "@/lib/admin/validation";
 import { cn } from "@/lib/utils";
-import { toLatinDigits } from "@/lib/validation/phone";
+import { toLatinDigits } from "@/lib/digits";
 
 function toErrorKey(message: string | undefined): AdminErrorKey {
   return adminErrorKeys.find((key) => key === message) ?? "invalid";

@@ -11,7 +11,7 @@ import { Input } from "@/components/ui/input";
 import { useRouter } from "@/i18n/navigation";
 import { lineUnitPrice, qualifiesForWholesale, type CartProduct } from "@/lib/cart";
 import { formatNumber, formatPrice } from "@/lib/format";
-import { toLatinDigits } from "@/lib/validation/phone";
+import { toLatinDigits } from "@/lib/digits";
 import { useCartStore } from "@/stores/cart";
 
 /** Quantities typed in the table; at least one line must be ordered. */

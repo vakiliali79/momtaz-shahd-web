@@ -6,6 +6,7 @@ import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations } from "next-intl/server";
 
 import { Providers } from "@/components/providers";
+import { ServiceWorkerRegistration } from "@/components/pwa/service-worker";
 import { getDirection } from "@/i18n/locales";
 import { routing, type AppLocale } from "@/i18n/routing";
 import { SITE_URL } from "@/lib/site";
@@ -49,8 +50,12 @@ export function generateStaticParams() {
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("metadata");
 
+  const locale = await rootLocale();
   return {
     title: { default: t("title"), template: t("titleTemplate") },
+    applicationName: t("siteName"),
+    manifest: `/${locale}/manifest.webmanifest`,
+    appleWebApp: { capable: true, title: t("siteName"), statusBarStyle: "default" },
     description: t("description"),
     metadataBase: new URL(SITE_URL),
     openGraph: { siteName: t("siteName"), type: "website" },
@@ -59,7 +64,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: light)", color: "#c8102e" },
     { media: "(prefers-color-scheme: dark)", color: "#17110c" },
   ],
 };
@@ -87,6 +92,7 @@ export default async function RootLayout({ children }: LayoutProps<"/[locale]">)
         <NextIntlClientProvider>
           {/* Shop pages add the site header and footer in (shop)/layout.tsx; the admin has its own. */}
           <Providers dir={dir}>{children}</Providers>
+          <ServiceWorkerRegistration />
         </NextIntlClientProvider>
       </body>
     </html>

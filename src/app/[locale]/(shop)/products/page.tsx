@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { hasLocale } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { locale as rootLocale } from "next/root-params";
 
-import { ProductListing } from "@/components/catalog/product-listing";
+import { ProductListing, ProductListingBodySkeleton } from "@/components/catalog/product-listing";
 import { PageHeader } from "@/components/shared/page-header";
-import { routing } from "@/i18n/routing";
+import { routing, type AppLocale } from "@/i18n/routing";
 import { parseCatalogParams } from "@/lib/catalog-query";
 import { getCatalog } from "@/lib/data/catalog";
 import { pageMetadata } from "@/lib/seo";
@@ -23,18 +24,20 @@ export async function generateMetadata(): Promise<Metadata> {
   });
 }
 
+/** The filtered list depends on the URL query, so it streams in after the static header. */
+async function Listing({ locale, searchParams }: { locale: AppLocale; searchParams: PageProps<"/[locale]/products">["searchParams"] }) {
+  const [catalog, rawParams] = await Promise.all([getCatalog(locale), searchParams]);
+  return <ProductListing catalog={catalog} params={parseCatalogParams(rawParams)} basePath="/products" />;
+}
+
 export default async function ProductsPage({
   searchParams,
 }: PageProps<"/[locale]/products">) {
   const locale = await rootLocale();
   if (!hasLocale(routing.locales, locale)) notFound();
+  const t = await getTranslations("catalog");
 
-  const [t, catalog, rawParams] = await Promise.all([
-    getTranslations("catalog"),
-    getCatalog(locale),
-    searchParams,
-  ]);
-
+  // The header is part of the prerendered page; only the listing waits for the query.
   return (
     <>
       <PageHeader
@@ -42,11 +45,9 @@ export default async function ProductsPage({
         description={t("description")}
         crumbs={[{ label: t("title") }]}
       />
-      <ProductListing
-        catalog={catalog}
-        params={parseCatalogParams(rawParams)}
-        basePath="/products"
-      />
+      <Suspense fallback={<ProductListingBodySkeleton />}>
+        <Listing locale={locale} searchParams={searchParams} />
+      </Suspense>
     </>
   );
 }

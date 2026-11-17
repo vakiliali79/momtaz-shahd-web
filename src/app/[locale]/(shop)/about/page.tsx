@@ -53,7 +53,7 @@ export default async function AboutPage() {
             <ProductImage
               src={resolveImage("/about/bakery.jpg")}
               alt={t("story.imageAlt")}
-              sizes="(min-width: 1024px) 45vw, 92vw"
+              sizes="(min-width: 1440px) 620px, (min-width: 1024px) 45vw, 92vw"
             />
           </div>
         </Reveal>

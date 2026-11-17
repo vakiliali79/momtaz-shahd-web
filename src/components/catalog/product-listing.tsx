@@ -121,6 +121,15 @@ export function ProductListingSkeleton() {
           <Skeleton className="h-4 w-96 max-w-full" />
         </Container>
       </div>
+      <ProductListingBodySkeleton />
+    </>
+  );
+}
+
+/** The filters, toolbar and grid placeholders (below a real page header). */
+export function ProductListingBodySkeleton() {
+  return (
+    <>
       <Container className="grid gap-8 py-8 lg:grid-cols-[15rem_minmax(0,1fr)] lg:gap-10 lg:py-10">
         <div className="hidden lg:block">
           <Skeleton className="h-96 rounded-2xl" />
