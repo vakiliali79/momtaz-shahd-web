@@ -47,13 +47,13 @@ Imagery must show these exact products. Nothing beyond the stored descriptions
 All slots are listed with prompts in `scripts/images/shot-list.mjs` (40 images).
 | Slot | Referenced as | Stored as | Size |
 |---|---|---|---|
-| Home hero | `/products/hero.jpg` | `public/products/hero.webp` | 1600² |
-| About story | `/about/bakery.jpg` | `public/about/bakery.webp` | 1600² |
-| Instagram ×6 | `/instagram/N.jpg` | `public/instagram/N.webp` | 1080² |
-| Categories ×4 | `/categories/<slug>.jpg` | `public/categories/<slug>.webp` | 1200×900 |
-| Products 14×2 | `/products/<slug>-{1,2}.jpg` | `public/products/<slug>-{1,2}.webp` | 1600² |
+| Home hero | `/products/hero.jpg` | `public/images/products/hero.webp` | 1600² |
+| About story | `/about/bakery.jpg` | `public/images/about/bakery.webp` | 1600² |
+| Instagram ×6 | `/instagram/N.jpg` | `public/images/instagram/N.webp` | 1080² |
+| Categories ×4 | `/categories/<slug>.jpg` | `public/images/categories/<slug>.webp` | 1200×900 |
+| Products 14×2 | `/products/<slug>-{1,2}.jpg` | `public/images/products/<slug>-{1,2}.webp` | 1600² |
 
-`resolveImage`/`resolveImages` (`src/lib/data/images.ts`) serve the `.webp` sibling of any
+`resolveImage`/`resolveImages` (`src/lib/data/images.ts`) serve `/images/<path>.webp` (or a `.webp` sibling) for any
 `.jpg`/`.png` reference, so database rows and product data stay untouched; `next/image`
 still produces AVIF/WebP variants at the right `sizes`.
 

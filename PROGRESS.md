@@ -457,3 +457,22 @@ All keyboard checks pass in fa, en and ar at desktop and phone widths.
   - 6 Instagram tiles.
 - `scripts/images/import-generated.mjs`: converts generated files to sized WebP (q80) under `public/`.
 - `resolveImage(s)` now serves a `.webp` sibling for `.jpg`/`.png` references, so product and category data are unchanged. Covered by `src/lib/data/images.test.ts`.
+
+## Temporary photography (Creative Commons)
+- All 40 image slots now show real photos instead of the placeholder:
+  - home hero;
+  - about;
+  - 6 Instagram tiles;
+  - 4 categories;
+  - 14 products × 2.
+- The photos are close matches (walnut, date, sesame, pistachio and spiced cookies, tea, Nowruz, ingredients), not Momtaz Shahd products.
+- **Source:** Openverse search, filtered to commercial-use licences (CC BY, CC BY-SA, CC0). NC and ND licences were excluded, as were photos with logos or packaging text.
+  - Files were downloaded from Flickr.
+  - Unsplash, Pexels and Pixabay need API keys or block automated clients.
+  - Wikimedia Commons rate-limits this environment. Links to better Commons matches are listed for manual download.
+- **Storage:** `public/images/{products,categories,about,instagram}/*.webp`, 2.4 MB in total. Files were cropped and resized without upscaling, then saved as WebP q80 by `scripts/images/import-generated.mjs`, which now supports crop hints and never upscales.
+- `resolveImage(s)` maps data paths such as `/products/x.jpg` to `/images/products/x.webp`, so product and category data are unchanged. `/images/**` was added to `images.localPatterns`.
+- **Attribution:** `docs/image-sources.md` holds title, author, licence and source for every file. A new `/[locale]/credits` page (fa/en/ar, noindex, footer link "Photo credits") shows the credits on the site, as CC BY and BY-SA require.
+- **Verified:** 105 page loads (35 pages × 1440/375/320 px), 939 images.
+  - 0 placeholders, 0 failed `/_next/image` responses, 0 horizontal overflow.
+  - Every visible image loads. Instagram tiles 4–6 are hidden below 1024 px by design.

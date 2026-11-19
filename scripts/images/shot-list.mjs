@@ -1,6 +1,6 @@
 // Shot list for every image slot the storefront references.
 // Each entry: `id` (source file name expected from the generator), `out`
-// (path under public/, always WebP — served for the matching .jpg reference
+// (path under public/images/, always WebP — served for the matching .jpg reference
 // by src/lib/data/images.ts), `width`/`height` (final pixels) and `prompt`.
 // Prompts describe only what the product data states; they never ask for
 // readable text, labels or logos, so no fake packaging copy is produced.
@@ -33,8 +33,8 @@ const products = [
   ["date-kolompeh-carton-5kg", "a plain brown corrugated carton (no printing) opened to show many individually wrapped rectangular date kolompeh in clear wrappers", "close view of the wrapped kolompeh in tidy rows, a stack of closed cartons softly blurred behind"],
   ["mixed-carton-10kg", "a large plain brown carton (no printing) opened to show individually wrapped walnut, coconut and plain koloocheh and date kolompeh in separate rows", "a top-down view of the carton's organised rows of different wrapped cookies"],
 ].flatMap(([slug, subject, detail]) => [
-  { id: `${slug}-1`, out: `products/${slug}-1.webp`, width: 1600, height: 1600, prompt: `Square hero product shot, three-quarter angle: ${subject}, arranged on a cream ceramic plate on a light linen cloth. ${STYLE}` },
-  { id: `${slug}-2`, out: `products/${slug}-2.webp`, width: 1600, height: 1600, prompt: `Square close-up detail shot: ${subject}; ${detail}. ${STYLE}` },
+  { id: `${slug}-1`, out: `images/products/${slug}-1.webp`, width: 1600, height: 1600, prompt: `Square hero product shot, three-quarter angle: ${subject}, arranged on a cream ceramic plate on a light linen cloth. ${STYLE}` },
+  { id: `${slug}-2`, out: `images/products/${slug}-2.webp`, width: 1600, height: 1600, prompt: `Square close-up detail shot: ${subject}; ${detail}. ${STYLE}` },
 ]);
 
 const categories = [
@@ -42,11 +42,11 @@ const categories = [
   ["kolompeh", `a neat arrangement of ${KOLOMPEH}, some sprinkled with sesame and some with slivered pistachios, with whole dates beside them`],
   ["gift-boxes", "several open plain unprinted gift boxes and a patterned keepsake tin filled with koloocheh and kolompeh, deep red ribbons"],
   ["wholesale-packs", "neatly stacked plain brown cartons (no printing), one open showing individually wrapped cookies in rows, clean bakery storeroom"],
-].map(([slug, subject]) => ({ id: `category-${slug}`, out: `categories/${slug}.webp`, width: 1200, height: 900, prompt: `4:3 category image: ${subject}. ${STYLE}` }));
+].map(([slug, subject]) => ({ id: `category-${slug}`, out: `images/categories/${slug}.webp`, width: 1200, height: 900, prompt: `4:3 category image: ${subject}. ${STYLE}` }));
 
 const editorial = [
-  { id: "home-hero", out: "products/hero.webp", width: 1600, height: 1600, prompt: `Square brand hero image: a generous still life of walnut-topped round koloocheh and sesame-topped rectangular date kolompeh on a cream ceramic platter, a glass of Persian tea, walnuts and dates scattered, warm morning light, space around the subject. ${STYLE}` },
-  { id: "about-bakery", out: "about/bakery.webp", width: 1600, height: 1600, prompt: `Square image inside a small traditional bakery: trays of freshly baked golden koloocheh on a floured wooden worktable, wooden carved cookie moulds, hands of a baker (no face) pressing dough, warm light. ${STYLE}` },
+  { id: "home-hero", out: "images/products/hero.webp", width: 1600, height: 1600, prompt: `Square brand hero image: a generous still life of walnut-topped round koloocheh and sesame-topped rectangular date kolompeh on a cream ceramic platter, a glass of Persian tea, walnuts and dates scattered, warm morning light, space around the subject. ${STYLE}` },
+  { id: "about-bakery", out: "images/about/bakery.webp", width: 1600, height: 1600, prompt: `Square image inside a small traditional bakery: trays of freshly baked golden koloocheh on a floured wooden worktable, wooden carved cookie moulds, hands of a baker (no face) pressing dough, warm light. ${STYLE}` },
   ...[
     "overhead flat lay of walnut koloocheh around a glass of tea on a linen cloth",
     "a single koloocheh broken in half showing its filling, macro",
@@ -54,7 +54,7 @@ const editorial = [
     "a stack of sesame-topped date kolompeh beside fresh Mazafati dates",
     "an open plain gift box of mixed cookies with a deep red ribbon",
     "a Nowruz table corner with sabzeh, hyacinth and a plate of koloocheh",
-  ].map((subject, index) => ({ id: `instagram-${index + 1}`, out: `instagram/${index + 1}.webp`, width: 1080, height: 1080, prompt: `Square social-media style photo: ${subject}. ${STYLE}` })),
+  ].map((subject, index) => ({ id: `instagram-${index + 1}`, out: `images/instagram/${index + 1}.webp`, width: 1080, height: 1080, prompt: `Square social-media style photo: ${subject}. ${STYLE}` })),
 ];
 
 export const SHOTS = [...editorial, ...categories, ...products];

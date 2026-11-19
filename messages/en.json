@@ -151,7 +151,8 @@
       "linkedin": "LinkedIn",
       "eitaa": "Eitaa"
     },
-    "track": "Track an order"
+    "track": "Track an order",
+    "credits": "Photo credits"
   },
   "newsletter": {
     "title": "Newsletter",
@@ -1824,5 +1825,14 @@
     "description": "We couldn't reach the shop. Check your connection and try again — your cart is saved on this device.",
     "retry": "Try again",
     "cart": "View cart"
+  },
+  "credits": {
+    "title": "Photo credits",
+    "lead": "Some photos on this site are temporary Creative Commons images by the photographers below, used under their licences. They show similar cookies and ingredients, not our own products, and will be replaced by our own photography.",
+    "by": "by {creator}",
+    "license": "Licence: {license}",
+    "source": "View original",
+    "modified": "Cropped, resized and converted to WebP.",
+    "usedOn": "Used on {count, plural, one {# slot} other {# slots}}"
   }
 }

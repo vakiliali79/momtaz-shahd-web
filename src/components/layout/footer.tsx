@@ -101,6 +101,14 @@ export function Footer({ year, contact, locale }: { year: string; contact: Conta
                 {t("footer.track")}
               </Link>
             </li>
+            <li>
+              <Link
+                href="/credits"
+                className="touch-target inline-flex min-h-11 items-center rounded text-muted-foreground transition-colors hover:text-primary"
+              >
+                {t("footer.credits")}
+              </Link>
+            </li>
           </ul>
         </nav>
 

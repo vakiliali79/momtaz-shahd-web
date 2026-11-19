@@ -13,21 +13,22 @@ function publicFileExists(src: string): boolean {
 }
 
 /**
- * Generated photography is stored as WebP next to the path the data refers
- * to, so `/products/walnut-koloocheh-450g-1.jpg` is served from
- * `/products/walnut-koloocheh-450g-1.webp` without touching product data.
+ * Photography lives in `public/images/` as WebP, mirroring the path the data
+ * refers to: `/products/walnut-koloocheh-450g-1.jpg` is served from
+ * `/images/products/walnut-koloocheh-450g-1.webp` (or a `.webp` next to the
+ * original), so product and category rows never need to change.
  */
-function webpSibling(src: string): string | null {
-  return /\.(jpe?g|png)$/i.test(src) ? src.replace(/\.(jpe?g|png)$/i, ".webp") : null;
+function photoCandidates(src: string): string[] {
+  if (!/\.(jpe?g|png)$/i.test(src)) return [src];
+  const webp = src.replace(/\.(jpe?g|png)$/i, ".webp");
+  return [`/images${webp}`, webp, src];
 }
 
-/** Keeps remote URLs and local files that exist (or their WebP sibling). */
+/** Keeps remote URLs and local files that exist (preferring WebP photography). */
 function toUsable(src: unknown): string | null {
   if (typeof src !== "string" || src === "") return null;
   if (/^https?:\/\//.test(src)) return src;
-  const webp = webpSibling(src);
-  if (webp && publicFileExists(webp)) return webp;
-  return publicFileExists(src) ? src : null;
+  return photoCandidates(src).find(publicFileExists) ?? null;
 }
 
 /**
